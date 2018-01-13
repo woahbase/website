@@ -1,23 +1,27 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
-  </div>
+    <div id="app">
+        <!-- <transition name="slide&#45;fade" appear mode="out&#45;in"> -->
+            <router-view/>
+        <!-- </transition> -->
+    </div>
 </template>
 
 <script>
-export default {
-  name: 'app'
-}
+    export default {
+        name: 'app'
+    }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+    .slide-fade-enter-active {
+        transition: all .4s ease;
+    }
+    .slide-fade-leave-active {
+        transition: all .4s ease;
+    }
+    .slide-fade-enter, .slide-fade-leave-to
+    /* .slide-fade-leave-active below version 2.1.8 */ {
+    /* transform: translateX(10px); */
+    opacity: 0;
 }
 </style>
