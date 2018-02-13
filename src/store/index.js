@@ -32,15 +32,15 @@ export default new Vuex.Store({
                 }
             });
         },
-        setDockerInfo(state, data) {
-            data.results.forEach((v, i) => {
-                state.repositories.forEach((w, k) => {
-                    if(v.name == w.name) {
-                        w.docker = v;
-                    }
-                })
-            })
-        },
+        // setDockerInfo(state, data) {
+        //     data.results.forEach((v, i) => {
+        //         state.repositories.forEach((w, k) => {
+        //             if(v.name == w.name) {
+        //                 w.docker = v;
+        //             }
+        //         })
+        //     })
+        // },
         toggleSidebar(state) {
             state.showSidebar = !state.showSidebar;
         }

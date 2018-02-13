@@ -30,6 +30,7 @@ import 'vue-awesome/icons/long-arrow-up'
 import 'vue-awesome/icons/long-arrow-down'
 import 'vue-awesome/icons/question-circle-o'
 import 'vue-awesome/icons/star'
+import 'vue-awesome/icons/tag'
 // import 'vue-awesome/icons/times'
 import 'vue-awesome/icons/twitter'
 

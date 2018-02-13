@@ -10,3 +10,9 @@ data :
 		&& cp $(CURDIR)/static/json/github.json $(CURDIR)/dist/static/json/github.json;
 	git commit -am "Data updated at $$(date)";
 	git push origin master;
+
+scrape :
+	dovue "-- node ./src/scraper.js"
+
+dev :
+	dovue "-- npm run dev"
