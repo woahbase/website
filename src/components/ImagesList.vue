@@ -141,8 +141,6 @@ export default {
                 this.compState = 'loading';
 
                 this.$api.scraped.getSiteJson().then((response) => {
-                    console.log( response.data );
-
                     // remove ignore repos straight away // not actually needed but for consistency
                     let repos = response.data.filter(v => this.$store.state.ignoredRepositories.indexOf(v.name) == -1);
 
