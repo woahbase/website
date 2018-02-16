@@ -48,12 +48,12 @@
             </a>
             <div class="dropdown is-right">
                 <div class="dropdown-trigger">
-                    <a class="card-footer-item has-text-grey" aria-haspopup="true" aria-controls="dropdown-menu" @click.stop="toggleDropdown('#dropdown-menu-' + repo.github.id)">
+                    <a class="card-footer-item has-text-grey" aria-haspopup="true" aria-controls="dropdown-menu" @click.stop="toggleDropdown('#dropdown-menu-' + repo.github.id + '-' + repo.name)">
                         <!-- <span>Links</span> -->
                         <icon name="ellipsis-v" scale="1.1"/>
                     </a>
                 </div>
-                <div class="dropdown-menu has-text-centered" :id="'dropdown-menu-' + repo.github.id" role="menu">
+                <div class="dropdown-menu has-text-centered" :id="'dropdown-menu-' + repo.github.id + '-' + repo.name" role="menu">
                     <div class="dropdown-content">
 
                         <a :href="nameToLink('docker', orgName, repo.name)" class="dropdown-item" target="_blank">
