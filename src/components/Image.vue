@@ -1,7 +1,7 @@
 <template>
     <div class="card" >
         <header class="card-header">
-            <a :href="nameToLink('image', orgName, repo.name)" class="card-header-title is-uppercase is-size-5">
+            <a :href="nameToLink('image', orgName, repo.github.name)" class="card-header-title is-uppercase is-size-5">
                 {{ repo.name.replace('alpine-', '') }}
             </a>
             <a :href="nameToLink('travis', orgName, repo.github.name)" class="card-header-icon" target="_blank">
@@ -43,17 +43,17 @@
 
         </div>
         <footer class="card-footer">
-            <a :href="nameToLink('image', orgName, repo.name)"  class="card-footer-item ">
+            <a :href="nameToLink('image', orgName, repo.github.name)"  class="card-footer-item ">
                 <icon name="file-text-o" scale="1"/> &nbsp; View README
             </a>
             <div class="dropdown is-right">
                 <div class="dropdown-trigger">
-                    <a class="card-footer-item has-text-grey" aria-haspopup="true" aria-controls="dropdown-menu" @click.stop="toggleDropdown('#dropdown-menu-' + repo.github.id + '-' + repo.name)">
+                    <a class="card-footer-item has-text-grey" aria-haspopup="true" aria-controls="dropdown-menu" @click.stop="toggleDropdown('#dropdown-menu-' + repo.github.id + '-' + repo.github.name)">
                         <!-- <span>Links</span> -->
                         <icon name="ellipsis-v" scale="1.1"/>
                     </a>
                 </div>
-                <div class="dropdown-menu has-text-centered" :id="'dropdown-menu-' + repo.github.id + '-' + repo.name" role="menu">
+                <div class="dropdown-menu has-text-centered" :id="'dropdown-menu-' + repo.github.id + '-' + repo.github.name" role="menu">
                     <div class="dropdown-content">
 
                         <a :href="nameToLink('docker', orgName, repo.name)" class="dropdown-item" target="_blank">
