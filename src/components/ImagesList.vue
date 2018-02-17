@@ -30,10 +30,11 @@
                                     <option disabled selected="true" class="has-text-dark">Github</option>
                                     <option value="-repo.created_at"> &nbsp; &#x2193; Repo Created</option>
                                     <option value="+repo.created_at"> &nbsp; &#x2191; Repo Created</option>
-                                    <!-- <option value="&#45;repo.updated_at"> &#38;nbsp; &#38;#x2193; Last Updated</option> -->
-                                    <!-- <option value="+repo.updated_at"> &#38;nbsp; &#38;#x2191; Last Updated</option> -->
                                     <option value="-repo.pushed_at"> &nbsp; &#x2193; Last Pushed</option>
                                     <option value="+repo.pushed_at"> &nbsp; &#x2191; Last Pushed</option>
+
+                                    <!-- <option value="&#45;repo.updated_at"> &#38;nbsp; &#38;#x2193; Last Updated</option> -->
+                                    <!-- <option value="+repo.updated_at"> &#38;nbsp; &#38;#x2191; Last Updated</option> -->
                                     <!-- <option value="&#45;repo.stargazers_count"> &#38;nbsp; &#38;#x2193; Stars</option> -->
                                     <!-- <option value="+repo.stargazers_count"> &#38;nbsp; &#38;#x2191; Stars</option> -->
                                     <!-- <option value="&#45;repo.watchers_count"> &#38;nbsp; &#38;#x2193; Watchers</option> -->
@@ -44,8 +45,10 @@
                                     <option value="+repo.docker.last_updated"> &nbsp; &#x2191; Image Pushed</option>
                                     <option value="+repo.docker.pull_count"> &nbsp; &#x2193; Image Pulled</option>
                                     <option value="-repo.docker.pull_count"> &nbsp; &#x2191; Image Pulled</option>
+
                                     <!-- <option value="&#45;repo.docker.star_count"> &#38;nbsp; &#38;#x2193; Stars</option> -->
                                     <!-- <option value="+repo.docker.star_count"> &#38;nbsp; &#38;#x2191; Stars</option> -->
+
                                     <option value="+repo.image.size"> &nbsp; &#x2193; Image Size</option>
                                     <option value="-repo.image.size"> &nbsp; &#x2191; Image Size</option>
                                 </select>
@@ -188,13 +191,12 @@ export default {
                         '-repo.image.size' : (a, b) => { return a.microbadger.DownloadSize - b.microbadger.DownloadSize },
                     }[this.sort](a, b);
             }).filter(v=>
-                v.name.includes(this.query)
+                v.name.includes(this.query.toLowerCase())
                 ||
-                v.github.description.includes(this.query)
+                v.github.description.toLowerCase().includes(this.query.toLowerCase())
                 ||
-                v.tags.filter(x => x.tag.includes(this.query)).length
-            )
-            ;
+                v.tags.filter(x => x.tag.includes(this.query.toLowerCase())).length
+            );
         }
     },
     components : {

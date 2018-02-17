@@ -7,3 +7,7 @@ dev :
 build :
 	dovue "-- npm run build"
 
+data :
+	git commit -am "Data updated at $$(date)"
+	git push origin master;
+
