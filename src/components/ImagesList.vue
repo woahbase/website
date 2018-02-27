@@ -134,7 +134,7 @@ export default {
             openDropdown : '',
             orgName : this.$store.state.orgName,
             query : '',
-            sort : '-repo.created_at'
+            sort : '+repo.name'
         }
     },
     methods : {
@@ -169,6 +169,7 @@ export default {
             return this.$store.state.repositories.sort((a, b) => {
                     return {
                         '+repo.name'                : (a, b) => { return a.name.localeCompare(b.name)},
+
                         // '+repo.id'               : (a, b) => { return b.id - a.id }, // same as created at
                         // '-repo.id'               : (a, b) => { return a.id - b.id },
                         '+repo.created_at'          : (a, b) => { return new Date(a.github.created_at).getTime() - new Date(b.github.created_at).getTime() },
@@ -177,10 +178,10 @@ export default {
                         '-repo.updated_at'          : (a, b) => { return new Date(b.github.updated_at).getTime() - new Date(a.github.updated_at).getTime() },
                         '+repo.pushed_at'           : (a, b) => { return new Date(a.github.pushed_at).getTime() - new Date(b.github.pushed_at).getTime() },
                         '-repo.pushed_at'           : (a, b) => { return new Date(b.github.pushed_at).getTime() - new Date(a.github.pushed_at).getTime() },
-                        '+repo.stargazers_count'    : (a, b) => { return b.github.stargazers_count - a.github.stargazers_count },
-                        '-repo.stargazers_count'    : (a, b) => { return a.github.stargazers_count - b.github.stargazers_count },
-                        '+repo.watchers_count'      : (a, b) => { return b.github.watchers_count - a.github.watchers_count },
-                        '-repo.watchers_count'      : (a, b) => { return a.github.watchers_count - b.github.watchers_count },
+                        '-repo.stargazers_count'    : (a, b) => { return b.github.stargazers_count - a.github.stargazers_count },
+                        '+repo.stargazers_count'    : (a, b) => { return a.github.stargazers_count - b.github.stargazers_count },
+                        '-repo.watchers_count'      : (a, b) => { return b.github.watchers_count - a.github.watchers_count },
+                        '+repo.watchers_count'      : (a, b) => { return a.github.watchers_count - b.github.watchers_count },
 
                         '+repo.docker.last_updated' : (a, b) => { return new Date(a.dockerhub.last_updated).getTime() - new Date(b.dockerhub.last_updated).getTime() },
                         '-repo.docker.last_updated' : (a, b) => { return new Date(b.dockerhub.last_updated).getTime() - new Date(a.dockerhub.last_updated).getTime() },
@@ -191,6 +192,7 @@ export default {
 
                         '+repo.image.size'          : (a, b) => { return b.microbadger.DownloadSize - a.microbadger.DownloadSize },
                         '-repo.image.size'          : (a, b) => { return a.microbadger.DownloadSize - b.microbadger.DownloadSize },
+
                     }[this.sort](a, b);
             }).filter(v=>
                 v.name.includes(this.query.toLowerCase())
