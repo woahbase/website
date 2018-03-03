@@ -11,3 +11,4 @@ data :
 	git commit -am "Data updated at $$(date)"
 	git push origin master;
 
+.PHONY : build

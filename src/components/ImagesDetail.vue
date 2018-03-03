@@ -7,11 +7,39 @@
 
             <div class="content markdown-html" v-html="readmeHtml" v-if="compState == 'html'">
             </div>
-            <div class="content markdown-html" v-if="compState == 'Xreadme'">
-                Error Loading ReadMe from Github.
+            <div class="content markdown-html has-text-centered" v-if="compState == 'Xreadme'">
+				<br/>
+				<h1 class="is-size-2">something went wrong. <span class="has-text-danger">:(</span></h1>
+				<br/>
+				<p>
+				</p>
+				<br/>
+
+				<p>
+                	We could not find a ReadMe for this repository.
+				</p>
+
+				<p>
+					try viewing another image, <br/>
+					or <span class="has-text-danger" onclick="window.location.reload()">reload the page</span>.
+				</p>
             </div>
             <div class="content markdown-html" v-if="compState == 'Xhtml'">
-                Error parsing ReadMe HTML.
+				<br/>
+				<h1 class="is-size-2">something went wrong. <span class="has-text-danger">:(</span></h1>
+				<br/>
+				<p>
+				</p>
+				<br/>
+
+				<p>
+                	There was a problem converting the ReadMe to valid html.
+				</p>
+
+				<p>
+					try viewing another image, <br/>
+					or <span class="has-text-danger" onclick="window.location.reload()">reload the page</span>.
+				</p>
             </div>
         </div>
     </section>
