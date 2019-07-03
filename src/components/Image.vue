@@ -1,9 +1,14 @@
 <template>
     <div class="card" >
         <header class="card-header">
-            <a :href="nameToLink('image', orgName, repo.github.name)" class="card-header-title is-uppercase is-size-5">
+            <div class="card-header-title">
+              <a :href="nameToLink('image', orgName, repo.github.name)" class="has-text-grey-dark is-uppercase is-size-5">
                 {{ repo.name.replace('alpine-', '') }}
-            </a>
+              </a>
+              <!-- <span class="heading has-text-grey-light is-size-7" v-if="repo.microbadger.Labels['online.woahbase.build-number'] && repo.microbadger.Labels['online.woahbase.source-image']">
+                #{{ repo.microbadger.Labels["online.woahbase.build-number"] }} ON {{ repo.microbadger.Labels["online.woahbase.source-image"].toUpperCase() }}
+              </span> -->
+            </div>
             <a :href="nameToLink('travis', orgName, repo.github.name)" class="card-header-icon" target="_blank">
                 <img :src="nameToLink('travis.svg', orgName, repo.github.name)" alt="Build Status">
             </a>
@@ -13,8 +18,36 @@
                 {{ repo.github.description }}
             </div>
             <div class="level is-mobile">
-                <div class="has-text-center" :class="index %2 == 0 ? 'level-left' : 'level-right'" v-for="(tag, index) in repo.tags" :key="tag.tag" :index="index" v-if="tag.tag != 'latest'">
-                    <div class="" v-if="index < 3">
+              <div class="has-text-center" :class="index %2 == 0 ? 'level-left' : 'level-right'" v-for="(tag, index) in filterAllowedTags(repo.tags)" :key="tag.tag" :index="index" v-if="[allowedTags[0], allowedTags[1]].indexOf(tag.tag) != -1">
+                <div class="">
+                  <p class="title is-size-6 has-text-grey-dark">
+                    <icon name="tag" scale="1" style="vertical-align : middle" class="has-text-grey-light"/>
+                    <span>
+                      {{ tag.tag.toUpperCase() }}
+                    </span>
+                  </p>
+                  <p class="heading">
+                    &nbsp;
+                    &nbsp;
+                    {{ tag.LayerCount }} layers
+                  </p>
+                  <p class="heading">
+                    &nbsp;
+                    &nbsp;
+                    <span v-if="tag.DownloadSize">
+                      {{ (tag.DownloadSize / (1024*1024)).toFixed(2) }} MB
+                    </span>
+                    <span v-if="!tag.DownloadSize">
+                      &nbsp;
+                    </span>
+
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="level is-mobile">
+              <div class="has-text-center" :class="index %2 == 0 ? 'level-left' : 'level-right'" v-for="(tag, index) in filterAllowedTags(repo.tags)" :key="tag.tag" :index="index" v-if="[allowedTags[2], allowedTags[3]].indexOf(tag.tag) != -1">
+                    <div class="">
                         <p class="title is-size-6 has-text-grey-dark">
                             <icon name="tag" scale="1" style="vertical-align : middle" class="has-text-grey-light"/>
                             <span>
@@ -111,6 +144,7 @@
         data () {
             return {
                 orgName : this.$store.state.orgName,
+                allowedTags : ['x86_64', 'armhf', 'armv7l', 'aarch64'],
                 openDropdown : "",
             }
         },
@@ -126,14 +160,17 @@
                 s && s.classList.toggle('is-active');
             },
             sortTags(tags) {
-                tags.sort((a,b) => a.tag < b.tag);
+              tags.sort((a,b) => a.tag > b.tag ? -1 : b.tag > a.tag ? 1 : 0);
+            },
+            filterAllowedTags(tags) {
+              return tags.filter(t => this.allowedTags.indexOf(t.tag) != -1);
             }
         },
         props : [
             "repo"
         ],
         mounted () {
-            this.sortTags(this.repo.tags);
+          this.sortTags(this.repo.tags);
             document.querySelector('body').addEventListener('click', () => {
                 if(this.openDropdown) {
                     let s = document.querySelector(this.openDropdown);
@@ -160,6 +197,8 @@
     .card-header-title {
         font-family : "Source Sans Pro", sans-serif;
         letter-spacing : 1px;
+        flex-direction: column;
+        flex-flow: wrap;
     }
 
     .dropdown-menu.is-active {
@@ -186,5 +225,6 @@
     .card-footer-item {
         font-family : "Source Sans Pro", sans-serif;
     }
+
 </style>
 
