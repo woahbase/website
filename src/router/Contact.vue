@@ -216,7 +216,7 @@
 					this.subject,
 					this.message
 				).then(response => {
-					if(response.data.success) {
+					if(response.data.ok) {
 						this.compState = 'sent';
 					} else {
 						this.compState = 'failed';

@@ -74,9 +74,9 @@
                             </strong>
                         </a>
 
-                        ~ Where only awesome happens.
+                        ~ Where only awesome happens
                         <br/>
-                        ~ Works only at Home.
+                        ~ Works only at Home
                         <!-- by <a href="">
                             -->
                             <!--
@@ -97,7 +97,7 @@
                         </a>
                         -->
                         <br/>
-                        &copy; 2018
+                        &copy; 2018 — now.
                     </p>
                 </div>
             </div>
