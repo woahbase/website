@@ -25,7 +25,7 @@
                         .
                         <br/>
                         Delivery and SSL by <a href="https://www.cloudflare.com">
-                            Clouldflare
+                            Cloudflare
                         </a>
                         .
                     </p>
