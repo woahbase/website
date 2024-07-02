@@ -110,6 +110,10 @@ nav:
   - Images:
       - Categories: images/index.md
 
+      # - base:
+      # --------
+      - alpine-base: images/alpine-base.md
+
   - About:
       - About: about/index.md
       - Contact: about/contact.md
