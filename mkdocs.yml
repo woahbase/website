@@ -117,6 +117,10 @@ nav:
       - alpine-glibc: images/alpine-glibc.md
       - alpine-supervisor: images/alpine-supervisor.md
 
+      # - dev/runtime:
+      # --------
+      - alpine-go: images/alpine-go.md
+
   - About:
       - About: about/index.md
       - Contact: about/contact.md
