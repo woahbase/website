@@ -1,0 +1,29 @@
+{% extends "main.html" %}
+
+ <!-- Content -->
+  {% block content %}
+    <style type="text/css">
+        .md-content { flex-grow: 1; text-align: center; }
+        .md-sidebar--primary   { display: none !important; }
+        .md-sidebar--secondary { display: none !important; }
+    </style>
+     <h1>Sorry, something went wrong. :(</h1>
+
+     <h3>We could not find this page.</h3>
+
+     <p>
+         It could be a mistyped URL,
+         <br/>
+         or the page may not exist (yet).
+     </p>
+
+     <p>
+         Try viewing another one of our <a href="/images">images</a>,
+         <br/>
+         or go back to <a href="/">Home</a>.
+         <br/>
+         If you think this is a problem with this site,
+         <br/>
+         consider opening an <a href="{{ config.repo_url }}/issues">issue</a>.
+     </p>
+  {% endblock %}

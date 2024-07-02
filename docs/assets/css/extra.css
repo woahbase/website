@@ -1,0 +1,15 @@
+:root {
+    --wb-primary-color: #23d160;
+    --wb-secondary-color: #4a4a4a;
+}
+
+.wb-logo {
+    font-size: 1.4em;
+    font-weight: 700;
+    font-family: 'Megrim', cursive;
+    color: var(--md-primary-bg-color);
+}
+
+.wb-logo > b {
+    color: var(--wb-primary-color);
+}

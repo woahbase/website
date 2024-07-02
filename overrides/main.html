@@ -1,0 +1,89 @@
+<!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+{% extends "base.html" %}
+
+<!-- Custom front matter -->
+{% block extrahead %}
+  {%- set title = config.site_name -%}
+  {%- if page and page.title and not page.is_homepage -%}
+  {%- set title = config.site_name ~ " - " ~ page.title | striptags -%}
+  {%- endif -%}
+  {%- set image = config.site_url ~ 'assets/images/logo.png' -%}
+  {%- set icon = config.site_url ~ 'assets/images/favicon.ico' -%}
+
+<link rel="canonical" href="{{ config.site_url }}" itemprop="url"/>
+<link rel="icon" type="image/x-icon" href="{{ icon }}" />
+<link rel="index" href="{{ config.site_url }}"/> {# Links to top level resource in an hierarchical structure #}
+<!-- <link rel="manifest" href="/static/manifest.json"/> --> {# Links to a JSON file that specifies "installation" credentials for web applications #}
+<link rel="me" href="{{ config.site_url }}about/" type="text/html"/>
+<link rel="me" href="mailto:{{ config.extra.mailto }}"/>
+<link rel="publisher" href="{{ config.extra.twiturl }}"/>
+<link rel="shortcut icon" type="image/x-icon" href="{{ icon }}" />
+
+<meta http-equiv="x-dns-prefetch-control" content="on"/> {# Completely opt out of DNS prefetching by setting to 'off' #}
+
+<meta itemprop="name" content="{{ config.site_name }}">
+<meta itemprop="description" content="{{ config.site_description }}">
+<meta itemprop="image" content="{{ image }}">
+
+<meta name="application-name" content="{{ config.site_name }}"/>
+<meta name="author" content="{{ config.site_name }}"/>
+<meta name="description" content="{{ config.site_description }}"/>
+<meta name="generator" content="Mkdocs-Material"/> {# Used to name software used to build the website (i.e. - WordPress, Dreamweaver) #}
+<meta name="google" content="notranslate"> {# Disable translation prompt #}
+<meta name="google" content="sitelinkssearchbox"/> {# Tells Google not to show the sitelinks search box #}
+<meta name="googlebot" content="index,follow"/>{#- Google Specific -#}
+<meta name="keywords" content="woahbase, online, where, only, awesome, happens, works, only, at, home, container, git, github, gnu, make, docker, dockerhub, buildbot, shields.io, images, alpine, linux, server, commandline, desktop, application, apps"/>
+<meta name="mobile-web-app-capable" content="yes"> <!-- Define your web page as a web app -->
+<meta name="pinterest" content="nopin" description="Sorry, you can't save pins from this website!">
+<meta name="rating" content="General"/> {# Gives a general age rating based on sites content #}
+<meta name="robots" content="index,follow"/>{#- All Search Engines -#}
+<meta name="subject" content="{{ title }}"/> {# Short description of your site's subject #}
+<!-- meta name="theme-color" content="#f5f5f5" --> {# Android change top bar color #}
+
+<meta name="twitter:card" content="summary_small_image">
+<meta name="twitter:creator" content="@{{ config.extra.orgname }}">
+<meta name="twitter:description" content="{{ config.site_description }}">
+<meta name="twitter:image" content="{{ image }}">
+<meta name="twitter:site" content="@{{ config.extra.orgname }}">
+<meta name="twitter:title" content="{{ title }}">
+
+<meta property="article:author" content="{{ config.site_name }}">
+<!-- <meta property="fb:app_id" content="123456789"> -->
+
+<meta property="og:description" content="{{ config.site_description }}">
+<meta property="og:image" content="{{ image }}">
+<meta property="og:image:height" content="150">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="150">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="{{ config.site_name }}">
+<meta property="og:title" content="{{ title }}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ page.canonical_url }}">
+
+<!--[IF lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js">
+    </script>
+<![endif]-->
+{% endblock %}

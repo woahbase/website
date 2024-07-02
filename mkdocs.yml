@@ -1,0 +1,230 @@
+---
+copyright: Copyleft &copy; 2017 - 5ever WOAHBase
+
+draft_docs: |
+  *_draft.md
+exclude_docs: |
+  *_draft.md
+  *_exclude.md
+
+extra:
+  # analytics:
+  #   provider: google
+  #   property: !ENV GOOGLE_ANALYTICS_KEY
+
+  # homepage: https://woahbase.online
+  mailto: write@woahbase.online
+
+  orgname: &orgname woahbase
+  gitorg: &gitorg https://github.com/woahbase
+  dockorg: &dockorg https://hub.docker.com/u/woahbase/
+  dockrepo: https://hub.docker.com/r/woahbase/
+  twiturl: &twiturl https://x.com/woahbase
+
+  social:
+    - icon: fontawesome/brands/github
+      link: *gitorg
+    # - icon: fontawesome/brands/gitter
+    #   link: https://gitter.im/<username>/<project-name>
+    - icon: fontawesome/brands/docker
+      link: *dockorg
+    - icon: fontawesome/brands/twitter
+      link: *twiturl
+    # - icon: fontawesome/brands/linkedin
+    #   link: https://linkedin.com/in/<username>
+    # - icon: fontawesome/brands/instagram
+    #   link: https://instagram.com/<username>
+
+  # extra vars for macros
+  # coderepo_weburl: 'github.com' # default 'github.com', no ending /
+  # imagerepo_weburl: 'hub.docker.com/r'  # default 'hub.docker.com/r', no ending /
+  shieldparams: >-
+    color=brightgreen&style=flat-square
+  # pgid: "`id -g`"
+  # puid: "`id -u`"
+  # alpine stable version for generating package urls
+  alpine_branch: v3.19
+
+extra_css:
+  - assets/css/fonts.css
+    # fonts source: https://gwfh.mranftl.com/
+  - assets/css/extra.css
+extra_javascript:
+  - assets/js/extra.js
+
+# hooks:
+#   - mdgenerator.py  # extract final markdown for pages and write in generated-markdown/
+                      # disabled since generated md files are not fully compatible
+                      # with Github/DockerHub
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+  - pymdownx.highlight:
+      anchor_linenums: true
+      # auto_title: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: *orgname
+      repo: website
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets:
+      base_path: [snippets/]
+      check_paths: false
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+nav:
+  - Home: index.md
+
+  - Images:
+      - Categories: images/index.md
+
+  - About:
+      - About: about/index.md
+      - Contact: about/contact.md
+
+  - Contact: /about/contact
+
+plugins:
+  # - git-authors
+  # - git-revision-date-localized:
+  #     type: timeago
+  #     enable_creation_date: false
+  #     fallback_to_build_date: true
+  - macros:
+      include_dir: snippets
+      on_error_fail: !ENV [MACRO_ERROR_FAIL, false]
+  # - meta-descriptions
+  - minify:
+      minify_html: true
+      minify_js: true
+      minify_css: true
+      htmlmin_opts:
+        remove_comments: true
+      js_files:
+        - assets/js/extra.js
+      css_files:
+        - assets/css/fonts.css
+        - assets/css/extra.css
+  - redirects:
+      redirect_maps: {}
+  - search:
+      lang: en
+      pipeline:
+        - stemmer
+        - stopWordFilter
+        - trimmer
+      # indexing: titles
+  # - social
+  - tags:
+      tags_file: images/index.md
+
+repo_name: woahbase/website
+repo_url: https://github.com/woahbase/website
+# edit_uri: https://github.com/woahbase/website/edit/master/docs
+
+site_name: WOAHBase
+site_url: https://woahbase.online/
+site_author: lapnapra
+site_description: >-
+  Where only Awesome happens,
+  works only at Home.
+
+theme:
+  name: material
+  custom_dir: overrides
+
+  favicon: assets/images/favicon.ico
+  font:
+    text: Roboto
+    code: Roboto Mono
+  language: en
+  logo: assets/images/logo.png
+  static_templates:
+    - 404.html  # 404 page
+
+  include_search_page: false
+  search_index_only: true
+
+  features:
+    - announce.dismiss
+    - content.code.annotate
+    - content.code.copy
+    - content.tabs.link
+    - content.tooltips
+    - header.autohide
+    - navigation.expand
+    - navigation.footer
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.progress
+    # - navigation.path
+    - navigation.prune
+    - navigation.sections
+    - navigation.tabs
+    # - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
+    # - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+    # - toc.integrate
+
+  icon:
+    repo: simple/github
+    tag:
+      default: fontawesome/solid/hashtag
+
+  palette:
+    - media: '(prefers-color-scheme: light)'
+      scheme: default
+      primary: white
+      accent: light green
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+
+    - media: '(prefers-color-scheme: dark)'
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+use_directory_urls: true
+
+watch:
+  - snippets

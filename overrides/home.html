@@ -1,0 +1,301 @@
+<!--
+  Copyright (c) 2016-2024 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+-->
+
+{% extends "main.html" %}
+
+<!-- Render hero under tabs -->
+{% block tabs %}
+  {{ super() }}
+
+  <!-- Additional styles for landing page -->
+  <style>
+
+    /* Application header should be static for the landing page */
+    .md-header {
+        position: initial;
+    }
+
+    .md-main {
+        background: white;
+    }
+
+    /* Remove spacing, as we cannot hide it completely */
+    .md-main__inner {
+        margin: 0;
+    }
+
+    /* Hide main content for now */
+    .md-content {
+        display: none;
+    }
+
+    .tx-container.wavy {
+        min-height: 80vh;
+        padding-top: 1rem;
+        background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1123 258'><path d='M1124,2c0,0 0,256 0,256l-1125,0l0,-48c0,0 16,5 55,5c116,0 197,-92 325,-92c121,0 114,46 254,46c140,0 214,-167 572,-166Z' style='fill: white' /></svg>") no-repeat bottom, linear-gradient(to bottom, var(--md-primary-fg-color), var(--wb-primary-color) 99%, #fff 99%);
+    }
+
+    .tx-hero {
+        margin: 0 .8rem;
+        color: var(--md-primary-bg-color);
+    }
+
+    .tx-hero h1 {
+        margin-bottom: 1rem;
+        color: currentColor;
+        font-weight: 700;
+    }
+
+    .tx-hero__content {
+        padding-bottom: 6rem;
+    }
+
+    .tx-hero__content > .md-social {
+        padding: 0px;
+        margin: -10px 0;
+    }
+
+    .tx-hero__content > .md-social > a.md-social__link {
+        margin: 0 1em 0 0;
+        color: var(--md-primary-bg-color);
+    }
+
+    .tx-hero__content > .md-social > a.md-social__link > svg {
+        max-height: 2em;
+    }
+
+    .tx-hero .md-button {
+        margin-top: .5rem;
+        margin-right: .5rem;
+        color: var(--md-primary-bg-color);
+    }
+
+    .tx-hero .md-button--primary {
+        background-color: var(--md-primary-bg-color);
+        color: var(--wb-primary-color);
+        border-color: var(--md-primary-bg-color);
+    }
+
+    .tx-hero .md-button:focus,
+    .tx-hero .md-button:hover {
+        background-color: var(--md-accent-fg-color);
+        color: var(--md-default-bg-color);
+        border-color: var(--md-accent-fg-color);
+    }
+
+    .orgtext {
+        margin-top: 0 !important;
+    }
+    .orgtext > div.hilit {
+        display: inline-block;
+        text-align: center;
+        width: 23.3%;
+    }
+    .orgtext h1, .orgtext > div.hilit > h1 {
+        color: var(--md-primary-bg-color);
+        display: inline-block;
+        font-family: 'Megrim', cursive;
+        font-size: 10em;
+        font-weight: 900;
+        letter-spacing: 0;
+        margin-bottom: 0em;
+        position: relative;
+        text-align: center;
+        text-shadow: -5px 5px 2px var(--wb-secondary-color);
+        text-transform: uppercase;
+        user-select: none;
+        width: 24%;
+
+        transition: all 0.5s ease-out;
+        -webkit-transition: all 0.5s ease-out;
+        -moz-transition: all 0.5s ease-out;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+    }
+
+    .orgtext > div.hilit > h1 {
+        color: var(--wb-primary-color);
+        width: 100%;
+        text-align: center;
+    }
+
+    .orgtext h1:hover, .orgtext > div.hilit > h1:hover {
+        text-shadow: 5px 5px 5px var(--wb-secondary-color);
+    }
+
+    .orgtext > div.hilit > span {
+        color: transparent;
+        display: inline-block;
+        float: left;
+        font-family: var(--md-text-font-family);
+        font-size: 1.2em;
+        font-weight: 300;
+        padding-left: 0.5em;
+        position: relative;
+        text-align: center;
+        text-transform: uppercase;
+        visibility: hidden;
+        width: 100%;
+
+        transition: all 0.5s ease-out;
+        -webkit-transition: all 0.5s ease-out;
+        -moz-transition: all 0.5s ease-out;
+    }
+    .orgtext > div.hilit > span:first-child {
+        text-align: center;
+        margin-bottom: -1em;
+        transform: translateX(15px);
+    }
+    .orgtext > div.hilit > span:last-child {
+        text-align: center;
+        margin-top: -1.5em;
+        transform: translateX(-15px);
+    }
+    .orgtext > div.hilit:hover > span {
+        visibility: visible;
+        transform: translateX(0px);
+        color: var(--md-primary-bg-color)
+    }
+
+    @media screen and (max-width: 70em) {
+        .tx-hero h1 {
+            font-size: 1.4rem;
+        }
+
+        .tx-hero__image {
+            text-align: center;
+        }
+
+        .tx-hero__image img {
+            max-width: 15rem;
+        }
+
+        .orgtext h1, .orgtext > div.hilit > h1 {
+            font-size: 7em;
+        }
+    }
+
+    /* Hide table of contents */
+    @media screen and (min-width: 60em) {
+        .md-sidebar--secondary {
+            display: none;
+        }
+
+        .tx-hero {
+            display: flex;
+            align-items: stretch;
+        }
+
+        .tx-hero__content {
+            max-width: 30rem;
+            margin-top: 3.5rem;
+            padding-bottom: 14vw;
+        }
+
+        .tx-hero__image {
+            order: 1;
+            margin-left: auto;
+            margin-top: 3.0rem;
+        }
+
+        .tx-hero__image img {
+            max-width: 20rem;
+        }
+    }
+
+    /* Hide navigation */
+    @media screen and (min-width:76.25em) {
+        .md-sidebar--primary {
+            display: none;
+        }
+
+        .tx-hero__image {
+            margin-left: auto;
+        }
+
+        .tx-hero__image img {
+            max-width: 20rem;
+        }
+    }
+  </style>
+<section class="tx-container wavy">
+    <div class="md-grid md-typeset">
+        <div class="tx-hero">
+            <div class="tx-hero__image orgtext">
+                <!-- <img src="assets/display_screenshot.png" alt="" draggable="false"> -->
+                <div class="hilit">
+                    <span>Where</span>
+                    <h1>W</h1>
+                    <span>Works</span>
+                </div>
+                <div class="hilit">
+                    <span>Only</span>
+                    <h1>O</h1>
+                    <span>Only</span>
+                </div>
+                <div class="hilit">
+                    <span>Awesome</span>
+                    <h1>A</h1>
+                    <span>At</span>
+                </div>
+                <div class="hilit">
+                    <span>Happens</span>
+                    <h1>H</h1>
+                    <span>Home</span>
+                </div>
+                <br/>
+                <h1>B</h1>
+                <h1>A</h1>
+                <h1>S</h1>
+                <h1>E</h1>
+            </div>
+            <div class="tx-hero__content">
+                <h1>Services Ready-to-Run.<br/> Available to Everyone.</h1>
+                <p>
+                    Bunch of containerized services and tools that make our self-hosted journey easier.
+                </p>
+                <a href="{{ page.next_page.url | url }}" title="{{ page.next_page.title | striptags }}"
+                    class="md-button md-button--primary">
+                    Let's see those images
+                </a>
+                <!--a href="/dood/" class="md-button">
+                    DOOD
+                </a-->
+                <br/>
+                <p style="display: inline-flex">
+                  Made with <span class="md-icon" style="color: red; display: inline-block; margin: 0 0.2em">{% include ".icons/material/heart.svg" %}</span> by <a style="color: var(--md-primary-bg-color); font-weight: bold; text-decoration: underline; margin: 0 0 0 0.3em" href="https://github.com/{{ config.site_author }}">{{ config.site_author }}</a>.
+                </p>
+                {#- if config.extra.social -%}
+                  {%- include "partials/social.html" -%}
+                {%- endif -#}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+<!-- Content -->
+{# block content %}{% endblock #}
+
+<!-- Application footer -->
+{# block footer %}{% endblock #}
