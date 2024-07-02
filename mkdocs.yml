@@ -120,6 +120,7 @@ nav:
       # - dev/runtime:
       # --------
       - alpine-go: images/alpine-go.md
+      - alpine-lua: images/alpine-lua.md
 
   - About:
       - About: about/index.md
