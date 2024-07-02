@@ -114,6 +114,7 @@ nav:
       # --------
       - alpine-base: images/alpine-base.md
       - alpine-s6: images/alpine-s6.md
+      - alpine-glibc: images/alpine-glibc.md
 
   - About:
       - About: about/index.md
