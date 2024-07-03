@@ -130,6 +130,7 @@ nav:
 
       # - service
       # --------
+      - alpine-adminer: images/alpine-adminer.md
       - alpine-nginx: images/alpine-nginx.md
       - alpine-redis: images/alpine-redis.md
       - alpine-registry: images/alpine-registry.md
