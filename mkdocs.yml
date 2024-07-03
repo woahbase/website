@@ -126,6 +126,7 @@ nav:
       - alpine-openjdk11: images/alpine-openjdk11.md
       - alpine-php: images/alpine-php.md
       - alpine-python3: images/alpine-python3.md
+      - alpine-ruby: images/alpine-ruby.md
 
       # - service
       # --------
