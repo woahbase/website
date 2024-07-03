@@ -1,0 +1,80 @@
+---
+services:
+  cgit:
+    container_name: cgit
+    deploy:
+      resources:
+        limits:
+          cpus: '2.00'
+          memory: 2048M  # may need more memory for sync job
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 120s
+    environment:
+      # CGIT_REPODIR: /home/git/repositories
+      # CGIT_SYNC_IGNORELIST: /home/git/repositories/ignored.txt
+      # CGIT_SYNC_ERRORLIST: /home/git/repositories/errors.txt
+      # CGIT_SYNC_JOBS: 1
+      PUID: ${PUID:-1000}
+      PGID: ${PGID:-100}
+      # TZ: ${TZ}
+    # healthcheck:
+    #   interval: 2m
+    #   retries: 5
+    #   start_period: 5m
+    #   test:
+    #     - CMD-SHELL
+    #     - >
+    #       curl -f http://localhost:80/git/ || exit 1
+    #   timeout: 20s
+    hostname: cgit
+    image: woahbase/alpine-cgit:${CGIT_TAG:-latest}
+    network_mode: bridge
+    ports:
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: ${CGIT_PORT_SSH:-22}
+        target: 22
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: ${CGIT_PORT_HTTP:-80}
+        target: 80
+    volumes:
+      - type: bind
+        source: ${CGIT_DIR:?err}/git
+        target: /home/git
+        bind:
+          create_host_path: true
+      - type: bind
+        source: ${CGIT_DIR:?err}/repositories
+        target: /home/git/repositories
+        bind:
+          create_host_path: true
+      - type: bind
+        source: ${CGIT_DIR:?err}/ssh
+        target: /etc/ssh
+        bind:
+          create_host_path: true
+      # - type: bind
+      #   source: ${CGIT_DIR:?err}/configs/cgitrc
+      #   target: /etc/cgitrc
+      #   bind:
+      #     create_host_path: false
+      # - type: bind
+      #   source: ${CGIT_DIR:?err}/configs/scripts
+      #   target: /config/scripts
+      #   bind:
+      #     create_host_path: false
+      # - type: bind
+      #   source: ${CGIT_DIR:?err}/configs/web
+      #   target: /var/www
+      #   bind:
+      #     create_host_path: false
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind:
+          create_host_path: false
