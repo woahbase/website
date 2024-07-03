@@ -103,11 +103,9 @@ For building an image that targets another architecture, it is
     * `DOCKERFILE`
 
     {% set dcf = dockerfile|default("Dockerfile") -%}
-    {% set dcfurl = "https://github.com/" ~ orgname ~ "/"
-    ~ (ghrepo | default(page.title)) ~ "/blob/master/" ~ dcf -%}
 
     :   The dockerfile to use for build. Defaults to the file
-        [{{ dcf }}]({{ dcfurl }}), but if per-arch dockerfiles
+        {{ m.ghfilelink(dcf) }}, but if per-arch dockerfiles
         exist, (e.g. for x86_64 the filename would be
         `{{ dcf }}_x86_64`) that is used instead.
 
@@ -123,24 +121,18 @@ For building an image that targets another architecture, it is
         or extracted from the image after build (e.g. for APK or pip
         packages).
 
-    {% set mkfurl = "https://github.com/" ~ orgname ~ "/"
-    ~ (ghrepo | default(page.title)) ~ "/blob/master/makefile" -%}
-
     The image may also require custom parameters (like binary
-    architecture). **Before you build**, check the [makefile]({{
-    mkfurl }}) for a complete list of parameters to see what may
-    (or may not) need to be set.
+    architecture). **Before you build**, check the {{ m.ghfilelink('makefile') }}
+    for a complete list of parameters to see what may (or may
+    not) need to be set.
 
 ??? info "BuildX and Self-signed certificates"
-
-    {% set ctmlurl = "https://github.com/" ~ orgname ~ "/"
-    ~ (ghrepo | default(page.title)) ~ "/blob/master/config.toml" %}
 
     If you're using a private registry (a-la docker distribution
     server) with self-signed certificates, that fail to validate
     when pulling/pushing images. You will need to configure buildx
     to allow insecure access to the registry. This is configured
-    via the `config.toml` file. A [sample]({{ ctmlurl }})
+    via the `config.toml` file. A {{ m.ghfilelink('config.toml', title='sample') }}
     is provided in the repository, make sure to replace
     `YOUR.PRIVATE.REGISTRY` with your own (include port if needed).
 {% endif %}

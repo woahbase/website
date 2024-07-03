@@ -17,6 +17,13 @@ from the
 image
 {%- endmacro %}
 
+{% macro ghfilelink(filename, org, ghrepo, branch, title) -%}
+[{{ title|default(filename) }}]({{ 'https://github.com/'
+~ org|default(orgname) ~ '/' ~ ghrepo|default(page.title)
+~ '/blob/' ~ branch|default('master')
+~ '/' ~ filename }})
+{%- endmacro%}
+
 {% macro ghreleaselink(repo_name, title) -%}
 [:material-github:/{{ title | default(repo_name) }}](https://github.com/{{ repo_name }}/releases/ "Go to Github Releases")
 {%- endmacro %}
