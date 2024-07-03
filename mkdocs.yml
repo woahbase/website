@@ -122,6 +122,14 @@ nav:
       - alpine-go: images/alpine-go.md
       - alpine-lua: images/alpine-lua.md
       - alpine-nodejs: images/alpine-nodejs.md
+      - alpine-openjdk8: images/alpine-openjdk8.md
+      - alpine-openjdk11: images/alpine-openjdk11.md
+
+      # - Deprecated:
+
+      # - dev/runtime
+      # --------
+      - alpine-openjdk7: images/alpine-openjdk7.md
 
   - About:
       - About: about/index.md
