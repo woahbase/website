@@ -128,6 +128,7 @@ nav:
       # - service
       # --------
       - alpine-nginx: images/alpine-nginx.md
+      - alpine-registry: images/alpine-registry.md
 
       # - Deprecated:
 
