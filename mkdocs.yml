@@ -121,6 +121,7 @@ nav:
       # --------
       - alpine-go: images/alpine-go.md
       - alpine-lua: images/alpine-lua.md
+      - alpine-nodejs: images/alpine-nodejs.md
 
   - About:
       - About: about/index.md

@@ -46,7 +46,7 @@ following environment variables.
 | ENV Vars           | Default       | Description
 | :---               | :---          | :---
 {% include "envvars/alpine-s6.md" %}
-| S6_USERGROUPS      | empty string  | Comma separated list of groups to add `S6_USER` to. E.g. `"audio,video,tty"`, groups **must** exist.
+| S6_USERGROUPS      | empty string  | **Comma**-separated list of groups to add `S6_USER` to. E.g. `"audio,video,tty"`, groups **must** exist.
 | S6_USERPASS        | unset         | Password for `S6_USER`.
 
 --8<-- "check-id.md"
