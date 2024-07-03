@@ -1,0 +1,61 @@
+---
+services:
+  redis:
+    container_name: redis
+    deploy:
+      resources:
+        limits:
+          cpus: '2.00'
+          memory: 512M
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 120s
+    environment:
+      PUID: ${PUID:-1000}
+      PGID: ${PGID:-100}
+      # TZ: ${TZ}
+    # healthcheck:
+    #   interval: 2m
+    #   retries: 5
+    #   start_period: 5m
+    #   test:
+    #     - CMD-SHELL
+    #     - >
+    #       redis-cli ping || exit 1
+    #   timeout: 10s
+    hostname: redis
+    image: woahbase/alpine-redis:${REDIS_TAG:-latest}
+    network_mode: bridge
+    ports:
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: ${REDIS_PORT:-6379}
+        target: 6379
+      # - protocol: tcp
+      #   host_ip: 0.0.0.0
+      #   published: ${REDIS_BUS_PORT:-6380}
+      #   target: 6380
+    volumes:
+      - type: bind
+        source: ${REDIS_DIR:?err}/data
+        target: /var/lib/redis
+        bind:
+          create_host_path: true
+      # - type: bind
+      #   source: ${REDIS_DIR:?err}/config/redis.conf
+      #   target: /etc/redis.conf
+      #   bind:
+      #     create_host_path: false
+      # - type: bind
+      #   source: ${REDIS_DIR:?err}/config/users.acl
+      #   target: /etc/redis/users.acl
+      #   bind:
+      #     create_host_path: false
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind:
+          create_host_path: false
