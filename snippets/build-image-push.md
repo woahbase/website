@@ -71,7 +71,6 @@ If the built image targets another architecture then it is
         build date (format `yyyymmdd`). This value is obtained from the `BUILDDATE`
         parameter, and if not essential, can be skipped by setting the
         parameter `SKIP_BUILDDATETAG` to a non-empty string value like `1`.
-{% endif %}
 
 ??? info "Pushing To A Private Registry"
 
@@ -92,3 +91,4 @@ If the built image targets another architecture then it is
     ``` sh
     make push REGISTRY=your.private.registry:5000
     ```
+{% endif %}
