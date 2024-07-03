@@ -72,13 +72,18 @@ Also,
   `/config/nginx/http.d/`. For JSON indexable (requires custom
   configuration) storage mount the data partition at `/storage/`.
 
-* Includes two default site configuration (for http(80) and
-  https(443)) in `/defaults` directory which are used as a starter
-  configuration if none exist, these are no way intended to be
-  used in production, you are better off rolling your own.
+* Includes two default site configuration (for {{
+  m.ghfilelink('root/defaults/default_http', title='http:80') }}
+  and {{ m.ghfilelink('root/defaults/default_https',
+  title='http:443') }}) in `/defaults` directory which are used
+  as a starter configuration if none exist, these are no way
+  intended to be used in production, you are better off rolling
+  your own.
 
 * Includes a placeholder script for further customizations.
-  Override this shell script located at
+  Override this {{
+  m.ghfilelink('root/etc/s6-overlay/s6-rc.d/p1-end/dependencies.d/p12-nginx-customize/run',
+  title='shellscript') }} located at
   `/etc/s6-overlay/s6-rc.d/p1-end/dependencies.d/p12-nginx-customize/run`
   with your custom pre-tasks.
 

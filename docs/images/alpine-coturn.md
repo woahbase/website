@@ -51,8 +51,10 @@ following environment variables.
 Also,
 
 * Config file loaded from `/var/lib/coturn/turnserver.conf` edit
-  or remount this with your own. A default is provided which is
-  auto loaded if there aren't any config file to start with.
+  or remount this with your own. A {{
+  m.ghfilelink('root/defaults/turnserver.conf', title='sample')
+  }} is provided which is auto loaded if there aren't any config
+  file to start with.
 
 * Data stored at `/var/lib/coturn`.
 

@@ -90,7 +90,8 @@ Also,
   don't clash with other services.
 
 * Config file loaded from `/etc/cgitrc` edit or remount this with
-  your own. A default is provided which is auto loaded if there
+  your own. A {{ m.ghfilelink('root/defaults/cgitrc',
+  title='sample') }} is provided which is auto loaded if there
   aren't any config file to start with.
 
 * To persist the same host keys, preserve their contents at `/etc/ssh`.
@@ -115,8 +116,9 @@ Also,
 ##### Scripts
 ---
 
-A few scripts for common tasks are baked into the image, E.g. we
-can create a bare repository with,
+A few {{ m.ghfilelink('root/scripts', title='scripts') }} for
+common tasks are baked into the image, E.g. we can create a bare
+repository with,
 
 ``` sh
 docker exec -u {{ s6_user }} -it docker_cgit /scripts/bareinit
@@ -134,14 +136,14 @@ Sync the repositories already tracking with their remote,
 docker exec -u {{ s6_user }} -it docker_cgit /scripts/sync
 ```
 
-Backup a bare or mirror repository with to
+Backup a bare or mirror repository to
 `$CGIT_ARCHIVEDIR/(optional category-dir)/repo-name`,
 
 ``` sh
 docker exec -u {{ s6_user }} -it docker_cgit /scripts/backup <filters: category-dirs, or reponames>
 ```
 
-Restore a backed-up repository with from
+Restore a backed-up repository from
 `$CGIT_ARCHIVEDIR/(optional category-dir)/repo-name`,
 
 ``` sh

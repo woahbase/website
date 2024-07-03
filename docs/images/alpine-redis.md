@@ -55,9 +55,10 @@ following environment variables.
 
 Also,
 
-* Config file is at `/etc/redis.conf`, edit or remount this
-  with your own. A default is provided in `/default`, this gets
-  copied if none exists.
+* Config file is at `/etc/redis.conf`, edit or remount this with
+  your own. A {{ m.ghfilelink('root/defaults/redis.conf',
+  title='sample') }} is provided in `/defaults`, this gets copied
+  if none exists.
 
 * Data stored at `/var/lib/redis`, logs go to `stdout` by default,
   or `/var/log/redis` when logging to file enabled in configuration.

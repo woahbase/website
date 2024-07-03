@@ -107,15 +107,15 @@ Also,
     * {{ m.alpinepkg('php'~phpmajmin~'-zlib') }}
 
 * If no `php.ini` is found inside  `/etc/php{{ phpmajmin }}/`,
-  a default (from `/default/`, with a few options modified to suit
+  a default (from `/defaults/`, with a few options modified to suit
   this image) is provided.
 
 * If no `php-fpm.conf` is found inside  `/etc/php{{ phpmajmin
-  }}/`, a default (from `/default/`, with a few options modified to
+  }}/`, a default (from `/defaults/`, with a few options modified to
   suit this image) is provided.
 
 * If no `www.conf` is found inside  `/etc/php{{ phpmajmin
-  }}/php-fpm.d/`, a default (from `/default/`, with a few options
+  }}/php-fpm.d/`, a default (from `/defaults/`, with a few options
   modified to suit this image) is provided.
 
 * Cron is enabled by default to read `/etc/crontabs/`.

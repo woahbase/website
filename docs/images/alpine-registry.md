@@ -70,9 +70,10 @@ following environment variables.
 
 Also,
 
-* Config file is at `/data/config.yml`, edit or remount this
-  with your own. A default is provided in `/default`, this gets
-  copied if none exists.
+* Config file is at `/data/config.yml`, edit or remount this with
+  your own. A {{ m.ghfilelink('root/defaults/config.yml',
+  title='sample') }} is provided in `/defaults`, this gets copied
+  if none exists.
 
 * Data at `/data/storage`.
 
