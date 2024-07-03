@@ -1,0 +1,79 @@
+---
+services:
+  grafana:
+    container_name: grafana
+    # depends_on:
+    #   influxdb:
+    #     condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: '2.00'
+          memory: 2048M
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 120s
+    environment:
+      PUID: ${PUID:-1000}
+      PGID: ${PGID:-100}
+      # TZ: ${TZ}
+      # ADMIN: ${GRAFANA_ADMIN}
+      # PASSWORD: ${GRAFANA_PASSWORD}
+    # healthcheck:
+    #   interval: 2m
+    #   retries: 5
+    #   start_period: 5m
+    #   test:
+    #     - CMD-SHELL
+    #     - >
+    #       wget -q -T 2 -O /dev/null
+    #       http://localhost:3000/grafana
+    #       || exit 1
+    #   timeout: 10s
+    hostname: grafana
+    image: woahbase/alpine-grafana:${GRAFANA_TAG:-latest}
+    network_mode: bridge
+    ports:
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: '${GRAFANA_PORT:-3000}'
+        target: 3000
+    volumes:
+      - type: bind
+        source: ${GRAFANA_DIR:?err}/dashboards
+        target: /var/lib/grafana/dashboards
+        bind:
+          create_host_path: true
+      # - type: bind
+      #   source: ${GRAFANA_DIR:?err}/conf
+      #   target: /var/lib/grafana/conf
+      #   bind:
+      #     create_host_path: false
+      - type: bind
+        source: ${GRAFANA_DIR:?err}/data
+        target: /var/lib/grafana/data
+        bind:
+          create_host_path: true
+      # - type: bind
+      #   source: ${GRAFANA_DIR:?err}/plugins
+      #   target: /var/lib/grafana/plugins
+      #   bind:
+      #     create_host_path: true
+      # - type: bind
+      #   source: ${GRAFANA_DIR:?err}/provisioning
+      #   target: /var/lib/grafana/provisioning
+      #   bind:
+      #     create_host_path: true
+      # - type: bind
+      #   source: ${GRAFANA_DIR:?err}/logs
+      #   target: /var/lib/grafana/logs
+      #   bind:
+      #     create_host_path: true
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind:
+          create_host_path: false
