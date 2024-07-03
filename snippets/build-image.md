@@ -102,9 +102,14 @@ For building an image that targets another architecture, it is
 
     * `DOCKERFILE`
 
-    :   The dockerfile to use. Defaults to the file `Dockerfile`, but
-        if per-arch dockerfiles exist, (e.g. for x86_64 the filename
-        would be `Dockerfile_x86_64`) that is used instead.
+    {% set dcf = dockerfile|default("Dockerfile") -%}
+    {% set dcfurl = "https://github.com/" ~ orgname ~ "/"
+    ~ (ghrepo | default(page.title)) ~ "/blob/master/" ~ dcf -%}
+
+    :   The dockerfile to use for build. Defaults to the file
+        [{{ dcf }}]({{ dcfurl }}), but if per-arch dockerfiles
+        exist, (e.g. for x86_64 the filename would be
+        `{{ dcf }}_x86_64`) that is used instead.
 
     * `TESTCMD`
 
@@ -118,14 +123,18 @@ For building an image that targets another architecture, it is
         or extracted from the image after build (e.g. for APK or pip
         packages).
 
-    The image may also require custom parameters (like binary
-    architecture). **Before you build**, check the `makefile` for
-    a complete list of parameters to see what may (or may not)
-    need to be set.
+    {% set mkfurl = "https://github.com/" ~ orgname ~ "/"
+    ~ (ghrepo | default(page.title)) ~ "/blob/master/makefile" -%}
 
-{% set ctmlurl = "https://github.com/" ~ orgname ~ "/"
-~ (ghrepo | default(page.title)) ~ "/blob/master/config.toml" %}
+    The image may also require custom parameters (like binary
+    architecture). **Before you build**, check the [makefile]({{
+    mkfurl }}) for a complete list of parameters to see what may
+    (or may not) need to be set.
+
 ??? info "BuildX and Self-signed certificates"
+
+    {% set ctmlurl = "https://github.com/" ~ orgname ~ "/"
+    ~ (ghrepo | default(page.title)) ~ "/blob/master/config.toml" %}
 
     If you're using a private registry (a-la docker distribution
     server) with self-signed certificates, that fail to validate

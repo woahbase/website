@@ -2,6 +2,7 @@
 description: Container for Alpine Linux + S6 + GNU LibC + OpenJDK 11
 svcname: openjdk11
 ghrepo: alpine-openjdk
+dockerfile: Dockerfile.11
 skip_armhf: true
 skip_armv7l: true
 wb_extra_args: JVVMAJOR=11
