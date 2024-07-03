@@ -133,6 +133,7 @@ nav:
       - alpine-adminer: images/alpine-adminer.md
       - alpine-cgit: images/alpine-cgit.md
       - alpine-coturn: images/alpine-coturn.md
+      - alpine-dhcp: images/alpine-dhcp.md
       - alpine-nginx: images/alpine-nginx.md
       - alpine-redis: images/alpine-redis.md
       - alpine-registry: images/alpine-registry.md

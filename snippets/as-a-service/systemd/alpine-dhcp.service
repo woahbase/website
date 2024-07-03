@@ -1,0 +1,38 @@
+[Unit]
+Description=SystemD Service for ISC DHCP Server (dockerized)
+Requires=multi-user.target network-online.target docker.service
+
+After=network-online.target docker.service
+
+# config dir must exist
+ConditionPathIsDirectory=/services/dhcp
+# and should contain at least one dhcpd.conf or multiple files for failover configs
+ConditionDirectoryNotEmpty=/services/dhcp
+# data dir must exist
+ConditionPathIsDirectory=/data/dhcp
+
+[Service]
+ExecStart=/usr/bin/docker run \
+    --rm \
+    --pull=never \
+    --net=host \
+    -e TZ=Asia/Kolkata \
+    -v /etc/localtime:/etc/localtime:ro \
+    --hostname dhcp \
+    --name docker_dhcp \
+    -e INTERFACES=eth0 \
+    -v /data/dhcp:/var/lib/dhcp \
+    -v /services/dhcp:/etc/dhcp \
+    -c 256 \
+    --memory 256mb \
+    woahbase/alpine-dhcp
+
+# ExecStop=/usr/bin/docker stop -t 2 docker_dhcp
+# ExecStopPost=/usr/bin/docker rm -f docker_dhcp
+
+Restart=always
+RestartSec=60
+SyslogIdentifier=dhcp
+
+[Install]
+WantedBy=default.target

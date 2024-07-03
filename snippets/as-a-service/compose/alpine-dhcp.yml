@@ -1,0 +1,64 @@
+---
+services:
+  dhcp:
+    container_name: dhcp
+    deploy:
+      resources:
+        limits:
+          cpus: '1.00'
+          memory: 64M
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 120s
+    environment:
+      INTERFACES: ${DHCP_INTERFACES:-eth0}
+      # TZ: ${TZ}
+    hostname: dhcp
+    image: woahbase/alpine-dhcp:${DHCP_TAG:-latest}
+    network_mode: host
+    # ports:
+    # - protocol: tcp
+    #   host_ip: 0.0.0.0
+    #   published: '${DHCP_PORT}'
+    #   target: '${DHCP_PORT}'
+    # - protocol: udp
+    #   host_ip: 0.0.0.0
+    #   published: '${DHCP_PORT}'
+    #   target: '${DHCP_PORT}'
+    #
+    # - protocol: tcp
+    #   host_ip: 0.0.0.0
+    #   published: '${DHCP_FAILOVER_PORT_PRIMARY:-647}'
+    #   target: '${DHCP_FAILOVER_PORT_PRIMARY:-647}'
+    # - protocol: udp
+    #   host_ip: 0.0.0.0
+    #   published: '${DHCP_FAILOVER_PORT_PRIMARY:-647}'
+    #   target: '${DHCP_FAILOVER_PORT_PRIMARY:-647}'
+    #
+    # - protocol: tcp
+    #   host_ip: 0.0.0.0
+    #   published: '${DHCP_FAILOVER_PORT_SECONDARY:-847}'
+    #   target: '${DHCP_FAILOVER_PORT_SECONDARY:-847}'
+    # - protocol: udp
+    #   host_ip: 0.0.0.0
+    #   published: '${DHCP_FAILOVER_PORT_SECONDARY:-847}'
+    #   target: '${DHCP_FAILOVER_PORT_SECONDARY:-847}'
+    volumes:
+      - type: bind
+        source: ${DHCP_DIR:?err}/data
+        target: /var/lib/dhcp
+        bind:
+          create_host_path: true
+      # - type: bind
+      #   source: ${DHCP_DIR:?err}/config
+      #   target: /etc/dhcp
+      #   bind:
+      #     create_host_path: false
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind:
+          create_host_path: false

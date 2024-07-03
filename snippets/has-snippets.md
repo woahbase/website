@@ -10,7 +10,7 @@ reference (and modify it as needed).
 {%   if ('compose' in has_services) %}
 === "compose"
 
-    With [`docker-compose`](https://docs.docker.com/compose/)
+    With [docker-compose](https://docs.docker.com/compose/)
 
     ``` yaml
     --8<-- "as-a-service/compose/{{ page.title }}.yml"
@@ -19,7 +19,7 @@ reference (and modify it as needed).
 {%   if ('nomad' in has_services) %}
 === "nomad"
 
-    With [`HashiCorp Nomad`](https://www.nomadproject.io/)
+    With [HashiCorp Nomad](https://www.nomadproject.io/)
 
     ``` hcl
     --8<-- "as-a-service/nomad/{{ page.title }}.hcl"
@@ -28,8 +28,7 @@ reference (and modify it as needed).
 {%   if ('openrc' in has_services) %}
 === "openrc"
 
-    Run the container as a
-    [SysVInit/OpenRC](https://wiki.gentoo.org/wiki/OpenRC)
+    As a [SysVInit/OpenRC](https://wiki.gentoo.org/wiki/OpenRC)
     service.
 
     ``` sh
@@ -39,8 +38,7 @@ reference (and modify it as needed).
 {%   if ('systemd' in has_services) %}
 === "systemd"
 
-    Run the container as a
-    [SystemD](https://www.freedesktop.org/software/systemd/man/255/systemd.service.html)
+    As a [SystemD](https://www.freedesktop.org/software/systemd/man/255/systemd.service.html)
     service.
 
     ``` ini
