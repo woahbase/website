@@ -125,6 +125,10 @@ nav:
       - alpine-openjdk8: images/alpine-openjdk8.md
       - alpine-openjdk11: images/alpine-openjdk11.md
 
+      # - service
+      # --------
+      - alpine-nginx: images/alpine-nginx.md
+
       # - Deprecated:
 
       # - dev/runtime

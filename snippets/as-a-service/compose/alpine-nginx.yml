@@ -1,0 +1,69 @@
+---
+services:
+  nginx:
+    container_name: nginx
+    deploy:
+      # mode: global
+      resources:
+        limits:
+          cpus: '2.00'
+          memory: 512M
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 120s
+    environment:
+      PUID: ${PUID:-1000}
+      PGID: ${PGID:-100}
+      # TZ: ${TZ}
+      # WEBADMIN: ${WEBADMIN}
+      # PASSWORD: ${WEBPASSWORD}
+      # HEALTHCHECK_URL: http://localhost/status  ## requires stub_status
+      # CERTFILE: /config/keys/certificate.crt
+      # PKEYFILE: /config/keys/private.key
+      # HTPASSWDFILE: /config/keys/.htpasswd
+    # healthcheck:
+    #   interval: 2m
+    #   retries: 5
+    #   start_period: 5m
+    #   test:
+    #     - CMD-SHELL
+    #     - >
+    #       wget --quiet --tries=1 --no-check-certificate --spider
+    #       ${HEALTHCHECK_URL:-"http://localhost:80/"} || exit 1
+    #   timeout: 10s
+    hostname: nginx
+    image: woahbase/alpine-nginx:${NGINX_TAG:-latest}
+    network_mode: bridge
+    ports:
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: 443
+        target: 443
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: 80
+        target: 80
+    volumes:
+      - type: bind
+        source: ${NGINX_DIR:?err}/config
+        target: /config
+        bind:
+          create_host_path: true
+      # - type: bind
+      #   source: ${CERTIFICATE_DIR:?err}
+      #   target: /config/keys
+      #   bind:
+      #     create_host_path: false
+      # - type: bind
+      #   source: /storage
+      #   target: /storage
+      #   bind:
+      #     create_host_path: true
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind:
+          create_host_path: false
