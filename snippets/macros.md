@@ -17,11 +17,11 @@ from the
 image
 {%- endmacro %}
 
-{% macro ghfilelink(filename, org, ghrepo, branch, title) -%}
-[{{ title|default(filename) }}]({{ 'https://github.com/'
+{% macro ghfilelink(fp, org, ghrepo, branch, title) -%}
+[{{ title|default(fp) }}]({{ 'https://github.com/'
 ~ org|default(orgname) ~ '/' ~ ghrepo|default(page.title)
 ~ '/blob/' ~ branch|default('master')
-~ '/' ~ filename }})
+~ '/' ~ fp }})
 {%- endmacro%}
 
 {% macro ghreleaselink(repo_name, title) -%}

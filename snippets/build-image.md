@@ -153,7 +153,7 @@ make run {{ wb_extra_args_run | default(wb_extra_args | default("")) }}
 But if we just need a root-shell in the container without
 any fance pre-tasks (e.g. for debug or to test something bespoke), we can
 run `bash` in the container with `--entrypoint /bin/bash`. This is
-wrapped in the `makefile` as
+wrapped in the {{ m.ghfilelink('makefile') }} as
 
 ``` sh
 make shell {{ wb_extra_args_run | default(wb_extra_args | default("")) }}
@@ -165,4 +165,4 @@ make shell {{ wb_extra_args_run | default(wb_extra_args | default("")) }}
     target `run` (which in turn may be mapped to `shell`).
 
 There may be more such targets defined as per the usage of the
-image. Check the `makefile` for more information.
+image. Check the {{ m.ghfilelink('makefile') }} for more information.
