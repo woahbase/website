@@ -1,0 +1,59 @@
+---
+services:
+  mosquitto:
+    container_name: mosquitto
+    deploy:
+      resources:
+        limits:
+          cpus: '2.00'
+          memory: 512M
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 120s
+    environment:
+      PUID: ${PUID:-1000}
+      PGID: ${PGID:-100}
+      USERNAME: ${MOSQUITTO_USERNAME:-mosquitto}
+      PASSWORD: ${MOSQUITTO_PASSWORD:-insecurebydefault}
+      # TZ: ${TZ}
+    healthcheck:
+      interval: 2m
+      retries: 5
+      start_period: 5m
+      test:
+        - CMD-SHELL
+        - >
+          mosquitto_sub -t '$$SYS/#' -u $$USERNAME -P $$PASSWORD
+          -C 1 || exit 1
+      timeout: 10s
+    hostname: mosquitto
+    image: woahbase/alpine-mosquitto:${MOSQUITTO_TAG:-latest}
+    network_mode: bridge
+    ports:
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: ${MOSQUITTO_PORT:-1883}
+        target: 1883
+      # - protocol: tcp
+      #   host_ip: 0.0.0.0
+      #   published: ${MOSQUITTO_SSL_PORT:-8883}
+      #   target: 8883
+    volumes:
+      - type: bind
+        source: ${MOSQUITTO_DIR:?err}/data
+        target: /mosquitto/data
+        bind:
+          create_host_path: true
+      # - type: bind
+      #   source: ${MOSQUITTO_DIR:?err}/config
+      #   target: /mosquitto/config
+      #   bind:
+      #     create_host_path: false
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind:
+          create_host_path: false
