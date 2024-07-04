@@ -1,0 +1,59 @@
+---
+services:
+  netdata:
+    cap_add:
+      - SYS_PTRACE
+    container_name: netdata
+    # depends_on:
+    #   - rsyslog
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 120s
+    environment:
+      TZ: Asia/Kolkata
+    # healthcheck:
+    #   interval: 2m
+    #   retries: 5
+    #   start_period: 5m
+    #   test:
+    #   - CMD
+    #   - curl
+    #   - -f
+    #   - http://localhost:19999/
+    #   timeout: 10s
+    hostname: netdata
+    image: woahbase/alpine-netdata:${NETDATA_TAG:-latest}
+    network_mode: bridge
+    ports:
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: 19999
+        target: 19999
+    volumes:
+      # - type: bind
+      #   source: ${NETDATA_DIR:?err}/config/${HOSTNAME}.conf
+      #   target: /etc/netdata/netdata.conf
+      #   bind:
+      #     create_host_path: false
+      - type: bind
+        source: /proc
+        target: /host/proc
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: /sys
+        target: /host/sys
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind:
+          create_host_path: false

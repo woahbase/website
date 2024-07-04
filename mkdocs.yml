@@ -149,6 +149,10 @@ nav:
       - alpine-openjdk7: images/alpine-openjdk7.md
       - alpine-python2: images/alpine-python2.md
 
+      # - services
+      # --------
+      - alpine-netdata: images/alpine-netdata.md
+
   - About:
       - About: about/index.md
       - Contact: about/contact.md
