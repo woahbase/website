@@ -1,0 +1,62 @@
+---
+services:
+  squid:
+    container_name: squid
+    deploy:
+      resources:
+        limits:
+          cpus: '2.00'
+          memory: 1024M
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 120s
+    environment:
+      PUID: ${PUID:-1000}
+      PGID: ${PGID:-100}
+      # TZ: ${TZ}
+      WEBADMIN: ${WEBADMIN}
+      PASSWORD: ${WEBPASSWORD}
+    # healthcheck:
+    #   interval: 2m
+    #   retries: 5
+    #   start_period: 5m
+    #   test:
+    #     - CMD-SHELL
+    #     - >
+    #       squidclient --ping -g 3 -I 1 || exit 1
+    #   timeout: 10s
+    hostname: squid
+    image: woahbase/alpine-squid:${SQUID_TAG:-latest}
+    network_mode: bridge
+    ports:
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: ${SQUID_PORT:-3128}
+        target: 3128
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: ${SQUID_INTERCEPT_PORT:-3129}
+        target: 3129
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: ${SQUID_INTERCEPT_SSL_PORT:-3130}
+        target: 3130
+    volumes:
+      - type: bind
+        source: ${SQUID_DIR:?err}/cache
+        target: /var/cache/squid
+        bind:
+          create_host_path: true
+      # - type: bind
+      #   source: ${SQUID_DIR:?err}/configs/squid
+      #   target: /etc/squid
+      #   bind:
+      #     create_host_path: false
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind:
+          create_host_path: false

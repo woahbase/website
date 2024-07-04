@@ -144,6 +144,7 @@ nav:
       - alpine-redis: images/alpine-redis.md
       - alpine-registry: images/alpine-registry.md
       - alpine-rsyslog: images/alpine-rsyslog.md
+      - alpine-squid: images/alpine-squid.md
 
       # - Legacy: []
 
