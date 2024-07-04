@@ -1,0 +1,69 @@
+---
+services:
+  mysql:
+    container_name: mysql
+    deploy:
+      resources:
+        limits:
+          cpus: '2.00'
+          memory: 4096M
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 3
+        window: 120s
+    environment:
+      # MYSQL_SKIP_INITIALIZE: true
+      MYSQL_USER_PWD: ${MYSQL_USER_PWD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_USER_DB: ${MYSQL_USER_DB}
+
+      PGID: ${PGID:-1000}
+      PUID: ${PUID:-100}
+      # TZ: ${TZ}
+    # healthcheck:
+    #   interval: 2m
+    #   retries: 5
+    #   start_period: 5m
+    #   test:
+    #     - CMD-SHELL
+    #     - >
+    #       /scripts/run.sh healthcheck
+    #     # # or
+    #     # - >
+    #     #   /usr/bin/mysql --user=${MYSQL_USER} --password=${MYSQL_USER_PWD} --execute
+    #     #   'SHOW DATABASES' || exit 1
+    #     #
+    #     # # or
+    #     # - >
+    #     #   mysqladmin ping -h localhost -u $MYSQL_USER -p$MYSQL_USER_PWD
+    #   timeout: 10s
+    hostname: mysql
+    image: woahbase/alpine-mysql:${MYSQL_TAG:-latest}
+    network_mode: bridge
+    ports:
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: '${MYSQL_PORT:3306}'
+        target: 3306
+      # - protocol: tcp
+      #   host_ip: 0.0.0.0
+      #   published: '${MYSQL_SSL_PORT:3366}'
+      #   target: 3366
+    volumes:
+      - type: bind
+        source: ${MYSQL_DIR:?err}/data
+        target: /var/lib/mysql
+        bind:
+          create_host_path: true
+      # - type: bind
+      #   source: ${MYSQL_DIR:?err}/configs/my.cnf
+      #   target: /etc/my.cnf
+      #   bind:
+      #     create_host_path: false
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind:
+          create_host_path: false
