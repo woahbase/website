@@ -142,6 +142,12 @@ nav:
       - alpine-redis: images/alpine-redis.md
       - alpine-registry: images/alpine-registry.md
 
+      # - Legacy: []
+
+      # - services
+      # --------
+      - alpine-pulseaudio: images/alpine-pulseaudio.md
+
       # - Deprecated:
 
       # - dev/runtime
