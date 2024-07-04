@@ -137,6 +137,7 @@ nav:
       - alpine-grafana: images/alpine-grafana.md
       - alpine-influxdb: images/alpine-influxdb.md
       - alpine-mosquitto: images/alpine-mosquitto.md
+      - alpine-mpd: images/alpine-mpd.md
       - alpine-nginx: images/alpine-nginx.md
       - alpine-redis: images/alpine-redis.md
       - alpine-registry: images/alpine-registry.md

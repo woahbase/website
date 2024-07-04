@@ -1,0 +1,71 @@
+---
+services:
+  mpd:
+    cap_add:
+      - SYS_NICE
+    container_name: mpd
+    deploy:
+      resources:
+        limits:
+          cpus: '2.00'
+          memory: 512M
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 3
+        window: 120s
+    environment:
+      PUID: ${PUID:-1000}
+      PGID: ${PGID:-100}
+      TZ: ${TZ}
+      PULSE_SERVER: ${PULSE_SERVER}
+    # healthcheck:
+    #   interval: 2m
+    #   retries: 3
+    #   start_period: 5m
+    #   test:
+    #     - CMD-SHELL
+    #     - >
+    #       nc -z -i 1 -w 1 localhost 6600
+    #       &&
+    #       wget --quiet --tries=1 --no-check-certificate --spider http://localhost:64801/
+    #       || exit 1
+    #   timeout: 10s
+    hostname: mpd
+    image: woahbase/alpine-mpd:${MPD_TAG:-latest}
+    network_mode: bridge
+    ports:
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: ${MPD_PORT:-6600}
+        target: 6600
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: ${MPD_STREAM_PORT:-8000}
+        target: 8000
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: ${MPD_WEB_PORT:-64801}
+        target: 64801
+    volumes:
+      # - type: bind
+      #   source: ${MPD_DIR:?err}/data
+      #   target: /var/lib/mpd
+      #   bind:
+      #     create_host_path: true
+      # - type: bind
+      #   source: ${MPD_DIR:?err}/configs/mpd.conf
+      #   target: /etc/mpd.conf
+      #   bind:
+      #     create_host_path: false
+      - type: bind
+        source: ${MUSICDIR:?err}
+        target: /music
+        bind:
+          create_host_path: false
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind:
+          create_host_path: false
