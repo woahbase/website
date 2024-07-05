@@ -1,0 +1,75 @@
+---
+services:
+  transmission:
+    container_name: transmission
+    deploy:
+      resources:
+        limits:
+          cpus: '2.00'
+          memory: 1024M
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 120s
+    environment:
+      PUID: ${PUID:-1000}
+      PGID: ${PGID:-100}
+      # TZ: ${TZ}
+    # healthcheck:
+    #   interval: 2m
+    #   retries: 5
+    #   start_period: 5m
+    #   test:
+    #     - CMD-SHELL
+    #     - >
+    #       wget -q -T '2' -O /dev/null http://localhost:9091/transmission
+    #   timeout: 10s
+    hostname: transmission
+    image: woahbase/alpine-transmission:${TRANSMISSION_TAG:-latest}
+    network_mode: bridge
+    ports:
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: ${TORRENT_PORT_HTTP:-9091}
+        target: 9091
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: ${TORRENT_PORT_NAT:-52437}
+        target: 52437
+      - protocol: udp
+        host_ip: 0.0.0.0
+        published: ${TORRENT_PORT_NAT:-52437}
+        target: 52437
+    volumes:
+      - type: bind
+        source: ${TORRENT_DIR:?err}/config
+        target: /var/lib/transmission/config
+        bind:
+          create_host_path: true
+      - type: bind
+        source: ${TORRENT_DOWNLOADS:?err}
+        target: /var/lib/transmission/downloads
+        bind:
+          create_host_path: true
+      - type: bind
+        source: ${TORRENT_WATCH:?err}
+        target: /var/lib/transmission/torrents
+        bind:
+          create_host_path: true
+      # - type: bind
+      #   source: ${TORRENT_DIR:?err}/configs/settings.json
+      #   target: /var/lib/transmission/config/settings.json
+      #   bind:
+      #     create_host_path: false
+      # - type: bind
+      #   source: ${TORRENT_DIR:?err}/configs/done.bash
+      #   target: /var/lib/transmission/config/done.bash
+      #   bind:
+      #     create_host_path: false
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind:
+          create_host_path: false
