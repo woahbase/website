@@ -80,12 +80,10 @@ Also,
   intended to be used in production, you are better off rolling
   your own.
 
-* Includes a placeholder script for further customizations.
-  Override this {{
-  m.ghfilelink('root/etc/s6-overlay/s6-rc.d/p1-end/dependencies.d/p12-nginx-customize/run',
-  title='shellscript') }} located at
-  `/etc/s6-overlay/s6-rc.d/p1-end/dependencies.d/p12-nginx-customize/run`
-  with your custom pre-tasks.
+* Includes a {{ m.ghfilelink('root/etc/s6-overlay/s6-rc.d/p12-nginx-customize/run', title='placeholder') }}
+  script for further customizations. Override the shell script
+  located at `/etc/s6-overlay/s6-rc.d/p12-nginx-customize/run`
+  with your custom pre-tasks as needed.
 
 * Default configs set up a https and auth protected web location
   at /secure.

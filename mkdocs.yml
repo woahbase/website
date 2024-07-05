@@ -153,6 +153,7 @@ nav:
       # - usershell
       # --------
       - alpine-awscli: images/alpine-awscli.md
+      - alpine-gimp: images/alpine-gimp.md
 
       # - Legacy: []
 
