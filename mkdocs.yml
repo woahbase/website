@@ -146,6 +146,7 @@ nav:
       - alpine-rsyslog: images/alpine-rsyslog.md
       - alpine-squid: images/alpine-squid.md
       - alpine-ssh: images/alpine-ssh.md
+      - alpine-syncthing: images/alpine-syncthing.md
 
       # - Legacy: []
 
