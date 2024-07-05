@@ -148,6 +148,7 @@ nav:
       - alpine-ssh: images/alpine-ssh.md
       - alpine-syncthing: images/alpine-syncthing.md
       - alpine-transmission: images/alpine-transmission.md
+      - alpine-webhook: images/alpine-webhook.md
 
       # - Legacy: []
 

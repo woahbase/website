@@ -1,0 +1,56 @@
+---
+services:
+  webhook:
+    container_name: webhook
+    deploy:
+      resources:
+        limits:
+          cpus: '2.00'
+          memory: 256M
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 120s
+    environment:
+      PUID: ${PUID:-1000}
+      PGID: ${PGID:-100}
+      # TZ: ${TZ}
+      WEBHOOK_ARGS: >-
+        -hotreload
+        -ip 0.0.0.0
+        -nopanic
+        -port 9000
+        -urlprefix hooks
+        -verbose
+      # WEBHOOK_JSON: /etc/webhook/hooks.json
+      # WEBHOOK_JSON_URL: https://raw.githubusercontent.com/woahbase/alpine-webhook/master/root/defaults/hooks.json
+    # healthcheck:
+    #   interval: 2m
+    #   retries: 5
+    #   start_period: 5m
+    #   test:
+    #     - CMD-SHELL
+    #     - >
+    #       wget --quiet --tries=1 --no-check-certificate --spider "http://localhost:9000/hooks/version" || exit 1
+    #   timeout: 10s
+    hostname: webhook
+    image: woahbase/alpine-webhook:${WEBHOOK_TAG:-latest}
+    network_mode: bridge
+    ports:
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: '${WEBHOOK_PORT:-9000}'
+        target: 9000
+    volumes:
+      # - type: bind
+      #   source: ${WEBHOOK_DIR:?err}/configs
+      #   target: /etc/webhook
+      #   bind:
+      #     create_host_path: false
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind:
+          create_host_path: false

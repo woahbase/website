@@ -90,7 +90,7 @@ Also,
 
 * Config file is at `/etc/my.cnf`, edit or remount this with your
   own. A {{ m.ghfilelink('root/defaults/my.cnf', title='sample')
-  }} is provided in `/default`, this gets copied if none exists.
+  }} is provided in `/defaults`, this gets copied if none exists.
   By default all snippets existing in `/etc/my.cnf.d/` are
   included.
 
