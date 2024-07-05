@@ -150,6 +150,10 @@ nav:
       - alpine-transmission: images/alpine-transmission.md
       - alpine-webhook: images/alpine-webhook.md
 
+      # - usershell
+      # --------
+      - alpine-awscli: images/alpine-awscli.md
+
       # - Legacy: []
 
       # - services
