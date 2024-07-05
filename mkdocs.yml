@@ -155,6 +155,7 @@ nav:
       - alpine-awscli: images/alpine-awscli.md
       - alpine-gimp: images/alpine-gimp.md
       - alpine-hugo: images/alpine-hugo.md
+      - alpine-libreoffice: images/alpine-libreoffice.md
 
       # - Legacy: []
 
