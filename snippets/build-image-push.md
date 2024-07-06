@@ -83,12 +83,12 @@ If the built image targets another architecture then it is
 
     ``` sh
     export REGISTRY=your.private.registry:5000
-    make push
+    make build test push
     ```
 
     or
 
     ``` sh
-    make push REGISTRY=your.private.registry:5000
+    make build test push REGISTRY=your.private.registry:5000
     ```
 {% endif %}

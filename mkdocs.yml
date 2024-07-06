@@ -157,6 +157,7 @@ nav:
       - alpine-hugo: images/alpine-hugo.md
       - alpine-libreoffice: images/alpine-libreoffice.md
       - alpine-rclone: images/alpine-rclone.md
+      - alpine-weechat: images/alpine-weechat.md
 
       # - Legacy: []
 
