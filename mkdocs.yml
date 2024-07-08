@@ -173,6 +173,7 @@ nav:
       - alpine-ionic: images/alpine-ionic.md
       - alpine-ng: images/alpine-ng.md
       - alpine-quasar: images/alpine-quasar.md
+      - alpine-vue: images/alpine-vue.md
 
       # - Deprecated:
 
