@@ -174,6 +174,7 @@ nav:
       - alpine-ng: images/alpine-ng.md
       - alpine-quasar: images/alpine-quasar.md
       - alpine-rpigpio: images/alpine-rpigpio.md
+      - alpine-tomcat: images/alpine-tomcat.md
       - alpine-vue: images/alpine-vue.md
 
       # - Deprecated:

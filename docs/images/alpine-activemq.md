@@ -14,7 +14,7 @@ tags:
 
 This [image][155] containerizes Apache [ActiveMQ][1] server, for
 applications / services that require a pub-sub message queue
-, running under [OpenJDK][2] 8.\*.\*.
+, running under [OpenJDK-8][2].
 
 Current stable version is `5.15.9`.
 
@@ -42,7 +42,7 @@ woahbase/alpine-activemq:x86_64
 --8<-- "multiarch.md"
 
 [1]: https://activemq.apache.org/
-[2]: http://openjdk.java.net/
+[2]: https://openjdk.org/projects/jdk8/
 [3]: https://downloads.apache.org/activemq/
 
 {% include "all-include.md" %}
