@@ -168,6 +168,10 @@ nav:
       - alpine-pulseaudio: images/alpine-pulseaudio.md
       - alpine-searx: images/alpine-searx.md
 
+      # - usershell
+      # --------
+      - alpine-ionic: images/alpine-ionic.md
+
       # - Deprecated:
 
       # - dev/runtime
