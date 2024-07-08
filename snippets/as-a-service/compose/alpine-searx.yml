@@ -1,0 +1,47 @@
+---
+services:
+  searx:
+    container_name: searx
+    deploy:
+      resources:
+        limits:
+          cpus: '2.00'
+          memory: 1024M
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 120s
+    environment:
+      PUID: ${PUID:-1000}
+      PGID: ${PGID:-100}
+      # TZ: ${TZ}
+    # healthcheck:
+    #   interval: 2m
+    #   retries: 5
+    #   start_period: 5m
+    #   test:
+    #     - CMD-SHELL
+    #     - >
+    #       curl -f http://localhost:${SEARX_PORT:-8888}/ || exit 1
+    #   timeout: 10s
+    hostname: searx
+    image: woahbase/alpine-searx:${SEARX_TAG:-latest}
+    network_mode: bridge
+    ports:
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: '${SEARX_PORT:-8888}'
+        target: 8888
+    volumes:
+      # - type: bind
+      #   source: ${SEARX_DIR:?err}/configs/searx
+      #   target: /data
+      #   bind:
+      #     create_host_path: false
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind:
+          create_host_path: false
