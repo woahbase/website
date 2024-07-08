@@ -164,6 +164,7 @@ nav:
       # - services
       # --------
       - alpine-activemq: images/alpine-activemq.md
+      - alpine-jenkins: images/alpine-jenkins.md
       - alpine-pulseaudio: images/alpine-pulseaudio.md
 
       # - Deprecated:
