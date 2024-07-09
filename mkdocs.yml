@@ -191,6 +191,7 @@ nav:
       - alpine-libresonic: images/alpine-libresonic.md
       - alpine-lychee: images/alpine-lychee.md
       - alpine-netdata: images/alpine-netdata.md
+      - alpine-pdnsd: images/alpine-pdnsd.md
 
   - About:
       - About: about/index.md

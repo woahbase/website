@@ -1,0 +1,59 @@
+services:
+  pdnsd:
+    container_name: pdnsd
+    deploy:
+      resources:
+        limits:
+          cpus: '1.00'
+          memory: 384M
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 120s
+    healthcheck:
+      interval: 2m
+      retries: 5
+      start_period: 5m
+      test:
+        - CMD-SHELL
+        - >
+          pdnsd-ctl -c /data/pdnsd status
+      timeout: 10s
+    hostname: pdnsd
+    image: woahbase/alpine-pdnsd:${PDNSD_TAG:-latest}
+    network_mode: bridge
+    ports:
+      - protocol: tcp
+        published: 53
+        target: 53
+      - protocol: udp
+        published: 53
+        target: 53
+    volumes:
+      - type: bind
+        source: ${PDNSD_DIR:?err}/data
+        target: /data/pdnsd
+        bind:
+          create_host_path: true
+      # - type: bind
+      #   source: ${PDNSD_DIR:?err}/config/pdnsd.conf
+      #   target: /data/pdnsd.conf
+      #   bind:
+      #     create_host_path: false
+      # - type: bind
+      #   source: ${PDNSD_DIR:?err}/config/hosts.local
+      #   target: /data/hosts/hosts.local
+      #   bind:
+      #     create_host_path: false
+      # - type: bind
+      #   source: ${PDNSD_DIR:?err}/config/hosts.blocked
+      #   target: /data/hosts/hosts.blocked
+      #   bind:
+      #     create_host_path: false
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind:
+          create_host_path: false
