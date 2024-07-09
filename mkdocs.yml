@@ -193,6 +193,7 @@ nav:
       - alpine-netdata: images/alpine-netdata.md
       - alpine-pdnsd: images/alpine-pdnsd.md
       - alpine-pydio: images/alpine-pydio.md
+      - alpine-wildfly: images/alpine-wildfly.md
 
   - About:
       - About: about/index.md
