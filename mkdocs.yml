@@ -189,6 +189,7 @@ nav:
       - alpine-blynk: images/alpine-blynk.md
       - alpine-laverna: images/alpine-laverna.md
       - alpine-libresonic: images/alpine-libresonic.md
+      - alpine-lychee: images/alpine-lychee.md
       - alpine-netdata: images/alpine-netdata.md
 
   - About:
