@@ -1,0 +1,42 @@
+[Unit]
+Description=SystemD Service for PDNSd Server (dockerized)
+Requires=multi-user.target network-online.target docker.service
+
+After=network-online.target docker.service
+
+# config dir must exist
+ConditionPathIsDirectory=/services/pdnsd
+# and should contain at least one file, pdnsd.conf
+ConditionDirectoryNotEmpty=/services/pdnsd
+
+[Service]
+# resolved should be stopped before pdnsd starts to free up port 53
+# ExecStartPre=/usr/bin/systemctl stop systemd-resolved.service
+
+ExecStart=/usr/bin/docker run \
+    --rm \
+    --pull=never \
+    -e TZ=Asia/Kolkata \
+    -v /etc/localtime:/etc/localtime:ro \
+    --hostname pdnsd \
+    --name docker_%N \
+    -p 53:53/tcp \
+    -p 53:53/udp \
+    -v /services/pdnsd:/data \
+    -v /etc/hosts:/etc/hosts:ro \
+    -c 256 \
+    --memory 256mb \
+    woahbase/alpine-pdnsd:x86_64
+
+# ExecStop=/usr/bin/docker stop -t 2 docker_%N
+# ExecStopPost=/usr/bin/docker rm -f docker_%N
+
+# optional, re-start resolved after stopping pdnsd, if needed
+# ExecStopPost=/usr/bin/systemctl start systemd-resolved.service
+
+Restart=always
+RestartSec=60
+SyslogIdentifier=pdnsd
+
+[Install]
+WantedBy=default.target

@@ -3,6 +3,7 @@ description: Container for Alpine Linux + S6 + Proxy DNS Daemon
 svcname: pdnsd
 has_services:
   - compose
+  - systemd
 skip_aarch64: true
 skip_armv7l: true
 tags:
@@ -10,6 +11,7 @@ tags:
   - deprecated
   - s6
   - service
+  - systemd
 ---
 
 {% import "macros.md" as m with context %}
