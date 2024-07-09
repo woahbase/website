@@ -186,6 +186,7 @@ nav:
 
       # - services
       # --------
+      - alpine-blynk: images/alpine-blynk.md
       - alpine-netdata: images/alpine-netdata.md
 
   - About:
