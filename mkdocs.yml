@@ -197,6 +197,7 @@ nav:
 
       # - usershell
       # --------
+      - alpine-travis: images/alpine-travis.md
       - alpine-youtubedl: images/alpine-youtubedl.md
 
   - About:
