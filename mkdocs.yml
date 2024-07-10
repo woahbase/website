@@ -197,6 +197,7 @@ nav:
 
       # - usershell
       # --------
+      - alpine-android: images/alpine-android.md
       - alpine-github: images/alpine-github.md
       - alpine-travis: images/alpine-travis.md
       - alpine-youtubedl: images/alpine-youtubedl.md
