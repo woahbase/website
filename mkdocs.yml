@@ -195,6 +195,10 @@ nav:
       - alpine-pydio: images/alpine-pydio.md
       - alpine-wildfly: images/alpine-wildfly.md
 
+      # - usershell
+      # --------
+      - alpine-youtubedl: images/alpine-youtubedl.md
+
   - About:
       - About: about/index.md
       - Contact: about/contact.md
