@@ -16,7 +16,6 @@ ConditionDirectoryNotEmpty=/services/pdnsd
 ExecStart=/usr/bin/docker run \
     --rm \
     --pull=never \
-    -e TZ=Asia/Kolkata \
     -v /etc/localtime:/etc/localtime:ro \
     --hostname pdnsd \
     --name docker_%N \

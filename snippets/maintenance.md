@@ -10,4 +10,4 @@ Built and tested at home using [Buildbot][111].
 
 <!-- Pull requests are welcome, forks even more so. :) -->
 
-Maintained (or sometimes a lack thereof?) by [WOAHBase][110].
+Maintained (or sometimes a lack thereof?) by [{{ config.site_name }}][110].

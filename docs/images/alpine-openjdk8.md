@@ -28,7 +28,7 @@ m.alpinepkg('openjdk8', star=true) }} packages installed in it.
 Run
 ---
 
-We can call `java` or `npm` directly on the container, or run
+We can call `java` commands directly on the container, or run
 `bash` in the container to get a [user-scoped][114] shell,
 
 === "command"

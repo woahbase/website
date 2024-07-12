@@ -6,7 +6,7 @@ Pull the image for your architecture if it's already available from
 [Docker Hub][155].
 
 ``` sh
-docker pull woahbase/{{ page.title }}
+docker pull {{ config.extra.orgname }}/{{ page.title }}
 ```
 ???+ info "Image Tags"
     The image is tagged respectively for the following architectures,

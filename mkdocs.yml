@@ -8,11 +8,11 @@ exclude_docs: |
   *_exclude.md
 
 extra:
-  # analytics:
-  #   provider: google
-  #   property: !ENV GOOGLE_ANALYTICS_KEY
+  analytics:
+    provider: google
+    property: !ENV GOOGLE_ANALYTICS_KEY
 
-  # homepage: https://woahbase.online
+  homepage: https://woahbase.online
   mailto: write@woahbase.online
 
   orgname: &orgname woahbase

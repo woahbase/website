@@ -13,8 +13,8 @@ services:
         delay: 10s
         max_attempts: 5
         window: 120s
-    environment:
-      TZ: Asia/Kolkata
+    # environment:
+    #   TZ: ${TZ}
     # healthcheck:
     #   interval: 2m
     #   retries: 5
