@@ -9,9 +9,7 @@ IMAGETAG	:= $(REGISTRY)/woahbase/alpine-mkdocsmaterial:9.5.25
 PUID			:= $(shell id -u)
 PGID			:= $(shell id -g)
 
-# run: CMD = e.g build or serve
-run: ## run with docker
-	docker run --rm -it \
+RUNFLAGS  := \
 		--hostname mkdocsmaterial \
 		--name $(CNTNAME) \
 		--workdir /home/alpine/project \
@@ -21,20 +19,18 @@ run: ## run with docker
 		-v $(CURDIR):/home/alpine/project \
 		-v /etc/hosts:/etc/hosts:ro \
 		-v /etc/localtime:/etc/localtime:ro \
+		#
+
+# run: CMD = e.g build or serve
+run: ## run with docker
+	docker run --rm -it \
+		$(RUNFLAGS) \
 		$(IMAGETAG) \
 		mkdocs $(CMD)
 
 shell: ## get a shell with docker
 	docker run --rm -it \
-		--hostname mkdocsmaterial \
-		--name $(CNTNAME) \
-		--workdir /home/alpine/project \
-		-c 512 -m 256m \
-		-e PGID=$(PGID) -e PUID=$(PUID) \
-		-p $(PORT):$(PORT) \
-		-v $(CURDIR):/home/alpine/project \
-		-v /etc/hosts:/etc/hosts:ro \
-		-v /etc/localtime:/etc/localtime:ro \
+		$(RUNFLAGS) \
 		$(IMAGETAG) \
 		bash
 

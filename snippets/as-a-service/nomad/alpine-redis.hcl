@@ -130,7 +130,7 @@ job "redis" {
       # template {
       #   destination = "local/redis.conf"
       #   data        = <<-EOC
-      #     {{ key "nomad/dc1/redis/redis.conf" }}
+      #     {{ key "nomad/${var.dc}/redis/redis.conf" }}
       #   EOC
       #   change_mode = "restart"
       #   perms       = "644"
@@ -140,7 +140,7 @@ job "redis" {
       # template {
       #   destination = "secrets/users.acl"
       #   data        = <<-EOP
-      #     {{ with secret "kv/data/nomad/dc1/redis" -}}
+      #     {{ with secret "kv/data/nomad/${var.dc}/redis" -}}
       #     {{   index .Data.data "users.acl" }}
       #     {{- end }}
       #   EOP

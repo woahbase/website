@@ -140,7 +140,7 @@ job "registry" {
       # template {
       #   destination = "local/config.yml"
       #   data        = <<-EOC
-      #     {{ key "nomad/dc1/docker_registry/config.yml" }}
+      #     {{ key "nomad/${var.dc}/docker_registry/config.yml" }}
       #   EOC
       #   change_mode = "restart"
       #   perms       = "644"
@@ -157,7 +157,7 @@ job "registry" {
       #     REGISTRY_REDIS_ADDR=redis.service.${var.dc}.consul:6379
       #     REGISTRY_REDIS_DB=0
       #
-      #     {{ with secret "kv/data/nomad/dc1/docker_registry" }}
+      #     {{ with secret "kv/data/nomad/${var.dc}/docker_registry" }}
       #     REGISTRY_HTTP_SECRET={{ .Data.data.http_secret }}
       #     REGISTRY_REDIS_PASSWORD={{ .Data.data.redis_password }}
       #
@@ -174,7 +174,7 @@ job "registry" {
       # template {
       #   destination = "secrets/auth/certificate.crt"
       #   data        = <<-EOP
-      #     {{ with secret "kv/data/nomad/dc1/certificates/selfsigned" -}}
+      #     {{ with secret "kv/data/nomad/${var.dc}/certificates/selfsigned" -}}
       #     {{   index .Data.data "certificate.crt"}}
       #     {{- end }}
       #   EOP
@@ -186,7 +186,7 @@ job "registry" {
       # template {
       #   destination = "secrets/auth/private.key"
       #   data        = <<-EOP
-      #     {{ with secret "kv/data/nomad/dc1/certificates/selfsigned" -}}
+      #     {{ with secret "kv/data/nomad/${var.dc}/certificates/selfsigned" -}}
       #     {{   index .Data.data "private.key"}}
       #     {{- end }}
       #   EOP
@@ -198,7 +198,7 @@ job "registry" {
       # template {
       #   destination = "secrets/auth/.htpasswd"
       #   data        = <<-EOP
-      #     {{ with secret "kv/data/nomad/dc1/docker_registry" -}}
+      #     {{ with secret "kv/data/nomad/${var.dc}/docker_registry" -}}
       #     {{   .Data.data.htpassword }}
       #     {{- end }}
       #   EOP

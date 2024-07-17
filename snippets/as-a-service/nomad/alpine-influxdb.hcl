@@ -135,7 +135,7 @@ job "influxdb" {
       # template {
       #   destination = "local/influxdb.conf"
       #   data        = <<-EOC
-      #     {{ key "nomad/dc1/influxdb/influxdb.conf" }}
+      #     {{ key "nomad/${var.dc}/influxdb/influxdb.conf" }}
       #   EOC
       #   change_mode = "restart"
       #   perms       = "644"
@@ -145,7 +145,7 @@ job "influxdb" {
       template {
         destination = "secrets/env"
         data        = <<-EOE
-          {{ with secret "kv/data/nomad/dc1/influxdb" }}
+          {{ with secret "kv/data/nomad/${var.dc}/influxdb" }}
           INFLUXDB_HEALTHCHECK_USER={{ .Data.data.username }}
           INFLUXDB_HEALTHCHECK_USER_PWD={{ .Data.data.password }}
           {{ end }}

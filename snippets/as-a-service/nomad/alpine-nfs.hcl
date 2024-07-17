@@ -135,7 +135,7 @@ job "nfs" {
         destination = "local/exports"
         data        = <<-EOC
           {{- /* Locate the exports file specific to this host from configs */ -}}
-          {{- $fnm := "nomad/dc1/nfs/exports" -}}
+          {{- $fnm := "nomad/${var.dc}/nfs/exports" -}}
           {{- $h   := env "attr.unique.hostname" -}}
           {{ key (print $fnm "." $h) }}
         EOC

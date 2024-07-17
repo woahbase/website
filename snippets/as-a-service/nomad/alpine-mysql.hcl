@@ -126,7 +126,7 @@ job "mysql" {
       template {
         destination = "local/my.cnf"
         data        = <<-EOC
-          {{ key "nomad/dc1/mysql/my.cnf" }}
+          {{ key "nomad/${var.dc}/mysql/my.cnf" }}
         EOC
         change_mode = "restart"
         perms       = "644"
@@ -136,7 +136,7 @@ job "mysql" {
         destination = "secrets/env"
         data        = <<-EOE
           MYSQL_USER_DB=test
-          {{ with secret "kv/data/nomad/dc1/mysql" }}
+          {{ with secret "kv/data/nomad/${var.dc}/mysql" }}
           MYSQL_USER={{ .Data.data.username }}
           MYSQL_USER_PWD={{ .Data.data.password }}
           {{ end }}

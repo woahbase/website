@@ -152,7 +152,7 @@ job "mpd" {
       # template {
       #   destination = "local/mpd.conf"
       #   data = <<-EOC
-      #     {{ key "nomad/dc1/mpd/mpd.conf" }}
+      #     {{ key "nomad/${var.dc}/mpd/mpd.conf" }}
       #   EOC
       #   change_mode = "restart"
       #   perms       = "644"

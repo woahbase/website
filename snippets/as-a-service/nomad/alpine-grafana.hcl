@@ -130,7 +130,7 @@ job "grafana" {
       # template {
       #   destination = "local/defaults.ini"
       #   data        = <<-EOC
-      #     {{ key "nomad/dc1/grafana/defaults.ini" }}
+      #     {{ key "nomad/${var.dc}/grafana/defaults.ini" }}
       #   EOC
       #   change_mode = "restart"
       #   perms       = "644"
@@ -142,7 +142,7 @@ job "grafana" {
       # template {
       #   destination = "secrets/env"
       #   data        = <<-EOE
-      #     {{ with secret "kv/data/nomad/dc1/grafana" }}
+      #     {{ with secret "kv/data/nomad/${var.dc}/grafana" }}
       #     GF_SECURITY_ADMIN_USER={{ .Data.data.username }}
       #     GF_SECURITY_ADMIN_PASSWORD={{ .Data.data.password }}
       #     GF_SECURITY_SECRET_KEY={{ .Data.data.secret_key }}

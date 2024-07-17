@@ -115,7 +115,7 @@ job "adminer" {
       # template {
       #   destination   = "secrets/keys/certificate.crt"
       #   data          = <<-EOP
-      #     {{ with secret "kv/data/nomad/dc1/certificates/selfsigned" -}}
+      #     {{ with secret "kv/data/nomad/${var.dc}/certificates/selfsigned" -}}
       #     {{   index .Data.data "certificate.crt"}}
       #     {{- end }}
       #   EOP
@@ -127,7 +127,7 @@ job "adminer" {
       # template {
       #   destination   = "secrets/keys/private.key"
       #   data          = <<-EOP
-      #     {{ with secret "kv/data/nomad/dc1/certificates/selfsigned" -}}
+      #     {{ with secret "kv/data/nomad/${var.dc}/certificates/selfsigned" -}}
       #     {{   index .Data.data "private.key"}}
       #     {{- end }}
       #   EOP
@@ -139,7 +139,7 @@ job "adminer" {
       # template {
       #   destination   = "secrets/keys/.htpasswd"
       #   data          = <<-EOP
-      #     {{ with secret "kv/data/nomad/dc1/certificates/selfsigned" -}}
+      #     {{ with secret "kv/data/nomad/${var.dc}/certificates/selfsigned" -}}
       #     {{   index .Data.data "htpasswd"}}
       #     {{- end }}
       #   EOP

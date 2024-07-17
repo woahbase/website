@@ -136,7 +136,7 @@ job "transmission" {
       # template {
       #   destination = "local/settings.json"
       #   data        = <<-EOC
-      #     {{ key "nomad/dc1/transmission/settings.json" }}
+      #     {{ key "nomad/${var.dc}/transmission/settings.json" }}
       #   EOC
       #   change_mode = "restart"
       #   perms       = "644"

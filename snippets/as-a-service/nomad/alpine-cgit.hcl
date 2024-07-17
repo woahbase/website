@@ -191,7 +191,7 @@ job "cgit" {
         change_mode = "restart"
         destination = "local/cgitrc"
         data        = <<-EOC
-          {{ key "nomad/dc1/cgit/cgitrc" }}
+          {{ key "nomad/${var.dc}/cgit/cgitrc" }}
         EOC
         error_on_missing_key = true
       }

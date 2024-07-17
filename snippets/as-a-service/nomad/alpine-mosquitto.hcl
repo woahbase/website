@@ -132,7 +132,7 @@ job "mosquitto" {
       # template {
       #   destination = "local/mosquitto.conf"
       #   data = <<-EOC
-      #     {{ key "nomad/dc1/mosquitto/mosquitto.conf" }}
+      #     {{ key "nomad/${var.dc}/mosquitto/mosquitto.conf" }}
       #   EOC
       #   change_mode = "restart"
       #   perms       = "644"
@@ -142,7 +142,7 @@ job "mosquitto" {
       # template {
       #   destination = "secrets/env"
       #   data        = <<-EOE
-      #     {{ with secret "kv/data/nomad/dc1/mosquitto" }}
+      #     {{ with secret "kv/data/nomad/${var.dc}/mosquitto" }}
       #     USERNAME={{ .Data.data.username }}
       #     PASSWORD={{ .Data.data.password }}
       #     {{ end }}
@@ -156,7 +156,7 @@ job "mosquitto" {
       # template {
       #   destination = "secrets/htpasswd"
       #   data        = <<-EOP
-      #     {{ with secret "kv/data/nomad/dc1/mosquitto" }}
+      #     {{ with secret "kv/data/nomad/${var.dc}/mosquitto" }}
       #     {{ .Data.data.htpasswd }}
       #     {{ end }}
       #   EOP

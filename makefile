@@ -1,10 +1,12 @@
-MODE      := docker ## run mode can be docker (or venv)
-PORT      := 8000   ## port to listen on
+# run mode can be docker (or venv)
+MODE      := docker
+# port to listen on
+PORT      := 8000
 
 # include targets as per mode
-ifeq ($(MODE), docker)
+ifeq ($(strip $(MODE)), docker)
 	include docker.include.mk
-# else ifeq ($(MODE), venv)
+# else ifeq ($(strip $(MODE)), venv)
 # 	include venv.include.mk
 endif
 

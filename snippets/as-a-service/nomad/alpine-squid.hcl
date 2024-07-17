@@ -153,7 +153,7 @@ job "squidproxy" {
       # template {
       #   destination = "local/squidproxy/cachemgr.conf"
       #   data        = <<-EOC
-      #     {{ key "nomad/dc1/squidproxy/cachemgr.conf" }}
+      #     {{ key "nomad/${var.dc}/squidproxy/cachemgr.conf" }}
       #   EOC
       #   perms       = "644"
       #   change_mode = "restart"
@@ -163,7 +163,7 @@ job "squidproxy" {
       # template {
       #   destination = "local/squidproxy/errorpage.css"
       #   data        = <<-EOC
-      #     {{ key "nomad/dc1/squidproxy/errorpage.css" }}
+      #     {{ key "nomad/${var.dc}/squidproxy/errorpage.css" }}
       #   EOC
       #   perms       = "644"
       #   change_mode = "restart"
@@ -173,7 +173,7 @@ job "squidproxy" {
       # template {
       #   destination = "local/squidproxy/mime.conf"
       #   data        = <<-EOC
-      #     {{ key "nomad/dc1/squidproxy/mime.conf" }}
+      #     {{ key "nomad/${var.dc}/squidproxy/mime.conf" }}
       #   EOC
       #   change_mode = "restart"
       #   perms       = "644"
@@ -183,7 +183,7 @@ job "squidproxy" {
       # template {
       #   destination = "local/squidproxy/squid.conf"
       #   data        = <<-EOC
-      #     {{ key "nomad/dc1/squidproxy/squid.conf" }}
+      #     {{ key "nomad/${var.dc}/squidproxy/squid.conf" }}
       #   EOC
       #   change_mode = "restart"
       #   perms       = "644"
@@ -193,7 +193,7 @@ job "squidproxy" {
       # template {
       #   destination = "secrets/env"
       #   data        = <<-EOE
-      #     {{ with secret "kv/data/nomad/dc1/squidproxy" }}
+      #     {{ with secret "kv/data/nomad/${var.dc}/squidproxy" }}
       #     WEBADMIN={{ .Data.data.username }}
       #     WEBPASSWORD={{ .Data.data.password }}
       #     {{ end }}

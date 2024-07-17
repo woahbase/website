@@ -145,7 +145,7 @@ job "nginx" {
       #     PKEYFILE=/config/keys/private.key
       #     HTPASSWDFILE=/config/keys/.htpasswd
       #
-      #     {{ with secret "kv/data/nomad/dc1/nginx" }}
+      #     {{ with secret "kv/data/nomad/${var.dc}/nginx" }}
       #     USERNAME={{ .Data.data.username }}
       #     PASSWORD={{ .Data.data.password }}
       #     {{ end }}
@@ -159,7 +159,7 @@ job "nginx" {
       # template {
       #   destination   = "secrets/keys/certificate.crt"
       #   data          = <<-EOP
-      #     {{ with secret "kv/data/nomad/dc1/certificates/selfsigned" -}}
+      #     {{ with secret "kv/data/nomad/${var.dc}/certificates/selfsigned" -}}
       #     {{   index .Data.data "certificate.crt"}}
       #     {{- end }}
       #   EOP
@@ -172,7 +172,7 @@ job "nginx" {
       # template {
       #   destination   = "secrets/keys/private.key"
       #   data          = <<-EOP
-      #     {{ with secret "kv/data/nomad/dc1/certificates/selfsigned" -}}
+      #     {{ with secret "kv/data/nomad/${var.dc}/certificates/selfsigned" -}}
       #     {{   index .Data.data "private.key"}}
       #     {{- end }}
       #   EOP
@@ -185,7 +185,7 @@ job "nginx" {
       # template {
       #   destination   = "secrets/keys/.htpasswd"
       #   data          = <<-EOP
-      #     {{ with secret "kv/data/nomad/dc1/nginx" -}}
+      #     {{ with secret "kv/data/nomad/${var.dc}/nginx" -}}
       #     {{   index .Data.data "htpasswd"}}
       #     {{- end }}
       #   EOP
@@ -198,7 +198,7 @@ job "nginx" {
       # template {
       #   destination   = "local/nginx/nginx.conf"
       #   data          = <<-EOC
-      #     {{ key "nomad/dc1/nginx/nginx.conf" }}
+      #     {{ key "nomad/${var.dc}/nginx/nginx.conf" }}
       #   EOC
       #   change_mode   = "script"
       #   change_script { command = "/config/nginx/validate-n-reload.sh" }
@@ -209,7 +209,7 @@ job "nginx" {
       # template {
       #   destination   = "local/nginx/http.d/http"
       #   data          = <<-EOC
-      #     {{ key "nomad/dc1/nginx/http" }}
+      #     {{ key "nomad/${var.dc}/nginx/http" }}
       #   EOC
       #   change_mode   = "script"
       #   change_script { command = "/config/nginx/validate-n-reload.sh" }
@@ -220,7 +220,7 @@ job "nginx" {
       # template {
       #   destination   = "local/nginx/http.d/https"
       #   data          = <<-EOC
-      #     {{ key "nomad/dc1/nginx/https" }}
+      #     {{ key "nomad/${var.dc}/nginx/https" }}
       #   EOC
       #   change_mode   = "script"
       #   change_script { command = "/config/nginx/validate-n-reload.sh" }
@@ -231,7 +231,7 @@ job "nginx" {
       # template {
       #   destination   = "local/nginx/http.d/upstream"
       #   data          = <<-EOT
-      #     {{- /* key "nomad/dc1/nginx/http-upstream" */ -}}
+      #     {{- /* key "nomad/${var.dc}/nginx/http-upstream" */ -}}
       #     {{- /* defaults params for upstreams */ -}}
       #     {{- $DP := "fail_timeout=10s max_fails=3 weight=1;" -}}
       #

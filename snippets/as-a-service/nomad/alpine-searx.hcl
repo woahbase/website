@@ -99,7 +99,7 @@ job "searx" {
       # template {
       #   destination = "local/settings.yml"
       #   data        = <<-EOC
-      #     {{ key "nomad/dc1/searx/settings.yml" }}
+      #     {{ key "nomad/${var.dc}/searx/settings.yml" }}
       #   EOC
       #   change_mode = "restart"
       #   perms       = "644"
