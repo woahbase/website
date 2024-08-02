@@ -62,20 +62,12 @@ following environment variables.
 | COMPOSER_ARGS            | --no-cache --no-interaction | Arguments given to `composer install`.
 | S6_COMPOSER_SKIP_INSTALL | unset                       | Skips running install/update task inside `S6_COMPOSER_PROJECTDIR`.
 {% include "envvars/cron.md" %}
-| SSLSUBJECT | see below   | Default SSL Subject for certificate generation on first run.
+| SSLSUBJECT | see [here](alpine-nginx.md#ssl-subject) | Default SSL Subject for self-signed certificate generation on first run.
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"
 
 Also,
-
-* Default configs generate a 4096-bit self-signed certificate. By
-  default the value of `SSLSUBJECT` is
-  ```
-  /C=US/ST=NY/L=EXAMPLE/O=EXAMPLE/OU=WOAHBase/CN=*/emailAddress=everybodycanseethis@mailinator.com
-  ```
-
-* Includes everything from the {{ m.myimage('alpine-nginx') }} image.
 
 * PHP `(major)(minor)` version (e.g. `{{ phpmajmin }}`) is available in the
   image as the environment variable `PHPMAJMIN`, for any image
@@ -119,6 +111,8 @@ Also,
   modified to suit this image) is provided.
 
 * Cron is enabled by default to read `/etc/crontabs/`.
+
+* Includes everything from the {{ m.myimage('alpine-nginx') }} image.
 
 [1]: https://nginx.org
 [2]: http://php.net/

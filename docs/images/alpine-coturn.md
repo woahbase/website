@@ -45,8 +45,10 @@ following environment variables.
 
 | ENV Vars    | Default | Description
 | :---        | :---    | :---
-| COTURN_ARGS | -v      | Custom arguments passed to `coturn` service.
+| COTURN_ARGS | -v      | Customizable arguments passed to `coturn` service.
 {% include "envvars/alpine-s6.md" %}
+
+--8<-- "check-id.md"
 
 Also,
 

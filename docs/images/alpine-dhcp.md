@@ -51,7 +51,7 @@ following environment variables.
 
 | ENV Vars   | Default           | Description
 | :---       | :---              | :---
-| DHCP_ARGS  | -4 -f -d --no-pid | Custom arguments passed to `dhcpd` service.
+| DHCP_ARGS  | -4 -f -d --no-pid | Customizable arguments passed to `dhcpd` service.
 | INTERFACES | eth0              | Bind to the specific NIC.
 
 Also,

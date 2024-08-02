@@ -60,9 +60,11 @@ following environment variables.
 | GF_INSTALL_PLUGINS    | empty string                       | Comma separated list of plugins (or urls) to install before running server.
 | GF_UPDATE_PLUGINS     | unset                              | Set to `true` to run plugin-update (uses `grafana cli`).
 | GF_LOG_MODE           | console                            | Default log mode, can be `console` or `file`.
-| GRAFANA_ARGS          | see below                          | Arguments passed to `grafana server` service.
-| GRAFANA_ARGS_EXTRA    | empty string                       | Custom arguments passed to `grafana server` service.
+| GRAFANA_ARGS          | see below                          | Customizable arguments passed to `grafana server` service. (Overrides default arguments)
+| GRAFANA_ARGS_EXTRA    | empty string                       | Customizable arguments passed to `grafana server` service.
 {% include "envvars/alpine-s6.md" %}
+
+--8<-- "check-id.md"
 
 Also,
 

@@ -51,7 +51,7 @@ following environment variables.
 
 | ENV Vars       | Default                             | Description
 | :---           | :---                                | :---
-| MOSQUITTO_ARGS | -c /mosquitto/config/mosquitto.conf | Arguments passed to `mosquitto` service.
+| MOSQUITTO_ARGS | -c /mosquitto/config/mosquitto.conf | Customizable arguments passed to `mosquitto` service.
 | USERNAME       | mosquitto                           | Default username for authentication.
 | PASSWORD       | insecurebydefault                   | Default password for authentication.
 {% include "envvars/alpine-s6.md" %}

@@ -30,7 +30,8 @@ Running the container starts the service.
 ``` sh
 docker run --rm -it \
   --name docker_laverna \
-  -p 80:80 -p 443:443 \
+  -p 80:80 \
+  -p 443:443 \
   -v $PWD/config:/config \
 woahbase/alpine-laverna:x86_64
 ```

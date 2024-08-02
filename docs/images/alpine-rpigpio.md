@@ -49,7 +49,8 @@ woahbase/alpine-rpigpio \
 Although `--privileged` is not usually required (unless your
 usecase demands it) for this image, you will still need to pass
 
-* `--device /dev/gpiomem`, and `--cap-add SYS_RAWIO` to access the gpio.
+* `--device /dev/gpiochip0` (previously `/dev/gpiomem`), and
+  `--cap-add SYS_RAWIO` to access the gpio.
 
 * `--device /dev/ttyAMA0:/dev/ttyAMA0` for serial access.
 

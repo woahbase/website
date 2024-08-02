@@ -75,9 +75,11 @@ following environment variables.
 | CGIT_SYNC_LIST       | /tmp/sync_list_of_repos          | List of repositories to sync, generated at start of sync job. (used in `sync` script)
 | CGIT_SYNC_IGNORELIST | $CGIT_REPODIR/ignored.txt        | List of repositories to ignore while sync. (format: (category)/(repo-name).git) (used in `sync` script)
 | CGIT_SYNC_ERRORLIST  | $CGIT_REPODIR/errors.txt         | Catches errors encountered while sync. Flushed on each run. (used in `sync` script)
-| LIGHTTPD_ARGS        | -D                               | Custom arguments passed to `lighttpd` service.
-| SSHD_ARGS            | -De                              | Custom arguments passed to `sshd` service.
+| LIGHTTPD_ARGS        | -D                               | Customizable arguments passed to `lighttpd` service.
+| SSHD_ARGS            | -De                              | Customizable arguments passed to `sshd` service.
 {% include "envvars/alpine-s6.md" %}
+
+--8<-- "check-id.md"
 
 Also,
 

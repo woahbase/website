@@ -105,8 +105,7 @@ job "mysql" {
       }
 
       volume_mount {
-        # works to pin the task to client with the volume available
-        # ensure polices allow token to write to the volume
+        # ensure policies allow vault-generated-token to read-write to the volume
         volume      = "nomad-mysql-data"
         destination = "/var/lib/mysql"
         read_only   = false

@@ -35,7 +35,8 @@ Running the container starts the service.
 ``` sh
 docker run --rm \
   --name docker_nginx \
-  -p 80:80 -p 443:443 \
+  -p 80:80 \
+  -p 443:443 \
   -v $PWD/config:/config \
 woahbase/alpine-nginx
 ```
@@ -52,18 +53,12 @@ following environment variables.
 | ENV Vars   | Default   | Description
 | :---       | :---      | :---
 {% include "envvars/alpine-nginx.md" %}
-| SSLSUBJECT | see below | Default SSL Subject for certificate generation on first run.
+| SSLSUBJECT | see [here](alpine-nginx.md#ssl-subject) | Default SSL Subject for self-signed certificate generation on first run.
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"
 
 Also,
-
-* Default configs generate a 4096-bit self-signed certificate. By
-  default the value of `SSLSUBJECT` is
-  ```
-  /C=US/ST=NY/L=EXAMPLE/O=EXAMPLE/OU=WOAHBase/CN=*/emailAddress=everybodycanseethis@mailinator.com
-  ```
 
 * Default configs setup a static site at `/` by copying
   `/defaults/index.html` at the webroot location `/config/www/`.
@@ -92,6 +87,14 @@ Also,
   reverse proxying multiple hosts through the same container, you
   may need to add `--net=host` and/or add entries in your firewall
   to allow traffic.
+
+###### SSL Subject
+
+Default configs generate a 4096-bit self-signed certificate. By
+default the value of `SSLSUBJECT` is
+```
+/C=US/ST=NY/L=EXAMPLE/O=EXAMPLE/OU=WOAHBase/CN=*/emailAddress=everybodycanseethis@mailinator.com
+```
 
 ??? info "Did you know?"
     To validate the configuration when modified, we could just

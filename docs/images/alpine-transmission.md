@@ -58,6 +58,8 @@ following environment variables.
 | TRANSMISSION_ARGS | --foreground --no-portmap --log-level=error | Customizable arguments passed to `transmission-daemon` service.
 {% include "envvars/alpine-s6.md" %}
 
+--8<-- "check-id.md"
+
 Also,
 
 * Config file is at `/var/lib/transmission/config/settings.json`,

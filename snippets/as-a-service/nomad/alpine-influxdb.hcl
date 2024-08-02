@@ -111,8 +111,7 @@ job "influxdb" {
       }
 
       volume_mount {
-        # works to pin the task to client with the volume available
-        # ensure polices allow token to write to the volume
+        # ensure policies allow vault-generated-token to read-write to the volume
         volume      = "nomad-influxdb-data"
         destination = "/var/lib/influxdb"
         read_only   = false

@@ -31,7 +31,6 @@ Running the container starts the service.
 ``` sh
 docker run --rm \
   --name docker_ssh \
-  -c 128 -m 256m \
   -p 64822:22 \
   -e S6_ROOTPASS=insecurebydefaultroot \
   -e S6_USER=alpine \
@@ -64,7 +63,7 @@ following environment variables.
 | S6_USERSHELL      | /bin/bash                           | Default user shell.
 | SSHD_CONFDIR      | /etc/ssh                            | Path to configuration dir. Expects `sshd_config` or `ssh_config` files to exist in this directory.
 | SSHD_ARGS         | -De                                 | Customizable arguments passed to `sshd` service.
-| SSHD__(parameter) | unset                               | If set, will update the parameter (if exists) with the value in `sshd_config`. E.g. `SSHD__Port=2222`. (Note the double underscore.)
+| SSHD__(parameter) | unset                               | If set, will update the parameter (if exists) with the value in `sshd_config`. E.g. `SSHD__Port=2222`. (Note the **double** underscores.)
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"

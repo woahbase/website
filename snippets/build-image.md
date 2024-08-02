@@ -121,6 +121,22 @@ For building an image that targets another architecture, it is
         or extracted from the image after build (e.g. for APK or pip
         packages).
 
+    * `REGISTRY`
+
+    :   The registry to push to, defaults to the Docker Hub
+        Registry (`docker.io`) or any custom registry that is set via
+        docker configurations. Does not need to be changed for local
+        or test builds, but to override, either pass it by setting an
+        environment variable, or with every `make` command.
+
+    * `ORGNAME`
+
+    :   The organization (or user) name under which the image
+        repositories exist, defaults to `{{ config.extra.orgname }}`.
+        Does not need to be changed for local or test builds, but to
+        override, either pass it by setting an environment variable,
+        or with every `make` command.
+
     The image may also require custom parameters (like binary
     architecture). **Before you build**, check the {{ m.ghfilelink('makefile') }}
     for a complete list of parameters to see what may (or may
