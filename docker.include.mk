@@ -23,7 +23,7 @@ RUNFLAGS  := \
 
 # run: CMD = e.g build or serve
 run: ## run with docker
-	docker run --rm -it \
+	docker run --rm -i \
 		$(RUNFLAGS) \
 		$(IMAGETAG) \
 		mkdocs $(CMD)
@@ -35,7 +35,7 @@ shell: ## get a shell with docker
 		bash
 
 test: build ## test static site with nginx
-	docker run --rm -it \
+	docker run --rm \
 		--name docker_nginx \
 		-e PGID=$(PGID) \
 		-e PUID=$(PUID) \
@@ -45,7 +45,7 @@ test: build ## test static site with nginx
 		$(REGISTRY)/woahbase/alpine-nginx
 
 deploy_netlify:  ## deploy site to netlify (as draft unless $(PROD) is set)
-	docker run --rm -it \
+	docker run --rm \
 		--name docker_netlify \
 		--workdir /home/alpine/project \
 		-c 512 \
