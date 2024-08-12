@@ -50,13 +50,13 @@ deploy_netlify:  ## deploy site to netlify (as draft unless $(PROD) is set)
 		--workdir /home/alpine/project \
 		-c 512 \
 		-m 768m \
-		-v $(CURDIR):/home/alpine/project \
 		-e NETLIFY_AUTH_TOKEN=$(if $(NETLIFY_AUTH_TOKEN),$(NETLIFY_AUTH_TOKEN),$(error NETLIFY_AUTH_TOKEN is not defined)) \
 		-e NETLIFY_SITE_ID=$(if $(NETLIFY_SITE_ID),$(NETLIFY_SITE_ID),$(error NETLIFY_SITE_ID is not defined)) \
 		-e PGID=$(PGID) \
 		-e PUID=$(PUID) \
 		-e S6_NPM_LOCAL_PACKAGES=netlify-cli \
 		-e S6_NPM_PROJECTDIR=/home/alpine/project \
+		-v $(CURDIR):/home/alpine/project \
 		$(REGISTRY)/woahbase/alpine-nodejs \
 		netlify \
 		--telemetry-disable \

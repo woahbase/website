@@ -17,7 +17,7 @@ services:
     environment:
       PUID: ${PUID:-1000}
       PGID: ${PGID:-100}
-      TZ: ${TZ}
+      # TZ: ${TZ}
       PULSE_SERVER: ${PULSE_SERVER}
     # healthcheck:
     #   interval: 2m
