@@ -43,7 +43,7 @@ extra:
   # pgid: "`id -g`"
   # puid: "`id -u`"
   # alpine stable version for generating package urls
-  alpine_branch: v3.19
+  alpine_branch: v3.20
 
 extra_css:
   - assets/css/fonts.css

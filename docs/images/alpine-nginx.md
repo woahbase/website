@@ -53,7 +53,6 @@ following environment variables.
 | ENV Vars   | Default   | Description
 | :---       | :---      | :---
 {% include "envvars/alpine-nginx.md" %}
-| SSLSUBJECT | see [here](alpine-nginx.md#ssl-subject) | Default SSL Subject for self-signed certificate generation on first run.
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"
@@ -61,11 +60,12 @@ following environment variables.
 Also,
 
 * Default configs setup a static site at `/` by copying
-  `/defaults/index.html` at the webroot location `/config/www/`.
-  Mount the `/config/` locally to persist modifications (or your
-  webapps). NGINX config is at `/config/nginx`, and vhosts are at
-  `/config/nginx/http.d/`. For JSON indexable (requires custom
-  configuration) storage mount the data partition at `/storage/`.
+  `/defaults/index.html` at the `$WEBDIR` (default
+  `/config/www/`).  Mount the `/config/` locally to persist
+  modifications (or your webapps). NGINX configurations are at
+  `/config/nginx`, and vhosts at `/config/nginx/http.d/`. For JSON
+  indexable (requires custom configuration) storage mount the data
+  partition at `/storage/`.
 
 * Includes two default site configuration (for {{
   m.ghfilelink('root/defaults/default_http', title='http:80') }}
@@ -81,7 +81,7 @@ Also,
   with your custom pre-tasks as needed.
 
 * Default configs set up a https and auth protected web location
-  at /secure.
+  at `/secure`.
 
 * If you're proxying multiple containers at the same host, or
   reverse proxying multiple hosts through the same container, you

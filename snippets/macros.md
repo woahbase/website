@@ -18,10 +18,20 @@ image
 {%- endmacro %}
 
 {% macro ghfilelink(fp, org, ghrepo, branch, title) -%}
-[{{ title|default(fp) }}]({{ 'https://github.com/'
-~ org|default(orgname) ~ '/' ~ ghrepo|default(page.title)
-~ '/blob/' ~ branch|default('master')
-~ '/' ~ fp }})
+[{{ title|default(fp) }}]({{ 'https://github.com'
+~'/'~ org   |default(orgname)
+~'/'~ ghrepo|default(page.title)
+~'/'~ 'blob'
+~'/'~ branch|default('master')
+~'/'~ fp }})
+{%- endmacro%}
+
+{% macro ghfileraw(fp, org, ghrepo, branch, title) -%}
+[{{ title|default(fp) }}]({{ 'https://raw.githubusercontent.com'
+~'/'~ org   |default(orgname)
+~'/'~ ghrepo|default(page.title)
+~'/'~ branch|default('master')
+~'/'~ fp }})
 {%- endmacro%}
 
 {% macro ghreleaselink(repo_name, title) -%}

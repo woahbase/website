@@ -1,5 +1,5 @@
 ---
-description: MultiArch Alpine Linux + S6 + Python 3.*.* Runtime + PIP.
+description: MultiArch Alpine Linux + S6 + Python 3.x.x Runtime + PIP
 svcname: python3
 tags:
   - dev

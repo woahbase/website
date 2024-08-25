@@ -46,6 +46,7 @@ following environment variables.
 | ENV Vars           | Default       | Description
 | :---               | :---          | :---
 {% include "envvars/alpine-s6.md" %}
+| HGID_(groupname)   | unset         | Update (or create) `groupname` with **non-zero positive integer** `gid` (to match with host). E.g `HGID_VIDEO=995` will change `gid` of `video` group to `995`. (since `s6 v3.2.0.0`)
 | S6_USERGROUPS      | empty string  | **Comma**-separated list of groups to add `S6_USER` to. E.g. `"audio,video,tty"`, groups **must** exist.
 | S6_USERPASS        | unset         | Password for `S6_USER`.
 

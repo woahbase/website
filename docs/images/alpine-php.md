@@ -8,8 +8,8 @@ tags:
   - service
 
 # pin php version
-phpmajmin: "81"
-wb_extra_args_build: PHPMAJMIN=81
+phpmajmin: "82"
+wb_extra_args_build: PHPMAJMIN=82
 
 ---
 
@@ -57,12 +57,14 @@ following environment variables.
 {% include "envvars/alpine-php.md" %}
 | S6_COMPOSER_REQUIRED     | unset                       | Optional, set to `true` if any [Composer][3] task is required to run. (Will download and install composer for the task.)
 | COMPOSER_VERSION         | unset                       | Specific version of `composer` to install.
+| COMPOSER_INSTALL_DIR     | /usr/bin                    | Path to composer binary installation directory.
+| COMPOSER_BIN_DIR         | /usr/local/bin              | Path to binaries directory for packages installed by `composer`.
+| COMPOSER_VENDOR_DIR      | /usr/local/composer         | Path to vendor directory for packages installed by `composer`.
 | S6_COMPOSER_PACKAGES     | empty string                | Space separated list of packages to install globally with `composer`.
-| S6_COMPOSER_PROJECTDIR   | unset                       | If specified, runs `composer install` (or `update` if lockfile exists) in this directory at runtime.
+| S6_COMPOSER_PROJECTDIR   | unset                       | If specified, runs `composer install` (or `update` if lockfile does not exist) in this directory at runtime.
 | COMPOSER_ARGS            | --no-cache --no-interaction | Arguments given to `composer install`.
 | S6_COMPOSER_SKIP_INSTALL | unset                       | Skips running install/update task inside `S6_COMPOSER_PROJECTDIR`.
 {% include "envvars/cron.md" %}
-| SSLSUBJECT | see [here](alpine-nginx.md#ssl-subject) | Default SSL Subject for self-signed certificate generation on first run.
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"
@@ -76,7 +78,7 @@ Also,
 
 * These packages below are installed by default into the image.
 
-    * {{ m.alpinepkg('php'~phpmajmin~'-apcu') }}
+    * {{ m.alpinepkg('php'~phpmajmin~'-pecl-apcu') }}
     * {{ m.alpinepkg('php'~phpmajmin~'-common') }}
     * {{ m.alpinepkg('php'~phpmajmin~'-ctype') }}
     * {{ m.alpinepkg('php'~phpmajmin~'-curl') }}
@@ -96,7 +98,6 @@ Also,
     * {{ m.alpinepkg('php'~phpmajmin~'-session') }}
     * {{ m.alpinepkg('php'~phpmajmin~'-sodium') }}
     * {{ m.alpinepkg('php'~phpmajmin~'-zip') }}
-    * {{ m.alpinepkg('php'~phpmajmin~'-zlib') }}
 
 * If no `php.ini` is found inside  `/etc/php{{ phpmajmin }}/`,
   a default (from `/defaults/`, with a few options modified to suit
