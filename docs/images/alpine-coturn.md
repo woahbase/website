@@ -1,7 +1,10 @@
 ---
 description: MultiArch Alpine Linux + S6 + Coturn STUN/TURN Gateway for VoIP.
 svcname: coturn
+has_services:
+  - compose
 tags:
+  - compose
   - package
   - s6
   - service
@@ -43,9 +46,11 @@ woahbase/alpine-coturn
 We can customize the runtime behaviour of the container with the
 following environment variables.
 
-| ENV Vars    | Default | Description
-| :---        | :---    | :---
-| COTURN_ARGS | -v      | Customizable arguments passed to `coturn` service.
+| ENV Vars       | Default                         | Description
+| :---           | :---                            | :---
+| COTURN_CONF    | /var/lib/coturn/turnserver.conf | Path to configuration file.
+| COTURN_DATADIR | /var/lib/coturn                 | Directory for datadir (for `sqlite` db).
+| COTURN_ARGS    | -v                              | Customizable arguments passed to `coturn` service.
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"
@@ -53,10 +58,8 @@ following environment variables.
 Also,
 
 * Config file loaded from `/var/lib/coturn/turnserver.conf` edit
-  or remount this with your own. A {{
-  m.ghfilelink('root/defaults/turnserver.conf', title='sample')
-  }} is provided which is auto loaded if there aren't any config
-  file to start with.
+  or remount this with your own. A {{ m.ghfilelink('root/defaults/turnserver.conf', title='sample') }}
+  is provided in `/defaults/`, that gets copied if none exists.
 
 * Data stored at `/var/lib/coturn`.
 
@@ -68,6 +71,10 @@ Also,
   be preferred to use `--net=host` and whitelist the relay ports
   in your firewall.
 
+* Check the [docs][2] to customize your own.
+
 [1]: https://github.com/coturn/coturn
+[2]: https://github.com/coturn/coturn/blob/master/README.turnserver
+[3]: https://github.com/coturn/coturn/raw/master/docker/coturn/turnserver.conf
 
 {% include "all-include.md" %}

@@ -1,0 +1,60 @@
+---
+services:
+  coturn:
+    container_name: coturn
+    deploy:
+      resources:
+        limits:
+          cpus: '2.00'
+          memory: 256M
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 120s
+    environment:
+      PUID: ${PUID:-1000}
+      PGID: ${PGID:-100}
+      # TZ: ${TZ}
+    hostname: coturn
+    image: woahbase/alpine-coturn:${COTURN_TAG:-latest}
+    network_mode: bridge
+    ports:
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: ${COTURN_HTTP_PORT:-3478}
+        target: 3478
+      - protocol: udp
+        host_ip: 0.0.0.0
+        published: ${COTURN_HTTP_PORT:-3478}
+        target: 3478
+      # # optionally with https
+      # - protocol: tcp
+      #   host_ip: 0.0.0.0
+      #   published: ${COTURN_HTTPS_PORT:-5349}
+      #   target: 5349
+      # # Relay Ports
+      # - "49152-65535:49152-65535"
+      # - "49152-65535:49152-65535/udp"
+    volumes:
+      # - type: bind # for SQLite storage
+      #   source: ${COTURN_DIR:?err}/data
+      #   target: /var/lib/coturn
+      #   bind:
+      #     create_host_path: false
+      # - type: bind
+      #   source: ${COTURN_DIR:?err}/config/turnserver.conf
+      #   target: /var/lib/coturn/turnserver.conf
+      #   bind:
+      #     create_host_path: false
+      # - type: bind  # to use your own certificates with coturn
+      #   source: ${CERTIFICATE_DIR:?err}
+      #   target: /var/lib/coturn/certs
+      #   bind:
+      #     create_host_path: true
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind:
+          create_host_path: false
