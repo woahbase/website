@@ -2,7 +2,7 @@ variables {
   dc   = "dc1" # to load the dc-local config file
   pgid = 100   # gid for docker
   puid = 1000  # uid for docker
-  version = "1.20.2"
+  version = "1.26.2"
 }
 # locals { var = yamldecode(file("${var.dc}.vars.yml")) } # load dc-local config file
 

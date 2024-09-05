@@ -52,10 +52,10 @@ following environment variables.
 | ENV Vars                        | Default                              | Description
 | :---                            | :---                                 | :---
 | MOSQUITTO_CONFDIR               | /mosquitto/config                    | Path to configuration directory. Expected to contain `mosquitto.conf`.
-| MOSQUITTO__(parameter)          | unset                                | If set and no configuration file exists at `$MOSQUITTO_CONFDIR/mosquitto.conf`, will set the parameter (if exists) with the value. E.g. `MOSQUITTO__persistence=false`. (Note the **double** underscores.)  (since `mosquitto v2.0.18_20240903`)
-| MOSQUITTO__persistence_location | /mosquitto/data                      | Path to datastore directory. (since `mosquitto v2.0.18_20240903`)
-| MOSQUITTO__log_dest             | stderr                               | Path to log destination (will create file if set to `file /path/to/file.log`). (since `mosquitto v2.0.18_20240903`)
-| MOSQUITTO__password_file        | $MOSQUITTO_CONFDIR/.passwd           | Path to auth file. (since `mosquitto v2.0.18_20240903`)
+| MOSQUITTO__(parameter)          | unset                                | If set and no configuration file exists at `$MOSQUITTO_CONFDIR/mosquitto.conf`, will set the parameter (if exists) with the value. E.g. `MOSQUITTO__persistence=false`. (Note the **double** underscores.) {{ m.sincev('2.0.18_20240903') }}
+| MOSQUITTO__persistence_location | /mosquitto/data                      | Path to datastore directory. {{ m.sincev('2.0.18_20240903') }}
+| MOSQUITTO__log_dest             | stderr                               | Path to log destination (will create file if set to `file /path/to/file.log`). {{ m.sincev('2.0.18_20240903') }}
+| MOSQUITTO__password_file        | $MOSQUITTO_CONFDIR/.passwd           | Path to auth file. {{ m.sincev('2.0.18_20240903') }}
 | USERNAME                        | mosquitto                            | Default username for authentication.
 | PASSWORD                        | insecurebydefault                    | Default password for authentication.
 | MOSQUITTO_ARGS                  | -c $MOSQUITTO_CONFDIR/mosquitto.conf | Customizable arguments passed to `mosquitto` service.

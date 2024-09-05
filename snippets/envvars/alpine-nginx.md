@@ -14,7 +14,7 @@
 | WEBADMIN                 | admin                                   | Default admin user in .htpasswd. (Not changed if file already exists)
 | PASSWORD                 | insecurebydefault                       | Default admin user password in .htpasswd.
 | NGINX_NO_HTPASSWD        | unset                                   | Set to 'true' to disable default htpasswd generation on first run.
-| NGINX_SKIP_FASTCGI_PARAM | unset                                   | If set to `true`, skip appending custom `fastcgi_param` configuration. (since `nginx v1.26.2`)
+| NGINX_SKIP_FASTCGI_PARAM | unset                                   | If set to `true`, skip appending custom `fastcgi_param` configuration. {{ m.sincev('1.26.2', name='alpine-nginx') }}
 | WEBDIR                   | /config/www                             | For serving files, e.g. either static HTML or dynamic scripts i.e. with PHP.
-| NGINX_ADD_DEFAULT_INDEX  | unset                                   | If set to `true` and no files exist inside `WEBDIR`, a static `index.html` is copied into it. Useful for testing. (since `nginx v1.26.2`, previously `NGINX_SKIP_DEFAULT_INDEX`, enabled by default)
-| NGINX_PERMFIX_WEBDIR     | unset                                   | If set to `true`, ensures files inside `$WEBDIR` are owned/accessible by `S6_USER`. (since `nginx v1.26.2`)
+| NGINX_ADD_DEFAULT_INDEX  | unset                                   | If set to `true` and no files exist inside `WEBDIR`, a static `index.html` is copied into it. Useful for testing. {{ m.sincev('1.26.2', name='alpine-nginx') }} Previously `NGINX_SKIP_DEFAULT_INDEX`, enabled by default.
+| NGINX_PERMFIX_WEBDIR     | unset                                   | If set to `true`, ensures files inside `$WEBDIR` are owned/accessible by `S6_USER`. {{ m.sincev('1.26.2', name='alpine-nginx') }}

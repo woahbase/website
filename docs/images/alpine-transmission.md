@@ -53,9 +53,14 @@ woahbase/alpine-transmission
 We can customize the runtime behaviour of the container with the
 following environment variables.
 
-| ENV Vars          | Default                                     | Description
-| :---              | :---                                        | :---
-| TRANSMISSION_ARGS | --foreground --no-portmap --log-level=error | Customizable arguments passed to `transmission-daemon` service.
+| ENV Vars                   | Default                                     | Description
+| :---                       | :---                                        | :---
+| TRANSMISSION_ROOTDIR       | /var/lib/transmission                       | (Preset) Default application directory. {{ m.sincev('4.0.5_20240905') }}
+| TRANSMISSION_CONFDIR       | $TRANSMISSION_ROOTDIR/config                | Default configuration directory. {{ m.sincev('4.0.5_20240905') }}
+| TRANSMISSION_DOWNLOADDIR   | $TRANSMISSION_ROOTDIR/downloads             | Default download directory. Only set if custom `settings.json` does not exist. {{ m.sincev('4.0.5_20240905') }}
+| TRANSMISSION_INCOMPLETEDIR | $TRANSMISSION_ROOTDIR/incomplete            | Default directory for running downloads. Only set if custom `settings.json` does not exist. {{ m.sincev('4.0.5_20240905') }}
+| TRANSMISSION_WATCHDIR      | $TRANSMISSION_ROOTDIR/torrents              | Default directory for watching torrents to add. Only set if custom `settings.json` does not exist. (not to be confused with currently running torrents in `$TRANSMISSION_CONFDIR/torrents`) {{ m.sincev('4.0.5_20240905') }}
+| TRANSMISSION_ARGS          | --foreground --no-portmap --log-level=error | Customizable arguments passed to `transmission-daemon` service.
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"
@@ -63,11 +68,8 @@ following environment variables.
 Also,
 
 * Config file is at `/var/lib/transmission/config/settings.json`,
-  edit or remount this file with your own. A {{
-  m.ghfilelink('root/defaults/settings.json', title='sample') }}
+  edit or remount this file with your own. A {{ m.ghfilelink('root/defaults/settings.json', title='sample') }}
   is provided in `/defaults/`, that gets copied if none exists.
-
-* Default download location is `/var/lib/transmission/downloads`.
 
 * Default configuration makes the service available at the subpath
   `/transmission/`.
@@ -76,6 +78,15 @@ Also,
   `52437` for peer communications. These may need to be
   whitelisted in your firewall.
 
+* Includes optional scripts to send notifications when torrents are
+  {{ m.ghfilelink('root/scripts/torrent-added.bash', title='added') }},
+  then {{ m.ghfilelink('root/scripts/torrent-done.bash', title='done downloading') }},
+  and {{ m.ghfilelink('root/scripts/torrent-done-seeding.bash', title='done seeding') }}.
+  By default uses [Gotify][2] to send notifications, feel free to replace the
+  {{ m.ghfilelink('root/scripts/notify.bash', title='notifier script') }}
+  with your own. {{ m.sincev('4.0.5_20240905') }}
+
 [1]: http://transmissionbt.com/
+[2]: https://gotify.net/
 
 {% include "all-include.md" %}

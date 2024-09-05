@@ -53,3 +53,7 @@ Versioned accordingly with releases from {{ ghreleaselink(repo_name) }}.
 {% macro pypipkg(name) -%}
 [{{ name }}](https://pypi.org/project/{{ name }}/ "PYPI Package")
 {%- endmacro %}
+
+{% macro sincev(tag, name) -%}
+(since `{{ name | default(page.title) }}:{{ tag }}`)
+{%- endmacro %}
