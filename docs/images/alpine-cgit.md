@@ -64,19 +64,27 @@ woahbase/alpine-cgit
 We can customize the runtime behaviour of the container with the
 following environment variables.
 
-| ENV Vars             | Default                          | Description
-| :---                 | :---                             | :---
-| CGIT_HOSTNAME        | localhost                        | Hostname to set in the url for cloning via web or ssh.
-| CGIT_SUBPATH         | /git                             | Alternate virtual-root repositories, default is `/cgit`.
-| CGIT_REPODIR         | /home/{{ s6_user }}/repositories | Default path to repositories.
-| CGIT_ARCHIVEDIR      | $CGIT_REPODIR/.archived          | Default path to archived repos (used in `backup`/`restore` scripts).
-| CGIT_HOOKSDIR        | /defaults/hooks                  | Custom hooks to add into repositories created via the `bareinit` or `mirror` script.
-| CGIT_SYNC_RUNFILE    | /tmp/sync_is_running             | File indicator that a sync job is already running. (used in `sync` script)
-| CGIT_SYNC_LIST       | /tmp/sync_list_of_repos          | List of repositories to sync, generated at start of sync job. (used in `sync` script)
-| CGIT_SYNC_IGNORELIST | $CGIT_REPODIR/ignored.txt        | List of repositories to ignore while sync. (format: (category)/(repo-name).git) (used in `sync` script)
-| CGIT_SYNC_ERRORLIST  | $CGIT_REPODIR/errors.txt         | Catches errors encountered while sync. Flushed on each run. (used in `sync` script)
-| LIGHTTPD_ARGS        | -D                               | Customizable arguments passed to `lighttpd` service.
-| SSHD_ARGS            | -De                              | Customizable arguments passed to `sshd` service.
+| ENV Vars              | Default                          | Description
+| :---                  | :---                             | :---
+| CGIT_HOSTNAME         | localhost                        | Hostname to set in the url for cloning via web or ssh.
+| CGIT_SUBPATH          | /git                             | Alternate virtual-root for CGit repositories, default is `/cgit`.
+| CGIT_REPODIR          | /home/{{ s6_user }}/repositories | Default path to repositories. {{ m.sincev('1.2.3_20240907') }}
+| CGIT_ARCHIVEDIR       | $CGIT_REPODIR/.archived          | Default path to archived repos (used in `backup`/`restore` scripts). {{ m.sincev('1.2.3_20240907') }}
+| CGIT_HOOKSDIR         | /defaults/hooks                  | Custom hooks to add into repositories created via the `bareinit` or `mirror` script. {{ m.sincev('1.2.3_20240907') }}
+| CGIT_SYNC_RUNFILE     | /tmp/sync_is_running             | File indicator that a sync job is already running. (used in `sync` script) {{ m.sincev('1.2.3_20240907') }}
+| CGIT_SYNC_LIST        | /tmp/sync_list_of_repos          | List of repositories to sync, generated at start of sync job. (used in `sync` script) {{ m.sincev('1.2.3_20240907') }}
+| CGIT_SYNC_IGNORELIST  | $CGIT_REPODIR/ignored.txt        | List of repositories to ignore while sync. (format: (category)/(repo-name).git) (used in `sync` script) {{ m.sincev('1.2.3_20240907') }}
+| CGIT_SYNC_ERRORLIST   | $CGIT_REPODIR/errors.txt         | Catches errors encountered while sync. Flushed on each run. (used in `sync` script) {{ m.sincev('1.2.3_20240907') }}
+| CGIT_SYNC_JOBS        | 1                                | Number of threads used by `git` to sync a repository. {{ m.sincev('1.2.3_20240907') }}
+| CGIT_PERMFIX_REPOS    | unset                            | If set to `true`, will fix repositories permissions to `$S6_USER` (default `git:git`). {{ m.sincev('1.2.3_20240907') }}
+| LIGHTTPD_CONFDIR      | /etc/lighttpd                    | Path to `lighttpd` configuration directory. {{ m.sincev('1.2.3_20240907') }}
+| LIGHTTPD_LOGFILE      | /var/log/lighttpd/lighttpd.log   | Logfile for `lighttpd`, by default logs both access and error logs. {{ m.sincev('1.2.3_20240907') }}
+| LIGHTTPD_USER         | lighttpd                         | Non-root user that `lighttpd` drops privileges to. {{ m.sincev('1.2.3_20240907') }}
+| LIGHTTPD_ARGS         | -D                               | Customizable arguments passed to `lighttpd` service.
+| LIGHTTPD_SKIP_LOGFIFO | unset                            | By default `lighttpd` logs to `stdout` via a `fifo`, set this to `true` to log to a regular file instead. {{ m.sincev('1.2.3_20240907') }}
+| SSHD_CONFDIR          | /etc/ssh                         | Path to `ssh` server configuration directory. {{ m.sincev('1.2.3_20240907') }}
+| SSHD_ARGS             | -De                              | Customizable arguments passed to `sshd` service.
+| SSHD__(parameter)     | unset                            | If set, will update the parameter (if exists) with the value in `sshd_config`. E.g. `SSHD__Port=2222`. (Note the **double** underscores.) {{ m.sincev('1.2.3_20240907') }}
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"
@@ -91,12 +99,22 @@ Also,
   may be published at `64801` and `64822` by default, so they
   don't clash with other services.
 
-* Config file loaded from `/etc/cgitrc` edit or remount this with
-  your own. A {{ m.ghfilelink('root/defaults/cgitrc',
-  title='sample') }} is provided which is auto loaded if there
-  aren't any config file to start with.
+* CGit config file loaded from `/etc/cgitrc` edit or remount this with
+  your own. A {{ m.ghfilelink('root/defaults/cgitrc', title='sample') }}
+  is provided which is auto loaded if there aren't any config
+  file to start with.
 
-* To persist the same host keys, preserve their contents at `/etc/ssh`.
+* Lighttpd config file loaded from `/etc/lighttpd/lighttpd.conf` edit or remount this with
+  your own. A {{ m.ghfilelink('root/defaults/lighttpd.conf', title='sample') }}
+  is provided which is auto loaded if there aren't any config
+  file to start with. {{ m.sincev('1.2.3_20240907') }}
+
+* SSH config file loaded from `/etc/ssh/sshd_config` edit or remount this with
+  your own. A {{ m.ghfilelink('root/defaults/sshd_config', title='sample') }}
+  is provided which is auto loaded if there aren't any config
+  file to start with.
+
+* To persist the same SSH host keys, preserve their contents at `/etc/ssh`.
   These are re-generated if not found.
 
 * Only allows pubkey authentication by default, either use the one
@@ -139,14 +157,14 @@ docker exec -u {{ s6_user }} -it docker_cgit /scripts/sync
 ```
 
 Backup a bare or mirror repository to
-`$CGIT_ARCHIVEDIR/(optional category-dir)/repo-name`,
+`$CGIT_ARCHIVEDIR/(optional category-dir)/repo-name`, {{ m.sincev('1.2.3_20240907') }}
 
 ``` sh
 docker exec -u {{ s6_user }} -it docker_cgit /scripts/backup <filters: category-dirs, or reponames>
 ```
 
 Restore a backed-up repository from
-`$CGIT_ARCHIVEDIR/(optional category-dir)/repo-name`,
+`$CGIT_ARCHIVEDIR/(optional category-dir)/repo-name`, {{ m.sincev('1.2.3_20240907') }}
 
 ``` sh
 docker exec -u {{ s6_user }} -it docker_cgit /scripts/restore <filters: category-dirs, or reponames>

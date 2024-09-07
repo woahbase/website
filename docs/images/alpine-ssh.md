@@ -1,5 +1,5 @@
 ---
-description: MultiArch Alpine Linux + S6 + SSH + RSync
+description: MultiArch Alpine Linux + S6 + SSH/SSL + RSync + TMux
 svcname: ssh
 tags:
   - package
@@ -14,10 +14,10 @@ This [image][155] serves as the base image for applications
 / services that require running an isolated shell via
 [OpenSSH][1] server or for transferring files securely via
 [RSync][2] (over SSH). Also includes [openssl][3],
-[autossh][6] and [sshfs][5] and [tmux][7].
+[autossh][6] and [sshfs][5] and [tmux][8].
 
-{{ m.srcimage('alpine-s6') }} with the {{ m.alpinepkg('openssh')
-}} and {{ m.alpinepkg('tmux') }} and {{ m.alpinepkg('rsync') }}
+{{ m.srcimage('alpine-s6') }} with the {{ m.alpinepkg('openssh') }}
+and {{ m.alpinepkg('rsync') }} and {{ m.alpinepkg('tmux') }}
 package(s) installed in it.
 
 {% include "pull-image.md" %}
@@ -98,5 +98,6 @@ Also,
 [5]: https://github.com/libfuse/sshfs
 [6]: https://github.com/Autossh/autossh
 [7]: https://linux.die.net/man/1/sshfs
+[8]: https://github.com/tmux/tmux
 
 {% include "all-include.md" %}
