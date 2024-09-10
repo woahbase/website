@@ -33,7 +33,7 @@ in the container to get a user-scoped shell,
     ``` sh
     docker run --rm -it \
       --name docker_youtubedl \
-      -v $(PWD)/downloads:/home/alpine/downloads \
+      -v $PWD/downloads:/home/alpine/downloads \
     woahbase/alpine-youtubedl:x86_64 \
       --version
     ```
@@ -42,7 +42,7 @@ in the container to get a user-scoped shell,
     docker run --rm -it \
       --entrypoint /bin/bash \
       --name docker_youtubedl \
-      -v $(PWD)/downloads:/home/alpine/downloads \
+      -v $PWD/downloads:/home/alpine/downloads \
     woahbase/alpine-youtubedl:x86_64
     ```
 

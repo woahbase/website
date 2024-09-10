@@ -1,5 +1,5 @@
 ---
-description: MultiArch Alpine Linux + S6 + Syncthing
+description: MultiArch Alpine Linux + S6 + SyncThing
 svcname: syncthing
 has_services:
   - compose
@@ -22,7 +22,7 @@ s6_userhome: /var/syncthing
 {% include "shields.md" %}
 
 This [image][155] containerizes the statically-linked
-[Syncthing][1] daemon, used to setup a continuous decentralized
+[SyncThing][1] daemon, used to setup a continuous decentralized
 file sync acrosss multiple devices. Checkout their [docs][3] for
 configuration or usage.
 

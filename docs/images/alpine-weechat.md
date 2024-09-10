@@ -58,6 +58,9 @@ Also,
 
 * WeeChat runs under the user `alpine`.
 
+* Check the [docs][2] for customizing your own.
+
 [1]: https://weechat.org/
+[2]: https://weechat.org/doc/
 
 {% include "all-include.md" %}

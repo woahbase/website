@@ -31,7 +31,7 @@ the container to get a [user-scoped][114] shell,
     docker run --rm -it \
       --name docker_rclone \
       --workdir /home/alpine \
-      -v $(PWD)/data:/home/alpine \
+      -v $PWD/data:/home/alpine \
     woahbase/alpine-rclone \
       rclone --version
     ```
@@ -40,7 +40,7 @@ the container to get a [user-scoped][114] shell,
     docker run --rm -it \
       --name docker_rclone \
       --workdir /home/alpine \
-      -v $(PWD)/data:/home/alpine \
+      -v $PWD/data:/home/alpine \
     woahbase/alpine-rclone \
       /bin/bash
     ```

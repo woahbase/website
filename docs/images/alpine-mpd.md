@@ -23,7 +23,7 @@ s6_userhome: /var/lib/mpd
 {% include "shields.md" %}
 
 This [image][155] containerizes the [Music Player Daemon][1] to
-setup a centralized wifi controlled local music playing service.
+setup a centralized network-controlled local music playing service.
 Compatible with [ALSA][2] but defaults to [PulseAudio][3] server
 running either on the host machine, or remotely somewhere in the
 local network. Also includes [yMPD][4] for managing music via the
@@ -59,7 +59,7 @@ or on a remote host, with
       -p 64801:64801 \
       -v $HOME/.pulse-cookie:/home/mpd/.pulse-cookie
       -v /dev/shm:/dev/shm \
-      -v /run/user/$(PUID)/pulse:/run/user/1000/pulse \
+      -v /run/user/${PUID:-1000}/pulse:/run/user/1000/pulse \
       -v $PWD/data:/var/lib/mpd \
       -v $PWD/music:/music \
     woahbase/alpine-mpd
@@ -95,8 +95,11 @@ following environment variables.
 
 | ENV Vars         | Default                       | Description
 | :---             | :---                          | :---
+| MPD_CONF         | /etc/mpd.conf                 | Path to configuration file. {{ m.sincev('0.23.15') }}
+| MPD_HOME         | /var/lib/mpd                  | Directory for database, playlists, state etc. {{ m.sincev('0.23.15') }}
 | MPD_ARGS         | --stdout                      | Customizable arguments passed to `mpd` service.
 | YMPD_ARGS        | -h localhost -p 6600 -w 64801 | Customizable arguments passed to `ympd` service.
+| MPDSCRIBBLE_CONF | /etc/mpdscribble.conf         | Path to `mpdscribble` configuration file. Must exist for service to start. {{ m.sincev('0.23.15') }}
 | MPDSCRIBBLE_ARGS | --host localhost --port 6600  | Customizable arguments passed to `mpdscribble` service.
 {% include "envvars/alpine-s6.md" %}
 
@@ -105,9 +108,8 @@ following environment variables.
 Also,
 
 * Config file is at `/etc/mpd.conf`, edit or remount this with
-  your own. A {{ m.ghfilelink('root/defaults/mpd.conf',
-  title='sample') }} is provided in `/defaults`, this gets copied
-  if none exists.
+  your own. A {{ m.ghfilelink('root/defaults/mpd.conf', title='sample') }}
+  is provided in `/defaults`, this gets copied if none exists.
 
 * Data stored at `/var/lib/mpd`.
 
