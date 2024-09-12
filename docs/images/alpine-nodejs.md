@@ -15,9 +15,9 @@ This [image][155] serves as the base image for applications
 / services that require [NodeJS][1] and [NPM][2] to manage
 dependencies (also includes [Yarn][3] and [git][101]).
 
-{{ m.srcimage('alpine-s6') }} with the packages {{
-m.alpinepkg('nodejs') }}, {{ m.alpinepkg('npm') }}, {{
-m.alpinepkg('yarn') }} and {{ m.alpinepkg('git') }}
+{{ m.srcimage('alpine-s6') }} with the packages
+{{ m.alpinepkg('nodejs', branch='v3.18') }}, {{ m.alpinepkg('npm', branch='v3.18') }},
+{{ m.alpinepkg('yarn', branch='v3.18') }} and {{ m.alpinepkg('git') }}
 installed in it.
 
 ???+ warning "NodeJS ARM32 v6/v7 Issue"

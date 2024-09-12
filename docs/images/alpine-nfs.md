@@ -32,19 +32,30 @@ Run
 
 Running the container starts the service.
 
-``` sh
-docker run --rm \
-  --name docker_nfs \
-  --privileged \
-  -p 111:111/tcp     -p 111:111/udp \
-  -p 2049:2049/tcp   -p 2049:2049/udp \
-  -p 32765:32765/tcp -p 32765:32765/udp \
-  -p 32766:32766/tcp -p 32766:32766/udp \
-  -p 32767:32767/tcp -p 32767:32767/udp \
-  -p 32768:32768/tcp -p 32768:32768/udp \
-  -v $PWD/data:/data \
-woahbase/alpine-nfs
-```
+=== "NFSv4"
+    ``` sh
+    docker run --rm \
+      --name docker_nfs \
+      --privileged \
+      -p 111:111/tcp   -p 111:111/udp \
+      -p 2049:2049/tcp -p 2049:2049/udp \
+      -v $PWD/data:/data \
+    woahbase/alpine-nfs
+    ```
+=== "NFSv3-or-v2"
+    ``` sh
+    docker run --rm \
+      --name docker_nfs \
+      --privileged \
+      -p 111:111/tcp     -p 111:111/udp \
+      -p 2049:2049/tcp   -p 2049:2049/udp \
+      -p 32765:32765/tcp -p 32765:32765/udp \
+      -p 32766:32766/tcp -p 32766:32766/udp \
+      -p 32767:32767/tcp -p 32767:32767/udp \
+      -p 32768:32768/tcp -p 32768:32768/udp \
+      -v $PWD/data:/data \
+    woahbase/alpine-nfs
+    ```
 
 --8<-- "multiarch.md"
 
@@ -57,6 +68,7 @@ following environment variables.
 
 | ENV Vars            | Default                                                       | Description
 | :---                | :---                                                          | :---
+| NFS_DATADIR         | /data                                                         | Default directory for exports, created if not exists. {{ m.sincev('2.6.4_20240912') }}
 | LOCKD_PORT          | 32768                                                         | Default port exposed for `lockd`, may require firewall whitelisting.
 | SKIP_SYSCTL         | unset                                                         | If set to `true`, will skip applying sysctl mods to kernel. Useful if those are already done at the provision level.
 | EXPORTFS_ARGS       | -afrv                                                         | Customizable arguments passed to `exportfs`.
@@ -84,7 +96,7 @@ Also,
 
 * NFSv4 configuration listens to ports `111` and `2049`. But for
   older versions there are multiple ports that need to be opened,
-  this is required if PXE-booting other hosts e.g. Raspberry Pi
+  this may be required if PXE-booting hosts e.g. Raspberry Pi
   devices.
 
 * By default runs as `NFSMODE = "SERVER"`, to use it as a client

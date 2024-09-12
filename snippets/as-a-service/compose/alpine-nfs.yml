@@ -24,24 +24,21 @@ services:
     network_mode: host
     # ports:
     # # for nfsv4
-    #   - protocol: tcp
-    #     host_ip: 0.0.0.0
-    #     published: 111
-    #     target: 111
-    #   - protocol: udp
-    #     host_ip: 0.0.0.0
-    #     published: 111
-    #     target: 111
-    #   - protocol: tcp
-    #     host_ip: 0.0.0.0
-    #     published: 2049
-    #     target: 2049
-    #   - protocol: udp
-    #     host_ip: 0.0.0.0
-    #     published: 2049
-    #     target: 2049
-    # # extra ports for mountd/statd needed for nfs v2/v3 need to be
-    # # whitelisted in firewall to allow access from network
+    #   - {protocol: "tcp", host_ip: "0.0.0.0", published: 111, target: 111}
+    #   - {protocol: "udp", host_ip: "0.0.0.0", published: 111, target: 111}
+    #   - {protocol: "tcp", host_ip: "0.0.0.0", published: 2049, target: 2049}
+    #   - {protocol: "udp", host_ip: "0.0.0.0", published: 2049, target: 2049}
+    # # for nfs v3/v2, ports for mountd/statd
+    #   - {protocol: "tcp", host_ip: "0.0.0.0", published: 32765, target: 32765}
+    #   - {protocol: "udp", host_ip: "0.0.0.0", published: 32765, target: 32765}
+    #   - {protocol: "tcp", host_ip: "0.0.0.0", published: 32766, target: 32766}
+    #   - {protocol: "udp", host_ip: "0.0.0.0", published: 32766, target: 32766}
+    #   - {protocol: "tcp", host_ip: "0.0.0.0", published: 32767, target: 32767}
+    #   - {protocol: "udp", host_ip: "0.0.0.0", published: 32767, target: 32767}
+    #   - {protocol: "tcp", host_ip: "0.0.0.0", published: 32768, target: 32768}
+    #   - {protocol: "udp", host_ip: "0.0.0.0", published: 32768, target: 32768}
+    # # ports may need to be whitelisted in firewall
+    # # to allow access from network
     privileged: true
     volumes:
       - type: bind
