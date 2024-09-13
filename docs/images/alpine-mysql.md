@@ -68,13 +68,13 @@ following environment variables.
 | MYSQL_SKIP_INITIALIZE     | unset                          | Set to `true` to skip all database initialization/bootstrap tasks. Useful when you only want the service to run.
 | MYSQL_HOST                | 127.0.0.1                      | Default host needed to whitelist user access. (part of bootstrap tasks).
 | MYSQL_ROOT_PWD            | insecurebydefault              | Default root password. (part of bootstrap tasks).
-| MYSQL_SKIP_ROOT_USER      | unset                          | If set to `true`, default root user left as-is, i.e only usable via localhost/socket.
+| MYSQL_SKIP_ROOT_USER      | unset                          | If set to `true`, default root user left as-is, i.e only usable via localhost/socket. (part of bootstrap tasks).
 | MYSQL_USER                | {{ s6_user }}                  | Default user to create upon bootstrap.
 | MYSQL_USER_PWD            | insecurebydefault              | Default user password. (part of bootstrap tasks).
 | MYSQL_USER_GRANTS         | ALL                            | Default user grants. (part of bootstrap tasks).
-| MYSQL_SKIP_USER           | unset                          | If set to `true`, default non-root user creation is skipped.
+| MYSQL_SKIP_USER           | unset                          | If set to `true`, default non-root user creation is skipped. (part of bootstrap tasks).
 | MYSQL_SOCKET_USER_GRANTS  | USAGE                          | Default socket user grants. (part of bootstrap tasks).
-| MYSQL_SKIP_SOCKET_USER    | unset                          | If set to `true`, default socket user `{{ s6_user }}` creation is skipped.
+| MYSQL_SKIP_SOCKET_USER    | unset                          | If set to `true`, socket user `{{ s6_user }}` creation is skipped. (part of bootstrap tasks).
 | MYSQL_DATABASE            | test                           | Default database to create when bootstrapping, after initialization.
 | MYSQL_SKIP_CREATE_DB      | unset                          | Skip default database creation when bootstrapping.
 | MYSQL_SKIP_BOOTSTRAP      | unset                          | Set to `true` to skip default database bootstrapping (but not initialization) tasks.
@@ -82,6 +82,8 @@ following environment variables.
 | MYSQL_KEEP_BOOTSTRAP_FILE | unset                          | Bootstrap file is **deleted after execution** as it contains secret information, set this to `true` if the file is required to persist.
 | MYSQL_EXECUTABLE          | /usr/bin/mysqld                | Binary to execute.
 | MYSQL_ARGS                | --user={{ s6_user }} --console | Customizable arguments passed to `mysqld` service.
+| MYSQL_INIT_DB             | /etc/my.initdb.d               | Default database initialization directory {{ m.sincev('10.11.8') }} used by `/scripts/run.sh`.
+| MYSQL_BACKUPDIR           | {{s6_userhome}}_backups        | Default database backup directory. {{ m.sincev('10.11.8') }}, previously `/var/lib/mysql/backups` used by `/scripts/run.sh`.
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"
@@ -115,20 +117,20 @@ to run a few common tasks is available into the image,
   docker exec -u {{ s6_user }} -it docker_mysql /scripts/run.sh initdb
   ```
 
-* [Backup][2] a **single** database to `{{ s6_userhome }}/backups` with
+* [Backup][2] a **single** database to `{{ s6_userhome }}_backups` with
   ```
   docker exec -u {{ s6_user }} -it docker_mysql /scripts/run.sh backup <db-name>
   ```
 
-* Restore a **single** database from `{{ s6_userhome }}/backups` with
+* Restore a **single** database from `{{ s6_userhome }}_backups` with
   ```
   docker exec -u {{ s6_user }} -it docker_mysql /scripts/run.sh restore <db-name>
   ```
 
-* Optionally run a healthcheck query (if authentication is
+* Optionally run a healthcheck query (if authentication or is
   enabled, make sure to set either `MYSQL_HEALTHCHECK_USER` and
   `MYSQL_HEALTHCHECK_USER_PWD` or `MYSQL_USER` and
-  `MYSQL_USER_PWD`) with
+  `MYSQL_USER_PWD`, or uses socket user by default) with
   ```
   /scripts/run.sh healthcheck
   ```

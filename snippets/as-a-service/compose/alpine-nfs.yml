@@ -16,8 +16,6 @@ services:
         max_attempts: 3
         window: 120s
     environment:
-      PUID: ${PUID:-1000}
-      PGID: ${PGID:-100}
       # TZ: ${TZ}
     hostname: nfs
     image: woahbase/alpine-nfs:${NFS_TAG:-latest}

@@ -27,7 +27,7 @@ Get a shell inside a already running container,
 docker exec -it docker_{{ svcname }} /bin/bash
 ```
 
-Optionally, login as a non-root user, (default is `alpine`)
+Optionally, login as a non-root user, (default is `{{ s6_user | default('alpine') }}`)
 
 ``` sh
 docker exec -u {{ s6_user | default('alpine') }} -it docker_{{ svcname }} /bin/bash
