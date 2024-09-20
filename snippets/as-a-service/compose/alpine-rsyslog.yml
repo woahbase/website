@@ -14,9 +14,9 @@ services:
         max_attempts: 5
         window: 120s
     environment:
-      RSYSLOG_CONF: /config/rsyslog.conf
-      LOGROTATE_CONF: /config/logrotate.conf
-      SYS_HOSTNAME: ${RSYSLOG_HOSTNAME}
+      # RSYSLOG_CONF: /etc/rsyslog.conf
+      # LOGROTATE_CONF: /etc/logrotate.conf
+      SYS_HOSTNAME: ${RSYSLOG_HOSTNAME:-rsyslog}
       # FWD_PROTOCOL: ${RSYSLOG_FWD_PROTOCOL}
       # FWD_TO_HOST: ${RSYSLOG_FWD_TO_HOST}
       # FWD_TO_PORT: ${RSYSLOG_FWD_TO_PORT}
@@ -25,6 +25,7 @@ services:
       # TZ: ${TZ}
     hostname: ${RSYSLOG_HOSTNAME:-rsyslog}
     image: woahbase/alpine-rsyslog:${RSYSLOG_TAG:-latest}
+    # # example for other containers
     # logging:
     #   driver: syslog
     #   options:
@@ -65,6 +66,7 @@ services:
         target: /var/spool/rsyslog
         bind:
           create_host_path: true
+      # # for systemd-journald logs
       # - type: bind
       #   source: /run/systemd/journal
       #   target: /run/systemd/journal
