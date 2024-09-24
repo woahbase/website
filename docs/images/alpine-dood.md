@@ -90,8 +90,8 @@ a [user-scoped][114] shell,
         ``` sh
         getent group docker | awk -F ":" '{ print $$3 }'
         ```
-    2. Only required if using relative mounts e.g. for `docker-compose`.
-    3. Required if using docker authentication or alternative docker.json or ssh-KBA.
+    2. Required if using docker authentication or alternative docker.json or ssh-KBA.
+    3. Only required if using relative mounts e.g. for `docker-compose`.
 
 --8<-- "multiarch.md"
 

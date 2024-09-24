@@ -126,6 +126,7 @@ nav:
       # - service
       # --------
       - alpine-adminer: images/alpine-adminer.md
+      - alpine-apcupsd: images/alpine-apcupsd.md
       - alpine-cgit: images/alpine-cgit.md
       - alpine-coturn: images/alpine-coturn.md
       - alpine-dhcp: images/alpine-dhcp.md
