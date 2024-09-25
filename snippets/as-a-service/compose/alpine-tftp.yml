@@ -1,0 +1,54 @@
+---
+services:
+  tftp:
+    container_name: tftp
+    deploy:
+      resources:
+        limits:
+          cpus: '1.00'
+          memory: 256M
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 120s
+    environment:
+      PUID: ${PUID:-1000}
+      PGID: ${PGID:-100}
+      # TZ: ${TZ}
+      TFTP_ROOT: /tftp
+      TFTPD_ARGS: >-
+        --address 0.0.0.0:${TFTP_PORT:-69}
+        --port-range 63050:63100
+        --secure
+        /tftp/
+      # --map-file /etc/tftpd.map
+      # --verbose
+      # -L4
+    hostname: tftp
+    image: woahbase/alpine-tftp:${TFTP_TAG:-latest}
+    network_mode: host
+    # ports:
+    #   - protocol: udp
+    #     host_ip: 0.0.0.0
+    #     published: ${TFTP_PORT:-69}
+    #     target: 69
+    #
+    #   - "63050-63100:63050-63100"
+    volumes:
+      - type: bind
+        source: ${TFTP_DIR:?err}
+        target: /tftp
+        bind:
+          create_host_path: false
+      # - type: bind
+      #   source: ${TFTP_DIR:?err}/configs/tftpd.map
+      #   target: /etc/tftpd.map
+      #   bind:
+      #     create_host_path: false
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind:
+          create_host_path: false

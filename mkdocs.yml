@@ -143,6 +143,7 @@ nav:
       - alpine-squid: images/alpine-squid.md
       - alpine-ssh: images/alpine-ssh.md
       - alpine-syncthing: images/alpine-syncthing.md
+      - alpine-tftp: images/alpine-tftp.md
       - alpine-transmission: images/alpine-transmission.md
       - alpine-webhook: images/alpine-webhook.md
 
