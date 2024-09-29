@@ -1,4 +1,4 @@
-{%- set phpmajmin    = phpmajmin | default('81') -%}
+{%- set phpmajmin    = phpmajmin | default('82') -%}
 | PHPDIR                      | /etc/php{{ phpmajmin }}                 | Root directory for `php` config files.
 | PHPCONFDIR                  | /etc/php{{ phpmajmin }}/conf.d          | Directory for `php` config snippets.
 | PHP_MAX_EXECUTION_TIME      | 30                                      | `php.ini` value for `max_execution_time`. (Only set if file does not exist)
