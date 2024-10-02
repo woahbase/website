@@ -138,6 +138,7 @@ nav:
       - alpine-mysql: images/alpine-mysql.md
       - alpine-nfs: images/alpine-nfs.md
       - alpine-nginx: images/alpine-nginx.md
+      - alpine-pigpio: images/alpine-pigpio.md
       - alpine-redis: images/alpine-redis.md
       - alpine-registry: images/alpine-registry.md
       - alpine-rsyncd: images/alpine-rsyncd.md
