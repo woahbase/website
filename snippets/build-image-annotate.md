@@ -1,3 +1,16 @@
+{%- set lstag = 'latest' -%}{%- set vstag = 'version' -%}{%- set bdtag = 'builddate' -%}
+{%- set _tags = [
+  'aarch64' if not skip_aarch64|default(false),
+  'armhf' if not skip_armhf|default(false),
+  'armv7l' if not skip_armv7l|default(false),
+  'x86_64' if not skip_x86_64|default(false)
+] | select -%}
+{%- set itags = [] -%}{%- set vtags = [] -%}{%- set btags = [] -%}
+{%- for t in _tags -%}
+{{-   itags.append('{}'.format(t))                         or '' -}}
+{{-   vtags.append('{}_({})'.format(t, vstag))             or '' -}}
+{{-   btags.append('{}_({})_({})'.format(t, vstag, bdtag)) or '' -}}
+{%- endfor -%}
 ---
 #### Annotate Manifest(s)
 ---
@@ -20,41 +33,42 @@ above we need to do it thrice.
     ```
 
 ---
-##### Tag Latest
+##### Tag {{ lstag | capitalize }}
 ---
 
-Assuming we built the images for all four architectures, we can
-create/amend the manifest and annotate it to map the images tagged
-`x86_64`, `aarch64`, `armv7l` and `armhf` to the tag `latest` by
-running
+{% set manifest_tag = lstag %}
 
-{% set manifest_tag = "latest" %}
+Assuming we built the images for all supported architectures, to
+facilitate pulling the correct image for the architecture, we
+can create/amend the `{{ manifest_tag }}` manifest and annotate it
+to map the tags `:{{- itags | join('`, `:') }}` to the tag `:{{
+manifest_tag }}` by running
+
 {% include "build-image-annotate-tag.md" %}
 
 ---
-##### Tag Version
+##### Tag {{ vstag | capitalize }}
 ---
 
-Next, to facilitate pulling images by version, we create/amend the
-manifest and annotate it to map the images tagged
-`x86_64_(version)`, `aarch64_(version)`, `armv7l_(version)` and
-`armhf_(version)` to the tag `(version)` by running
+{% set target_name = vstag %}
+{% set manifest_tag = "({})".format(vstag) %}
 
-{% set target_name = "version" %}
-{% set manifest_tag = "(version)" %}
+Next, to facilitate pulling images by version, we create/amend the
+image-version manifest and annotate it to map the tags `:{{- vtags
+| join('`, `:') }}` to the tag `:{{ manifest_tag }}` by running
+
 {% include "build-image-annotate-tag.md" %}
 
 ---
 ##### Tag Build-Date
 ---
 
-Then, (optionally) we create/amend the manifest and annotate it to
-map the images tagged `x86_64_(version)_(builddate)`,
-`aarch64_(version)_(builddate)`, `armv7l_(version)_(builddate)`
-and `armhf_(version)_(builddate)` to the tag
-`(version)_(builddate)` by running
-
 {% set target_name = "date" %}
-{% set manifest_tag = "(version)_(builddate)" %}
+{% set manifest_tag = "({})_({})".format(vstag, bdtag) %}
+
+Then, (optionally) we create/amend the `{{ manifest_tag }}`
+manifest and annotate it to map the tags `:{{- btags | join("`, `:")
+}}` to the tag `:{{ manifest_tag }}` by running
+
 {% include "build-image-annotate-tag.md" %}
 

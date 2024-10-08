@@ -1,4 +1,4 @@
-{%- set mimg = orgname ~ "/" ~ page.title         -%}
+{%- set mimg = orgname ~ "/" ~ dhrepo|default(page.title) -%}
 {%- set mtag = manifest_tag | default("latest")   -%}
 {%- set mtarget = target_name | default("latest") -%}
 {%- set msuffix = (("_" + mtag) if mtag != "latest" else "") -%}

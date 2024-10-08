@@ -41,16 +41,18 @@ If the built image targets another architecture then it is
 {% endif %}
 
 {% if not (('deprecated' in tags) or ('legacy' in tags)) %}{# no version/builddate push for old images #}
+{%- set iimag = dhrepo | default(page.title) -%}
+{%- set iarch = 'x86_64' if not skip_x86_64|default(false) else 'aarch64' -%}
 ???+ info "Pushing Multiple Tags"
 
     With a single `make push`, we are actually pushing 3 tags of
-    the same image, e.g. for x86_64 architecture, they're namely
+    the same image, e.g. for `{{ iarch }}` architecture, they're namely
 
-    * `{{ page.title }}:x86_64`
+    * `{{ iimag }}:{{ iarch }}`
 
     :   The actual image that is built.
 
-    * `{{ page.title }}:x86_64_(version)`
+    * `{{ iimag }}:{{ iarch }}_(version)`
 
     :   It is expected that the application is versioned when
         built or packaged, it can be specified in the tag, this
@@ -61,7 +63,7 @@ If the built image targets another architecture then it is
         github releases. Can be skipped with the parameter
         `SKIP_VERSIONTAG` to a non-empty string value like `1`.
 
-    * `{{ page.title }}:x86_64_(version)_(builddate)`
+    * `{{ iimag }}:{{ iarch }}_(version)_(builddate)`
 
     :   When building multiple versions of the same image (e.g. for
         providing fixes or revisions), this ensures that a more recent

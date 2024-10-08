@@ -6,7 +6,7 @@ Pull the image for your architecture if it's already available from
 [Docker Hub][155].
 
 ``` sh
-docker pull {{ config.extra.orgname }}/{{ page.title }}
+docker pull {{ config.extra.orgname }}/{{ dhrepo | default(page.title) }}
 ```
 ???+ info "Image Tags"
     The image is tagged respectively for the following architectures,
@@ -28,7 +28,7 @@ docker pull {{ config.extra.orgname }}/{{ page.title }}
     **latest** tag is retagged from `x86_64`, so pulling without any
     tag fetches you that image. For any other architectures specify
     the tag for that architecture. e.g. for `armv8` or
-    `aarch64` host it is `{{ page.title }}:aarch64`.
+    `aarch64` host it is `{{ dhrepo | default(page.title) }}:aarch64`.
 {% else %}
     **latest** tag is annotated as multiarch so pulling without any
     tags should fetch the correct image for your architecture. Same goes
