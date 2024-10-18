@@ -7,10 +7,7 @@ has_services:
 has_proxies:
   - nginx
 tags:
-  - compose
-  - nomad
   - package
-  - proxy
   - s6
   - service
 
@@ -81,9 +78,7 @@ following environment variables.
 
 Also,
 
-* A {{ m.ghfilelink('root/defaults/influxdb.conf', title='sample') }}
-  configuration is provided in the `/defaults` directory, this
-  gets copied to `/etc/influxdb.conf` if none exist.
+* {{ m.defcfgfile('/etc/influxdb.conf', vname='INFLUXDB_CONFIG_PATH') }}
 
 * Default [configuration][3] starts the database server **without any
   authorization**. (Not recommended other than development

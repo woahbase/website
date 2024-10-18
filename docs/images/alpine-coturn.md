@@ -4,7 +4,6 @@ svcname: coturn
 has_services:
   - compose
 tags:
-  - compose
   - package
   - s6
   - service
@@ -57,9 +56,7 @@ following environment variables.
 
 Also,
 
-* Config file loaded from `/var/lib/coturn/turnserver.conf` edit
-  or remount this with your own. A {{ m.ghfilelink('root/defaults/turnserver.conf', title='sample') }}
-  is provided in `/defaults/`, that gets copied if none exists.
+* {{ m.defcfgfile('/var/lib/coturn/turnserver.conf', vname='COTURN_CONF') }}
 
 * Data stored at `/var/lib/coturn`.
 

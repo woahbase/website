@@ -5,9 +5,7 @@ has_services:
   - compose
   - nomad
 tags:
-  - compose
   - dev
-  - nomad
   - package
   - s6
   - service
@@ -75,10 +73,7 @@ Also,
   intended to be used in production, you are better off rolling
   your own.
 
-* Includes a {{ m.ghfilelink('root/etc/s6-overlay/s6-rc.d/p12-nginx-customize/run', title='placeholder') }}
-  script for further customizations. Override the shell script
-  located at `/etc/s6-overlay/s6-rc.d/p12-nginx-customize/run`
-  with your custom pre-tasks as needed.
+* {{ m.customscript('p12-nginx-customize') }}
 
 * Default configs set up a https and auth protected web location
   at `/secure`.

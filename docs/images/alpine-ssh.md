@@ -79,17 +79,11 @@ Also,
 * Custom configuration snippets can also be mounted at
   `/etc/ssh/sshd_config.d/` or `/etc/ssh/ssh_config.d/` if needed.
 
-* Includes a {{ m.ghfilelink('root/etc/s6-overlay/s6-rc.d/p11-autossh-setup/run', title='placeholder') }}
-  script for further customizations for `autossh`. Override the
-  shell script located at `/etc/s6-overlay/s6-rc.d/p11-autossh-setup/run`
-  with your custom pre-tasks as needed. Refer to the [manpage][4]
-  to configure your own.
+* {{ m.customscript('p11-autossh-setup', fr='autossh') }} Refer
+  to the [manpage][4] to configure your own.
 
-* Includes a {{ m.ghfilelink('root/etc/s6-overlay/s6-rc.d/p12-sshfs-setup/run', title='placeholder') }}
-  script for further customizations for `sshfs`. Override the
-  shell script located at `/etc/s6-overlay/s6-rc.d/p12-sshfs-setup/run`
-  with your custom pre-tasks as needed. Refer to the [manpage][7]
-  to configure your own.
+* {{ m.customscript('p12-sshfs-setup', fr='sshfs') }} Refer to
+  the [manpage][7] to configure your own.
 
 [1]: https://www.openssh.com/
 [2]: https://www.samba.org/rsync/

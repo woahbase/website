@@ -5,8 +5,6 @@ has_services:
   - compose
   - nomad
 tags:
-  - compose
-  - nomad
   - package
   - s6
   - service
@@ -88,11 +86,8 @@ Also,
 * Requires either `--cap-add SYS_ADMIN` capabilities or
   `--privileged` flag if applying `sysctl` changes.
 
-* Directories are exported from `/etc/exports`. Remount the
-  exports file with your own configuration. A {{
-  m.ghfilelink('root/defaults/exports', title='sample') }} is
-  provided in `/defaults`, by default it exposes `/data` at `/`.
-  this gets copied if none exists.
+* {{ m.defcfgfile('/etc/exports', fr='exported directories') }}
+  By default it exposes `/data` at `/`.
 
 * NFSv4 configuration listens to ports `111` and `2049`. But for
   older versions there are multiple ports that need to be opened,

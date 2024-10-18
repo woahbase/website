@@ -16,6 +16,7 @@ reference (and modify it as needed).
     ``` yaml
     --8<-- "as-a-service/compose/{{ page.title }}.yml"
     ```
+{{     (page.meta.tags.append('compose') or "") if not 'compose' in page.meta.tags }}
 {%   endif %}
 {%   if ('nomad' in has_services) %}
 === "nomad"
@@ -26,6 +27,7 @@ reference (and modify it as needed).
     ``` hcl
     --8<-- "as-a-service/nomad/{{ page.title }}.hcl"
     ```
+{{     (page.meta.tags.append('nomad') or "") if not 'nomad' in page.meta.tags }}
 {%   endif %}
 {%   if ('openrc' in has_services) %}
 === "openrc"
@@ -36,6 +38,7 @@ reference (and modify it as needed).
     ``` sh
     --8<-- "as-a-service/openrc/{{ page.title }}"
     ```
+{{     (page.meta.tags.append('openrc') or "") if not 'openrc' in page.meta.tags }}
 {%   endif %}
 {%   if ('systemd' in has_services) %}
 === "systemd"
@@ -46,6 +49,7 @@ reference (and modify it as needed).
     ``` ini
     --8<-- "as-a-service/systemd/{{ page.title }}.service"
     ```
+{{     (page.meta.tags.append('systemd') or "") if not 'systemd' in page.meta.tags }}
 {%   endif %}
 {% endif %}
 
@@ -60,7 +64,7 @@ To proxy it through a web server, see below
 {%   if ('nginx' in has_proxies) %}
 === "NGINX"
 
-    The following
+    This
     {{ m.ghfilelink('snippets/proxies/nginx/' + page.title + '.conf', title='snippet', ghrepo='website') }}
     can be used to reverse-proxy the service using
     [NGINX](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/).
@@ -68,5 +72,6 @@ To proxy it through a web server, see below
     ``` nginx
     --8<-- "proxies/nginx/{{ page.title }}.conf"
     ```
+{{     (page.meta.tags.append('proxy') or "") if not 'proxy' in page.meta.tags }}
 {%   endif %}
 {% endif %}

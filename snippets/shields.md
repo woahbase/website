@@ -1,45 +1,76 @@
+{% macro genshieldlink(typ, subtyp, repo, label, fpath, fparams, lpath, lparams) -%}
+{%-  set _coderepo_weburl  = (config.extra.sources.values()      |first)['orgurl']| default('https://github.com')       -%}
+{%-  set _imagerepo_weburl = (config.extra.distributions.values()|first)['repo']  | default('https://hub.docker.com/r') -%}
+{%-  set furl = 'https://img.shields.io'
+        ~'/'~ typ ~'/'~ subtyp
+        ~'/'~ orgname ~'/'~ repo
+        ~ ('/'~fpath if fpath)
+        ~'?'~ shieldparams
+        ~ ('&logo='~typ if typ in ['github', 'docker'])
+        ~ ('&label='~label if label)
+        ~ ('&'~fparams if fparams) -%}
+{%-  set iurl = {
+            "github" : _coderepo_weburl,
+            "docker" : _imagerepo_weburl
+          }[typ]
+        ~'/'~ {
+            "github" : repo,
+            "docker" : orgname ~'/'~ repo
+          }[typ]
+        ~ ('/'~lpath if lpath)
+        ~ ('?'~lparams if lparams) -%}
+{%-  if 'private' in tags -%}{#- no shields for private images -#}
+        {{ '| [{}]({})'.format(label|default(subtyp), iurl) }}
+{%-  else  -%}
+        {{ '[![{}]({})]({})'.format(label|default(subtyp), furl, iurl) }}
+{%-  endif -%}
+{%-endmacro %}
+
+{% macro genline_github(repo, extra) -%}
+{{      genshieldlink('github', 'last-commit', repo, label=(extra~" " if extra)~'updated' ) }}
+{{      genshieldlink('github', 'stars'      , repo, lpath='stargazers'     ) }}
+{{      genshieldlink('github', 'forks'      , repo, lpath='network/members') }}
+{{      genshieldlink('github', 'watchers'   , repo, lpath='watchers'       ) }}
+{{      genshieldlink('github', 'issues'     , repo, lpath='issues'         ) }}
+{{      genshieldlink('github', 'issues-pr'  , repo, lpath='pulls'          ) }}
+<br/>
+{%-endmacro %}
+
+{% macro genline_dockerhub(repo, extra, mr={}) -%}
+{{    genshieldlink('docker', 'pulls', repo, label=(extra~" " if extra)~'pulls' ) }}
+{{    genshieldlink('docker', 'stars', repo, label='stars') }}
+{%-   if not skip_aarch64|default(false) and not mr.skip_aarch64|default(false) %}
+{{      genshieldlink('docker', 'image-size', repo, fpath='aarch64', label='aarch64', lpath='tags?name=aarch64&ordering=last_updated') }}
+{%-   endif -%}
+{%-   if not skip_armhf|default(false) and not mr.skip_armhf|default(false) %}
+{{      genshieldlink('docker', 'image-size', repo, fpath='armhf',   label='armhf',   lpath='tags?name=armhf&ordering=last_updated')   }}
+{%-   endif -%}
+{%-   if not skip_armv7l|default(false) and not mr.skip_armv7l|default(false) %}
+{{      genshieldlink('docker', 'image-size', repo, fpath='armv7l',  label='armv7l',  lpath='tags?name=armv7l&ordering=last_updated')  }}
+{%-   endif -%}
+{%-   if not skip_x86_64|default(false) and not mr.skip_x86_64|default(false) %}
+{{      genshieldlink('docker', 'image-size', repo, fpath='x86_64',  label='x86_64',  lpath='tags?name=x86_64&ordering=last_updated')  }}
+{%-   endif -%}
+<br/>
+{%-endmacro %}
+
 {% include 'deprecated.md' %}
 <!--
 [:material-github:][151]
 [:fontawesome-brands-docker:][155]
 -->
 {%- if not gh_multirepo -%}
-[![gh_commit status][201]][151]
-[![gh_stars][202]][152]
-[![gh_forks][203]][153]
-[![gh_watches][204]][154]
-[![gh_issues][211]][161]
-[![gh_pr][212]][162]
-<br/>
+{{    genline_github(ghrepo|default(page.title)) }}
 {%- else -%}
 {%-   for ms in gh_multirepo -%}
 {#-     ms:
           name: repo-name       -#}
-[![gh_commit status][201]][151]
-[![gh_stars][202]][152]
-[![gh_forks][203]][153]
-[![gh_watches][204]][154]
-[![gh_issues][211]][161]
-[![gh_pr][212]][162]
-<br/>
+{{      genline_github(ms.name, ms.name.split('-')|last) }}
 {%-   endfor-%}
 {%- endif -%}
 
 {%- if not dh_multirepo -%}
-[![dh_pulls][205]][155]
-[![dh_stars][206]][156]
-{%-   if not skip_aarch64 %}
-[![dh_size:aarch64][208]][158]
-{%-   endif -%}
-{%-   if not skip_armhf %}
-[![dh_size:armhf][210]][160]
-{%-   endif -%}
-{%-   if not skip_armv7l %}
-[![dh_size:armv7l][209]][159]
-{%-   endif -%}
-{%-   if not skip_x86_64 %}
-[![dh_size:x86_64][207]][157]
-{%-   endif -%}
+{{    genline_dockerhub(dhrepo|default(page.title)) }}
 {%- else -%}
 {%-   for mr in dh_multirepo -%}
 {#-     mr:
@@ -48,21 +79,7 @@
           skip_armhf: boolean
           skip_armv7l: boolean
           skip_x86_64: boolean  -#}
-[![dh_pulls](https://img.shields.io/docker/pulls/{{ orgname }}/{{ mr.name }}?{{ shieldparams }}&logo=docker&label={{ mr.name.split('-')|last }} pulls)](https://hub.docker.com/r/{{ orgname }}/{{ mr.name }})
-[![dh_stars](https://img.shields.io/docker/stars/{{ orgname }}/{{ mr.name }}?{{ shieldparams }}&logo=docker&label=stars)](https://hub.docker.com/r/{{ orgname }}/{{ mr.name }})
-{%-     if not mr.skip_aarch64 %}
-[![dh_size:aarch64](https://img.shields.io/docker/image-size/{{ orgname }}/{{ mr.name }}/aarch64?label=aarch64&{{ shieldparams }}&logo=docker)](https://hub.docker.com/r/{{ orgname }}/{{ mr }}/tags?name=aarch64&ordering=last_updated)
-{%-     endif -%}
-{%-     if not mr.skip_armhf %}
-[![dh_size:armhf](https://img.shields.io/docker/image-size/{{ orgname }}/{{ mr.name }}/armhf?label=armhf&{{ shieldparams }}&logo=docker)](https://hub.docker.com/r/{{ orgname }}/{{ mr.name }}/tags?name=armhf&ordering=last_updated)
-{%-     endif -%}
-{%-     if not mr.skip_armv7l %}
-[![dh_size:armv7l](https://img.shields.io/docker/image-size/{{ orgname }}/{{ mr.name }}/armv7l?label=armv7l&{{ shieldparams }}&logo=docker)](https://hub.docker.com/r/{{ orgname }}/{{ mr.name }}/tags?name=armv7l&ordering=last_updated)
-{%-     endif -%}
-{%-     if not mr.skip_x86_64 %}
-[![dh_size:x86_64](https://img.shields.io/docker/image-size/{{ orgname }}/{{ mr.name }}/x86_64?label=x86_64&{{ shieldparams }}&logo=docker )](https://hub.docker.com/r/{{ orgname }}/{{ mr.name }}/tags?name=x86_64&ordering=last_updated)
-{%-     endif -%}
-<br/>
+{{      genline_dockerhub(mr.name, mr.name.split('-')|last) }}
 {%-   endfor-%}
 {%- endif -%}
 

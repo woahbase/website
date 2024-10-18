@@ -65,10 +65,7 @@ Also,
 * To use fonts installed in the host system, mount
   `/usr/share/fonts` inside the container.
 
-* Includes a {{ m.ghfilelink('root/etc/s6-overlay/s6-rc.d/p11-gimp-customize/run', title='placeholder') }}
-  script for further customizations. Override the shell script
-  located at `/etc/s6-overlay/s6-rc.d/p11-gimp-customize/run`
-  with your custom pre-tasks as needed.
+* {{ m.customscript('p11-gimp-customize') }}
 
 * To preserve/load images from the host system,  mount the
   `/home/alpine` dir somewhere in your host storage. By default

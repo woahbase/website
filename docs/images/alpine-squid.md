@@ -5,8 +5,6 @@ has_services:
   - compose
   - nomad
 tags:
-  - compose
-  - nomad
   - package
   - s6
   - service
@@ -66,14 +64,13 @@ following environment variables.
 
 Also,
 
-* Config files are at `/etc/squid/`, edit or remount files here
-  with your own. A {{ m.ghfilelink('root/defaults/squid/', title='sample') }}
-  is provided in `/defaults`, these get copied if none exists.
-  Look into the [Configuration reference][3] and
-  [ConfigExamples][2] to customize as needed.
+* {{ m.defcfgfile('/etc/squid', plural=true, vname='SQUID_CONFDIR') }}
 
 * Default configuration listens to ports `3128` and
   `3129`(interceptor).
+
+*  Look into the [Configuration reference][3] and
+  [ConfigExamples][2] to customize as needed.
 
 [1]: http://www.squid-cache.org/
 [2]: https://wiki.squid-cache.org/ConfigExamples/

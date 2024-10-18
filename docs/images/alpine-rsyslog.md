@@ -4,7 +4,6 @@ svcname: rsyslog
 has_services:
   - compose
 tags:
-  - compose
   - package
   - s6
   - service
@@ -96,11 +95,9 @@ Also,
   `RSYSLOG_CONF` variable, a {{ m.ghfilelink('root/defaults/rsyslog.conf', title='sample') }}
    is provided inside `/defaults/`, this gets copied if none exists.
 
-* This image includes `logrotate` for managing the log files by
-  periodically rotating them. A {{ m.ghfilelink('root/defaults/logrotate.conf', title='sample') }}
-  configuration is provied in `/defaults/`, this gets copied
-  to `/etc/logrotate.conf` if none exists. By default, it uses
-  `/tmp/logrotate.state` for its state.
+* {{ m.defcfgfile('/etc/logrotate.conf', fr='`logrotate` (to trim
+  the log files periodically)', vname='LOGROTATE_CONF') }} By
+  default, it uses `/tmp/logrotate.state` for its state.
 
 * Log rotation configurations for `rsyslog` are defined in
   `/etc/logrotate.d/rsyslog`. A {{ m.ghfilelink('root/defaults/rsyslog.logrotate', title='sample') }}

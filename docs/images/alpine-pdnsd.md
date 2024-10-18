@@ -7,11 +7,9 @@ has_services:
 skip_aarch64: true
 skip_armv7l: true
 tags:
-  - compose
   - deprecated
   - s6
   - service
-  - systemd
 ---
 
 {% import "macros.md" as m with context %}
@@ -49,11 +47,8 @@ woahbase/alpine-pdnsd:x86_64
 #### Configuration
 ---
 
-* Config file is at `/etc/pdnsd.conf`, edit or remount this with
-  your own. A {{ m.ghfilelink('root/defaults/pdnsd.conf',
-  title='sample') }} is provided in `/defaults`, this gets copied
-  if none exists. Put your custom config file at
-  `/data/pdnsd.conf` and it will be used instead.
+* {{ m.defcfgfile('/etc/pdnsd.conf') }} Put your custom config file
+  at `/data/pdnsd.conf` and it will be used instead.
 
 * Local names are served from `/data/hosts/hosts.local`, if not
   found, `/etc/hosts` is copied.

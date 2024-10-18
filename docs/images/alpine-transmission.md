@@ -7,10 +7,7 @@ has_services:
 has_proxies:
   - nginx
 tags:
-  - compose
-  - nomad
   - package
-  - proxy
   - s6
   - service
 ---
@@ -67,9 +64,7 @@ following environment variables.
 
 Also,
 
-* Config file is at `/var/lib/transmission/config/settings.json`,
-  edit or remount this file with your own. A {{ m.ghfilelink('root/defaults/settings.json', title='sample') }}
-  is provided in `/defaults/`, that gets copied if none exists.
+* {{ m.defcfgfile('/var/lib/transmission/config/settings.json') }}
 
 * Default configuration makes the service available at the subpath
   `/transmission/`.

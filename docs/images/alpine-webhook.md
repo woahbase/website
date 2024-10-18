@@ -6,10 +6,8 @@ has_services:
 has_proxies:
   - nginx
 tags:
-  - compose
-  - s6
   - github
-  - proxy
+  - s6
   - service
 ---
 
@@ -62,10 +60,7 @@ following environment variables.
 
 Also,
 
-* Hooks configuration file is at `/etc/webhook/hooks.json`,
-  edit or remount this file with your own. A {{
-  m.ghfilelink('root/defaults/hooks.json', title='sample') }}
-  is provided in `/defaults/`, that gets copied if none exists.
+* {{ m.defcfgfile('/etc/webhook/hooks.json', vname='WEBHOOK_JSON') }}
 
 * Checkout the [docs][2] for more information about writing hooks.
 

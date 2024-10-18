@@ -7,11 +7,8 @@ has_services:
 has_proxies:
   - nginx
 tags:
-  - compose
   - github
-  - nomad
   - php
-  - proxy
   - service
 ---
 

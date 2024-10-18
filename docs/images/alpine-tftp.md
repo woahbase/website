@@ -5,8 +5,6 @@ has_services:
   - compose
   - nomad
 tags:
-  - compose
-  - nomad
   - package
   - s6
   - service

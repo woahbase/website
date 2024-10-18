@@ -7,10 +7,7 @@ has_services:
 has_proxies:
   - nginx
 tags:
-  - compose
-  - nomad
   - package
-  - proxy
   - s6
   - service
 
@@ -107,9 +104,7 @@ following environment variables.
 
 Also,
 
-* Config file is at `/etc/mpd.conf`, edit or remount this with
-  your own. A {{ m.ghfilelink('root/defaults/mpd.conf', title='sample') }}
-  is provided in `/defaults`, this gets copied if none exists.
+* {{ m.defcfgfile('/etc/mpd.conf', fr='`mpd`', vname='MPD_CONF') }}
 
 * Data stored at `/var/lib/mpd`.
 

@@ -8,10 +8,7 @@ has_proxies:
   - nginx
 tags:
   - legacy
-  - compose
-  - nomad
   - github
-  - proxy
   - s6
   - service
 ---

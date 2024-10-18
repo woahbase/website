@@ -5,8 +5,6 @@ has_services:
   - compose
   - nomad
 tags:
-  - compose
-  - nomad
   - package
   - s6
   - service
@@ -90,11 +88,8 @@ following environment variables.
 
 Also,
 
-* Config file is at `/etc/my.cnf`, edit or remount this with your
-  own. A {{ m.ghfilelink('root/defaults/my.cnf', title='sample')
-  }} is provided in `/defaults`, this gets copied if none exists.
-  By default all snippets existing in `/etc/my.cnf.d/` are
-  included.
+* {{ m.defcfgfile('/etc/my.cnf') }} By default all snippets
+  existing in `/etc/my.cnf.d/` are included.
 
 * Data stored at `/var/lib/mysql`.
 

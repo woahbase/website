@@ -7,11 +7,8 @@ has_services:
 has_proxies:
   - nginx
 tags:
-  - compose
   - github
-  - nomad
   - php
-  - proxy
   - service
 ---
 
@@ -82,9 +79,7 @@ Also,
   `KANBOARD_UPDATE` is set) the release included in the image gets
   unzipped at this path.
 
-* Config file is at `/config/www/kanboard/config.php`, edit or remount this with
-  your own. A {{ m.ghfilelink('root/defaults/config.php', title='sample') }}
-  is provided in `/defaults`, this gets copied if none exists.
+* {{ m.defcfgfile('/config/www/kanboard/config.php') }}
 
 * You can either mount only the `data` and `plugins` directories
   to persist between updates, or mount the whole `/config`

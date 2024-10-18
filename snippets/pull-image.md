@@ -1,27 +1,33 @@
+{% import "macros.md" as m with context %}
 ---
 Get the Image
 ---
 
-Pull the image for your architecture if it's already available from
-[Docker Hub][155].
+{% for d in config.extra.distributions.values() %}
+{%   if not d.disabled|default(false) %}
+=== "{{ d.name }}"
+    Pull the image from [{{ d.name }}]({{ d.repo ~'/'~ config.extra.orgname ~'/'~ dhrepo | default(page.title) }}).
 
-``` sh
-docker pull {{ config.extra.orgname }}/{{ dhrepo | default(page.title) }}
-```
+    ``` sh
+    docker pull {{ d.ns~"/" if d.ns else "" }}{{ config.extra.orgname }}/{{ dhrepo | default(page.title) }}
+    ```
+{%   endif %}
+{% endfor %}
+
 ???+ info "Image Tags"
     The image is tagged respectively for the following architectures,
 
 {% if not skip_aarch64 %}
-    * [**aarch64**][158]
+      &nbsp;&nbsp;{{ m.myimagetag('aarch64') }}
 {% endif %}
 {% if not skip_armhf %}
-    * [**armhf**][160]
+      &nbsp;&nbsp;{{ m.myimagetag('armhf') }}
 {% endif %}
 {% if not skip_armv7l %}
-    * [**armv7l**][159]
+      &nbsp;&nbsp;{{ m.myimagetag('armv7l') }}
 {% endif %}
 {% if not skip_x86_64 %}
-    * [**x86_64**][157]
+      &nbsp;&nbsp;{{ m.myimagetag('x86_64') }}
 {% endif %}
 
 {% if (('deprecated' in tags) or ('legacy' in tags)) %}{# no annotate or version tags for old images #}

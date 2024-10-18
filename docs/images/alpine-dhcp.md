@@ -5,11 +5,9 @@ has_services:
   - compose
   - systemd
 tags:
-  - compose
   - package
   - s6
   - service
-  - systemd
 ---
 
 {% import "macros.md" as m with context %}
@@ -61,9 +59,7 @@ Also,
 * ISC-DHCP needs the `--network=host` flag to have access to the
   NIC of the host machine.
 
-* A {{ m.ghfilelink('root/defaults/dhcpd.conf', title='sample') }}
-  configuration is provided in the `/defaults` directory, this
-  gets copied to `/etc/dhcp/dhcpd.conf` if none exist.
+* {{ m.defcfgfile('/etc/dhcp/dhcpd.conf', vname='DHCP_CONF') }}
 
 * Check the [docs][2] or [configuration][3] options for
   customizing your own.

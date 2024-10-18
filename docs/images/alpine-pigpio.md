@@ -6,9 +6,7 @@ has_services:
   - compose
   - nomad
 tags:
-  - compose
   - github
-  - nomad
   - s6
   - service
 ---
@@ -62,10 +60,7 @@ Also,
     * `--device /dev/gpiochip0`
     * `--cap-add SYS_RAWIO`
 
-* Includes a {{ m.ghfilelink('root/etc/s6-overlay/s6-rc.d/p10-pigpio-setup/run', title='placeholder') }}
-  script for further customizations. Override the shell script
-  located at `/etc/s6-overlay/s6-rc.d/p10-pigpio-setup/run`
-  with your custom pre-tasks as needed.
+* {{ m.customscript('p10-pigpio-setup') }}
 
 [1]: https://abyz.me.uk/rpi/pigpio/
 [2]: https://github.com/joan2937/pigpio/

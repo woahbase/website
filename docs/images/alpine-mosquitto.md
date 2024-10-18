@@ -5,8 +5,6 @@ has_services:
   - compose
   - nomad
 tags:
-  - compose
-  - nomad
   - package
   - s6
   - service
@@ -65,10 +63,7 @@ following environment variables.
 
 Also,
 
-* Config file is at `/mosquitto/config/mosquitto.conf`, edit or
-  remount this with your own. A {{ m.ghfilelink('root/defaults/mosquitto.conf', title='sample') }}
-  is provided in the `/defaults/` directory, this gets copied
-  if none exist.
+* {{ m.defcfgfile('/mosquitto/config/mosquitto.conf') }}
 
 * Data stored at `/mosquitto/data`.
 

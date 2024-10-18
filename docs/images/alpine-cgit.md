@@ -7,10 +7,7 @@ has_services:
 has_proxies:
   - nginx
 tags:
-  - compose
-  - nomad
   - package
-  - proxy
   - s6
   - service
 
@@ -99,20 +96,11 @@ Also,
   may be published at `64801` and `64822` by default, so they
   don't clash with other services.
 
-* CGit config file loaded from `/etc/cgitrc` edit or remount this with
-  your own. A {{ m.ghfilelink('root/defaults/cgitrc', title='sample') }}
-  is provided which is auto loaded if there aren't any config
-  file to start with.
+* {{ m.defcfgfile('/etc/cgitrc', fr='CGit') }}
 
-* Lighttpd config file loaded from `/etc/lighttpd/lighttpd.conf` edit or remount this with
-  your own. A {{ m.ghfilelink('root/defaults/lighttpd.conf', title='sample') }}
-  is provided which is auto loaded if there aren't any config
-  file to start with. {{ m.sincev('1.2.3_20240907') }}
+* {{ m.defcfgfile('/etc/lighttpd/lighttpd.conf', fr='Lighttpd') }} {{ m.sincev('1.2.3_20240907') }}
 
-* SSH config file loaded from `/etc/ssh/sshd_config` edit or remount this with
-  your own. A {{ m.ghfilelink('root/defaults/sshd_config', title='sample') }}
-  is provided which is auto loaded if there aren't any config
-  file to start with.
+* {{ m.defcfgfile('/etc/ssh/sshd_config', fr='SSH server') }}
 
 * To persist the same SSH host keys, preserve their contents at `/etc/ssh`.
   These are re-generated if not found.

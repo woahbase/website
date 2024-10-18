@@ -16,10 +16,40 @@ extra:
   mailto: write@woahbase.online
 
   orgname: &orgname woahbase
-  gitorg: &gitorg https://github.com/woahbase
-  dockorg: &dockorg https://hub.docker.com/u/woahbase/
   dockrepo: https://hub.docker.com/r/woahbase/
   twiturl: &twiturl https://x.com/woahbase
+
+  sources:
+    github:
+      name: Github
+      orgurl: &gitorg https://github.com/woahbase
+      repo: https://github.com  # /orgname/os-app
+    # # add your self-hosted git repository below
+    # private:
+    #   # disabled: true
+    #   name: Your Private Git
+    #   orgurl: https://git.service.local/git/woahbase
+    #   repo: ssh://git@git.service.local:64822/~git/repositories  # /orgname/os-app
+
+  distributions:
+    dockerhub:
+      name: Docker Hub
+      # ns: docker.io
+      orgurl: &dockorg https://hub.docker.com/u/woahbase
+      repo: https://hub.docker.com/r  # /orgname/os-app
+    # ghcr:
+    #   # disabled: true
+    #   name: GHCR.io
+    #   ns: ghcr.io
+    #   orgurl: https://github.com/woahbase
+    #   repo: https://github.com  # /orgname/os-app
+    # # add your self-hosted image repository below
+    # private:
+    #   # disabled: true
+    #   name: Your Private Registry
+    #   ns: registry.service.local
+    #   orgurl: https://registry.service.local/ui
+    #   repo: 'https://registry.service.loca/ui/#!/taglist'  # /orgname/os-app
 
   social:
     - icon: fontawesome/brands/github
@@ -36,8 +66,6 @@ extra:
     #   link: https://instagram.com/<username>
 
   # extra vars for macros
-  # coderepo_weburl: 'github.com' # default 'github.com', no ending /
-  # imagerepo_weburl: 'hub.docker.com/r'  # default 'hub.docker.com/r', no ending /
   shieldparams: >-
     color=brightgreen&style=flat-square
   # pgid: "`id -g`"

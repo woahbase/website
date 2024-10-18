@@ -21,11 +21,19 @@ make][102], and [Docker][103] (optionally, with [buildx][106] plugin for
 multi-platform images) setup on the machine. Also, for multi-platform
 annotations, we might require enabling [experimental features][107] of Docker.
 
-Clone the repo with,
-``` sh
-git clone https://github.com/{{ orgname }}/{{ ghrepo | default(page.title) }}
-cd {{ ghrepo | default(page.title) }}
-```
+Now, to get the code,
+
+{% for d in config.extra.sources.values() %}
+{%   if not d.disabled|default(false) %}
+=== "{{ d.name }}"
+    Clone the [repository]({{ d.orgurl ~'/'~ dhrepo | default(page.title) }}) with,
+
+    ``` sh
+    git clone {{ d.repo }}/{{ config.extra.orgname }}/{{ ghrepo | default(page.title) }}
+    cd {{ ghrepo | default(page.title) }}
+    ```
+{%   endif %}
+{% endfor %}
 
 {% if not (('deprecated' in tags) or ('legacy' in tags)) %}{# no help target for legacy/deprecated images #}
 To get a list of all available targets, run

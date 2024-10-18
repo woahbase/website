@@ -4,7 +4,6 @@ svcname: netdata
 has_services:
   - compose
 tags:
-  - compose
   - deprecated
   - glibc
   - service

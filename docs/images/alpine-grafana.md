@@ -7,10 +7,7 @@ has_services:
 has_proxies:
   - nginx
 tags:
-  - compose
   - github
-  - nomad
-  - proxy
   - s6
   - service
 ---
@@ -47,6 +44,10 @@ woahbase/alpine-grafana
 
 --8<-- "multiarch.md"
 
+---
+##### Configuration
+---
+
 We can customize the runtime behaviour of the container with the
 following environment variables.
 
@@ -68,10 +69,7 @@ following environment variables.
 
 Also,
 
-* A {{ m.ghfilelink('root/defaults/defaults.ini', title='sample')
-  }} configuration is provided in the `/defaults` directory, this
-  gets copied to `/var/lib/grafana/conf/defaults.ini` if none
-  exist.
+* {{ m.defcfgfile('/var/lib/grafana/conf/defaults.ini', vname='GF_PATHS_CONFIG') }}
 
 * By default `grafana server` is run with the following arguments,
     ```

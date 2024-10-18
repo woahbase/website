@@ -46,6 +46,10 @@ Versioned accordingly with releases from {{ ghreleaselink(repo_name) }}.
 [{{ title | default(name) }}]({{ name }}.md "Go to {{ name }} docs")
 {%- endmacro %}
 
+{% macro myimagetag(tag, name) -%}
+[:material-tag-text-outline: {{ tag }}](https://hub.docker.com/r/{{ orgname }}/{{ name | default(page.title) }}/tags?name={{ tag }} "Filter Images with Tag")
+{%- endmacro %}
+
 {% macro npmpkg(name) -%}
 [{{ name }}](https://www.npmjs.com/package/{{ name }} "NPM Package")
 {%- endmacro %}
@@ -55,5 +59,25 @@ Versioned accordingly with releases from {{ ghreleaselink(repo_name) }}.
 {%- endmacro %}
 
 {% macro sincev(tag, name) -%}
-(since [:material-tag-text-outline:{{ tag }}](https://hub.docker.com/r/{{ orgname }}/{{ name | default(page.title) }}/tags?name={{ tag }} "Filter Images with Tag"))
+(since {{ myimagetag(tag, name) }})
+{%- endmacro %}
+
+{% macro defcfgfile(dst, src, fr, vname, title="sample", ddir="defaults", plural=false) -%}
+{%- if not src -%}{%- set src = 'root' ~'/'~ ddir ~'/'~ (dst.split("/")|last) -%}{%- endif -%}
+Configuration {{ 'files' if plural else 'file' }} {{ 'for '~fr if
+fr }} {{ 'are' if plural else 'is' }} at `{{ dst }}`{{ ' (the
+filepath preset in the env-var `'~vname~'`)' if vname }},
+edit or remount {{ 'these' if plural else 'this' }} with your own.
+A {{ ghfilelink(src, title=title) }} is provided in `{{ '/'~ddir
+}}`, {{ 'these get' if plural else 'this gets' }} copied when no
+such {{ 'files exist' if plural else 'file exists' }} before {{
+'services are' if plural else 'service is' }} started.
+{%- endmacro %}
+
+{% macro customscript(p, fr, title="shellscript", ddir="etc/s6-overlay/s6-rc.d") -%}
+Includes a placeholder script for {{ 'customizing `'~fr~'`' if fr
+else 'further customizations'}} before starting processes.
+Override the {{ ghfilelink('root' ~'/'~ ddir ~'/'~ p ~'/run', title=title) }}
+located at `{{ '/'~ ddir ~'/'~ p ~'/run' }}` with your custom
+pre-tasks as needed.
 {%- endmacro %}

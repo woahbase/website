@@ -7,10 +7,7 @@ has_services:
 has_proxies:
   - nginx
 tags:
-  - compose
-  - nomad
   - package
-  - proxy
   - s6
   - service
 ---
@@ -47,6 +44,10 @@ woahbase/alpine-registry
 
 --8<-- "multiarch.md"
 
+---
+##### Configuration
+---
+
 We can customize the runtime behaviour of the container with the
 following environment variables.
 
@@ -71,9 +72,7 @@ following environment variables.
 
 Also,
 
-* Config file is at `/data/config.yml`, edit or remount this with
-  your own. A {{ m.ghfilelink('root/defaults/config.yml', title='sample') }}
-  is provided in `/defaults`, this gets copied if none exists.
+* {{ m.defcfgfile('/data/config.yml', fr='docker `registry`', vname='CONF_YML') }}
 
 * Data at `/data/storage`.
 
