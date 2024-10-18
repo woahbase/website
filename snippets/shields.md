@@ -1,6 +1,11 @@
 {% macro genshieldlink(typ, subtyp, repo, label, fpath, fparams, lpath, lparams) -%}
-{%-  set _coderepo_weburl  = (config.extra.sources.values()      |first)['orgurl']| default('https://github.com')       -%}
-{%-  set _imagerepo_weburl = (config.extra.distributions.values()|first)['repo']  | default('https://hub.docker.com/r') -%}
+{%-  if 'private' in tags -%}{#- generate links using private repo/registry urls -#}
+{%-    set coderepo_weburl  = config.extra.sources['private']['orgurl']     | default('https://github.com')       -%}
+{%-    set imagerepo_weburl = config.extra.distributions['private']['repo'] | default('https://hub.docker.com/r') -%}
+{%-  else  -%}
+{%-    set coderepo_weburl  = (config.extra.sources.values()      |first)['orgurl']| default('https://github.com')       -%}
+{%-    set imagerepo_weburl = (config.extra.distributions.values()|first)['repo']  | default('https://hub.docker.com/r') -%}
+{%-  endif -%}
 {%-  set furl = 'https://img.shields.io'
         ~'/'~ typ ~'/'~ subtyp
         ~'/'~ orgname ~'/'~ repo
@@ -10,8 +15,8 @@
         ~ ('&label='~label if label)
         ~ ('&'~fparams if fparams) -%}
 {%-  set iurl = {
-            "github" : _coderepo_weburl,
-            "docker" : _imagerepo_weburl
+            "github" : coderepo_weburl,
+            "docker" : imagerepo_weburl
           }[typ]
         ~'/'~ {
             "github" : repo,
