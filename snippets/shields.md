@@ -3,8 +3,8 @@
 {%-    set coderepo_weburl  = config.extra.sources['private']['orgurl']     | default('https://github.com')       -%}
 {%-    set imagerepo_weburl = config.extra.distributions['private']['repo'] | default('https://hub.docker.com/r') -%}
 {%-  else  -%}
-{%-    set coderepo_weburl  = (config.extra.sources.values()      |first)['orgurl']| default('https://github.com')       -%}
-{%-    set imagerepo_weburl = (config.extra.distributions.values()|first)['repo']  | default('https://hub.docker.com/r') -%}
+{%-    set coderepo_weburl  = (config.extra.sources.values()      |default([])|rejectattr("disabled")|list|first)['orgurl']|default('https://github.com')       -%}
+{%-    set imagerepo_weburl = (config.extra.distributions.values()|default([])|rejectattr("disabled")|list|first)['repo']  |default('https://hub.docker.com/r') -%}
 {%-  endif -%}
 {%-  set furl = 'https://img.shields.io'
         ~'/'~ typ ~'/'~ subtyp

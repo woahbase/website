@@ -23,7 +23,7 @@ annotations, we might require enabling [experimental features][107] of Docker.
 
 Now, to get the code,
 
-{% for d in config.extra.sources.values() %}
+{% for d in config.extra.sources.values()|default([])|rejectattr("disabled")|list %}
 {%   if not d.disabled|default(false) %}
 === "{{ d.name }}"
     Clone the [repository]({{ d.orgurl ~'/'~ dhrepo | default(page.title) }}) with,
