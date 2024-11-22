@@ -238,11 +238,11 @@ nav:
   - Contact: /about/contact
 
 plugins:
-  # - git-authors
-  # - git-revision-date-localized:
-  #     type: timeago
-  #     enable_creation_date: false
-  #     fallback_to_build_date: true
+  - git-authors
+  - git-revision-date-localized:
+      type: timeago
+      enable_creation_date: false
+      fallback_to_build_date: true
   - macros:
       include_dir: snippets
       on_error_fail: !ENV [MACRO_ERROR_FAIL, false]
