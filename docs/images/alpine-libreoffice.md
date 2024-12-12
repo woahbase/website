@@ -4,8 +4,6 @@ svcname: libreoffice
 skip_armhf: 1
 tags:
   - gui
-  - openjdk
-  - package
   - usershell
 ---
 

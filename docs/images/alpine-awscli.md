@@ -2,7 +2,6 @@
 description: MultiArch Alpine Linux + Python3 + AWS-CLI
 svcname: awscli
 tags:
-  - python
   - usershell
 ---
 

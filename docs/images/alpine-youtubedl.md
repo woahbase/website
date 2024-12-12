@@ -3,8 +3,6 @@ description: Container for Alpine Linux + S6 + Python2 + Youtube-DL
 svcname: youtubedl
 tags:
   - deprecated
-  - github
-  - python
   - usershell
 ---
 

@@ -6,8 +6,6 @@ skip_armhf: true
 skip_armv7l: true
 tags:
   - deprecated
-  - github
-  - php
   - service
 ---
 

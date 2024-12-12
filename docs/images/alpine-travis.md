@@ -4,7 +4,6 @@ svcname: travis
 tags:
   - deprecated
   - dev
-  - ruby
   - usershell
 ---
 

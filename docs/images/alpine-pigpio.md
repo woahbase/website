@@ -6,8 +6,6 @@ has_services:
   - compose
   - nomad
 tags:
-  - github
-  - s6
   - service
 ---
 
@@ -18,7 +16,8 @@ This [image][155] containerizes the [PiGPIO][1] daemon to remotely
 control the GPIO pins on a Raspberrpi Pi.
 
 {{ m.srcimage('alpine-s6') }} with the `pigpiod` binary (compiled
-from [joan2937][2]'s project) included in it.
+from [joan2937][2]'s project) included in it. {{
+m.ghreleasestr('joan2937/pigpio') }}
 
 {% include "pull-image.md" %}
 

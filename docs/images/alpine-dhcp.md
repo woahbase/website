@@ -5,8 +5,6 @@ has_services:
   - compose
   - systemd
 tags:
-  - package
-  - s6
   - service
 ---
 

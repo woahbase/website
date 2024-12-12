@@ -5,7 +5,6 @@ skip_x86_64: 1
 tags:
   - legacy
   - dev
-  - python
   - shell
 ---
 

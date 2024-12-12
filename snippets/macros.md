@@ -1,4 +1,9 @@
+{% macro addpagetag(tag) -%}
+{{- (page.meta.tags.append(tag) or page.meta.tags.sort() or "") if not tag in page.meta.tags -}}
+{%- endmacro %}
+
 {% macro alpinepkg(name, branch, repo, arch, star) -%}
+{{- addpagetag('package') -}}
 [{{ name }}](https://pkgs.alpinelinux.org/packages?name=
 {{- name -}}
 {{- '*' if star else '' -}}
@@ -10,6 +15,7 @@
 {% macro srcimage(name) -%}
 Based on
 {% if 'alpine-' in name -%}
+{{- addpagetag(name|replace('alpine-', '')) -}}
 [Alpine Linux][113]
 from the
 [{{ name | replace('alpine-', '') }}]({{ name }}.md "Go to {{ name }} docs")
@@ -39,6 +45,7 @@ image
 {%- endmacro %}
 
 {% macro ghreleasestr(repo_name) -%}
+{{- addpagetag('github') -}}
 Versioned accordingly with releases from {{ ghreleaselink(repo_name) }}.
 {%- endmacro %}
 

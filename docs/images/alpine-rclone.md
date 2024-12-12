@@ -2,8 +2,6 @@
 description: MultiArch Alpine Linux + S6 + RClone
 svcname: rclone
 tags:
-  - github
-  - s6
   - usershell
 ---
 

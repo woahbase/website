@@ -3,11 +3,10 @@ description: MultiArch Alpine Linux + S6 + Webhook Server
 svcname: webhook
 has_services:
   - compose
+  - systemd
 has_proxies:
   - nginx
 tags:
-  - github
-  - s6
   - service
 ---
 

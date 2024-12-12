@@ -3,8 +3,6 @@ description: MultiArch Alpine Linux + S6 + Lua + LuaRocks
 svcname: lua
 tags:
   - dev
-  - package
-  - s6
   - usershell
 
 # pin lua major.minor
@@ -20,7 +18,7 @@ This [image][155] serves as the base image for applications
 / services that require [Lua][1] and [Luarocks][2] to manage
 dependencies.
 
-{{ m.srcimage('alpine-glibc') }} with the {{
+{{ m.srcimage('alpine-s6') }} with the {{
 m.alpinepkg('lua'~luamajmin, star=true) }} and {{
 m.alpinepkg('luarocks'~luamajmin) }} package(s) installed
 in it.

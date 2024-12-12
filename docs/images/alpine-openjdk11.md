@@ -8,9 +8,6 @@ skip_armv7l: true
 wb_extra_args: JVVMAJOR=11
 tags:
   - dev
-  - glibc
-  - openjdk
-  - package
   - usershell
 ---
 

@@ -4,8 +4,6 @@ svcname: rsyslog
 has_services:
   - compose
 tags:
-  - package
-  - s6
   - service
 
 s6_user: rsyslog

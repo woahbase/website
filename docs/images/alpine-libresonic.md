@@ -7,7 +7,6 @@ skip_armv7l: 1
 # deprecator_linktitle: Navidrome
 tags:
   - deprecated
-  - openjdk
   - service
 ---
 

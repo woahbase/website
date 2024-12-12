@@ -6,7 +6,6 @@ skip_armv7l: 1
 tags:
   - deprecated
   - dev
-  - glibc
   - usershell
 ---
 

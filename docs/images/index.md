@@ -22,19 +22,19 @@ navigation or search,
     | {{ anchify('service') }}    | Images that provide a service.
     | {{ anchify('shell') }}      | Images that provide a CLI interface. (Default as `root`)
     | {{ anchify('systemd') }}    | These images include a sample systemd service file.
-    | {{ anchify('usershell') }}  | Images that provide a userspace CLI interface. (Default as `alpine`)
+    | {{ anchify('usershell') }}  | Images that provide a [user-scoped](alpine-s6.md#usershell) CLI interface. (Default user as `alpine`)
 
     Other than the above, the images are also tagged as per their
     source-image, e.g.
 
-    | Source-Image | Description
-    | :---         | :---
-    | `glibc`      | Applications that require GNU LibC instead of musl.
-    | `nginx`      | Images that build from NGINX.
-    | `nodejs`     | Images that build from NodeJS.
-    | `openjdk`    | Applications that require a java runtime, and build from OpenJDK.
-    | `php`        | Applications that require NGINX/PHP.
-    | `python`     | Applications that build from Python 2 or 3.
-    | `s6`         | Images that build from s6.
+    | Source-Image                | Description
+    | :---                        | :---
+    | {{ anchify('glibc') }}      | Applications that require GNU LibC instead of musl.
+    | {{ anchify('nginx') }}      | Images that build from NGINX.
+    | {{ anchify('nodejs') }}     | Images that build from NodeJS.
+    | {{ anchify('openjdk8') }}   | Applications that require a java runtime, and build from OpenJDK8.
+    | {{ anchify('php') }}        | Applications that require NGINX/PHP.
+    | {{ anchify('python3') }}    | Applications that build from Python 3.
+    | {{ anchify('s6') }}         | Images that build from s6.
 
 [TAGS]

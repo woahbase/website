@@ -5,7 +5,6 @@ has_services:
   - compose
 tags:
   - deprecated
-  - glibc
   - service
 ---
 

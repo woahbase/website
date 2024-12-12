@@ -3,8 +3,6 @@ description: Container for Alpine Linux + S6 + PulseAudio + Bluez
 svcname: pulseaudio
 tags:
   - legacy
-  - package
-  - s6
   - service
 ---
 

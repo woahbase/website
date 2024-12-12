@@ -6,9 +6,6 @@ dockerfile: Dockerfile.8
 wb_extra_args: JVVMAJOR=8
 tags:
   - dev
-  - glibc
-  - openjdk
-  - package
   - usershell
 ---
 

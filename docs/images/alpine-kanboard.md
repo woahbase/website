@@ -7,8 +7,6 @@ has_services:
 has_proxies:
   - nginx
 tags:
-  - github
-  - php
   - service
 ---
 

@@ -3,7 +3,6 @@ description: Container for Alpine Linux + S6 + GNU LibC + OpenJDK8 + Tomcat
 svcname: tomcat
 tags:
   - legacy
-  - openjdk
   - usershell
 ---
 

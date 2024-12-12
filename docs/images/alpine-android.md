@@ -6,7 +6,6 @@ skip_armv7l: true
 skip_aarch64: true
 tags:
   - deprecated
-  - openjdk
   - usershell
 ---
 

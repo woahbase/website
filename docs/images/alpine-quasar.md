@@ -8,7 +8,6 @@ tags:
   - legacy
   - dev
   - usershell
-  - vue
 ---
 
 {% import "macros.md" as m with context %}

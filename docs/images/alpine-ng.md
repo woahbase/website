@@ -7,7 +7,6 @@ skip_armv7l: 1
 tags:
   - legacy
   - dev
-  - nodejs
   - usershell
 ---
 

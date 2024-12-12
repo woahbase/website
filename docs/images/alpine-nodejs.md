@@ -3,8 +3,6 @@ description: MultiArch Alpine Linux + S6 + NodeJS + NPM + Yarn
 svcname: nodejs
 tags:
   - dev
-  - package
-  - s6
   - usershell
 ---
 

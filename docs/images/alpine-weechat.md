@@ -2,8 +2,6 @@
 description: MultiArch Alpine Linux + S6 + Python3 + WeeChat(IRC++)
 svcname: weechat
 tags:
-  - package
-  - python
   - usershell
 ---
 

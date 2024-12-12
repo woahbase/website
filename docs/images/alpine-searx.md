@@ -8,8 +8,6 @@ has_proxies:
   - nginx
 tags:
   - legacy
-  - github
-  - s6
   - service
 ---
 

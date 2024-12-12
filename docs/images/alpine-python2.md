@@ -4,8 +4,6 @@ svcname: python2
 tags:
   - deprecated
   - dev
-  - package
-  - s6
   - shell
 ---
 

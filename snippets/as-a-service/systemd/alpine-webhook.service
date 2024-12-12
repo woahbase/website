@@ -1,0 +1,51 @@
+[Unit]
+Description=SystemD Service for Webhook Server (dockerized)
+Documentation=https://github.com/adnanh/webhook/
+
+Requires=multi-user.target network-online.target docker.service
+After=network-online.target docker.service
+
+# config dir must exist
+ConditionPathIsDirectory=/services/webhook
+# and should contain at least one hooks.json
+ConditionDirectoryNotEmpty=/services/webhook
+
+[Service]
+ExecStart=/usr/bin/docker run \
+    --rm \
+    --pull=never \
+    -v /etc/localtime:/etc/localtime:ro \
+    --hostname webhook \
+    --name docker_webhook \
+    -e PUID=1000 \
+    -e PGID=100 \
+    -e WEBHOOK_ARGS="-hotreload -ip 0.0.0.0 -nopanic -port 9000 -urlprefix hooks -verbose" \
+    -v /services/webhook:/etc/webhook \
+    -c 512 \
+    --memory 256mb \
+    woahbase/alpine-webhook
+
+# ExecStop=/usr/bin/docker stop -t 2 docker_webhook
+# ExecStopPost=/usr/bin/docker rm -f docker_webhook
+
+Restart=always
+RestartSec=60
+SyslogIdentifier=webhook
+Type=simple
+# User=user
+
+StandardOutput=journal
+StandardError=journal
+
+# Security.
+CapabilityBoundingSet=
+NoNewPrivileges=true
+PrivateDevices=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadOnlyPaths=/etc/webhook
+ReadWritePaths=/tmp
+
+[Install]
+WantedBy=multi-user.target

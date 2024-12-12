@@ -2,8 +2,6 @@
 description: MultiArch Alpine Linux + S6 Init System.
 svcname: s6
 tags:
-  - base
-  - github
   - shell
 ---
 

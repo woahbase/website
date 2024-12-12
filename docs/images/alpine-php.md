@@ -3,8 +3,6 @@ description: MultiArch Alpine Linux + S6 + NGINX + PHP-fpm.
 svcname: php
 tags:
   - dev
-  - package
-  - nginx
   - service
 
 # pin php version

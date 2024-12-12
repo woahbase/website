@@ -5,7 +5,6 @@ skip_aarch64: true
 skip_armv7l: true
 tags:
   - legacy
-  - openjdk
   - service
 ---
 

@@ -2,8 +2,6 @@
 description: MultiArch Alpine Linux + S6 + Hugo + Pygments
 svcname: hugo
 tags:
-  - github
-  - s6
   - usershell
 ---
 

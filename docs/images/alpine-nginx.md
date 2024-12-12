@@ -6,8 +6,6 @@ has_services:
   - nomad
 tags:
   - dev
-  - package
-  - s6
   - service
 ---
 

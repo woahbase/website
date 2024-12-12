@@ -7,9 +7,6 @@ wb_extra_args: JVVMAJOR=7
 tags:
   - deprecated
   - dev
-  - glibc
-  - openjdk
-  - package
   - usershell
 ---
 

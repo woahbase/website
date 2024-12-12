@@ -2,8 +2,6 @@
 description: MultiArch Alpine Linux + Supervisor Init System.
 svcname: supervisor
 tags:
-  - base
-  - package
   - service
 ---
 

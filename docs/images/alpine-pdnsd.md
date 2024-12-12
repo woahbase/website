@@ -8,7 +8,6 @@ skip_aarch64: true
 skip_armv7l: true
 tags:
   - deprecated
-  - s6
   - service
 ---
 

@@ -4,8 +4,6 @@ svcname: rsyncd
 has_services:
   - compose
 tags:
-  - package
-  - s6
   - service
 ---
 
