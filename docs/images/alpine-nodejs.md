@@ -22,9 +22,9 @@ installed in it.
 
     NPM seems to hang in current node (20.x.x) versions, affects
     `armv7l` and `armhf` builds, sticking to 18.x.x version from
-    Alpine Linux 3.18 repositories until
-    [this issue](https://github.com/nodejs/docker-node/issues/1946)
-    is resolved.
+    Alpine Linux 3.18 repositories until [this issue](https://github.com/nodejs/docker-node/issues/1946)
+    (relevant [QEMU issue](https://gitlab.com/qemu-project/qemu/-/issues/1729)) is
+    resolved.
 
 {% include "pull-image.md" %}
 

@@ -71,7 +71,7 @@ extra:
   # pgid: "`id -g`"
   # puid: "`id -u`"
   # alpine stable version for generating package urls
-  alpine_branch: v3.20
+  alpine_branch: v3.21
 
 extra_css:
   - assets/css/fonts.css
@@ -147,6 +147,8 @@ nav:
       - alpine-nodejs: images/alpine-nodejs.md
       - alpine-openjdk8: images/alpine-openjdk8.md
       - alpine-openjdk11: images/alpine-openjdk11.md
+      - alpine-openjdk17: images/alpine-openjdk17.md
+      - alpine-openjdk21: images/alpine-openjdk21.md
       - alpine-php: images/alpine-php.md
       - alpine-python3: images/alpine-python3.md
       - alpine-ruby: images/alpine-ruby.md
@@ -211,6 +213,7 @@ nav:
       # - dev/runtime
       # --------
       - alpine-openjdk7: images/alpine-openjdk7.md
+      - alpine-openjdk14: images/alpine-openjdk14.md
       - alpine-python2: images/alpine-python2.md
 
       # - services

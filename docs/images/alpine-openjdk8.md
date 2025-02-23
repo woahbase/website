@@ -1,5 +1,5 @@
 ---
-description: Container for Alpine Linux + S6 + GNU LibC + OpenJDK 8
+description: MultiArch Alpine Linux + S6 + GNU LibC + OpenJDK 8
 svcname: openjdk8
 ghrepo: alpine-openjdk
 dockerfile: Dockerfile.8

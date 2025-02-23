@@ -1,11 +1,11 @@
 ---
-description: MultiArch Alpine Linux + S6 + GNU LibC + OpenJDK 11
-svcname: openjdk11
+description: MultiArch Alpine Linux + S6 + GNU LibC + OpenJDK 21
+svcname: openjdk21
 ghrepo: alpine-openjdk
-dockerfile: Dockerfile.11
+dockerfile: Dockerfile.21
 skip_armhf: true
 skip_armv7l: true
-wb_extra_args: JVVMAJOR=11
+wb_extra_args: JVVMAJOR=21
 tags:
   - dev
   - usershell
@@ -16,10 +16,10 @@ tags:
 
 
 This [image][155] serves as the base image for applications
-/ services that require an [OpenJDK11][1] compiler/runtime.
+/ services that require an [OpenJDK21][1] compiler/runtime.
 
 {{ m.srcimage('alpine-glibc') }} with the {{
-m.alpinepkg('openjdk11', star=true) }} packages installed in it.
+m.alpinepkg('openjdk21', star=true) }} packages installed in it.
 
 {% include "pull-image.md" %}
 
@@ -27,16 +27,16 @@ m.alpinepkg('openjdk11', star=true) }} packages installed in it.
 Run
 ---
 
-We can call `java` or `bash` directly on the container, or run
-`bash` in the container to get a [user-scoped][114] shell,
+We can call `java` commands directly on the container, or run
+`bash` in the container to get a shell,
 
 === "command"
     ``` sh
-    docker run --rm -it --name docker_openjdk11 woahbase/alpine-openjdk11 java -version
+    docker run --rm -it --name docker_openjdk21 woahbase/alpine-openjdk21 java -version
     ```
 === "shell"
     ``` sh
-    docker run --rm -it --name docker_openjdk11 woahbase/alpine-openjdk11 /bin/bash
+    docker run --rm -it --name docker_openjdk21 woahbase/alpine-openjdk21 /bin/bash
     ```
 
 --8<-- "multiarch.md"
@@ -50,12 +50,12 @@ following environment variables.
 
 | ENV Vars  | Default                      | Description
 | :---      | :---                         | :---
-| JAVA_HOME | /usr/lib/jvm/java-11-openjdk | (Preset) Specifies which Java runtime environment (JRE) to use.
+| JAVA_HOME | /usr/lib/jvm/java-21-openjdk | (Preset) Specifies which Java runtime environment (JRE) to use.
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"
 
-[1]: https://openjdk.org/projects/jdk/11/
+[1]: https://openjdk.org/projects/jdk/21/
 [2]: https://github.com/openjdk/jdk/
 
 {% include "all-include.md" %}
