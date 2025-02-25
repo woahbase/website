@@ -164,7 +164,7 @@ job "nginx" {
       #     {{- end }}
       #   EOP
       #   change_mode   = "script"
-      #   change_script { command = "/config/nginx/validate-n-reload.sh" }
+      #   change_script { command = "/usr/local/bin/nginx-reconf.sh" }
       #   perms         = "444"
       #   error_on_missing_key = true
       # }
@@ -177,7 +177,7 @@ job "nginx" {
       #     {{- end }}
       #   EOP
       #   change_mode   = "script"
-      #   change_script { command = "/config/nginx/validate-n-reload.sh" }
+      #   change_script { command = "/usr/local/bin/nginx-reconf.sh" }
       #   perms         = "444"
       #   error_on_missing_key = true
       # }
@@ -190,7 +190,7 @@ job "nginx" {
       #     {{- end }}
       #   EOP
       #   change_mode   = "script"
-      #   change_script { command = "/config/nginx/validate-n-reload.sh" }
+      #   change_script { command = "/usr/local/bin/nginx-reconf.sh" }
       #   perms         = "444"
       #   error_on_missing_key = true
       # }
@@ -201,7 +201,7 @@ job "nginx" {
       #     {{ key "nomad/${var.dc}/nginx/nginx.conf" }}
       #   EOC
       #   change_mode   = "script"
-      #   change_script { command = "/config/nginx/validate-n-reload.sh" }
+      #   change_script { command = "/usr/local/bin/nginx-reconf.sh" }
       #   perms         = "644"
       #   error_on_missing_key = true
       # }
@@ -212,7 +212,7 @@ job "nginx" {
       #     {{ key "nomad/${var.dc}/nginx/http" }}
       #   EOC
       #   change_mode   = "script"
-      #   change_script { command = "/config/nginx/validate-n-reload.sh" }
+      #   change_script { command = "/usr/local/bin/nginx-reconf.sh" }
       #   perms         = "644"
       #   error_on_missing_key = true
       # }
@@ -223,7 +223,7 @@ job "nginx" {
       #     {{ key "nomad/${var.dc}/nginx/https" }}
       #   EOC
       #   change_mode   = "script"
-      #   change_script { command = "/config/nginx/validate-n-reload.sh" }
+      #   change_script { command = "/usr/local/bin/nginx-reconf.sh" }
       #   perms         = "644"
       #   error_on_missing_key = true
       # }
@@ -249,23 +249,8 @@ job "nginx" {
       #     # add your own services here
       #   EOT
       #   change_mode   = "script"
-      #   change_script { command = "/config/nginx/validate-n-reload.sh" }
+      #   change_script { command = "/usr/local/bin/nginx-reconf.sh" }
       #   perms         = "644"
-      # }
-
-      # template {
-      #   destination = "local/nginx/validate-n-reload.sh"
-      #   data        = <<-EOS
-      #     #!/bin/bash
-      #     ###
-      #     ## reload nginx only if config valid
-      #     ###
-      #     nginx -c /config/nginx/nginx.conf -t \
-      #     && \
-      #     nginx -c /config/nginx/nginx.conf -s reload \
-      #   EOS
-      #   change_mode = "noop"
-      #   perms       = "755"
       # }
     }
   }

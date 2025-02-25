@@ -66,12 +66,10 @@ Also,
 * Includes two default site configuration (for {{
   m.ghfilelink('root/defaults/default_http', title='http:80') }}
   and {{ m.ghfilelink('root/defaults/default_https',
-  title='http:443') }}) in `/defaults` directory which are used
+  title='https:443') }}) in `/defaults` directory which are used
   as a starter configuration if none exist, these are no way
   intended to be used in production, you are better off rolling
   your own.
-
-* {{ m.customscript('p12-nginx-customize') }}
 
 * Default configs set up a https and auth protected web location
   at `/secure`.
@@ -81,12 +79,19 @@ Also,
   may need to add `--net=host` and/or add entries in your firewall
   to allow traffic.
 
+* {{ m.customscript('p12-nginx-customize') }}
+
+* Includes a {{ m.ghfilelink('root/usr/local/bin/nginx-reconf.sh',
+  title='nginx-reconf.sh') }} script to check and reload `nginx`
+  configurations (only when valid) without restarting the
+  container. {{ m.sincev('1.26.2_20250225') }}
+
 ###### SSL Subject
 
 Default configs generate a 4096-bit self-signed certificate. By
 default the value of `SSLSUBJECT` is
 ```
-/C=US/ST=NY/L=EXAMPLE/O=EXAMPLE/OU=WOAHBase/CN=*/emailAddress=everybodycanseethis@mailinator.com
+/C=US/ST=NY/L=EXAMPLE/O=EXAMPLE/OU=EXAMPLE/CN=*/emailAddress=me@example.com
 ```
 
 ??? info "Did you know?"
