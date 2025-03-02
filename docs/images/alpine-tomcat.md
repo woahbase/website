@@ -13,7 +13,7 @@ This [image][155] serves as the server for applications / services
 that require a [Tomcat8][1] server **with tomcat-native
 extentions**, running under [OpenJDK-8][2].
 
-Current [stable version][3] is `8.5.43`.
+Current [stable version][3] is `8.5.50`.
 
 {{ m.srcimage('alpine-openjdk8') }} with the [tomcat][3] package
 overlayed on it.

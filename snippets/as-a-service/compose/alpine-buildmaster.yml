@@ -1,0 +1,87 @@
+---
+services:
+  buildmaster:
+    container_name: buildmaster
+    # depends_on:
+    #   mysql:
+    #     condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: '2.00'
+          memory: 1024M
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 120s
+    environment:
+      BUILDBOT_PROJECTNAME: ${BUILDMASTER_PROJECTNAME:-buildbot}
+      # BUILDBOT_MASTERCFG: /custom/master.cfg
+      # BUILDBOT_USE_CUSTOM_TACFILE: 1
+      # BUILDBOT_SKIP_SETUP: 1
+
+      # # configurations from remote source
+      # BUILDBOT_CONFIG_URL=https://github.com/buildbot/buildbot/releases/download/v3.11.9/buildbot-3.11.9.tar.gz
+      # BUILDBOT_CONFIG_CFGFILE=buildbot/scripts/sample.cfg
+      # # or
+      # BUILDBOT_CONFIG_URL=https://github.com/buildbot/buildbot.git
+      # BUILDBOT_CONFIG_CFGFILE=master/docker-example/master.cfg
+      # BUILDBOT_CONFIG_TACFILE=master/contrib/docker/master/buildbot.tac
+      # # or
+      # BUILDBOT_CONFIG_URL=https://raw.githubusercontent.com/buildbot/buildbot/refs/heads/master/master/docker-example/master.cfg
+
+      BUILDBOT_SKIP_CHECKCONFIG: ${BUILDMASTER_SKIP_CHECKCONFIG:-false}
+      BUILDBOT_UPGRADE_MASTER: ${BUILDMASTER_UPGRADE_MASTER:-false}
+      BUILDBOT_CLEANUP_DB: ${BUILDMASTER_CLEANUP_DB:-false}
+      PUID: ${PUID}
+      PGID: ${PGID}
+      TZ: ${TZ}
+    # healthcheck:
+    #   interval: 2m
+    #   retries: 5
+    #   start_period: 5m
+    #   test:
+    #     - CMD-SHELL
+    #     - >
+    #       wget --quiet --tries=1 --no-check-certificate --spider http://localhost:8010/ || exit 1
+    #   timeout: 10s
+    hostname: buildmaster
+    image: woahbase/alpine-buildmaster:${BUILDMASTER_TAG:-latest}
+    network_mode: bridge
+    ports:
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: ${BUILDMASTER_WEB_PORT:-8010}
+        target: 8010
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: ${BUILDMASTER_PB_PORT:-9989}
+        target: 9989
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: ${BUILDMASTER_CLI_PORT:-9990}
+        target: 9990
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: ${BUILDMASTER_METRICS_PORT:-9991}
+        target: 9991
+    volumes:
+      - type: bind
+        source: ${BUILDMASTER_DIR:?err}
+        target: /home/alpine/buildbot
+        bind:
+          create_host_path: false
+      # # pass your own master.cfg
+      # # gets copied to proper place before service start
+      # - type: bind
+      #   source: ${BUILDMASTER_DIR:?err}/custom_config/master.cfg
+      #   target: /custom/master.cfg
+      #   bind:
+      #     create_host_path: false
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind:
+          create_host_path: false
