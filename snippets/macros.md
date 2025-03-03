@@ -81,10 +81,10 @@ such {{ 'files exist' if plural else 'file exists' }} before {{
 'services are' if plural else 'service is' }} started.
 {%- endmacro %}
 
-{% macro customscript(p, fr, title="shellscript", ddir="etc/s6-overlay/s6-rc.d") -%}
+{% macro customscript(p, fr, ghrepo, title="shellscript", ddir="etc/s6-overlay/s6-rc.d") -%}
 Includes a placeholder script for {{ 'customizing `'~fr~'`' if fr
 else 'further customizations'}} before starting processes.
-Override the {{ ghfilelink('root' ~'/'~ ddir ~'/'~ p ~'/run', title=title) }}
+Override the {{ ghfilelink('root' ~'/'~ ddir ~'/'~ p ~'/run', ghrepo=ghrepo, title=title) }}
 located at `{{ '/'~ ddir ~'/'~ p ~'/run' }}` with your custom
 pre-tasks as needed.
 {%- endmacro %}
