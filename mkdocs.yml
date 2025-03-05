@@ -180,6 +180,7 @@ nav:
       - alpine-syncthing: images/alpine-syncthing.md
       - alpine-tftp: images/alpine-tftp.md
       - alpine-transmission: images/alpine-transmission.md
+      - alpine-ubooquity: images/alpine-ubooquity.md
       - alpine-webhook: images/alpine-webhook.md
 
       # - usershell
@@ -189,6 +190,7 @@ nav:
       - alpine-gimp: images/alpine-gimp.md
       - alpine-hugo: images/alpine-hugo.md
       - alpine-libreoffice: images/alpine-libreoffice.md
+      - alpine-maven: images/alpine-maven.md
       - alpine-rclone: images/alpine-rclone.md
       - alpine-weechat: images/alpine-weechat.md
 
