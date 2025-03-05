@@ -8,7 +8,6 @@ has_services:
 has_proxies:
   - nginx
 tags:
-  - python
   - service
 wb_extra_args: ROLE=master
 ---

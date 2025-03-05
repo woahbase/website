@@ -2,8 +2,9 @@
 description: MultiArch Alpine Linux + S6 + Python3 + Buildbot (Worker)
 svcname: buildworker
 ghrepo: alpine-buildbot
+has_services:
+  - compose
 tags:
-  - python
   - service
 wb_extra_args: ROLE=worker
 ---
@@ -89,7 +90,7 @@ Also,
 * The env variable `BUILDBOT_ROLE` determines if you are running
   a master or worker. This also determines what image you'll be
   running when used with the `makefile`. This is baked into the
-  image so does not need to be changes unless you know what you're
+  image so does not need to be changed unless you know what you're
   doing.
 
 * Setup tasks are only run when the `buildbot.tac` file does not

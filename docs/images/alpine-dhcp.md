@@ -15,8 +15,14 @@ This [image][155] containerizes the [ISC DHCP][1] to quickly
 deploy a DHCP server to serve/manage IP configurations to the
 devices in the network.
 
-{{ m.srcimage('alpine-s6') }} with the {{ m.alpinepkg('dhcp') }}
+{{ m.srcimage('alpine-s6') }} with the {{ m.alpinepkg('dhcp', branch='v3.20') }}
 package installed in it.
+
+???+ warning "DHCP deprecated since v3.21"
+
+    `dhcp` packages are unavailable in Alpine Linux Repositories since
+    `v3.21`. This image uses the final pre-built packages (`4.4.3-p1`) from
+    the `v3.20` repository.
 
 {% include "pull-image.md" %}
 

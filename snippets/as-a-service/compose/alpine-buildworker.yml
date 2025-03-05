@@ -1,0 +1,64 @@
+---
+services:
+  buildworker:
+    container_name: buildworker
+    # depends_on:
+    #   buildmaster:
+    #     condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: '2.00'
+          memory: 1024M
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 120s
+    environment:
+      # BUILDBOT_PROJECTNAME: ${BUILDWORKER_PROJECTNAME:-buildbot}
+      # BUILDBOT_USE_CUSTOM_TACFILE: 1
+      # BUILDBOT_SKIP_SETUP: 1
+      # BUILDBOT_SKIP_PERMFIX: 1
+
+      BUILDBOT_MASTERADDRESS: your.buildmaster.local
+      # BUILDBOT_MASTERPORT: 9989
+      # BUILDBOT_PROTOCOL: pb
+      BUILDBOT_WORKERNAME: buildbot-worker
+      BUILDBOT_WORKERPASS: insecurebydefault
+      # BUILDBOT_WORKER_KEEPALIVE: 180
+      # BUILDBOT_WORKER_MAXDELAY: 180
+      # BUILDBOT_WORKER_MAXRETRIES: 5
+      # BUILDBOT_WORKER_USETLS: 0
+      # BUILDBOT_WORKERINFO_ADMIN: docker
+      # BUILDBOT_WORKERINFO_HOST: buildworker
+      # BUILDBOT_WORKERINFO_ACCESSURI: ssh://buildworker
+
+      PUID: ${PUID}
+      PGID: ${PGID}
+      # TZ: ${TZ}
+    # healthcheck:
+    #   interval: 2m
+    #   retries: 5
+    #   start_period: 5m
+    #   test:
+    #     - CMD-SHELL
+    #     - >
+    #       wget --quiet --tries=1 --no-check-certificate --spider http://${BUILDBOT_MASTERADDRESS}:8010/ || exit 1
+    #   timeout: 10s
+    hostname: buildworker
+    image: woahbase/alpine-buildworker:${BUILDWORKER_TAG:-latest}
+    network_mode: bridge
+    ports: []
+    volumes:
+      - type: bind
+        source: ${BUILDWORKER_DIR:?err}
+        target: /home/alpine/buildbot
+        bind:
+          create_host_path: false
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind:
+          create_host_path: false

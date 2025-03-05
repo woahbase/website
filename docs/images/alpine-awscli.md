@@ -9,7 +9,7 @@ tags:
 {% include "shields.md" %}
 
 This [image][155] serves as the base container for applications
-/ services that require [aws-cli][4](v1) from the terminal or use
+/ services that require [aws-cli][4](**v1.x.x**) from the terminal or use
 [boto3][7] programmatically using [python][5], includes {{
 m.pypipkg('pip') }} and a few tools like [eb-cli][8], for
 managing Elastic Beanstalk, and [cfn-lint][9], [cfn-flip][10],
@@ -17,6 +17,17 @@ and [sceptre][11] for cloudformation.
 
 {{ m.srcimage('alpine-python3') }} with the {{ m.pypipkg('awscli')
 }} and {{ m.pypipkg('awsebcli') }} packages installed in it.
+
+???+ warning "ElasticBeanstalk-CLI in VirtualENV"
+
+    Since April'24, `awsebcli` has been pulling in
+    a few dependencies (e.g. Botocore) that are conflicting with
+    AWS CLI. Installing them together is causing PIP to be
+    `looking at multiple versions of awsebcli to determine which
+    version is compatible with other requirements. This could take
+    a while.` and then eventually fail. Currently the fix is to
+    put `awsebcli` inside a virtualenv and add a wrapper script in
+    `/usr/local/bin`. (See {{ m.ghfilelink('Dockerfile') }})
 
 {% include "pull-image.md" %}
 

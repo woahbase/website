@@ -20,6 +20,7 @@ services:
       # BUILDBOT_MASTERCFG: /custom/master.cfg
       # BUILDBOT_USE_CUSTOM_TACFILE: 1
       # BUILDBOT_SKIP_SETUP: 1
+      # BUILDBOT_SKIP_PERMFIX: 1
 
       # # configurations from remote source
       # BUILDBOT_CONFIG_URL=https://github.com/buildbot/buildbot/releases/download/v3.11.9/buildbot-3.11.9.tar.gz
@@ -34,9 +35,10 @@ services:
       BUILDBOT_SKIP_CHECKCONFIG: ${BUILDMASTER_SKIP_CHECKCONFIG:-false}
       BUILDBOT_UPGRADE_MASTER: ${BUILDMASTER_UPGRADE_MASTER:-false}
       BUILDBOT_CLEANUP_DB: ${BUILDMASTER_CLEANUP_DB:-false}
+
       PUID: ${PUID}
       PGID: ${PGID}
-      TZ: ${TZ}
+      # TZ: ${TZ}
     # healthcheck:
     #   interval: 2m
     #   retries: 5

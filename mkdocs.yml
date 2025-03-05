@@ -49,7 +49,7 @@ extra:
       name: Your Private Registry
       ns: registry.service.local
       orgurl: https://registry.service.local/ui
-      repo: 'https://registry.service.loca/ui/#!/taglist'  # /orgname/os-app
+      repo: 'https://registry.service.local/ui/#!/taglist'  # /orgname/os-app
 
   social:
     - icon: fontawesome/brands/github
