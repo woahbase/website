@@ -185,6 +185,7 @@ nav:
 
       # - usershell
       # --------
+      - alpine-ansible: images/alpine-ansible.md
       - alpine-awscli: images/alpine-awscli.md
       - alpine-dood: images/alpine-dood.md
       - alpine-gimp: images/alpine-gimp.md
@@ -192,6 +193,7 @@ nav:
       - alpine-libreoffice: images/alpine-libreoffice.md
       - alpine-maven: images/alpine-maven.md
       - alpine-rclone: images/alpine-rclone.md
+      - alpine-rpigpio: images/alpine-rpigpio.md
       - alpine-weechat: images/alpine-weechat.md
 
       # - Legacy: []
@@ -208,7 +210,6 @@ nav:
       - alpine-ionic: images/alpine-ionic.md
       - alpine-ng: images/alpine-ng.md
       - alpine-quasar: images/alpine-quasar.md
-      - alpine-rpigpio: images/alpine-rpigpio.md
       - alpine-tomcat: images/alpine-tomcat.md
       - alpine-vue: images/alpine-vue.md
 

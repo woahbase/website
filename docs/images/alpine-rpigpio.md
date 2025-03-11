@@ -1,9 +1,8 @@
 ---
-description: Container for Alpine Linux + S6 + Python3 + RPi.GPIO
+description: MultiArch Alpine Linux + S6 + Python3 + RPi.GPIO
 svcname: rpigpio
 skip_x86_64: 1
 tags:
-  - legacy
   - dev
   - shell
 ---
@@ -19,7 +18,7 @@ dependencies.
 
 {{ m.srcimage('alpine-python3') }} with the packages {{
 m.pypipkg('pyserial') }} and {{ m.pypipkg('RPi.GPIO') }}
-and {{ m.pypipkg('wiringpi') }} installed in it.
+and {{ m.alpinepkg('wiringpi') }} installed in it.
 
 {% include "pull-image.md" %}
 
@@ -27,17 +26,29 @@ and {{ m.pypipkg('wiringpi') }} installed in it.
 Run
 ---
 
-Run `bash` in the container to get a shell.
+We can call `gpio` commands directly on the container, or run `bash`
+in the container to get a [user-scoped][114] shell,
 
-``` sh
-docker run --rm -it \
-  --name docker_rpigpio \
-  --device /dev/gpiomem \
-  --cap-add SYS_RAWIO \
-  --device /dev/ttyAMA0:/dev/ttyAMA0 \
-woahbase/alpine-rpigpio \
-  /bin/bash
-```
+=== "command"
+    ``` sh
+    docker run --rm -it \
+      --name docker_rpigpio \
+      --device /dev/gpiomem \
+      --cap-add SYS_RAWIO \
+      --device /dev/ttyAMA0:/dev/ttyAMA0 \
+    woahbase/alpine-rpigpio \
+      gpio -h
+    ```
+=== "shell"
+    ``` sh
+    docker run --rm -it \
+      --name docker_rpigpio \
+      --device /dev/gpiomem \
+      --cap-add SYS_RAWIO \
+      --device /dev/ttyAMA0:/dev/ttyAMA0 \
+    woahbase/alpine-rpigpio \
+      /bin/bash
+    ```
 
 --8<-- "multiarch.md"
 
@@ -45,8 +56,22 @@ woahbase/alpine-rpigpio \
 ##### Configuration
 ---
 
-Although `--privileged` is not usually required (unless your
-usecase demands it) for this image, you will still need to pass
+We can customize the runtime behaviour of the container with the
+following environment variables.
+
+| ENV Vars                 | Default      | Description
+| :---                     | :---         | :---
+| GID_DIALOUT              | unset        | Group-id of `dialout` group on the host. If set, updates group-id of the group `dialout` inside container, and adds `S6_USER` to the group.
+| GID_TTY                  | unset        | Group-id of `tty` group on the host. If set, updates group-id of the group `tty` inside container, and adds `S6_USER` to the group.
+{% include "envvars/alpine-s6.md" %}
+
+--8<-- "check-id.md"
+
+Also,
+
+Flag `--privileged` is not usually required (unless your
+usecase demands for it) for this image, you will still need to
+pass
 
 * `--device /dev/gpiochip0` (previously `/dev/gpiomem`), and
   `--cap-add SYS_RAWIO` to access the gpio.
