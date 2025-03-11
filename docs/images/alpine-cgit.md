@@ -65,13 +65,18 @@ following environment variables.
 | CGIT_SUBPATH          | /git                             | Alternate virtual-root for CGit repositories, default is `/cgit`.
 | CGIT_REPODIR          | /home/{{ s6_user }}/repositories | Default path to repositories. {{ m.sincev('1.2.3_20240907') }}
 | CGIT_ARCHIVEDIR       | $CGIT_REPODIR/.archived          | Default path to archived repos (used in `backup`/`restore` scripts). {{ m.sincev('1.2.3_20240907') }}
+| CGIT_PERMFIX_REPOS    | unset                            | If set to `true`, will fix repositories permissions to `$S6_USER` (default `git:git`). {{ m.sincev('1.2.3_20240907') }}
+| CGIT_GIT_CONIG        | /home/{{ s6_user }}/.gitconfig   | Customizable configurations for git. (used in scripts) {{ m.sincev('1.2.3_20250311') }}
 | CGIT_HOOKSDIR         | /defaults/hooks                  | Custom hooks to add into repositories created via the `bareinit` or `mirror` script. {{ m.sincev('1.2.3_20240907') }}
+| CGIT_HOOKS            | unset                            | Comma-separated list of hooks to add into repositories created via the `bareinit` or `mirror` script. e.g. `"post-receive,post-update"`. (Previously all hooks in `CGIT_HOOKSDIR` were copied) If any hook listed here is not found, the default hook from the `(repository-name)/hooks` directory is copied instead.{{ m.sincev('1.2.3_20250311') }}
+| CGIT_REPOS_MAXDEPTH   | 3                                | Maximum depth to search for repositores, (used in scripts). {{ m.sincev('1.2.3_20250311') }}
 | CGIT_SYNC_RUNFILE     | /tmp/sync_is_running             | File indicator that a sync job is already running. (used in `sync` script) {{ m.sincev('1.2.3_20240907') }}
 | CGIT_SYNC_LIST        | /tmp/sync_list_of_repos          | List of repositories to sync, generated at start of sync job. (used in `sync` script) {{ m.sincev('1.2.3_20240907') }}
 | CGIT_SYNC_IGNORELIST  | $CGIT_REPODIR/ignored.txt        | List of repositories to ignore while sync. (format: (category)/(repo-name).git) (used in `sync` script) {{ m.sincev('1.2.3_20240907') }}
 | CGIT_SYNC_ERRORLIST   | $CGIT_REPODIR/errors.txt         | Catches errors encountered while sync. Flushed on each run. (used in `sync` script) {{ m.sincev('1.2.3_20240907') }}
 | CGIT_SYNC_JOBS        | 1                                | Number of threads used by `git` to sync a repository. {{ m.sincev('1.2.3_20240907') }}
-| CGIT_PERMFIX_REPOS    | unset                            | If set to `true`, will fix repositories permissions to `$S6_USER` (default `git:git`). {{ m.sincev('1.2.3_20240907') }}
+| CGIT_SYNC_FSCK        | false                            | If set to `true`, the `sync` script runs a `git fsck` **before** fetch for all repositories. Alternately, create a file named `SYNC_NEED_FSCK` in a repository to enable just for that repository. {{ m.sincev('1.2.3_20250311') }}
+| CGIT_SYNC_REPACK      | false                            | If set to `true`, the `sync` script runs a `git repack` **after** fetch for all repositories. Alternately, create a file named `SYNC_NEED_REPACK` in a repository to enable just for that repository. {{ m.sincev('1.2.3_20250311') }}
 | LIGHTTPD_CONFDIR      | /etc/lighttpd                    | Path to `lighttpd` configuration directory. {{ m.sincev('1.2.3_20240907') }}
 | LIGHTTPD_LOGFILE      | /var/log/lighttpd/lighttpd.log   | Logfile for `lighttpd`, by default logs both access and error logs. {{ m.sincev('1.2.3_20240907') }}
 | LIGHTTPD_USER         | lighttpd                         | Non-root user that `lighttpd` drops privileges to. {{ m.sincev('1.2.3_20240907') }}

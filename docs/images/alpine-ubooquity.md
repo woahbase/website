@@ -69,27 +69,29 @@ following environment variables.
 
 Also,
 
-* Configuration are read from `/config/preferences.json`
-  (previously `preferences.xml`), edit or remount this file to
-  customize settings. A default is provided in `/defaults`, this
-  gets copied if none exists.
+* {{ m.defcfgfile('/config/preferences.json', fr='`ubooquity`') }}
 
-* Default serves books from `/books`, comics from `/comics` and
-  files from `/files`. They should be readable by the process
-  user.
+* By default, expects books to be at path `/books`, comics at
+  `/comics` and files from `/files`. They should be readable by
+  the process user.
 
-* Default exposes the `libraryport` at `2202` and if enabled,
+* By default, exposes the `libraryport` at `2202` and if enabled,
   `adminport` at `2203`.
 
-* On first-run, visit the administrator url (e.g. to
+* On first-run, visit the administrator url (e.g.
   [http://your.service.local:2203/admin](http://your.service.local:2203/admin)
-  when no revers proxy prefix is set, else `/(prefix)/admin`, no
+  when no reverse proxy prefix is set, else `/(prefix)/admin`, no
   ending `/`) and set your administrator password. Afterwards, you
-  can disable `adminport` from the web-ui-configuration or modify
-  `preferences.json` accordingly.
+  can disable `adminport` either from the web-ui-configuration or
+  modify `preferences.json` accordingly.
+
+* Refer to the [Installation Guide][4] or [User Manual][5] for
+  more information.
 
 [1]: http://vaemendis.net/ubooquity/
 [2]: https://openjdk.org/projects/jdk8/
 [3]: https://vaemendis.net/ubooquity/static2/download
+[4]: https://vaemendis.github.io/ubooquity-doc/pages/installation-guide.html
+[5]: https://vaemendis.github.io/ubooquity-doc/pages/manual.html
 
 {% include "all-include.md" %}

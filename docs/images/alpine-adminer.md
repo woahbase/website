@@ -65,5 +65,6 @@ Also,
 [3]: https://www.adminer.org/
 [4]: https://github.com/vrana/adminer/releases/latest
 [5]: https://github.com/adminerevo/adminerevo/releases/latest
+[6]: https://github.com/TimWolla/docker-adminer
 
 {% include "all-include.md" %}
