@@ -1,9 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + GNU LibC + Chromium Browser
 svcname: chromium
-skip_aarch64: 1
 skip_armhf: 1
-skip_armv7l: 1
 has_services:
   - systemd
 tags:
