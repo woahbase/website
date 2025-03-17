@@ -187,6 +187,7 @@ nav:
       # --------
       - alpine-ansible: images/alpine-ansible.md
       - alpine-awscli: images/alpine-awscli.md
+      - alpine-chromium: images/alpine-chromium.md
       - alpine-dood: images/alpine-dood.md
       - alpine-gimp: images/alpine-gimp.md
       - alpine-hugo: images/alpine-hugo.md

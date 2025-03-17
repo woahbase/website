@@ -1,0 +1,60 @@
+[Unit]
+Description=SystemD (User) Service for Chromium Browser (dockerized)
+After=graphical.target network-online.target docker.service
+
+# expects user UID/GID as 1000/100
+# expects GID of group 'video' as 44
+# expects remote PulseAudio service (via anonymous access) at pulse.service.local
+
+ConditionPathExists=/var/run/user/1000/bus
+# data/downloads dirs must exist
+ConditionPathIsDirectory=/data/docker_data/chromium
+# optionally enable to only run when profile already exists
+# ConditionDirectoryNotEmpty=/data/docker_data/chromium
+ConditionPathIsDirectory=/data/downloads
+
+[Service]
+Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/var/run/user/1000/bus
+# ensure display is set to correct monitor
+Environment=DISPLAY=:1
+# this is for GNOME, will vary for other DEs
+Environment=XAUTHORITY=/var/run/user/1000/gdm/Xauthority
+
+ExecStartPre=/usr/bin/xhost +local:docker
+ExecStart=/usr/bin/docker run \
+    -i --rm \
+    --pull=never \
+    --cap-add=SYS_ADMIN \
+    --device /dev/dri:/dev/dri \
+    --net=host \
+    --workdir=/home/alpine \
+    -e DISPLAY=unix${DISPLAY} \
+    -v /dev/shm:/dev/shm \
+    -v /etc/hosts:/etc/hosts:ro \
+    -v /etc/localtime:/etc/localtime:ro \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v /usr/share/fonts:/usr/share/fonts:ro \
+    --hostname chromium \
+    --name docker_chromium \
+    -e GID_VIDEO=44 \
+    -e PGID=100 \
+    -e PUID=1000 \
+    -v /data/docker_data/chromium:/home/alpine \
+    -v /data/downloads:/home/alpine/Downloads \
+    -c 512 \
+    --memory 4096mb \
+    -e DBUS_SESSION_BUS_ADDRESS=unix:path=/var/run/user/1000/bus \
+    -v /var/run/user/1000/bus:/var/run/user/1000/bus \
+    -e PULSE_SERVER=tcp:pulse.service.local:4713 \
+    woahbase/alpine-chromium \
+    chromium-browser
+
+# ExecStop=/usr/bin/docker stop -t 2 docker_chromium
+# ExecStopPost=/usr/bin/docker rm -f docker_chromium
+
+TimeoutSec=10
+SyslogIdentifier=chromium
+WorkingDirectory=/data/docker_data/chromium
+
+[Install]
+WantedBy=default.target
