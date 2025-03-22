@@ -44,11 +44,11 @@ services:
     ports:
       - protocol: tcp
         host_ip: 0.0.0.0
-        published: '${MYSQL_PORT:3306}'
+        published: '${MYSQL_PORT:-3306}'
         target: 3306
       # - protocol: tcp
       #   host_ip: 0.0.0.0
-      #   published: '${MYSQL_SSL_PORT:3366}'
+      #   published: '${MYSQL_SSL_PORT:-3366}'
       #   target: 3366
     volumes:
       - type: bind
@@ -56,6 +56,11 @@ services:
         target: /var/lib/mysql
         bind:
           create_host_path: true
+      # - type: bind
+      #   source: ${MYSQL_DIR:?err}/backups
+      #   target: /var/lib/mysql_backups
+      #   bind:
+      #     create_host_path: true
       # - type: bind
       #   source: ${MYSQL_DIR:?err}/configs/my.cnf
       #   target: /etc/my.cnf

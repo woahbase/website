@@ -1,6 +1,6 @@
 ---
-description: MultiArch Alpine Linux + S6 + GNU LibC + Chromium Browser
-svcname: chromium
+description: MultiArch Alpine Linux + S6 + GNU LibC + Firefox Browser
+svcname: firefox
 skip_armhf: 1
 has_services:
   - systemd
@@ -12,13 +12,20 @@ tags:
 {% import "macros.md" as m with context %}
 {% include "shields.md" %}
 
-This [image][155] containerizes the [Chromium][1] browser.
+This [image][155] containerizes the [Firefox][1] browser.
 
 {{ m.srcimage('alpine-glibc') }} with the {{
-m.alpinepkg('chromium') }} and {{
-m.alpinepkg('chromium-chromedriver') }} packages installed in it.
+m.alpinepkg('firefox') }} package and [GeckoDriver][3] binaries
+(from preferably {{ m.ghreleaselink('mozilla/geckodriver') }} or
+{{ m.ghreleaselink('jamesmortensen/geckodriver-arm-binaries') }})
+installed in it.
 
 {% include "pull-image.md" %}
+
+    **ESR** Tags:
+
+    * **x86_64_esr** The extended support release version (retagged as `latest_esr`, **no updates**)
+    * **x86_64_esr_52** Firefox 52 (retagged as `latest_esr_52`, **no updates**)
 
 ---
 Run
@@ -30,8 +37,7 @@ Run the browser with,
 
 ``` sh
 docker run --rm -it \
-  --cap-add=SYS_ADMIN \
-  --name docker_chromium \
+  --name docker_firefox \
   --workdir /home/alpine \
   -e DISPLAY=unix:${DISPLAY:-0} \
   -e PULSE_SERVER=tcp:localhost:4713 \
@@ -40,14 +46,14 @@ docker run --rm -it \
   -v /tmp/.X11-unix:/tmp/.X11-unix \
   -v /usr/share/fonts:/usr/share/fonts:ro \
   -v /var/run/dbus:/var/run/dbus \
-woahbase/alpine-chromium \
-  chromium-browser --no-sandbox
+woahbase/alpine-firefox \
+  firefox
 ```
 
 --8<-- "multiarch.md"
 
 ---
-##### Configuration
+#### Configuration
 ---
 
 We can customize the runtime behaviour of the container with the
@@ -68,14 +74,12 @@ Also,
   own X, with `/tmp/.X11-unix/` mounted and `$DISPLAY` set inside
   the container.
 
-* By default, runs with sandboxing disabled using the
-  `--cap-add=SYS_ADMIN` and `--no-sandbox` flags. Optionally add
-  `--net=host` if needed.
+* Optionally may require `--cap-add=SYS_ADMIN` and `--net=host`.
 
 * To preserve data mount the `/home/alpine` dir in your local. By
   default mounts `$PWD/data`.
 
-* {{ m.customscript('p11-chromium-customize') }}
+* {{ m.customscript('p11-firefox-customize') }}
 
 * By default directs audio to the pulseaudio server whether mounted
   locally from the host system with,
@@ -86,28 +90,23 @@ Also,
   -v /run/user/1000/pulse:/run/user/1000/pulse \
   ```
   or a local/remote pulseaudio server (requires [anonymous network
-  access][4] enabled),
+  access][2] enabled),
   ```
   -e PULSE_SERVER=tcp:localhost:4713
   ```
   to use `/dev/snd` (or alsa directly), need to customize
   `/home/alpine/.asoundrc`.
 
-* You can get JessFrazelle's seccomp `chrome.json` file from [here][2].
-  Need to pass the flag `--security-opt seccomp=/path/to/chrome.json`
-  to use it.
+* Checkout the [docs][5] to get started with [GeckoDriver][3].
+  (Check the [support][4] page for testing dependencies or
+  capabilities configuration)
 
-* Check [here][3] for a reference of most of the
-  command-line-switches that can be used to tune browser
-  behaviour.
-
-* Checkout the [docs][6] to get started with [ChromeDriver][5].
-
-[1]: https://www.chromium.org/
-[2]: https://github.com/jessfraz/dotfiles/blob/master/etc/docker/seccomp/chrome.json
-[3]: https://peter.sh/experiments/chromium-command-line-switches/
-[4]: https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/Network/
-[5]: https://developer.chrome.com/docs/chromedriver
-[6]: https://developer.chrome.com/docs/chromedriver/get-started
+[1]: https://www.mozilla.org/en-US/firefox/
+[2]: https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/Network/
+[3]: https://firefox-source-docs.mozilla.org/testing/geckodriver/index.html
+[4]: https://firefox-source-docs.mozilla.org/testing/geckodriver/Support.html
+[5]: https://firefox-source-docs.mozilla.org/testing/geckodriver/Usage.html
+[6]: https://github.com/mozilla/geckodriver
+[7]: https://github.com/jamesmortensen/geckodriver-arm-binaries
 
 {% include "all-include.md" %}

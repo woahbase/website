@@ -1,0 +1,59 @@
+[Unit]
+Description=SystemD (User) Service for Firefox Browser (dockerized)
+After=graphical.target network-online.target docker.service
+
+# expects user UID/GID as 1000/100
+# expects GID of group 'video' as 44
+# expects remote PulseAudio service (via anonymous access) at pulse.service.local
+
+ConditionPathExists=/var/run/user/1000/bus
+# data/downloads dirs must exist
+ConditionPathIsDirectory=/data/docker_data/firefox
+# optionally enable to only run when profile already exists
+# ConditionDirectoryNotEmpty=/data/docker_data/firefox
+ConditionPathIsDirectory=/data/downloads
+
+[Service]
+Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/var/run/user/1000/bus
+# ensure display is set to correct monitor
+Environment=DISPLAY=:1
+# this is for GNOME, will vary for other DEs
+Environment=XAUTHORITY=/var/run/user/1000/gdm/Xauthority
+
+ExecStartPre=/usr/bin/xhost +local:docker
+ExecStart=/usr/bin/docker run \
+    -i --rm \
+    --pull=never \
+    --device /dev/dri:/dev/dri \
+    --net=host \
+    --workdir=/home/alpine \
+    -e DISPLAY=unix${DISPLAY} \
+    -v /dev/shm:/dev/shm \
+    -v /etc/hosts:/etc/hosts:ro \
+    -v /etc/localtime:/etc/localtime:ro \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v /usr/share/fonts:/usr/share/fonts:ro \
+    --hostname firefox \
+    --name docker_firefox \
+    -e GID_VIDEO=44 \
+    -e PGID=100 \
+    -e PUID=1000 \
+    -v /data/docker_data/firefox:/home/alpine \
+    -v /data/downloads:/home/alpine/Downloads \
+    -c 512 \
+    --memory 4096mb \
+    -e DBUS_SESSION_BUS_ADDRESS=unix:path=/var/run/user/1000/bus \
+    -v /var/run/user/1000/bus:/var/run/user/1000/bus \
+    -e PULSE_SERVER=tcp:pulse.service.local:4713 \
+    woahbase/alpine-firefox \
+    firefox
+
+# ExecStop=/usr/bin/docker stop -t 2 docker_firefox
+# ExecStopPost=/usr/bin/docker rm -f docker_firefox
+
+TimeoutSec=10
+SyslogIdentifier=firefox
+WorkingDirectory=/data/docker_data/firefox
+
+[Install]
+WantedBy=default.target

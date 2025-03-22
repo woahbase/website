@@ -93,7 +93,7 @@ Also,
 
 * Initialization and bootstrapping tasks are **only** run if the
   default `mysql` table does not exist, i.e. on the **first run**.
-  Once the database is initialized, the environment vars have not
+  Once the database is initialized, the environment vars have no
   effect.
 
 ---

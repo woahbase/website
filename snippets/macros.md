@@ -49,6 +49,15 @@ image
 Versioned accordingly with releases from {{ ghreleaselink(repo_name) }}.
 {%- endmacro %}
 
+{% macro gltagslink(repo_name, title, search) -%}
+[:material-gitlab:/{{ title | default(repo_name) }}](https://gitlab.com/{{ repo_name }}/-/tags{{ '?search='~search if search else "" }} "Go to Gitlab Tags")
+{%- endmacro %}
+
+{% macro gltagstr(repo_name, title, search) -%}
+{{- addpagetag('gitlab') -}}
+Versioned accordingly with tags from {{ gltagslink(repo_name, title, search) }}.
+{%- endmacro %}
+
 {% macro myimage(name, title) -%}
 [{{ title | default(name) }}]({{ name }}.md "Go to {{ name }} docs")
 {%- endmacro %}
