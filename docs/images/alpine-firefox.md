@@ -108,5 +108,6 @@ Also,
 [5]: https://firefox-source-docs.mozilla.org/testing/geckodriver/Usage.html
 [6]: https://github.com/mozilla/geckodriver
 [7]: https://github.com/jamesmortensen/geckodriver-arm-binaries
+[8]: https://github.com/jlesage/docker-firefox/tree/master
 
 {% include "all-include.md" %}

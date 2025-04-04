@@ -58,28 +58,41 @@ woahbase/alpine-mysql
 We can customize the runtime behaviour of the container with the
 following environment variables.
 
-| ENV Vars                  | Default                        | Description
-| :---                      | :---                           | :---
-| MYSQL_SKIP_MYCNFD         | unset                          | Set to `true` to skip copying default snippets to `/etc/my.cnf.d`.
-| MYSQL_SKIP_INITIALIZE     | unset                          | Set to `true` to skip all database initialization/bootstrap tasks. Useful when you only want the service to run.
-| MYSQL_HOST                | 127.0.0.1                      | Default host needed to whitelist user access. (part of bootstrap tasks).
-| MYSQL_ROOT_PWD            | insecurebydefault              | Default root password. (part of bootstrap tasks).
-| MYSQL_SKIP_ROOT_USER      | unset                          | If set to `true`, default root user left as-is, i.e only usable via localhost/socket. (part of bootstrap tasks).
-| MYSQL_USER                | {{ s6_user }}                  | Default user to create upon bootstrap.
-| MYSQL_USER_PWD            | insecurebydefault              | Default user password. (part of bootstrap tasks).
-| MYSQL_USER_GRANTS         | ALL                            | Default user grants. (part of bootstrap tasks).
-| MYSQL_SKIP_USER           | unset                          | If set to `true`, default non-root user creation is skipped. (part of bootstrap tasks).
-| MYSQL_SOCKET_USER_GRANTS  | USAGE                          | Default socket user grants. (part of bootstrap tasks).
-| MYSQL_SKIP_SOCKET_USER    | unset                          | If set to `true`, socket user `{{ s6_user }}` creation is skipped. (part of bootstrap tasks).
-| MYSQL_DATABASE            | test                           | Default database to create when bootstrapping, after initialization.
-| MYSQL_SKIP_CREATE_DB      | unset                          | Skip default database creation when bootstrapping.
-| MYSQL_SKIP_BOOTSTRAP      | unset                          | Set to `true` to skip default database bootstrapping (but not initialization) tasks.
-| MYSQL_BOOTSTRAP_FILE      | tempfile                       | Default bootstrapping file to execute on first run, can be replaced with your own.
-| MYSQL_KEEP_BOOTSTRAP_FILE | unset                          | Bootstrap file is **deleted after execution** as it contains secret information, set this to `true` if the file is required to persist.
-| MYSQL_EXECUTABLE          | /usr/bin/mysqld                | Binary to execute.
-| MYSQL_ARGS                | --user={{ s6_user }} --console | Customizable arguments passed to `mysqld` service.
-| MYSQL_INIT_DB             | /etc/my.initdb.d               | Default database initialization directory {{ m.sincev('10.11.8') }} used by `/scripts/run.sh`.
-| MYSQL_BACKUPDIR           | {{s6_userhome}}_backups        | Default database backup directory. {{ m.sincev('10.11.8') }}, previously `/var/lib/mysql/backups` used by `/scripts/run.sh`.
+| ENV Vars                      | Default                        | Description
+| :---                          | :---                           | :---
+| MYSQL_HOME                    | /var/lib/mysql                 | (Preset) Default database storage directory {{ m.sincev('11.4.5') }}.
+| MYSQL_INITDIR                 | /initdb.d                      | Default database initialization directory {{ m.sincev('11.4.5') }} (used by `/scripts/run.sh`). Previously named `MYSQL_INIT_DB` at `/etc/my.initdb.d` {{ m.sincev('10.11.8') }}
+| MYSQL_BACKUPDIR               | {{s6_userhome}}_backups        | Default database backup directory. {{ m.sincev('10.11.8') }}, previously `/var/lib/mysql/backups` (used by `/scripts/run.sh`).
+| MYSQL_SKIP_MYCNFD             | unset                          | Set to `true` to skip copying default snippets to `/etc/my.cnf.d`.
+| MYSQL_SKIP_INITIALIZE         | unset                          | Set to `true` to skip all database initialization/bootstrap tasks. Useful when you only want the service to run.
+| MYSQL_HOST                    | 127.0.0.1                      | Default host needed to whitelist user access. (part of bootstrap tasks).
+| MYSQL_ROOT_PWD                | unset                          | Default root password **required** for database initialization. (part of bootstrap tasks).
+| MYSQL_SKIP_ROOT_USER          | unset                          | If set to `true`, default root user left as-is, i.e only usable via localhost/socket. (part of bootstrap tasks).
+| MYSQL_USER                    | myadmin                        | Default user to create upon bootstrap.
+| MYSQL_USER_PWD                | unset                          | Default user password **required** for database initialization. (part of bootstrap tasks).
+| MYSQL_USER_GRANTS             | ALL                            | Default user grants. (part of bootstrap tasks).
+| MYSQL_SKIP_USER               | unset                          | If set to `true`, default non-root user creation is skipped. (part of bootstrap tasks).
+| MYSQL_HEALTHCHECK_USER        | myhcuser                       | Default healthcheck user to create upon bootstrap. {{ m.sincev('11.4.5') }}
+| MYSQL_HEALTHCHECK_USER_PWD    | unset                          | Default healthcheck user password. (part of bootstrap tasks). {{ m.sincev('11.4.5') }}
+| MYSQL_HEALTHCHECK_USER_GRANTS | USAGE                          | Default healthcheck user grants. (part of bootstrap tasks).{{ m.sincev('11.4.5') }}
+| MYSQL_SKIP_HEALTHCHECK_USER   | unset                          | If set to `true`, default healthcheck user creation is skipped. (part of bootstrap tasks). {{ m.sincev('11.4.5') }}
+| MYSQL_REPLICA_MASTER          | unset                          | Default replica master to connect to. Used to determine if database role is master or slave. For slave, master connection details are updated instead of creating replica user. {{ m.sincev('11.4.5') }}
+| MYSQL_REPLICA_PORT            | 3306                           | Default replica master port to connect to. {{ m.sincev('11.4.5') }}
+| MYSQL_REPLICA_USER            | myreplica                      | Default replica user to create upon bootstrap. {{ m.sincev('11.4.5') }}
+| MYSQL_REPLICA_USER_PWD        | unset                          | Default replica user password. (part of bootstrap tasks). {{ m.sincev('11.4.5') }}
+| MYSQL_SKIP_REPLICA_USER       | unset                          | If set to `true`, default replica user creation is skipped. (part of bootstrap tasks). {{ m.sincev('11.4.5') }}
+| MYSQL_SOCKET_USER_GRANTS      | USAGE                          | Default socket user grants. (part of bootstrap tasks).
+| MYSQL_SKIP_SOCKET_USER        | unset                          | If set to `true`, socket user `{{ s6_user }}` creation is skipped. (part of bootstrap tasks).
+| MYSQL_DATABASE                | test                           | Default database to create when bootstrapping, after initialization.
+| MYSQL_SKIP_CREATE_DB          | unset                          | Skip default database creation when bootstrapping.
+| MYSQL_SKIP_BOOTSTRAP          | unset                          | Set to `true` to skip default database bootstrapping (but not initialization) tasks.
+| MYSQL_INITDB_SKIP_TZINFO      | unset                          | Set to `true` to skip adding `tzinfo`-specific SQL statements to database bootstrap script. {{ m.sincev('11.4.5') }}
+| MYSQL_BOOTSTRAP_FILE          | /tmp/filename                  | Default bootstrapping file to execute on first run, can be replaced with your own.
+| MYSQL_KEEP_BOOTSTRAP_FILE     | unset                          | By default, the bootstrap file is **deleted after execution** as it contains secret information, set this to `true` if the file is required to persist.
+| MYSQL_UPGRADE_SYSTEM          | unset                          | If set, will backup the system database and run `upgrade-db` task from `run.sh` after. (Not needed for fresh installs). {{ m.sincev('11.4.5') }}
+| MYSQL_EXECUTABLE              | /usr/bin/maridbd               | Binary to execute. Previously used `/usr/bin/mysqld` {{ m.sincev('11.4.5') }}.
+| MYSQLD_ARGS                   | --console                      | Customizable arguments passed to `mariadbd` service. Previously named `MYSQL_ARGS` {{ m.sincev('11.4.5') }}.
+| MYSQL_SOCKET_PATH             | /run/mysqld/mysqld.sock        | Default socket path. (part of bootstrap tasks). {{ m.sincev('11.4.5') }}
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"
@@ -104,20 +117,21 @@ A {{ m.ghfilelink('root/scripts/run.sh', title='shellscript') }}
 to run a few common tasks is available into the image,
 
 * If you already have customized scripts or `sql` (or `sql.gz`)
-  files to initialize your database, mount them in `{{ s6_userhome
-  }}/initdb.d`, and execute them via the `/scripts/run.sh`.
+  files to initialize your database, mount them in `/initdb.d`,
+  and execute them via the `/scripts/run.sh`. (Loaded
+  automatically as part of bootstrap tasks.{{ m.sincev('11.4.5') }})
   ```
-  docker exec -u {{ s6_user }} -it docker_mysql /scripts/run.sh initdb
-  ```
-
-* [Backup][2] a **single** database to `{{ s6_userhome }}_backups` with
-  ```
-  docker exec -u {{ s6_user }} -it docker_mysql /scripts/run.sh backup <db-name>
+  docker exec -u {{ s6_user }} -it docker_mysql /scripts/run.sh initdb <additional args>
   ```
 
-* Restore a **single** database from `{{ s6_userhome }}_backups` with
+* [Backup][3] a **single** database to `{{ s6_userhome }}_backups` with
   ```
-  docker exec -u {{ s6_user }} -it docker_mysql /scripts/run.sh restore <db-name>
+  docker exec -u {{ s6_user }} -it docker_mysql /scripts/run.sh backup <db-name> <additional args>
+  ```
+
+* [Restore][4] a **single** database from `{{ s6_userhome }}_backups` with
+  ```
+  docker exec -u {{ s6_user }} -it docker_mysql /scripts/run.sh restore <db-name> <additional args>
   ```
 
 * Optionally run a healthcheck query (if authentication or is
@@ -130,5 +144,7 @@ to run a few common tasks is available into the image,
 
 [1]: https://www.mysql.com/
 [2]: https://dev.mysql.com/doc/refman/8.4/en/mysqldump.html
+[3]: https://mariadb.com/kb/en/mariadb-dump/
+[4]: https://mariadb.com/kb/en/mariadb-command-line-client/
 
 {% include "all-include.md" %}

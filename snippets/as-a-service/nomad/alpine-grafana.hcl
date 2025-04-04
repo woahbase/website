@@ -112,10 +112,18 @@ job "grafana" {
       }
 
       env {
-        GF_LOG_MODE="console" # log to console only
+        GF_LOG_MODE           = "console" # log to console only
         # for logging to file
-        # GF_PATHS_LOGS=/var/log/grafana/
-        # GF_LOG_MODE="console file"
+        # GF_PATHS_LOGS         = "/var/lib/grafana/logs"
+        # GF_LOG_MODE           = "console file"
+
+        # GF_PATHS_CONFIG       = "/var/lib/grafana/conf/defaults.ini"
+        # GF_PATHS_DATA         = "/var/lib/grafana/data"
+        # GF_PATHS_LOGS         = "/var/lib/grafana/logs"
+        # GF_PATHS_PLUGINS      = "/var/lib/grafana/plugins"
+        # GF_PATHS_PROVISIONING = "/var/lib/grafana/provisioning"
+        # GF_INSTALL_PLUGINS  =
+        # GF_UPDATE_PLUGINS   = 1
 
         PGID = var.pgid
         PUID = var.puid

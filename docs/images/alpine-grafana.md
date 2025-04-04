@@ -53,7 +53,7 @@ following environment variables.
 | :---                  | :---                               | :---
 | GF_PATHS_CONFIG       | /var/lib/grafana/conf/defaults.ini | Path to configuration file.
 | GF_PATHS_DATA         | /var/lib/grafana/data              | Path to data directory.
-| GF_PATHS_LOGS         | /var/lib/grafana/log               | Path where logs are stored.
+| GF_PATHS_LOGS         | /var/lib/grafana/logs              | Path where logs are stored.
 | GF_PATHS_PLUGINS      | /var/lib/grafana/plugins           | Path to plugins directory.
 | GF_PATHS_PROVISIONING | /var/lib/grafana/provisioning      | Path where provisioning configuration should exist.
 | GF_INSTALL_PLUGINS    | empty string                       | Comma separated list of plugins (or urls) to install before running server.
