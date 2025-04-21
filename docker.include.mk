@@ -5,7 +5,7 @@ ifndef REGISTRY # ensure REGISTRY in env is prioritised over default
 endif
 
 CNTNAME		:= docker_mkdocsmaterial
-IMAGETAG	:= $(REGISTRY)/woahbase/alpine-mkdocsmaterial:9.5.45
+IMAGETAG	:= $(REGISTRY)/woahbase/alpine-mkdocsmaterial:9.6.11
 PUID			:= $(shell id -u)
 PGID			:= $(shell id -g)
 
