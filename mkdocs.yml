@@ -245,7 +245,7 @@ nav:
       - About: about/index.md
       - Contact: about/contact.md
 
-  - Contact: /about/contact
+  - Contact: about/contact.md
 
 plugins:
   - git-authors
@@ -356,6 +356,12 @@ theme:
         name: Switch to light mode
 
 use_directory_urls: true
+
+validation:
+  links:
+    absolute_links: relative_to_docs
+    anchors: warn
+    unrecognized_links: warn
 
 watch:
   - snippets
