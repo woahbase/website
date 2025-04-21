@@ -17,18 +17,18 @@ Get the Image
 ???+ info "Image Tags"
     The image is tagged respectively for the following architectures,
 
-{% if not skip_aarch64 %}
-      &nbsp;&nbsp;{{ m.myimagetag('aarch64') }}
-{% endif %}
-{% if not skip_armhf %}
-      &nbsp;&nbsp;{{ m.myimagetag('armhf') }}
-{% endif %}
-{% if not skip_armv7l %}
-      &nbsp;&nbsp;{{ m.myimagetag('armv7l') }}
-{% endif %}
-{% if not skip_x86_64 %}
-      &nbsp;&nbsp;{{ m.myimagetag('x86_64') }}
-{% endif %}
+    <div class="grid cards pull-image-arches" markdown>
+
+    {% if not skip_aarch64 -%}- {{ m.myimagetag('aarch64', icon='octicons-container-24') }}
+    {% endif -%}
+    {%- if not skip_armhf  -%}- {{ m.myimagetag('armhf'  , icon='octicons-container-24') }}
+    {% endif -%}
+    {%- if not skip_armv7l -%}- {{ m.myimagetag('armv7l' , icon='octicons-container-24') }}
+    {% endif -%}
+    {%- if not skip_x86_64 -%}- {{ m.myimagetag('x86_64' , icon='octicons-container-24') }}
+    {% endif %}
+
+    </div>
 
 {% if (('deprecated' in tags) or ('legacy' in tags)) %}{# no annotate or version tags for old images #}
     **latest** tag is retagged from `x86_64`, so pulling without any

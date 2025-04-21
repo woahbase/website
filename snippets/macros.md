@@ -62,8 +62,13 @@ Versioned accordingly with tags from {{ gltagslink(repo_name, title, search) }}.
 [{{ title | default(name) }}]({{ name }}.md "Go to {{ name }} docs")
 {%- endmacro %}
 
-{% macro myimagetag(tag, name) -%}
-[:material-tag-text-outline: {{ tag }}](https://hub.docker.com/r/{{ orgname }}/{{ name | default(page.title) }}/tags?name={{ tag }} "Filter Images with Tag")
+{% macro myimagetag(tag, name, icon, tagname) -%}
+[:{{ icon|default('material-tag-text-outline')
+}}: {{ tagname|default(tag) }}]({{
+'https://hub.docker.com/r/' ~ orgname
+~ '/' ~ name|default(page.title)
+~ '/' ~ 'tags?name=' ~ tag
+}} "Filter images with tag: {{ tagname|default(tag) }}")
 {%- endmacro %}
 
 {% macro npmpkg(name) -%}
