@@ -109,5 +109,6 @@ Also,
 [4]: https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/Network/
 [5]: https://developer.chrome.com/docs/chromedriver
 [6]: https://developer.chrome.com/docs/chromedriver/get-started
+[7]: https://github.com/GoogleChrome/chrome-launcher
 
 {% include "all-include.md" %}

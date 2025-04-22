@@ -90,7 +90,8 @@ Also,
 * NFSv4 configuration listens to ports `111` and `2049`. But for
   older versions there are multiple ports that need to be opened,
   this may be required if PXE-booting hosts e.g. Raspberry Pi
-  devices.
+  devices. (For running a `tftp` server, checkout our
+  {{ m.myimage('alpine-tftp') }} image)
 
 * By default runs as `NFSMODE = "SERVER"`, to use it as a client
   change its value to `CLIENT`. However, this way is not really

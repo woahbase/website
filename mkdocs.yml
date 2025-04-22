@@ -168,6 +168,7 @@ nav:
       - alpine-mosquitto: images/alpine-mosquitto.md
       - alpine-mpd: images/alpine-mpd.md
       - alpine-mysql: images/alpine-mysql.md
+      - alpine-navidrome: images/alpine-navidrome.md
       - alpine-nfs: images/alpine-nfs.md
       - alpine-nginx: images/alpine-nginx.md
       - alpine-pigpio: images/alpine-pigpio.md
