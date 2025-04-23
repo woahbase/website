@@ -246,7 +246,7 @@ nav:
       - About: about/index.md
       - Contact: about/contact.md
 
-  - Contact: about/contact.md
+  - Contact: /about/contact
 
 plugins:
   - git-authors
