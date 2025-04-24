@@ -1,0 +1,86 @@
+---
+services:
+  postgresql:
+    container_name: postgresql
+    deploy:
+      resources:
+        limits:
+          cpus: '2.00'
+          memory: 4096M
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 3
+        window: 120s
+    environment:
+      # # only needed for initialization
+      # POSTGRES_PASSWORD: insecurebydefault
+      # POSTGRES_DB: test
+
+      # PGSQL_SKIP_INITIALIZE: true
+
+      # PGSQL_CUSTOM_CONF: /defaults/postgresql.conf
+      # PGSQL_CUSTOM_HBA: /defaults/pg_hba.conf
+      # PGSQL_CUSTOM_IDENT: /defaults/pg_ident.conf
+
+      PGID: ${PGID:-1000}
+      PUID: ${PUID:-100}
+      # TZ: ${TZ}
+    # healthcheck:
+    #   interval: 2m
+    #   retries: 5
+    #   start_period: 5m
+    #   test:
+    #     - CMD-SHELL
+    #     - >
+    #       /scripts/run.sh healthcheck
+    #   timeout: 10s
+    hostname: postgresql
+    image: woahbase/alpine-postgresql:${PGSQL_TAG:-latest}
+    network_mode: bridge
+    ports:
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: '${PGSQL_PORT:-5432}'
+        target: 5432
+      # - protocol: tcp
+      #   host_ip: 0.0.0.0
+      #   published: '${PGSQL_SSL_PORT:-5433}'
+      #   target: 5433
+    volumes:
+      - type: bind
+        source: ${PGSQL_DIR:?err}/data
+        target: /var/lib/postgresql/data
+        bind:
+          create_host_path: true
+      # - type: bind
+      #   source: ${PGSQL_DIR:?err}/backups
+      #   target: /var/lib/postgresql/backups
+      #   bind:
+      #     create_host_path: true
+      # - type: bind
+      #   source: ${PGSQL_DIR:?err}/initdb.d
+      #   target: /initdb.d
+      #   bind:
+      #     create_host_path: false
+      # - type: bind
+      #   source: ${PGSQL_DIR:?err}/configs/postgresql.conf
+      #   target: /defaults/postgresql.conf
+      #   bind:
+      #     create_host_path: false
+      # - type: bind
+      #   source: ${PGSQL_DIR:?err}/configs/pg_hba.conf
+      #   target: /defaults/pg_hba.conf
+      #   bind:
+      #     create_host_path: false
+      # - type: bind
+      #   source: ${PGSQL_DIR:?err}/configs/pg_ident.conf
+      #   target: /defaults/pg_ident.conf
+      #   bind:
+      #     create_host_path: false
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind:
+          create_host_path: false
