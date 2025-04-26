@@ -1,0 +1,83 @@
+---
+services:
+  haproxy:
+    container_name: haproxy
+    deploy:
+      # mode: global
+      resources:
+        limits:
+          cpus: '2.00'
+          memory: 256M
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 120s
+    environment:
+      # DPA_ARGS: -i -u haproxy-dataplaneapi
+      # DPA_CONF: /etc/haproxy/dataplaneapi.yaml
+      # DPA_USERNAME: ${WEBADMIN}
+      # DPA_PASSWORD: ${WEBPASSWORD}
+      # HAPROXY_CONF: /etc/haproxy/haproxy.cfg
+      # HAPROXY_CRTFILE: /etc/haproxy/ssl/certificate.pem
+      # HAPROXY_PROMEX: true
+      PUID: ${PUID:-1000}
+      PGID: ${PGID:-100}
+      # TZ: ${TZ}
+    # healthcheck:
+    #   interval: 2m
+    #   retries: 5
+    #   start_period: 5m
+    #   test:
+    #     - CMD-SHELL
+    #     - >
+    #       wget --quiet --tries=1 --no-check-certificate --spider ${HEALTHCHECK_URL:-"http://localhost:80/"}
+    #       && nc -z -i 1 -w 1 localhost 8080
+    #       || exit 1
+    #   timeout: 10s
+    hostname: haproxy
+    image: woahbase/alpine-haproxy:${HAPROXY_TAG:-latest}
+    network_mode: bridge
+    ports:
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: 443
+        target: 443
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: 80
+        target: 80
+      # - protocol: tcp  # /v3 DataPlaneAPI
+      #   host_ip: 0.0.0.0
+      #   published: 8080
+      #   target: ${HAPROXY_PORT_DPAPI:-8080}
+      # - protocol: tcp  # /stats
+      #   host_ip: 0.0.0.0
+      #   published: 5556
+      #   target: 5556
+      # - protocol: tcp  # /metrics (Prometheus)
+      #   host_ip: 0.0.0.0
+      #   published: 8402
+      #   target: {HAPROXY_PORT_METRICS:-8402}
+    volumes:
+      - type: bind
+        source: ${HAPROXY_DIR:?err}/config
+        target: /etc/haproxy
+        bind:
+          create_host_path: true
+      # - type: bind
+      #   source: ${HAPROXY_DIR:?err}/data
+      #   target: /var/lib/haproxy
+      #   bind:
+      #     create_host_path: true
+      # - type: bind
+      #   source: ${CERTIFICATE_DIR:?err}
+      #   target: /etc/haproxy/ssl
+      #   bind:
+      #     create_host_path: false
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind:
+          create_host_path: false
