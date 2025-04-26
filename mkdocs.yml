@@ -194,6 +194,7 @@ nav:
       - alpine-firefox: images/alpine-firefox.md
       - alpine-gimp: images/alpine-gimp.md
       - alpine-hugo: images/alpine-hugo.md
+      - alpine-mkdocsmaterial: images/alpine-mkdocsmaterial.md
       - alpine-libreoffice: images/alpine-libreoffice.md
       - alpine-maven: images/alpine-maven.md
       - alpine-rclone: images/alpine-rclone.md

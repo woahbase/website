@@ -71,12 +71,12 @@ Versioned accordingly with tags from {{ gltagslink(repo_name, title, search) }}.
 }} "Filter images with tag: {{ tagname|default(tag) }}")
 {%- endmacro %}
 
-{% macro npmpkg(name) -%}
-[{{ name }}](https://www.npmjs.com/package/{{ name }} "NPM Package")
+{% macro npmpkg(name, dname) -%}
+[{{ dname|default(name) }}](https://www.npmjs.com/package/{{ name }} "NPM Package")
 {%- endmacro %}
 
-{% macro pypipkg(name) -%}
-[{{ name }}](https://pypi.org/project/{{ name }}/ "PYPI Package")
+{% macro pypipkg(name, dname) -%}
+[{{ dname|default(name) }}](https://pypi.org/project/{{ name }}/ "PYPI Package")
 {%- endmacro %}
 
 {% macro sincev(tag, name) -%}

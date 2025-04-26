@@ -10,6 +10,7 @@ tags:
 pgmajor: 16
 s6_user: postgres
 s6_userhome: /var/lib/postgresql
+wb_extra_args_build: PGMAJOR=16
 
 ---
 
