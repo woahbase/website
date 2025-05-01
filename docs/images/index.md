@@ -3,7 +3,7 @@
 The images are tagged as per the following categories for ease of
 navigation or search,
 
-{% macro anchify(name) %}[`{{ name }}`](#{{ name }}){% endmacro %}
+{% macro anchify(name) %}[`{{ name }}`](#tag:{{ name }}){% endmacro %}
 
 ??? info "Categories Explained"
 

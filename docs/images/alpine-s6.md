@@ -79,7 +79,7 @@ default `alpine`). Checkout any of the images tagged
 [1]: https://skarnet.org/software/s6/
 [2]: https://github.com/just-containers/s6-overlay
 [3]: https://docs.docker.com/engine/reference/commandline/secret/
-[4]: index.md#usershell
+[4]: /images/index.md#tag:usershell
 [5]: https://github.com/just-containers/s6-overlay/blob/master/MOVING-TO-V3.md
 [6]: https://skarnet.org/software/s6-rc/s6-rc-compile.html
 [7]: https://skarnet.org/software/s6/servicedir.html
