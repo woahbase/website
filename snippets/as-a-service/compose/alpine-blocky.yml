@@ -1,0 +1,68 @@
+---
+services:
+  blocky:
+    container_name: blocky
+    deploy:
+      resources:
+        limits:
+          cpus: '1.00'
+          memory: 512M
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 3
+        window: 120s
+    environment:
+      PUID: ${PUID:-1000}
+      PGID: ${PGID:-100}
+      # TZ: ${TZ}
+    # healthcheck:
+    #   interval: 2m
+    #   retries: 3
+    #   start_period: 1m
+    #   test:
+    #     - CMD-SHELL
+    #     - >
+    #       blocky healthcheck || exit 1
+    #     # # or
+    #     # - >
+    #     #   dig @127.0.0.1 -p 53 healthcheck.blocky +tcp || exit 1
+    #   timeout: 10s
+    hostname: blocky
+    image: woahbase/alpine-blocky:${BLOCKY_TAG:-latest}
+    network_mode: host
+    # ports:
+    # - protocol: tcp
+    #   host_ip: 0.0.0.0
+    #   published: 53
+    #   target: 53
+    # - protocol: udp
+    #   host_ip: 0.0.0.0
+    #   published: 53
+    #   target: 53
+    # - protocol: tcp
+    #   host_ip: 0.0.0.0
+    #   published: ${BLOCKY_PORT}
+    #   target: ${BLOCKY_PORT}
+    volumes:
+      - type: bind
+        source: ${BLOCKY_DIR:?err}/lists
+        target: /config/lists
+        bind:
+          create_host_path: true
+      - type: bind
+        source: ${BLOCKY_DIR:?err}/logs
+        target: /config/logs
+        bind:
+          create_host_path: true
+      # - type: bind
+      #   source: ${BLOCKY_DIR:?err}/configs/config.yml
+      #   target: /config/config.yml
+      #   bind:
+      #     create_host_path: false
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind:
+          create_host_path: false

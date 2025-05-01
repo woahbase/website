@@ -3,8 +3,8 @@ description: Container for Alpine Linux + S6 + GNU LibC + OpenJDK8 + Libresonic
 svcname: libresonic
 skip_aarch64: 1
 skip_armv7l: 1
-# deprecator_link: https://github.com/navidrome/navidrome
-# deprecator_linktitle: Navidrome
+deprecator_link: /images/alpine-navidrome.md
+deprecator_linktitle: Navidrome
 tags:
   - deprecated
   - service

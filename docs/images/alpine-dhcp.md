@@ -127,10 +127,59 @@ For failover, consider configuring two servers (namely `primary` and
     };
     ```
 
+##### DHCP Hooks
+
+For running a hook-script when an event takes place, consider the
+following (references [here][6] and [here][7])
+
+``` conf
+subnet 172.17.0.0 netmask 255.255.255.0 {
+  # your subnet specific configurations
+
+  # event can be one of commit | expiry | release e.g.
+  on commit {
+    set chw = binary-to-ascii(16, 8, ":", substring(hardware, 1, 6));
+    set cip = binary-to-ascii(10, 8, ".", leased-address);
+    set cnm = pick-first-value(host-decl-name, option fqdn.hostname, option host-name, "unknown");
+    execute("/bin/dhcp_on_event", "commit", chw, cip, cnm);
+  }
+  on expiry {
+    set chw = binary-to-ascii(16, 8, ":", substring(hardware, 1, 6));
+    set cip = binary-to-ascii(10, 8, ".", leased-address);
+    set cnm = pick-first-value(host-decl-name, option fqdn.hostname, option host-name, "unknown");
+    execute("/bin/dhcp_on_event", "expiry", chw, cip, cnm);
+  }
+  on release {
+    set chw = binary-to-ascii(16, 8, ":", substring(hardware, 1, 6));
+    set cip = binary-to-ascii(10, 8, ".", leased-address);
+    set cnm = pick-first-value(host-decl-name, option fqdn.hostname, option host-name, "unknown");
+    execute("/bin/dhcp_on_event", "release", chw, cip, cnm);
+  }
+}
+```
+
+and the script can be like
+
+``` sh
+#!/bin/bash
+
+EVNT="${1:? \$1 event type is required}";
+CHW="${2:? \$2 client-MAC is required}";
+CIP="${3:? \$3 client-ip is required}";
+CNM="${4:? \$4 client-hostname is required}";
+
+echo "Detected event ${EVNT} for host ${CNM} with address ${CIP} (mac ${CHW})";
+
+# now do whatever is needed,
+# keep in mind the script should return as soon as possible
+```
+
 [1]: https://www.isc.org/dhcp/
 [2]: https://linux.die.net/man/8/dhcpd
 [3]: https://linux.die.net/man/5/dhcpd.conf
 [4]: https://kb.isc.org/docs/en/tags/isc%20dhcp
 [5]: https://www.iana.org/assignments/bootp-dhcp-parameters/bootp-dhcp-parameters.xhtml
+[6]: https://www.tspi.at/2021/05/15/dhcpdevents.html#gsc.tab=0
+[7]: https://jpmens.net/2011/07/06/execute-a-script-when-isc-dhcp-hands-out-a-new-lease/
 
 {% include "all-include.md" %}

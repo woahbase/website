@@ -1,0 +1,43 @@
+[Unit]
+Description=SystemD Service for Blocky DNS server (dockerized)
+Requires=multi-user.target network-online.target docker.service
+
+After=network-online.target docker.service
+
+# config dir must exist
+ConditionPathIsDirectory=/services/blocky/config
+# and should contain at least one config.yml or multiple files that get merged
+ConditionDirectoryNotEmpty=/services/blocky/config
+ConditionPathIsDirectory=/services/blocky/lists
+# following not needed if using stdout or db for logging
+ConditionPathIsDirectory=/services/blocky/logs
+
+[Service]
+ExecStart=/usr/bin/docker run \
+    --rm \
+    --pull=never \
+    --net=host \
+    -v /etc/hosts:/etc/hosts:ro \
+    -v /etc/localtime:/etc/localtime:ro \
+    --hostname blocky \
+    --name docker_blocky \
+    -e PGID=100 \
+    -e PUID=1000 \
+    -v /services/blocky/config:/config \
+    -v /services/blocky/lists:/config/lists \
+    -v /services/blocky/logs:/config/logs \
+    -c 512 \
+    --memory 512mb \
+    woahbase/alpine-blocky
+
+# ExecStop=/usr/bin/docker stop -t 2 docker_blocky
+# ExecStopPost=/usr/bin/docker rm -f docker_blocky
+
+Restart=always
+RestartSec=60
+SyslogIdentifier=blocky
+# User=user
+# Group=users
+
+[Install]
+WantedBy=default.target
