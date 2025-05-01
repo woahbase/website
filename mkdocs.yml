@@ -281,7 +281,8 @@ plugins:
         - stopWordFilter
         - trimmer
       # indexing: titles
-  # - social
+  # - social:
+  #     cache_dir: .cache/plugin/social
   - tags:
       tags_file: images/index.md
 

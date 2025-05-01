@@ -3,6 +3,7 @@ description: MultiArch Alpine Linux + S6 + Python3 + MkDocsMaterial
 svcname: mkdocsmaterial
 skip_armhf: 1
 tags:
+  - dev
   - usershell
 ---
 
@@ -78,13 +79,24 @@ Also,
 * Additionally, these plugins are bundled in the docker image,
   along with the [default][3] ones.
 
-    * [mkdocs-awesome-pages-plugin](https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin/) ({{ m.pypipkg('mkdocs-awesome-pages-plugin', dname='PyPi') }})
-    * [mkdocs-git-authors-plugin](https://github.com/timvink/mkdocs-git-authors-plugin) ({{ m.pypipkg('mkdocs-git-authors-plugin', dname='PyPi') }})
-    * [mkdocs-git-revision-date-localized-plugin](https://github.com/timvink/mkdocs-git-revision-date-localized-plugin) ({{ m.pypipkg('mkdocs-git-revision-date-localized-plugin', dname='PyPi') }})
-    * [mkdocs-macros-plugin](https://github.com/fralau/mkdocs-macros-plugin) ({{ m.pypipkg('mkdocs-macros-plugin', dname='PyPi') }})
-    * [mkdocs-meta-descriptions-plugin](https://github.com/prcr/mkdocs-meta-descriptions-plugin) ({{ m.pypipkg('mkdocs-meta-descriptions-plugin', dname='PyPi') }})
-    * [mkdocs-minify-plugin](https://github.com/byrnereese/mkdocs-minify-plugin) ({{ m.pypipkg('mkdocs-minify-plugin', dname='PyPi') }})
-    * [mkdocs-redirects](https://github.com/datarobot/mkdocs-redirects) ({{ m.pypipkg('mkdocs-redirects', dname='PyPi') }})
+    * {{ m.pypipkg('mkdocs-awesome-pages-plugin',
+        doc='https://lukasgeiter.github.io/mkdocs-awesome-nav/',
+        repo='https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin/') }}
+    * {{ m.pypipkg('mkdocs-git-authors-plugin',
+        doc='https://timvink.github.io/mkdocs-git-authors-plugin',
+        repo='https://github.com/timvink/mkdocs-git-authors-plugin') }}
+    * {{ m.pypipkg('mkdocs-git-revision-date-localized-plugin',
+        doc='https://timvink.github.io/mkdocs-git-revision-date-localized-plugin/index.html',
+        repo='https://github.com/timvink/mkdocs-git-revision-date-localized-plugin') }}
+    * {{ m.pypipkg('mkdocs-macros-plugin',
+        doc='https://mkdocs-macros-plugin.readthedocs.io/',
+        repo='https://github.com/fralau/mkdocs-macros-plugin') }}
+    * {{ m.pypipkg('mkdocs-meta-descriptions-plugin',
+        repo='https://github.com/prcr/mkdocs-meta-descriptions-plugin') }}
+    * {{ m.pypipkg('mkdocs-minify-plugin',
+        repo='https://github.com/byrnereese/mkdocs-minify-plugin') }}
+    * {{ m.pypipkg('mkdocs-redirects',
+        repo='https://github.com/datarobot/mkdocs-redirects') }}
 
 [1]: https://squidfunk.github.io/mkdocs-material/
 [2]: https://squidfunk.github.io/mkdocs-material/getting-started/

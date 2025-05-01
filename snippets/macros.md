@@ -1,5 +1,8 @@
 {% macro addpagetag(tag) -%}
-{{- (page.meta.tags.append(tag) or page.meta.tags.sort() or "") if not tag in page.meta.tags -}}
+{{- (page.meta.tags.append(tag)
+     or page.meta.tags.sort()
+     or '')
+  if not tag in page.meta.tags -}}
 {%- endmacro %}
 
 {% macro alpinepkg(name, branch, repo, arch, star) -%}
@@ -71,12 +74,22 @@ Versioned accordingly with tags from {{ gltagslink(repo_name, title, search) }}.
 }} "Filter images with tag: {{ tagname|default(tag) }}")
 {%- endmacro %}
 
-{% macro npmpkg(name, dname) -%}
-[{{ dname|default(name) }}](https://www.npmjs.com/package/{{ name }} "NPM Package")
+{% macro npmpkg(name, lname, doc, repo, lndoc='Docs', lnrepo='Source') -%}
+[{{ lname|default(name) }}](https://www.npmjs.com/package/{{ name }} "NPM Package")
+{% if doc or repo -%}(
+{%-   if doc  -%} [{{ lndoc  }}]({{ doc  }} "View {{ lname|default(name) }} docs") {%- endif -%}
+{{-   ' | ' if doc and repo else ''  -}}
+{%-   if repo -%} [{{ lnrepo }}]({{ repo }} "Checkout {{ lname|default(name) }} code") {%- endif -%})
+{%- endif %}
 {%- endmacro %}
 
-{% macro pypipkg(name, dname) -%}
-[{{ dname|default(name) }}](https://pypi.org/project/{{ name }}/ "PYPI Package")
+{% macro pypipkg(name, lname, doc, repo, lndoc='Docs', lnrepo='Source') -%}
+[{{ lname|default(name) }}](https://pypi.org/project/{{ name }}/ "PyPI Package")
+{% if doc or repo -%}(
+{%-   if doc  -%} [{{ lndoc  }}]({{ doc  }} "View {{ lname|default(name) }} docs") {%- endif -%}
+{{-   ' | ' if doc and repo else ''  -}}
+{%-   if repo -%} [{{ lnrepo }}]({{ repo }} "Checkout {{ lname|default(name) }} code") {%- endif -%})
+{%- endif %}
 {%- endmacro %}
 
 {% macro sincev(tag, name) -%}
@@ -84,15 +97,17 @@ Versioned accordingly with tags from {{ gltagslink(repo_name, title, search) }}.
 {%- endmacro %}
 
 {% macro defcfgfile(dst, src, fr, vname, title="sample", ddir="defaults", plural=false) -%}
-{%- if not src -%}{%- set src = 'root' ~'/'~ ddir ~'/'~ (dst.split("/")|last) -%}{%- endif -%}
-Configuration {{ 'files' if plural else 'file' }} {{ 'for '~fr if
-fr }} {{ 'are' if plural else 'is' }} at `{{ dst }}`{{ ' (the
-filepath preset in the env-var `'~vname~'`)' if vname }},
+{%- if not src -%}
+{%-   set src = 'root' ~'/'~ ddir ~'/'~ (dst.split("/")|last) -%}
+{%- endif -%}
+Configuration {{ 'files' if plural else 'file' }}
+{{ 'for '~fr if fr }} {{ 'are' if plural else 'is' }} at
+`{{ dst }}`{{ ' (the filepath preset in the env-var `'~vname~'`)' if vname }},
 edit or remount {{ 'these' if plural else 'this' }} with your own.
-A {{ ghfilelink(src, title=title) }} is provided in `{{ '/'~ddir
-}}`, {{ 'these get' if plural else 'this gets' }} copied when no
-such {{ 'files exist' if plural else 'file exists' }} before {{
-'services are' if plural else 'service is' }} started.
+A {{ ghfilelink(src, title=title) }} is provided in
+`{{ '/'~ddir }}`, {{ 'these get' if plural else 'this gets' }}
+copied when no such {{ 'files exist' if plural else 'file exists' }}
+before {{ 'services are' if plural else 'service is' }} started.
 {%- endmacro %}
 
 {% macro customscript(p, fr, ghrepo, title="shellscript", ddir="etc/s6-overlay/s6-rc.d") -%}
