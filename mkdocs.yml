@@ -163,6 +163,7 @@ nav:
       - alpine-cgit: images/alpine-cgit.md
       - alpine-coturn: images/alpine-coturn.md
       - alpine-dhcp: images/alpine-dhcp.md
+      - alpine-gotify: images/alpine-gotify.md
       - alpine-grafana: images/alpine-grafana.md
       - alpine-haproxy: images/alpine-haproxy.md
       - alpine-influxdb: images/alpine-influxdb.md
