@@ -181,6 +181,7 @@ nav:
       - alpine-rsyslog: images/alpine-rsyslog.md
       - alpine-squid: images/alpine-squid.md
       - alpine-ssh: images/alpine-ssh.md
+      - alpine-sshwifty: images/alpine-sshwifty.md
       - alpine-syncthing: images/alpine-syncthing.md
       - alpine-tftp: images/alpine-tftp.md
       - alpine-transmission: images/alpine-transmission.md
