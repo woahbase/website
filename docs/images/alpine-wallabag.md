@@ -1,5 +1,5 @@
 ---
-description: MultiArch Alpine Linux + S6 + NGINX + PHP8 + Wallabag
+description: MultiArch Alpine Linux + S6 + NGINX + PHP-fpm + Wallabag
 svcname: wallabag
 has_services:
   - compose
@@ -74,6 +74,11 @@ Also,
 * Supported [applications][4] e.g mobile-apps
   ([Android][5]/[iOS][6]), browser [extensions][10]. All compatible
   readers can be found [here][9].
+
+* By itself, **only SQLITE Database storage included**. Checkout
+  {{ m.myimage('alpine-mysql') }} or {{
+  m.myimage('alpine-postgresql') }} to configure your own
+  database server as another container.
 
 * On first-run the default login credentials are
   `wallabag`/`wallabag`.

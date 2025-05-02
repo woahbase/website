@@ -1,5 +1,5 @@
 ---
-description: MultiArch Alpine Linux + S6 + NGINX + PHP8 + Kanboard
+description: MultiArch Alpine Linux + S6 + NGINX + PHP-fpm + Kanboard
 svcname: kanboard
 has_services:
   - compose
@@ -68,9 +68,10 @@ following environment variables.
 
 Also,
 
-* By itself, **only SQLITE Database storage included**. Checkout {{
-  m.myimage('alpine-mysql') }} to configure your own MySQL server
-  as another container.
+* By itself, **only SQLITE Database storage included**. Checkout
+  {{ m.myimage('alpine-mysql') }} or {{
+  m.myimage('alpine-postgresql') }} to configure your own
+  database server as another container.
 
 * Kanboard is located at the endpoint `/kanboard/`, with the
   webapp at `/config/www/kanboard/`. If not exists, (or if
