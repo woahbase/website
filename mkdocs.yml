@@ -187,6 +187,7 @@ nav:
       - alpine-tftp: images/alpine-tftp.md
       - alpine-transmission: images/alpine-transmission.md
       - alpine-ubooquity: images/alpine-ubooquity.md
+      - alpine-wallabag: images/alpine-wallabag.md
       - alpine-webhook: images/alpine-webhook.md
 
       # - usershell
