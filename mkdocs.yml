@@ -254,6 +254,7 @@ nav:
   - About:
       - About: about/index.md
       - Contact: about/contact.md
+      - Donate: about/donate.md
 
   - Contact: /about/contact
 
@@ -345,6 +346,9 @@ theme:
     # - toc.integrate
 
   icon:
+    admonition:
+      tip: material/hand-coin
+
     repo: simple/github
     tag:
       default: fontawesome/solid/hashtag
