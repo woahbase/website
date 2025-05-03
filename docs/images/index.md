@@ -37,4 +37,4 @@ navigation or search,
     | {{ anchify('python3') }}    | Applications that build from Python 3.
     | {{ anchify('s6') }}         | Images that build from s6.
 
-[TAGS]
+<!-- material/tags -->

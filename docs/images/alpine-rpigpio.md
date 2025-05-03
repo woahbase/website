@@ -17,8 +17,8 @@ access, using [RPi.GPIO][7] or serial access using
 dependencies.
 
 {{ m.srcimage('alpine-python3') }} with the packages {{
-m.pypipkg('pyserial') }} and {{ m.pypipkg('RPi.GPIO') }}
-and {{ m.alpinepkg('wiringpi') }} installed in it.
+m.pypipkg('pyserial') }} and {{ m.pypipkg('RPi.GPIO')
+}} and {{ m.alpinepkg('wiringpi') }} installed in it.
 
 {% include "pull-image.md" %}
 

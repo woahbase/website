@@ -205,6 +205,7 @@ nav:
       - alpine-maven: images/alpine-maven.md
       - alpine-rclone: images/alpine-rclone.md
       - alpine-rpigpio: images/alpine-rpigpio.md
+      - alpine-watchtower: images/alpine-watchtower.md
       - alpine-weechat: images/alpine-weechat.md
 
       # - Legacy: []
@@ -289,7 +290,7 @@ plugins:
   # - social:
   #     cache_dir: .cache/plugin/social
   - tags:
-      tags_file: images/index.md
+      # tags_file: images/index.md
 
 repo_name: woahbase/website
 repo_url: https://github.com/woahbase/website

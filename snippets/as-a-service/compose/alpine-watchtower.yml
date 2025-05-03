@@ -1,0 +1,67 @@
+---
+services:
+  watchtower:
+    container_name: watchtower
+    deploy:
+      resources:
+        limits:
+          cpus: '2.00'
+          memory: 512M
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 120s
+    environment:
+      PUID: ${PUID:-1000}
+      PGID: ${PGID:-100}
+      # GID_DOCKER: ${GID_DOCKER:-995}
+      # TZ: ${TZ}
+      # DOCKER_HOST: "unix:///var/run/docker.sock"
+      DOCKER_CONFIG: /home/alpine/.docker
+      # NO_COLOR: false
+      WATCHTOWER_CLEANUP: ${WATCHTOWER_CLEANUP:-true}
+      WATCHTOWER_DEBUG: false
+      # WATCHTOWER_HTTP_API: true
+      # WATCHTOWER_HTTP_API_METRICS: true
+      # WATCHTOWER_HTTP_API_TOKEN: "${WATCHTOWER_HTTP_API_TOKEN:-insecurebydefault}"
+      WATCHTOWER_INCLUDE_RESTARTING: true
+      WATCHTOWER_INCLUDE_STOPPED: true
+      # WATCHTOWER_POLL_INTERVAL: ${WATCHTOWER_POLL_INTERVAL:-28800}
+      WATCHTOWER_REMOVE_VOLUMES: ${WATCHTOWER_REMOVE_VOLUMES:-false}
+      WATCHTOWER_REVIVE_STOPPED: true
+      WATCHTOWER_ROLLING_RESTART: true
+      WATCHTOWER_TIMEOUT: 10s
+      WATCHTOWER_TRACE: false
+      WATCHTOWER_WARN_ON_HEAD_FAILURE: auto
+      # DOCKER_API_VERSION: "1.24"
+      # DOCKER_TLS_VERIFY: false
+      # WATCHTOWER_LABEL_ENABLE: false
+      # WATCHTOWER_MONITOR_ONLY: false
+      # WATCHTOWER_NO_PULL: false
+      # WATCHTOWER_NO_RESTART: false
+      # WATCHTOWER_NO_STARTUP_MESSAGE: false
+      # WATCHTOWER_RUN_ONCE: false
+      WATCHTOWER_SCHEDULE: "0 0 */4 * * *"
+      # WATCHTOWER_SCOPE: ""
+    hostname: ${HOSTNAME}
+    image: woahbase/alpine-watchtower:${WATCHTOWER_TAG:-latest}
+    network_mode: host
+    volumes:
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+        bind:
+          create_host_path: false
+      # - type: bind
+      #   source: ${WATCHTOWER_DOCKER_CONFIG:?err}/config.json
+      #   target: /home/alpine/.docker/config.json
+      #   read_only: true
+      #   bind:
+      #     create_host_path: false
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind:
+          create_host_path: false
