@@ -1,0 +1,16 @@
+{% macro render(listing) %}
+  {{ listing.content }}
+  <ul>
+    {% for mapping in listing.mappings %}
+      <li style="margin:0.2rem 0.1rem;padding:0;border-radius:0.2rem;" class="md-tag">
+        <a href="{{ mapping.item.url | url }}" style="padding:0.3125em 0.78125em;font-size:0.65rem">
+          {{ mapping.item.title }}
+        </a>
+      </li>
+    {% endfor %}
+    {% for child in listing %}
+      <li style="list-style-type:none">{{ render(child) }}</li>
+    {% endfor %}
+  </ul>
+{% endmacro %}
+{{ render(listing) }}

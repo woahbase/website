@@ -257,6 +257,7 @@ nav:
       - Donate: about/donate.md
 
   - Contact: /about/contact
+  - Donate: /about/donate
 
 plugins:
   - git-authors
