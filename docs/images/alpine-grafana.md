@@ -56,7 +56,7 @@ following environment variables.
 | GF_PATHS_LOGS         | /var/lib/grafana/logs              | Path where logs are stored.
 | GF_PATHS_PLUGINS      | /var/lib/grafana/plugins           | Path to plugins directory.
 | GF_PATHS_PROVISIONING | /var/lib/grafana/provisioning      | Path where provisioning configuration should exist.
-| GF_INSTALL_PLUGINS    | empty string                       | Comma separated list of plugins (or urls) to install before running server.
+| GF_INSTALL_PLUGINS    | empty string                       | **Comma**-separated list of plugins (or urls) to install before running server.
 | GF_UPDATE_PLUGINS     | unset                              | Set to `true` to run plugin-update (uses `grafana cli`).
 | GF_LOG_MODE           | console                            | Default log mode, can be `console` or `file`.
 | GRAFANA_ARGS          | see below                          | Customizable arguments passed to `grafana server` service. (Overrides default arguments)
@@ -87,5 +87,6 @@ Also,
 [3]: https://www.influxdata.com/time-series-platform/telegraf/
 [4]: https://grafana.com/grafana/download
 [5]: https://github.com/fg2it/grafana-on-raspberry/releases
+[6]: https://github.com/grafana/grafana/blob/main/Dockerfile
 
 {% include "all-include.md" %}
