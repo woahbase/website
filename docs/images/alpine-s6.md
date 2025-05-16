@@ -41,14 +41,16 @@ Run `bash` in the container to get a shell.
 We can customize the runtime behaviour of the container with the
 following environment variables.
 
-| ENV Vars                   | Default         | Description
-| :---                       | :---            | :---
+| ENV Vars          | Default         | Description
+| :---              | :---            | :---
 {% include "envvars/alpine-s6.md" %}
-| S6_USERGROUPS              | empty string    | **Comma**-separated list of groups to add `S6_USER` to. E.g. `"audio,video,tty"`, groups **must** exist.
-| S6_USERPASS                | unset           | Password for `S6_USER`.
-| FILEURL_`varname`          | unset           | If set to `<url>|<optional /file/path>`, will download `url` to `/file/path`. See [URL to File](#url-to-file). {{ m.sincev('3.2.1.0') }}
-| HGID_`groupname`           | unset           | Update (or create) `groupname` with **non-zero positive integer** `gid` (to match with host). E.g `HGID_VIDEO=995` will change (or create if not exists) `gid` of `video` group to `995`. {{ m.sincev('3.2.0.0') }}
-| SECRET__`varname`          | unset           | If set to a filepath, the contents of file are loaded in the environment variable `varname`. See [Secrets](#secrets).
+| S6_USERGROUPS     | empty string    | **Comma**-separated list of groups to add `S6_USER` to. E.g. `"audio,video,tty"`, groups **must** exist.
+| S6_USERPASS       | unset           | Password for `S6_USER`.
+| FILEURL_`varname` | unset           | If set to `<url>|<optional /file/path>`, will download `url` to `/file/path`. See [URL to File](#url-to-file). {{ m.sincev('3.2.1.0') }}
+| HGID_`groupname`  | unset           | Update (or create) `groupname` with **non-zero positive integer** `gid` (to match with host). E.g `HGID_VIDEO=995` will change (or create if not exists) `gid` of `video` group to `995`. {{ m.sincev('3.2.0.0') }}
+| SECRET__`varname` | unset           | If set to a filepath, the contents of file are loaded in the environment variable `varname` (Note the **double** underscores). See [Secrets](#secrets).
+| TRUSTED_CERTS     | unset           | **Space**-or-**comma**-separated certificate files, those are merged into the root (or `nssdb`) certificate store. See [Custom Certificates](#custom-certificates). {{ m.sincev('3.2.1.0_20250516') }}
+| TRUSTED_SITES     | unset           | **Space**-or-**comma**-separated server names, the certificates are fetched are merged into the root (or `nssdb`) certificate store. See [Custom Certificates](#custom-certificates). {{ m.sincev('3.2.1.0_20250516') }}
 
 --8<-- "check-id.md"
 
@@ -64,6 +66,54 @@ m.ghfilelink('root/etc/s6-overlay/s6-rc.d/p01-file2env/run',
 title='helper-script') }} should read and export the secret as
 the value of `variablename`. These environment variables are
 available to any scope that uses container-env (`with-contenv`).
+
+###### Custom Certificates
+
+To install and trust your own certificates into the container,
+whether obtained from a third party or especially when
+self-signed, we can use the {{
+m.ghfilelink('root/etc/s6-overlay/s6-rc.d/p04-certup/run',
+title='helper-script') }} {{ m.sincev('3.2.1.0_20250516') }} to merge the
+certificate files listed in `TRUSTED_CERTS` environment variable
+(or fetch those from servers listed in `TRUSTED_SITES` using
+{{ m.alpinepkg('openssl') }}) into the root certificate store
+(requires {{ m.alpinepkg('ca-certificates') }}), or any `nssdb`
+database (requires {{ m.alpinepkg('nssdb-tools') }} for
+`certutil` / `pk12util`).
+
+??? info "Custom Certificate defaults and examples"
+
+    These environment variable control how the custom certificates are
+    updated into the store.
+
+    | ENV Vars                | Default                          | Description
+    | :---                    | :---                             | :---
+    | S6_CERTDIR              | /usr/local/share/certificates    | Directory where the certificates are copied or downloaded.
+    | S6_CACERTDIR            | /usr/local/share/ca-certificates | (Preset) Directory where the CA certificates are (checked and if success) moved into, before merge. This ensures we don't end up adding non-CA certificates in the root certificate store.
+    | S6_CACERT_INCLUDE_NONCA | unset                            | Set to `true` to enable including **non-ca**-certificate files into root certificate store. Rather **insecure**, but gets rid of most `unable to get local issuer certificate` errors during develop/test. Use with **caution**, definitely **not in production** and only with certificates that you *really* trust, but *for some odd reason cannot provide the issuer-CA-Cert for them*, or have signed them yourself.
+    | S6_CERTUPDATE           | unset                            | Enabled when atleast one certificate is located, set to `1` to force-refresh the store.
+    | NSS_DBDIR               | unset                            | Path to `nssdb` database dir. E.g. `/home/alpine/.pki/nssdb` or `/etc/pki/nssdb`. **Required** for nss-specific tasks to run.
+    | NSS_DEFAULT_DB_TYPE     | sql                              | Format of `nssdb`, legacy ones used to be `dbm`.
+    | NSS_DBDIR_OWNER         | unset                            | To apply ownership to the database, set it to e.g. `root:root`, if unset, but the path in inside `S6_USER`-homedir, it defaults to `alpine:$PGID`.
+    | NSS_TRUST               | P,P,,                            | Default trust for server certificates when installing in `nssdb`.
+    | NSS_CATRUST             | CT,C,C,                          | Default trust for CA certificates when installing in `nssdb`.
+
+    The environment variables `TRUSTED_CERTS` and `TRUSTED_SITES`
+    are **space**-or-**comma**-separated lists of file (or
+    directory) path and `server[:port-optional]` (port defaults to
+    `443`) addresses respectively. E.g.
+    ```
+    TRUSTED_CERTS="/crts/cert1.ca.crt /crts/cert2.crt /crts/cert3.pfx"
+    ```
+    ```
+    TRUSTED_SITES="example.com test.net:443 hello.world.local:64801"
+    ```
+
+The required packages *may* or **may not** be installed
+depending on the image, for the latter, they can be installed
+at runtime by adding them in the `S6_NEEDED_PACKAGES`
+variable. Recommended to preserve-and-remount the certificate
+stores for subsequent runs to reduce the mutable surface area.
 
 ###### URL to File
 
@@ -119,9 +169,9 @@ is not always feasible to hardcode those in the `Dockerfile` and
 it becomes more complex with the additional initialization stages
 that `s6` introduces. To ease this problem, in addition to the
 `/init` entrypoint script that s6 brings, another {{
-m.ghfilelink('root/usershell', title='alternate initscript') }}
+m.ghfilelink('root/usershell', title='alternate init-script') }}
 is added at `/usershell` that run the initialization stage tasks
-as root-user, and then executes the `CMD` **as a not-root
+**as root**, and then execute the `CMD` **as a not-root
 user**. This way, images that set their entrypoint to
 `/usershell` have all the benefits of s6, but the CMD that is
 run, is run by `S6_USER` (by default `alpine`). Checkout any of
