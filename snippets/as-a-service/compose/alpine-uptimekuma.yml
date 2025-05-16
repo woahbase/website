@@ -1,0 +1,50 @@
+---
+services:
+  uptimekuma:
+    container_name: uptimekuma
+    deploy:
+      resources:
+        limits:
+          cpus: '1.00'
+          memory: 256M
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 120s
+    environment:
+      PUID: ${PUID:-1000}
+      PGID: ${PGID:-100}
+      # TZ: ${TZ}
+    # healthcheck:
+    #   interval: 2m
+    #   retries: 5
+    #   start_period: 5m
+    #   test:
+    #     - CMD-SHELL
+    #     - >
+    #       node ./extra/healthcheck.js || exit 1
+    #     # # or
+    #     # - >
+    #     #   curl -f http://localhost:3001/ || exit 1
+    #   timeout: 10s
+    hostname: uptimekuma
+    image: woahbase/alpine-uptimekuma:${UPTIMEKUMA_TAG:-latest}
+    network_mode: bridge
+    ports:
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: ${UPTIMEKUMA_PORT:-3001}
+        target: 3001
+    volumes:
+      # - type: bind
+      #   source: ${UPTIMEKUMA_DIR:?err}
+      #   target: /home/alpine/project/data
+      #   bind:
+      #     create_host_path: true
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind:
+          create_host_path: false

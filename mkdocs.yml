@@ -189,6 +189,7 @@ nav:
       - alpine-transmission: images/alpine-transmission.md
       - alpine-ttrss: images/alpine-ttrss.md
       - alpine-ubooquity: images/alpine-ubooquity.md
+      - alpine-uptimekuma: images/alpine-uptimekuma.md
       - alpine-wallabag: images/alpine-wallabag.md
       - alpine-webhook: images/alpine-webhook.md
 
