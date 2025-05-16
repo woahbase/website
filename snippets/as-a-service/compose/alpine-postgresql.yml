@@ -23,8 +23,8 @@ services:
       # PGSQL_CUSTOM_HBA: /defaults/pg_hba.conf
       # PGSQL_CUSTOM_IDENT: /defaults/pg_ident.conf
 
+      PUID: ${PUID:-1000}
       PGID: ${PGID:-1000}
-      PUID: ${PUID:-100}
       # TZ: ${TZ}
     # healthcheck:
     #   interval: 2m

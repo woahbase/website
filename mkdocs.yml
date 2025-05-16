@@ -170,6 +170,7 @@ nav:
       - alpine-haproxy: images/alpine-haproxy.md
       - alpine-influxdb: images/alpine-influxdb.md
       - alpine-kanboard: images/alpine-kanboard.md
+      - alpine-mjpgstreamer: images/alpine-mjpgstreamer.md
       - alpine-mosquitto: images/alpine-mosquitto.md
       - alpine-mpd: images/alpine-mpd.md
       - alpine-mysql: images/alpine-mysql.md

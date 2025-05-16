@@ -36,7 +36,7 @@ ExecStart=/usr/bin/docker run \
     --hostname firefox \
     --name docker_firefox \
     -e GID_VIDEO=44 \
-    -e PGID=100 \
+    -e PGID=1000 \
     -e PUID=1000 \
     -v /data/docker_data/firefox:/home/alpine \
     -v /data/downloads:/home/alpine/Downloads \

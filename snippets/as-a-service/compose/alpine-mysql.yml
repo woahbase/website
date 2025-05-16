@@ -18,8 +18,8 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_USER_DB: ${MYSQL_USER_DB}
 
+      PUID: ${PUID:-1000}
       PGID: ${PGID:-1000}
-      PUID: ${PUID:-100}
       # TZ: ${TZ}
     # healthcheck:
     #   interval: 2m

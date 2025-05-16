@@ -33,10 +33,10 @@ Optionally, login as a non-root user, (default is `{{ s6_user | default('alpine'
 docker exec -u {{ s6_user | default('alpine') }} -it docker_{{ svcname }} /bin/bash
 ```
 
-Or set user/group id e.g 1000/100,
+Or set user/group id e.g 1000/1000,
 
 ``` sh
-docker exec -u 1000:100 -it docker_{{ svcname }} /bin/bash
+docker exec -u 1000:1000 -it docker_{{ svcname }} /bin/bash
 ```
 
 ---

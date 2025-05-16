@@ -18,7 +18,7 @@ ExecStart=/usr/bin/docker run \
     --hostname webhook \
     --name docker_webhook \
     -e PUID=1000 \
-    -e PGID=100 \
+    -e PGID=1000 \
     -e WEBHOOK_ARGS="-hotreload -ip 0.0.0.0 -nopanic -port 9000 -urlprefix hooks -verbose" \
     -v /services/webhook:/etc/webhook \
     -c 512 \

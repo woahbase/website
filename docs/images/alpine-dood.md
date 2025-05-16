@@ -42,7 +42,7 @@ a [user-scoped][114] shell,
     docker run --rm -it \
       --name docker_dood \
       --workdir=/home/alpine \
-      -e PGID=100 \
+      -e PGID=1000 \
       -e PUID=1000 \
       -v $PWD/data:/home/alpine `#(1)` \
       -v /var/run/docker.sock:/var/run/docker.sock \
@@ -57,7 +57,7 @@ a [user-scoped][114] shell,
     docker run --rm -it \
       --name docker_dood \
       --workdir=/home/alpine \
-      -e PGID=100 \
+      -e PGID=1000 \
       -e PUID=1000 \
       -v $PWD/data:/home/alpine `#(1)` \
       -v /var/run/docker.sock:/var/run/docker.sock \
@@ -74,7 +74,7 @@ a [user-scoped][114] shell,
       --workdir=/home/alpine/project \
       -e GID_DOCKER=995 `#(1)` \
       -e HOSTCWD=$PWD `#(3)` \
-      -e PGID=100 \
+      -e PGID=1000 \
       -e PUID=1000 \
       -v $PWD/data:/home/alpine `#(2)` \
       -v $PWD/project:/home/alpine/project \

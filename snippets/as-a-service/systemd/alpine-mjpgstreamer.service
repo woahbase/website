@@ -1,0 +1,36 @@
+[Unit]
+Description=SystemD (User) Service for Webcam stream server using mJPEG-streamer
+Requires=multi-user.target network-online.target docker.service
+After=network-online.target docker.service
+
+ConditionPathExists=/dev/video0
+
+[Service]
+ExecStart=/usr/bin/docker run \
+    --rm \
+    --pull=never \
+    --hostname mjpgstreamer \
+    --name docker_mjpgstreamer \
+    -c 256 \
+    --memory 256m \
+    --device /dev/video0:/dev/video0 \
+    -e GID_VIDEO=991 \
+    -e MJPGST_CREDENTIALS="webcam:insecurebydefault" \
+    -e MJPGST_INPUT_OPTS="-n -r 640x480 -f 30" \
+    -e MJPGST_VIDEO_DEV=/dev/video0 \
+    -e PUID=1000 \
+    -e PGID=1000 \
+    -p 8080:8080 \
+    -v /etc/localtime:/etc/localtime:ro \
+    woahbase/alpine-mjpgstreamer
+
+# ExecStop=/usr/bin/docker stop -t 2 docker_mjpgstreamer
+# ExecStopPost=/usr/bin/docker rm -f docker_mjpgstreamer
+Restart=always
+RestartSec=60
+SyslogIdentifier=mjpgstreamer
+# User=user
+# Group=users
+
+[Install]
+WantedBy=default.target
