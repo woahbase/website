@@ -19,7 +19,7 @@ services:
         window: 120s
     environment:
       PUID: ${PUID:-1000}
-      PGID: ${PGID:-100}
+      PGID: ${PGID:-1000}
       # TZ: ${TZ}
 
       # for updating

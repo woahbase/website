@@ -1,6 +1,6 @@
 variables {
   dc   = "dc1" # to load the dc-local config file
-  pgid = 100   # gid for docker
+  pgid = 1000  # gid for docker
   puid = 1000  # uid for docker
   version = "9.1.2"
 }

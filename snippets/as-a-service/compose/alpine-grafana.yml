@@ -29,7 +29,7 @@ services:
       # GF_UPDATE_PLUGINS: 1
 
       PUID: ${PUID:-1000}
-      PGID: ${PGID:-100}
+      PGID: ${PGID:-1000}
       # TZ: ${TZ}
 
       # ADMIN: ${GRAFANA_ADMIN}

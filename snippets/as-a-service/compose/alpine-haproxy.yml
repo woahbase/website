@@ -22,7 +22,7 @@ services:
       # HAPROXY_CRTFILE: /etc/haproxy/ssl/certificate.pem
       # HAPROXY_PROMEX: true
       PUID: ${PUID:-1000}
-      PGID: ${PGID:-100}
+      PGID: ${PGID:-1000}
       # TZ: ${TZ}
     # healthcheck:
     #   interval: 2m

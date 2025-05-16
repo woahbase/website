@@ -160,6 +160,7 @@ nav:
       - alpine-blocky: images/alpine-blocky.md
       - alpine-buildmaster: images/alpine-buildmaster.md
       - alpine-buildworker: images/alpine-buildworker.md
+      - alpine-cec: images/alpine-cec.md
       - alpine-cgit: images/alpine-cgit.md
       - alpine-coturn: images/alpine-coturn.md
       - alpine-davical: images/alpine-davical.md

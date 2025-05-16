@@ -1,7 +1,7 @@
 ---
 services:
-  uptimekuma:
-    container_name: uptimekuma
+  cec:
+    container_name: cec
     deploy:
       resources:
         limits:
@@ -12,36 +12,33 @@ services:
         delay: 10s
         max_attempts: 5
         window: 120s
+    devices:
+      - /dev/vchiq:/dev/vchiq # for raspberry-pi
+      - /dev/cec0:/dev/cec0
     environment:
       PUID: ${PUID:-1000}
       PGID: ${PGID:-1000}
+      # GID_DIALOUT: 984  # gid of group 'dialout'
+      GID_VIDEO: 985  # gid of group 'video'
       # TZ: ${TZ}
     # healthcheck:
-    #   interval: 2m
-    #   retries: 5
-    #   start_period: 5m
     #   test:
     #     - CMD-SHELL
     #     - >
-    #       node ./extra/healthcheck.js || exit 1
-    #     # # or
-    #     # - >
-    #     #   curl -f http://localhost:3001/ || exit 1
+    #       nc -z -i 1 -w 1 localhost 9526 || exit 1
+    #   interval: 2m
     #   timeout: 10s
-    hostname: uptimekuma
-    image: woahbase/alpine-uptimekuma:${UPTIMEKUMA_TAG:-latest}
+    #   retries: 5
+    #   start_period: 5m
+    hostname: cec
+    image: woahbase/alpine-cec:${CEC_TAG:-latest}
     network_mode: bridge
     ports:
       - protocol: tcp
         host_ip: 0.0.0.0
-        published: ${UPTIMEKUMA_PORT:-3001}
-        target: 3001
+        published: ${CEC_PORT:-9526}
+        target: 9526
     volumes:
-      # - type: bind
-      #   source: ${UPTIMEKUMA_DIR:?err}
-      #   target: /home/alpine/project/data
-      #   bind:
-      #     create_host_path: true
       - type: bind
         source: /etc/localtime
         target: /etc/localtime

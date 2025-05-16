@@ -17,7 +17,7 @@ services:
         window: 120s
     environment:
       PUID: ${PUID:-1000}
-      PGID: ${PGID:-100}
+      PGID: ${PGID:-1000}
       REG_USER: ${WEBADMIN}
       REG_PASS: ${WEBPASSWORD}
       REGISTRY_HTTP_HOST: https://${REGISTRY}

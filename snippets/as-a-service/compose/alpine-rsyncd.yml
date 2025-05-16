@@ -14,7 +14,7 @@ services:
         window: 120s
     environment:
       PUID: ${PUID:-1000}
-      PGID: ${PGID:-100}
+      PGID: ${PGID:-1000}
       # RSYNCD_MAKEDIRS: true
       # RSYNC_USER: user
       # RSYNC_USERPASS: insecurebydefault

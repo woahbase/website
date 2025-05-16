@@ -21,7 +21,7 @@ services:
       # FWD_TO_HOST: ${RSYSLOG_FWD_TO_HOST}
       # FWD_TO_PORT: ${RSYSLOG_FWD_TO_PORT}
       PUID: ${PUID:-1000}
-      PGID: ${PGID:-100}
+      PGID: ${PGID:-1000}
       # TZ: ${TZ}
     hostname: ${RSYSLOG_HOSTNAME:-rsyslog}
     image: woahbase/alpine-rsyslog:${RSYSLOG_TAG:-latest}

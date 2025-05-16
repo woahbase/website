@@ -19,7 +19,7 @@ services:
       # KANBOARD_URL: "http://your-domain.local/kanboard/"
       # KANBOARD_UPDATE: "false"
       PUID: ${PUID:-1000}
-      PGID: ${PGID:-100}
+      PGID: ${PGID:-1000}
       # TZ: ${TZ}
     # healthcheck:
     #   interval: 2m

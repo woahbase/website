@@ -14,7 +14,7 @@ services:
         window: 120s
     environment:
       PUID: ${PUID:-1000}
-      PGID: ${PGID:-100}
+      PGID: ${PGID:-1000}
       # GID_DOCKER: ${GID_DOCKER:-995}
       # TZ: ${TZ}
       # DOCKER_HOST: "unix:///var/run/docker.sock"
