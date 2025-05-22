@@ -171,6 +171,7 @@ nav:
       - alpine-haproxy: images/alpine-haproxy.md
       - alpine-influxdb: images/alpine-influxdb.md
       - alpine-kanboard: images/alpine-kanboard.md
+      - alpine-kapacitor: images/alpine-kapacitor.md
       - alpine-mjpgstreamer: images/alpine-mjpgstreamer.md
       - alpine-mosquitto: images/alpine-mosquitto.md
       - alpine-mpd: images/alpine-mpd.md
