@@ -1,0 +1,57 @@
+---
+services:
+  chronograf:
+    container_name: chronograf
+    # depends_on:
+    #   influxdb:
+    #     condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: '2.00'
+          memory: 1024M
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 120s
+    environment:
+      PUID: ${PUID:-1000}
+      PGID: ${PGID:-1000}
+      # TZ: ${TZ}
+      BASE_PATH: /chronograf
+      REPORTING_DISABLED: true
+    # healthcheck:
+    #   interval: 2m
+    #   retries: 5
+    #   start_period: 5m
+    #   test:
+    #     - CMD-SHELL
+    #     - >
+    #       wget -q -T 2 --no-check-certificate --spider http://localhost:8888${BASE_PATH}/ || exit 1
+    #   timeout: 10s
+    hostname: chronograf
+    image: woahbase/alpine-chronograf:${CHRONOGRAF_TAG:-latest}
+    network_mode: bridge
+    ports:
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: '${CHRONOGRAF_PORT:-8888}'
+        target: 8888
+    volumes:
+      - type: bind
+        source: ${CHRONOGRAF_DIR:?err}/data
+        target: /var/lib/chronograf
+        bind:
+          create_host_path: true
+      # - type: bind
+      #   source: ${CHRONOGRAF_DIR:?err}/resources
+      #   target: /usr/share/chronograf
+      #   bind:
+      #     create_host_path: true
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind:
+          create_host_path: false

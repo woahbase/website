@@ -162,6 +162,7 @@ nav:
       - alpine-buildworker: images/alpine-buildworker.md
       - alpine-cec: images/alpine-cec.md
       - alpine-cgit: images/alpine-cgit.md
+      - alpine-chronograf: images/alpine-chronograf.md
       - alpine-coturn: images/alpine-coturn.md
       - alpine-davical: images/alpine-davical.md
       - alpine-dhcp: images/alpine-dhcp.md
