@@ -2,7 +2,7 @@
 Description=SystemD (User) Service for Chromium Browser (dockerized)
 After=graphical.target network-online.target docker.service
 
-# expects user UID/GID as 1000/100
+# expects user UID/GID as 1000/1000
 # expects GID of group 'video' as 44
 # expects remote PulseAudio service (via anonymous access) at pulse.service.local
 

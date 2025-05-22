@@ -67,9 +67,10 @@ Also,
   port is accessible in the firewall configurations.
 
 * Make sure to mount the proper camera device (e.g.
-  `/dev/video0`) in the container, and optionally set `GID_VIDEO`
-  so that `mjpg_streamer` (running under user `alpine`) is allowed
-  access to the camera.
+  `/dev/video0`) in the container, and ensure `MJPGST_VIDEO_DEV`
+  points to it, optionally also set `GID_VIDEO` so that
+  `mjpg_streamer` (running under user `alpine`) is allowed access
+  to the camera.
 
 * `mjpg_streamer` feature status printed during build.
   ```

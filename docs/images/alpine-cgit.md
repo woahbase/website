@@ -19,8 +19,8 @@ s6_user: git
 This [image][155] containerizes [cGit][1] running under
 a [LigHttpd][2] server to serve locally hosted git repositories.
 Can also be used to clone and push/pull the repos using git via
-[SSH][3]/PubKey authentication. Scripts included to ease the
-tasks e.g creating or mirroring bare repositories, or sync them
+[SSH][3]/PubKey authentication. Scripts included to ease the tasks
+of creating or mirroring bare repositories, or to sync them
 periodically.
 
 {{ m.srcimage('alpine-s6') }} with the {{ m.alpinepkg('cgit') }}

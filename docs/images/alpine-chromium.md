@@ -110,5 +110,7 @@ Also,
 [5]: https://developer.chrome.com/docs/chromedriver
 [6]: https://developer.chrome.com/docs/chromedriver/get-started
 [7]: https://github.com/GoogleChrome/chrome-launcher
+[8]: https://docs.docker.com/engine/security/apparmor/
+[9]: https://discourse.ubuntu.com/t/mantic-minotaur-release-notes/35534#security-improvements
 
 {% include "all-include.md" %}
