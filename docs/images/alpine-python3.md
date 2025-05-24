@@ -45,8 +45,8 @@ following environment variables.
 | ENV Vars                | Default             | Description
 | :---                    | :---                | :---
 {% include "envvars/alpine-python3.md" %}
-| PYTHONUSERBASE          | /home/alpine/.local | Default prefix for installing user-scoped packages with `pip`.
-| PYTHON_SKIP_MODIFY_PATH | unset               | By default, user-scoped binaries installed by `pip` (in `~/.local/bin`) are added automatically to path, setting this to e.g `1` skips that step.
+| PYTHONUSERBASE          | /home/alpine/.local | Default prefix for installing user-scoped packages with `pip`. {{ m.sincev('3.12.10_20250524') }} Previously named `USERINSTPREFIX`.
+| PYTHON_SKIP_MODIFY_PATH | unset               | By default, user-scoped binaries installed by `pip` (in `~/.local/bin`) are added automatically to path, setting this to e.g `1` skips that step. {{ m.sincev('3.12.10_20250524') }}
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"

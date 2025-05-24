@@ -96,7 +96,8 @@ Also,
   Here's another [link][6] for securing the service and general
   best-practices.
 
-* The following extension packages are included in the image,
+  * The following extension packages are included in the image, {{
+    m.sincev('16.9_20250524') }}
 
     === "PostgreSQL{{pgmajor}}"
 
