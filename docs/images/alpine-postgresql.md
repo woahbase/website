@@ -96,6 +96,28 @@ Also,
   Here's another [link][6] for securing the service and general
   best-practices.
 
+* The following extension packages are included in the image,
+
+    === "PostgreSQL{{pgmajor}}"
+
+    * {{ m.alpinepkg('postgresql-age', branch="v3.20") }}
+    * {{ m.alpinepkg('postgresql-bdr-extension', branch="v3.20") }}
+    * {{ m.alpinepkg('postgresql-citus', branch="v3.20") }}
+    * {{ m.alpinepkg('postgresql-hypopg', branch="v3.20") }}
+    * {{ m.alpinepkg('postgresql-mysql_fdw', branch="v3.20") }}
+    * {{ m.alpinepkg('postgresql-orafce', branch="v3.20") }}
+    * {{ m.alpinepkg('postgresql-pg_cron', branch="v3.20") }}
+    * {{ m.alpinepkg('postgresql-pg_roaringbitmap', branch="v3.20") }}
+    * {{ m.alpinepkg('postgresql-pgvector', branch="v3.20") }}
+    * {{ m.alpinepkg('postgresql-rum', branch="v3.20") }}
+    * {{ m.alpinepkg('postgresql-sequential-uuids', branch="v3.20") }}
+    * {{ m.alpinepkg('postgresql-shared_ispell', branch="v3.20") }}
+    * {{ m.alpinepkg('postgresql-temporal_tables', branch="v3.20") }}
+    * {{ m.alpinepkg('postgresql-timescaledb', branch="v3.20") }}
+    * {{ m.alpinepkg('postgresql-topn', branch="v3.20") }}
+    * {{ m.alpinepkg('postgresql-uint', branch="v3.20") }}
+    * {{ m.alpinepkg('postgresql-url_encode', branch="v3.20") }}
+
 ---
 ##### Script - run.sh
 ---
