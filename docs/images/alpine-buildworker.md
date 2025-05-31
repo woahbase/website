@@ -19,7 +19,10 @@ m.myimage('alpine-buildmaster') }} image for running a master
 service.
 
 {{ m.srcimage('alpine-python3') }} with the {{
-m.pypipkg('buildbot-worker') }} package(s) installed in it.
+m.pypipkg('buildbot-worker',
+repo='https://github.com/buildbot/buildbot') }} package(s)
+installed in it.
+
 
 {% include "pull-image.md" %}
 
@@ -110,6 +113,6 @@ Also,
   required.
 
 [1]: https://buildbot.net/
-[2]: https://docs.buildbot.net/current/index.html
+[2]: https://docs.buildbot.net/current/manual/installation/worker.html
 
 {% include "all-include.md" %}

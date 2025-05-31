@@ -1,0 +1,58 @@
+---
+services:
+  jackett:
+    container_name: jackett
+    deploy:
+      resources:
+        limits:
+          cpus: '2.00'
+          memory: 1024M
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 120s
+    environment:
+      PUID: ${PUID:-1000}
+      PGID: ${PGID:-1000}
+      # TZ: ${TZ}
+    # healthcheck:
+    #   test:
+    #     - CMD-SHELL
+    #     - >-
+    #        wget --quiet --tries=1 --no-check-certificate --spider
+    #        ${HEALTHCHECK_URL:-"http://localhost:9117"} || exit 1
+    #   interval: 2m
+    #   timeout: 10s
+    #   retries: 5
+    #   start_period: 5m
+    hostname: jackett
+    image: woahbase/alpine-jackett:${JACKETT_TAG:-latest}
+    network_mode: bridge
+    ports:
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: ${JACKETT_PORT:-9117}
+        target: 9117
+    volumes:
+      - type: bind
+        source: ${JACKETT_DIR:?err}/config
+        target: /config
+        bind:
+          create_host_path: true
+      - type: bind
+        source: ${JACKETT_DIR:?err}/torrents
+        target: /torrents
+        bind:
+          create_host_path: true
+      # - type: bind
+      #   source: ${JACKETT_DIR:?err}/ServerConfig.json
+      #   target: /config/Jackett/ServerConfig.json
+      #   bind:
+      #     create_host_path: false
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind:
+          create_host_path: false

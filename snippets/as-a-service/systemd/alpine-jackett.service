@@ -1,0 +1,39 @@
+[Unit]
+Description=SystemD Service for Jackett API (dockerized)
+Requires=multi-user.target network-online.target docker.service
+Documentation=https://github.com/Jackett/Jackett/wiki/
+
+After=network-online.target docker.service
+
+# config dir must exist
+ConditionPathIsDirectory=/services/jackett/config
+# ConditionDirectoryNotEmpty=/services/jackett/config
+# ConditionPathIsDirectory=/services/jackett/torrents
+
+[Service]
+ExecStart=/usr/bin/docker run \
+    --rm \
+    --pull=never \
+    -p 9117:9117 \
+    -v /etc/localtime:/etc/localtime:ro \
+    --hostname jackett \
+    --name docker_jackett \
+    -e PGID=1000 \
+    -e PUID=1000 \
+    -v /services/jackett/config:/config \
+    -v /services/jackett/torrents:/torrents \
+    -c 512 \
+    --memory 512mb \
+    woahbase/alpine-jackett
+
+# ExecStop=/usr/bin/docker stop -t 2 docker_jackett
+# ExecStopPost=/usr/bin/docker rm -f docker_jackett
+
+Restart=always
+RestartSec=60
+SyslogIdentifier=jackett
+# User=user
+# Group=users
+
+[Install]
+WantedBy=default.target

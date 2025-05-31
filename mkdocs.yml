@@ -170,6 +170,7 @@ nav:
       - alpine-grafana: images/alpine-grafana.md
       - alpine-haproxy: images/alpine-haproxy.md
       - alpine-influxdb: images/alpine-influxdb.md
+      - alpine-jackett: images/alpine-jackett.md
       - alpine-kanboard: images/alpine-kanboard.md
       - alpine-kapacitor: images/alpine-kapacitor.md
       - alpine-mjpgstreamer: images/alpine-mjpgstreamer.md
