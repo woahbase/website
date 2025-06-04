@@ -66,7 +66,7 @@ following environment variables.
 | CGIT_REPODIR          | /home/{{ s6_user }}/repositories | Default path to repositories. {{ m.sincev('1.2.3_20240907') }}
 | CGIT_ARCHIVEDIR       | $CGIT_REPODIR/.archived          | Default path to archived repos (used in `backup`/`restore` scripts). {{ m.sincev('1.2.3_20240907') }}
 | CGIT_PERMFIX_REPOS    | unset                            | If set to `true`, will fix repositories permissions to `$S6_USER` (default `git:git`). {{ m.sincev('1.2.3_20240907') }}
-| CGIT_GIT_CONIG        | /home/{{ s6_user }}/.gitconfig   | Customizable configurations for git. (used in scripts) {{ m.sincev('1.2.3_20250311') }}
+| CGIT_GIT_CONFIG       | /home/{{ s6_user }}/.gitconfig   | Customizable configurations for git. (used in scripts) {{ m.sincev('1.2.3_20250311') }}
 | CGIT_HOOKSDIR         | /defaults/hooks                  | Custom hooks to add into repositories created via the `bareinit` or `mirror` script. {{ m.sincev('1.2.3_20240907') }}
 | CGIT_HOOKS            | unset                            | **Comma**-separated list of hooks to add into repositories created via the `bareinit` or `mirror` script. e.g. `"post-receive,post-update"`. (Previously all hooks in `CGIT_HOOKSDIR` were copied) If any hook listed here is not found, the default hook from the `(repository-name)/hooks` directory is copied instead.{{ m.sincev('1.2.3_20250311') }}
 | CGIT_REPOS_MAXDEPTH   | 3                                | Maximum depth to search for repositores, (used in scripts). {{ m.sincev('1.2.3_20250311') }}
@@ -164,5 +164,6 @@ docker exec -u {{ s6_user }} -it docker_cgit /scripts/restore <filters: category
 [1]: https://git.zx2c4.com/cgit/
 [2]: https://www.lighttpd.net/
 [3]: https://www.openssh.com/
+[4]: https://wiki.archlinux.org/title/Cgit
 
 {% include "all-include.md" %}
