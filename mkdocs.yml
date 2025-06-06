@@ -186,6 +186,7 @@ nav:
       - alpine-registry: images/alpine-registry.md
       - alpine-rsyncd: images/alpine-rsyncd.md
       - alpine-rsyslog: images/alpine-rsyslog.md
+      - alpine-saned: images/alpine-saned.md
       - alpine-squid: images/alpine-squid.md
       - alpine-ssh: images/alpine-ssh.md
       - alpine-sshwifty: images/alpine-sshwifty.md

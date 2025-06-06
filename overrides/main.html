@@ -26,7 +26,7 @@
 {% block extrahead %}
   {%- set title = config.site_name -%}
   {%- if page and page.title and not page.is_homepage -%}
-  {%- set title = config.site_name ~ " - " ~ page.title | striptags -%}
+  {%-   set title = config.site_name ~ " - " ~ page.title | striptags -%}
   {%- endif -%}
   {%- set image = config.site_url ~ 'assets/images/logo.png' -%}
   {%- set icon = config.site_url ~ 'assets/images/favicon.ico' -%}
@@ -49,11 +49,28 @@
 <meta name="application-name" content="{{ config.site_name }}"/>
 <meta name="author" content="{{ config.site_name }}"/>
 <meta name="description" content="{{ config.site_description }}"/>
-<meta name="generator" content="Mkdocs-Material"/> {# Used to name software used to build the website (i.e. - WordPress, Dreamweaver) #}
+<!---meta name="generator" content="Mkdocs-Material"/> {# Redundant, Used to name software used to build the website (i.e. - WordPress, Dreamweaver) #}-->
 <meta name="google" content="notranslate"> {# Disable translation prompt #}
 <meta name="google" content="sitelinkssearchbox"/> {# Tells Google not to show the sitelinks search box #}
 <meta name="googlebot" content="index,follow"/>{#- Google Specific -#}
-<meta name="keywords" content="woahbase, online, where, only, awesome, happens, works, only, at, home, container, git, github, gnu, make, docker, dockerhub, buildbot, shields.io, images, alpine, linux, server, commandline, desktop, application, apps"/>
+<meta name="keywords" content="{{- [ 'woahbase', 'online',
+  'where', 'only', 'awesome', 'happens', 'works', 'only', 'at', 'home',
+  'builder', 'container', 'images', 'linux', 'multiarch',
+  'git', 'gnu', 'make', 'docker', 'buildx', 'binfmt', 'qemu',
+  'buildbot', 'dockerhub', 'github', 'shields.io',
+  'admin', 'administration', 'appliance', 'application', 'apps',
+  'automation', 'cli', 'cluster', 'code', 'commandline',
+  'datastore', 'deploy', 'desktop', 'developer', 'development',
+  'devops', 'documentation', 'foss', 'framework', 'gui',
+  'homelab', 'homeserver', 'knowledgebase', 'language', 'logging',
+  'monitor', 'networking', 'open', 'programming', 'raspberrypi',
+  'rpi', 'runtime', 'scalable', 'script', 'selfhosted', 'server',
+  'services', 'shared', 'source', 'stable', 'standalone', 'tools',
+  'ui', 'utility', 'webapps',
+]|join(', ') -}}
+{{- ', '~tags|default([])|join(', ') if tags|default([]) -}}
+{{- ', '~(page.title|default('')).split('-')|join(', ') if page and page.title -}}
+{{- ', '~page.meta.extrakws|default([])|join(', ') if page and page.meta and page.meta.extrakws|default([]) -}}"/>
 <meta name="mobile-web-app-capable" content="yes"> <!-- Define your web page as a web app -->
 <meta name="pinterest" content="nopin" description="Sorry, you can't save pins from this website!">
 <meta name="rating" content="General"/> {# Gives a general age rating based on sites content #}
