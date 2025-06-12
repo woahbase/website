@@ -54,7 +54,7 @@ deploy_netlify:  ## deploy site to netlify (as draft unless $(PROD) is set)
 		-e NETLIFY_SITE_ID=$(if $(NETLIFY_SITE_ID),$(NETLIFY_SITE_ID),$(error NETLIFY_SITE_ID is not defined)) \
 		-e PGID=$(PGID) \
 		-e PUID=$(PUID) \
-		-e S6_NPM_LOCAL_PACKAGES=netlify-cli@21.6.0 \
+		-e S6_NPM_LOCAL_PACKAGES=netlify-cli \
 		-e S6_NPM_PROJECTDIR=/home/alpine/project \
 		-v $(CURDIR):/home/alpine/project \
 		$(REGISTRY)/woahbase/alpine-nodejs \
