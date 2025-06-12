@@ -137,7 +137,7 @@ job "saned" {
         PUID = var.puid
 
         # SANED_CONF_abaton = "--/dev/scanner;/dev/scanner0"
-        # SANED_CONF_airscan: "devices=>\"Kyocera MFP Scanner\" = http://192.168.1.102:9095/eSCL;options=>discovery = enable;options=>model = network;blacklist=>--model = \"Xerox*\""
+        # SANED_CONF_airscan = "devices=>\"Kyocera MFP Scanner\" = http://192.168.1.102:9095/eSCL;options=>discovery = enable;options=>model = network;blacklist=>--model = \"Xerox*\""
         # SANED_TRIM_CONFLINE = "1"
 
         # TZ = local.var.tz

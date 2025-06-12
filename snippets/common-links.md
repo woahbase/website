@@ -13,8 +13,8 @@
 [105]: https://github.com/multiarch/qemu-user-static/releases/
 [106]: https://github.com/docker/buildx#installing
 [107]: https://github.com/docker/cli/blob/master/experimental/README.md
-<!-- [108]: {{ coderepo_weburl }} -->
-<!-- [109]: https://hub.docker.com/u/{{ orgname }} -->
+[108]: https://github.com/tonistiigi/binfmt/releases/
+[109]: {{ imagerepo_weburl }}/tonistiigi/binfmt
 [110]: {{ homepage | default(config.site_url) }}
 
 [111]: https://buildbot.net/
