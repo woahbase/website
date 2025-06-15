@@ -1,11 +1,28 @@
-{% macro genshieldlink(typ, subtyp, repo, label, fpath, fparams, lpath, lparams) -%}
-{%-  if 'private' in tags -%}{#- generate links using private repo/registry urls -#}
+{%- macro genshieldlink(typ, subtyp, repo, label, fpath, fparams, lpath, lparams) -%}
+{%-  if 'private' in tags -%}
+{#-    no shields for private images -#}
+{#-    generate links using private repo/registry urls -#}
+
 {%-    set coderepo_weburl  = config.extra.sources['private']['orgurl']     | default('https://github.com')       -%}
 {%-    set imagerepo_weburl = config.extra.distributions['private']['repo'] | default('https://hub.docker.com/r') -%}
+
+{%-    set iurl = {
+            "github" : coderepo_weburl,
+            "docker" : imagerepo_weburl
+          }[typ]
+        ~'/'~ {
+            "github" : repo,
+            "docker" : orgname ~'/'~ repo
+          }[typ]
+        ~ ('/'~lpath if lpath)
+        ~ ('?'~lparams if lparams) -%}
+
+{{    '| [{}]({})'.format(label|default(subtyp), iurl) }}
+
 {%-  else  -%}
 {%-    set coderepo_weburl  = (config.extra.sources.values()      |default([])|rejectattr("disabled")|list|first)['orgurl']|default('https://github.com')       -%}
 {%-    set imagerepo_weburl = (config.extra.distributions.values()|default([])|rejectattr("disabled")|list|first)['repo']  |default('https://hub.docker.com/r') -%}
-{%-  endif -%}
+
 {%-  set furl = 'https://img.shields.io'
         ~'/'~ typ ~'/'~ subtyp
         ~'/'~ orgname ~'/'~ repo
@@ -14,6 +31,7 @@
         ~ ('&logo='~typ if typ in ['github', 'docker'])
         ~ ('&label='~label if label)
         ~ ('&'~fparams if fparams) -%}
+
 {%-  set iurl = {
             "github" : coderepo_weburl,
             "docker" : imagerepo_weburl
@@ -24,14 +42,12 @@
           }[typ]
         ~ ('/'~lpath if lpath)
         ~ ('?'~lparams if lparams) -%}
-{%-  if 'private' in tags -%}{#- no shields for private images -#}
-        {{ '| [{}]({})'.format(label|default(subtyp), iurl) }}
-{%-  else  -%}
-        {{ '[![{}]({})]({})'.format(label|default(subtyp), furl, iurl) }}
-{%-  endif -%}
-{%-endmacro %}
 
-{% macro genline_github(repo, extra) -%}
+{{     '[![{}]({})]({})'.format(label|default(subtyp), furl, iurl) }}
+{%-  endif -%}
+{%- endmacro -%}
+
+{%- macro genline_github(repo, extra) -%}
 {{      genshieldlink('github', 'last-commit', repo, label=(extra~" " if extra)~'updated' ) }}
 {{      genshieldlink('github', 'stars'      , repo, lpath='stargazers'     ) }}
 {{      genshieldlink('github', 'forks'      , repo, lpath='network/members') }}
@@ -39,27 +55,22 @@
 {{      genshieldlink('github', 'issues'     , repo, lpath='issues'         ) }}
 {{      genshieldlink('github', 'issues-pr'  , repo, lpath='pulls'          ) }}
 <br/>
-{%-endmacro %}
+{%- endmacro -%}
 
-{% macro genline_dockerhub(repo, extra, mr={}) -%}
+{%- macro genline_dockerhub(repo, extra, mr={}) -%}
 {{    genshieldlink('docker', 'pulls', repo, label=(extra~" " if extra)~'pulls' ) }}
 {{    genshieldlink('docker', 'stars', repo, label='stars') }}
-{%-   if not skip_aarch64|default(false) and not mr.skip_aarch64|default(false) %}
-{{      genshieldlink('docker', 'image-size', repo, fpath='aarch64', label='aarch64', lpath='tags?name=aarch64&ordering=last_updated') }}
-{%-   endif -%}
-{%-   if not skip_armhf|default(false) and not mr.skip_armhf|default(false) %}
-{{      genshieldlink('docker', 'image-size', repo, fpath='armhf',   label='armhf',   lpath='tags?name=armhf&ordering=last_updated')   }}
-{%-   endif -%}
-{%-   if not skip_armv7l|default(false) and not mr.skip_armv7l|default(false) %}
-{{      genshieldlink('docker', 'image-size', repo, fpath='armv7l',  label='armv7l',  lpath='tags?name=armv7l&ordering=last_updated')  }}
-{%-   endif -%}
-{%-   if not skip_x86_64|default(false) and not mr.skip_x86_64|default(false) %}
-{{      genshieldlink('docker', 'image-size', repo, fpath='x86_64',  label='x86_64',  lpath='tags?name=x86_64&ordering=last_updated')  }}
-{%-   endif -%}
+{%-   for ar in page.meta.arches|default(config.extra.arches) -%}
+{%-     if page.meta.has_perarch_tags|default(true)
+          and not page.meta["skip_"~ar]|default(false)
+          and not mr["skip_"~ar]|default(false) %}
+{{        genshieldlink('docker', 'image-size', repo, fpath=ar, label=ar, lpath='tags?name='~ar~'&ordering=last_updated') }}
+{%-     endif -%}
+{%-   endfor %}
 <br/>
-{%-endmacro %}
+{%- endmacro -%}
 
-{% include 'deprecated.md' %}
+{%- include 'deprecated.md' %}
 <!--
 [:material-github:][151]
 [:fontawesome-brands-docker:][155]
@@ -86,11 +97,10 @@
           skip_x86_64: boolean  -#}
 {{      genline_dockerhub(mr.name, mr.name.split('-')|last) }}
 {%-   endfor-%}
-{%- endif -%}
+{%- endif %}
 
-{% if page.meta.description %}
-
+{% if page.meta.description -%}
 {{ page.meta.description }}
 
 ---
-{% endif %}
+{%- endif %}

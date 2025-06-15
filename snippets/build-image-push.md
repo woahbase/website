@@ -15,32 +15,16 @@ make push {{ wb_extra_args_push | default(wb_extra_args | default("")) }}
 If the built image targets another architecture then it is
 **required** to specify the `ARCH` parameter when pushing. e.g.
 
-{% if not skip_aarch64 %}
-=== "aarch64"
+{% for ar in page.meta.arches|default(config.extra.arches) -%}
+{%-  if not page.meta["skip_"~ar]|default(false) -%}
+=== "{{ ar }}"
     ``` sh
-    make push ARCH=aarch64 {{ wb_extra_args_push | default(wb_extra_args | default("")) }}
+    make push ARCH={{ ar  }} {{ wb_extra_args_push | default(wb_extra_args | default("")) }}
     ```
-{% endif %}
-{% if not skip_armhf %}
-=== "armhf"
-    ``` sh
-    make push ARCH=armhf {{ wb_extra_args_push | default(wb_extra_args | default("")) }}
-    ```
-{% endif %}
-{% if not skip_armv7l %}
-=== "armv7l"
-    ``` sh
-    make push ARCH=armv7l {{ wb_extra_args_push | default(wb_extra_args | default("")) }}
-    ```
-{% endif %}
-{% if not skip_x86_64 %}
-=== "x86_64"
-    ``` sh
-    make push ARCH=x86_64 {{ wb_extra_args_push | default(wb_extra_args | default("")) }}
-    ```
-{% endif %}
+{%-   endif %}
+{% endfor %}
 
-{% if not (('deprecated' in tags) or ('legacy' in tags)) %}{# no version/builddate push for old images #}
+{% if not (('deprecated' in tags) or ('legacy' in tags)) -%}{#- no version/builddate push for old images -#}
 {%- set iimag = dhrepo | default(page.title) -%}
 {%- set iarch = 'x86_64' if not skip_x86_64|default(false) else 'aarch64' -%}
 ???+ info "Pushing Multiple Tags"
@@ -93,4 +77,5 @@ If the built image targets another architecture then it is
     ``` sh
     make build test push REGISTRY=your.private.registry:5000
     ```
-{% endif %}
+{%- endif %}
+

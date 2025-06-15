@@ -1,15 +1,11 @@
 {%- set lstag = 'latest' -%}{%- set vstag = 'version' -%}{%- set bdtag = 'builddate' -%}
-{%- set _tags = [
-  'aarch64' if not skip_aarch64|default(false),
-  'armhf' if not skip_armhf|default(false),
-  'armv7l' if not skip_armv7l|default(false),
-  'x86_64' if not skip_x86_64|default(false)
-] | select -%}
 {%- set itags = [] -%}{%- set vtags = [] -%}{%- set btags = [] -%}
-{%- for t in _tags -%}
-{{-   itags.append('{}'.format(t))                         or '' -}}
-{{-   vtags.append('{}_({})'.format(t, vstag))             or '' -}}
-{{-   btags.append('{}_({})_({})'.format(t, vstag, bdtag)) or '' -}}
+{%- for ar in page.meta.arches|default(config.extra.arches) -%}
+{%-   if not page.meta["skip_"~ar]|default(false) -%}
+{{-     itags.append('{}'.format(ar))                         or '' -}}
+{{-     vtags.append('{}_({})'.format(ar, vstag))             or '' -}}
+{{-     btags.append('{}_({})_({})'.format(ar, vstag, bdtag)) or '' -}}
+{%-   endif -%}
 {%- endfor -%}
 ---
 #### Annotate Manifest(s)
@@ -36,7 +32,7 @@ above we need to do it thrice.
 ##### Tag {{ lstag | capitalize }}
 ---
 
-{% set manifest_tag = lstag %}
+{% set manifest_tag = lstag -%}
 
 Assuming we built the images for all supported architectures, to
 facilitate pulling the correct image for the architecture, we
@@ -50,8 +46,8 @@ manifest_tag }}` by running
 ##### Tag {{ vstag | capitalize }}
 ---
 
-{% set target_name = vstag %}
-{% set manifest_tag = "({})".format(vstag) %}
+{% set target_name = vstag -%}
+{% set manifest_tag = "({})".format(vstag) -%}
 
 Next, to facilitate pulling images by version, we create/amend the
 image-version manifest and annotate it to map the tags `:{{- vtags
@@ -63,12 +59,11 @@ image-version manifest and annotate it to map the tags `:{{- vtags
 ##### Tag Build-Date
 ---
 
-{% set target_name = "date" %}
-{% set manifest_tag = "({})_({})".format(vstag, bdtag) %}
+{% set target_name = "date" -%}
+{% set manifest_tag = "({})_({})".format(vstag, bdtag) -%}
 
 Then, (optionally) we create/amend the `{{ manifest_tag }}`
 manifest and annotate it to map the tags `:{{- btags | join("`, `:")
 }}` to the tag `:{{ manifest_tag }}` by running
 
 {% include "build-image-annotate-tag.md" %}
-

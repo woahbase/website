@@ -66,12 +66,26 @@ extra:
     #   link: https://instagram.com/<username>
 
   # extra vars for macros
+  # alpine stable version for generating package urls
+  alpine_branch: v3.21
+  # default supported architectures
+  arches: [aarch64, armhf, armv7l, x86_64]
+  platforms:
+    aarch64: --os linux --arch arm64
+    armhf: --os linux --arch arm --variant v6
+    armv7l: --os linux --arch arm --variant v7
+    i386: --os linux --arch 386
+    loongarch64: --os linux --arch loong64
+    mips64: --os linux --arch mips64
+    mips64le: --os linux --arch mips64le
+    ppc64le: --os linux --arch ppc64le
+    riscv64: --os linux --arch riscv64
+    s390x: --os linux --arch s390x
+    x86_64: --os linux --arch amd64
   shieldparams: >-
     color=brightgreen&style=flat-square
   # pgid: "`id -g`"
   # puid: "`id -u`"
-  # alpine stable version for generating package urls
-  alpine_branch: v3.21
 
 extra_css:
   - assets/css/fonts.css

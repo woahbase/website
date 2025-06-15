@@ -10,7 +10,7 @@
 {{-       ''      if (loop.last  and items|length>1) -}}
 {%-     endif -%}
 {%-   endfor -%}
-{%- endmacro %}
+{%- endmacro -%}
 {%- macro genobjlinks(items, t="Sources|Images") -%}
 {%-   for d in items -%}
 {%-     if not d.disabled|default(false) -%}
@@ -24,7 +24,7 @@
 {{-       ') ' if (loop.last  and items|length>1) -}}
 {%-     endif -%}
 {%-   endfor -%}
-{%- endmacro %}
+{%- endmacro -%}
 
 ---
 Maintenance

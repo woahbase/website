@@ -71,6 +71,10 @@ Also,
 * Checkout their [wiki][3] for customizing your own. Especially
   the [environment-variables][4].
 
+* Includes everything from the {{ m.myimage('alpine-nodejs') }}
+  image. Which in turn, includes everything from the {{
+  m.myimage('alpine-s6') }} image.
+
 [1]: https://uptime.kuma.pet/
 [2]: https://github.com/louislam/uptime-kuma/releases
 [3]: https://github.com/louislam/uptime-kuma/wiki

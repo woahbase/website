@@ -1,4 +1,4 @@
-{% import "macros.md" as m with context %}
+{% import "macros.md" as m with context -%}
 
 ---
 Build Your Own
@@ -11,7 +11,6 @@ repository.
 
 Here's how...
 
-
 ---
 #### Setting up
 ---
@@ -23,25 +22,25 @@ annotations, we might require enabling [experimental features][107] of Docker.
 
 Now, to get the code,
 
-{% for d in config.extra.sources.values()|default([])|rejectattr("disabled")|list %}
-{%   if not d.disabled|default(false) %}
+{% for d in config.extra.sources.values()|default([])|rejectattr("disabled")|list -%}
+{%   if not d.disabled|default(false) -%}
 === "{{ d.name }}"
-    Clone the [repository]({{ d.orgurl ~'/'~ dhrepo | default(page.title) }}) with,
+    Clone the [repository]({{ d.orgurl ~'/'~ ghrepo | default(page.title) }}) with,
 
     ``` sh
     git clone {{ d.repo }}/{{ config.extra.orgname }}/{{ ghrepo | default(page.title) }}
     cd {{ ghrepo | default(page.title) }}
     ```
-{%   endif %}
+{%-   endif %}
 {% endfor %}
 
-{% if not (('deprecated' in tags) or ('legacy' in tags)) %}{# no help target for legacy/deprecated images #}
+{% if not (('deprecated' in tags) or ('legacy' in tags)) -%}{#- no help target for legacy/deprecated images -#}
 To get a list of all available targets, run
 
 ``` sh
 make help
 ```
-{% endif %}
+{%- endif %}
 
 ??? info "Always Check Before You Make!"
     Did you know, we could check what any make target is going to
@@ -64,32 +63,16 @@ make build test {{ wb_extra_args_build | default(wb_extra_args | default("")) }}
 For building an image that targets another architecture, it is
 **required** to specify the `ARCH` parameter when building. e.g.
 
-{% if not skip_aarch64 %}
-=== "aarch64"
+{% for ar in page.meta.arches|default(config.extra.arches) -%}
+{%-  if not page.meta["skip_"~ar]|default(false) -%}
+=== "{{ ar }}"
     ``` sh
-    make build test ARCH=aarch64 {{ wb_extra_args_build | default(wb_extra_args | default("")) }}
+    make build test ARCH={{ ar }} {{ wb_extra_args_build | default(wb_extra_args | default("")) }}
     ```
-{% endif %}
-{% if not skip_armhf %}
-=== "armhf"
-    ``` sh
-    make build test ARCH=armhf {{ wb_extra_args_build | default(wb_extra_args | default("")) }}
-    ```
-{% endif %}
-{% if not skip_armv7l %}
-=== "armv7l"
-    ``` sh
-    make build test ARCH=armv7l {{ wb_extra_args_build | default(wb_extra_args | default("")) }}
-    ```
-{% endif %}
-{% if not skip_x86_64 %}
-=== "x86_64"
-    ``` sh
-    make build test ARCH=x86_64 {{ wb_extra_args_build | default(wb_extra_args | default("")) }}
-    ```
-{% endif %}
+{%-  endif %}
+{% endfor %}
 
-{% if not (('deprecated' in tags) or ('legacy' in tags)) %}
+{% if not (('deprecated' in tags) or ('legacy' in tags)) -%}
 ???+ info "Build Parameters"
     All images have a few common build parameters that can be
     customized at build time, like
@@ -98,10 +81,10 @@ For building an image that targets another architecture, it is
 
     :   The target architecture to build for. Defaults to host
         architecture, auto-detected at build-time if not specified.
-        Also determines if binfmt support is required before build
-        or run and runs the `regbinfmt` target automatically.
-        Possible values are `aarch64`, `armhf`, `armv7l`, and
-        `x86_64`.
+        Also determines if binfmt support is required before build or
+        run and runs the `regbinfmt` (or `inbinfmt` for recent images)
+        target automatically. Possible values could be `aarch64`, `armhf`,
+        `armv7l`, or `x86_64`.
 
     * `BUILDDATE`
 
@@ -159,7 +142,7 @@ For building an image that targets another architecture, it is
     via the `config.toml` file. A {{ m.ghfilelink('config.toml', title='sample') }}
     is provided in the repository, make sure to replace
     `YOUR.PRIVATE.REGISTRY` with your own (include port if needed).
-{% endif %}
+{%- endif %}
 
 ---
 #### Make to Run
@@ -190,3 +173,4 @@ make shell {{ wb_extra_args_run | default(wb_extra_args | default("")) }}
 
 There may be more such targets defined as per the usage of the
 image. Check the {{ m.ghfilelink('makefile') }} for more information.
+

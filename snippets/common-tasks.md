@@ -48,3 +48,4 @@ To check logs of a running container in real time
 ``` sh
 docker logs -f docker_{{ svcname }}
 ```
+
