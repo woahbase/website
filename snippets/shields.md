@@ -3,47 +3,41 @@
 {#-    no shields for private images -#}
 {#-    generate links using private repo/registry urls -#}
 
-{%-    set coderepo_weburl  = config.extra.sources['private']['orgurl']     | default('https://github.com')       -%}
-{%-    set imagerepo_weburl = config.extra.distributions['private']['repo'] | default('https://hub.docker.com/r') -%}
+{%-    set coderepo_weburl  = config.extra.sources['private']['weburl']     | default('https://github.com')       -%}
+{%-    set imagerepo_weburl = config.extra.distributions['private']['weburl'] | default('https://hub.docker.com/r') -%}
 
 {%-    set iurl = {
-            "github" : coderepo_weburl,
-            "docker" : imagerepo_weburl
-          }[typ]
-        ~'/'~ {
-            "github" : repo,
-            "docker" : orgname ~'/'~ repo
-          }[typ]
-        ~ ('/'~lpath if lpath)
-        ~ ('?'~lparams if lparams) -%}
+             "github" : coderepo_weburl,
+             "docker" : imagerepo_weburl
+           }[typ]
+         ~'/'~ repo
+         ~ ('/'~lpath if lpath)
+         ~ ('?'~lparams if lparams) -%}
 
-{{    '| [{}]({})'.format(label|default(subtyp), iurl) }}
+       {{ '| [{}]({})'.format(label|default(subtyp), iurl) }}
 
 {%-  else  -%}
-{%-    set coderepo_weburl  = (config.extra.sources.values()      |default([])|rejectattr("disabled")|list|first)['orgurl']|default('https://github.com')       -%}
-{%-    set imagerepo_weburl = (config.extra.distributions.values()|default([])|rejectattr("disabled")|list|first)['repo']  |default('https://hub.docker.com/r') -%}
+{%-    set coderepo_weburl  = (config.extra.sources.values()      |default([])|rejectattr("disabled")|list|first)['weburl']|default('https://github.com')       -%}
+{%-    set imagerepo_weburl = (config.extra.distributions.values()|default([])|rejectattr("disabled")|list|first)['weburl']  |default('https://hub.docker.com/r') -%}
 
-{%-  set furl = 'https://img.shields.io'
-        ~'/'~ typ ~'/'~ subtyp
-        ~'/'~ orgname ~'/'~ repo
-        ~ ('/'~fpath if fpath)
-        ~'?'~ shieldparams
-        ~ ('&logo='~typ if typ in ['github', 'docker'])
-        ~ ('&label='~label if label)
-        ~ ('&'~fparams if fparams) -%}
+{%-    set furl = 'https://img.shields.io'
+         ~'/'~ typ ~'/'~ subtyp
+         ~'/'~ repo
+         ~ ('/'~fpath if fpath)
+         ~'?'~ shieldparams
+         ~ ('&logo='~typ if typ in ['github', 'docker'])
+         ~ ('&label='~label if label)
+         ~ ('&'~fparams if fparams) -%}
 
-{%-  set iurl = {
-            "github" : coderepo_weburl,
-            "docker" : imagerepo_weburl
-          }[typ]
-        ~'/'~ {
-            "github" : repo,
-            "docker" : orgname ~'/'~ repo
-          }[typ]
-        ~ ('/'~lpath if lpath)
-        ~ ('?'~lparams if lparams) -%}
+{%-    set iurl = {
+             "github" : coderepo_weburl,
+             "docker" : imagerepo_weburl
+           }[typ]
+         ~'/'~ repo
+         ~ ('/'~lpath if lpath)
+         ~ ('?'~lparams if lparams) -%}
 
-{{     '[![{}]({})]({})'.format(label|default(subtyp), furl, iurl) }}
+       {{ '[![{}]({})]({})'.format(label|default(subtyp), furl, iurl) }}
 {%-  endif -%}
 {%- endmacro -%}
 
@@ -76,17 +70,17 @@
 [:fontawesome-brands-docker:][155]
 -->
 {%- if not gh_multirepo -%}
-{{    genline_github(ghrepo|default(page.title)) }}
+{{    genline_github(ghorgname|default(orgname)~'/'~ghrepo|default(page.title)) }}
 {%- else -%}
 {%-   for ms in gh_multirepo -%}
 {#-     ms:
           name: repo-name       -#}
-{{      genline_github(ms.name, ms.name.split('-')|last) }}
-{%-   endfor-%}
+{{      genline_github(ghorgname|default(orgname)~'/'~ms.name, ms.name.split('-')|last) }}
+{%-   endfor -%}
 {%- endif -%}
 
 {%- if not dh_multirepo -%}
-{{    genline_dockerhub(dhrepo|default(page.title)) }}
+{{    genline_dockerhub(dhorgname|default(orgname)~'/'~dhrepo|default(page.title)) }}
 {%- else -%}
 {%-   for mr in dh_multirepo -%}
 {#-     mr:
@@ -95,8 +89,8 @@
           skip_armhf: boolean
           skip_armv7l: boolean
           skip_x86_64: boolean  -#}
-{{      genline_dockerhub(mr.name, mr.name.split('-')|last) }}
-{%-   endfor-%}
+{{      genline_dockerhub(dhorgname|default(orgname)~'/'~mr.name, mr.name.split('-')|last) }}
+{%-   endfor -%}
 {%- endif %}
 
 {% if page.meta.description -%}

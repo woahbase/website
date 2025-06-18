@@ -25,11 +25,11 @@ Now, to get the code,
 {% for d in config.extra.sources.values()|default([])|rejectattr("disabled")|list -%}
 {%   if not d.disabled|default(false) -%}
 === "{{ d.name }}"
-    Clone the [repository]({{ d.orgurl ~'/'~ ghrepo | default(page.title) }}) with,
+    Clone the [repository]({{ d.weburl ~'/'~ orgname ~'/'~ ghrepo|default(page.title) }}) with,
 
     ``` sh
-    git clone {{ d.repo }}/{{ config.extra.orgname }}/{{ ghrepo | default(page.title) }}
-    cd {{ ghrepo | default(page.title) }}
+    git clone {{ d.cloneurl ~'/'~ orgname ~'/'~ ghrepo|default(page.title) }}
+    cd {{ ghrepo|default(page.title) }}
     ```
 {%-   endif %}
 {% endfor %}
@@ -123,10 +123,10 @@ For building an image that targets another architecture, it is
     * `ORGNAME`
 
     :   The organization (or user) name under which the image
-        repositories exist, defaults to `{{ config.extra.orgname }}`.
-        Does not need to be changed for local or test builds, but to
-        override, either pass it by setting an environment variable,
-        or with every `make` command.
+        repositories exist, defaults to `{{ orgname }}`. Does not
+        need to be changed for local or test builds, but to override,
+        either pass it by setting an environment variable, or with
+        every `make` command.
 
     The image may also require custom parameters (like binary
     architecture). **Before you build**, check the {{ m.ghfilelink('makefile') }}

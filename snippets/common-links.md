@@ -1,9 +1,9 @@
 {%- if 'private' in tags %}{#- generate links using private repo/registry urls -#}
-{%-   set coderepo_weburl  = config.extra.sources['private']['orgurl']     | default('https://github.com')       -%}
-{%-   set imagerepo_weburl = config.extra.distributions['private']['repo'] | default('https://hub.docker.com/r') -%}
+{%-   set coderepo_weburl  = config.extra.sources['private']['weburl']     | default('https://github.com')       -%}
+{%-   set imagerepo_weburl = config.extra.distributions['private']['weburl'] | default('https://hub.docker.com/r') -%}
 {%- else  %}
-{%-   set coderepo_weburl  = (config.extra.sources.values()      |default([])|rejectattr("disabled")|list|first)['orgurl']|default('https://github.com')       -%}
-{%-   set imagerepo_weburl = (config.extra.distributions.values()|default([])|rejectattr("disabled")|list|first)['repo']  |default('https://hub.docker.com/r') -%}
+{%-   set coderepo_weburl  = (config.extra.sources.values()      |default([])|rejectattr("disabled")|list|first)['weburl']|default('https://github.com')       -%}
+{%-   set imagerepo_weburl = (config.extra.distributions.values()|default([])|rejectattr("disabled")|list|first)['weburl']  |default('https://hub.docker.com/r') -%}
 {%- endif %}
 
 [101]: https://git-scm.com
@@ -22,5 +22,5 @@
 [113]: https://alpinelinux.org/
 [114]: alpine-s6.md#usershell
 
-[151]: {{ coderepo_weburl }}/{{ ghrepo | default(page.title) }}
-[155]: {{ imagerepo_weburl }}/{{ orgname }}/{{ dhrepo | default(page.title) }}
+[151]: {{ coderepo_weburl  ~'/'~ ghorgname|default(orgname) ~'/'~ ghrepo|default(page.title) }}
+[155]: {{ imagerepo_weburl ~'/'~ dhorgname|default(orgname) ~'/'~ dhrepo|default(page.title) }}

@@ -17,3 +17,12 @@
     keep working as expected, but for building new images,
     a significant part of the code needs to be updated.
 {%- endif %}
+{% if 'foreign' in tags -%}
+???+ info "Not Our Image"
+    This image is not built (or modified or maintained) by, nor
+    has any direct affiliation with us. But like many other FOSS,
+    we like and trust it enough and may (or may not) use it ourselves.
+    Any issues/questions/support regarding this image that is not
+    relevant to this documentation or snippets go to the actual
+    owner or maintainers.
+{%- endif %}

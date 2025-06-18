@@ -14,8 +14,8 @@
 {%- macro genobjlinks(items, t="Sources|Images") -%}
 {%-   for d in items -%}
 {%-     if not d.disabled|default(false) -%}
-{%-       if   t == "Sources" -%} {%- set ln = d.orgurl ~'/'~ dhrepo|default(page.title) -%}
-{%-       elif t == "Images"  -%} {%- set ln = d.repo ~'/'~ orgname ~'/'~ dhrepo|default(page.title) -%}
+{%-       if   t == "Sources" -%} {%- set ln = d.weburl ~'/'~ orgname ~'/'~ ghrepo|default(page.title) -%}
+{%-       elif t == "Images"  -%} {%- set ln = d.weburl ~'/'~ orgname ~'/'~ dhrepo|default(page.title) -%}
 {%-       endif               -%}
 {%-       if loop.first -%} [{{ t }}]({{ ln }} "View {{ t }}")
 {%-       else          -%} [*Mirror{{ loop.index - 1 }}*]({{ ln }} "{{ t }} Mirror #{{ loop.index - 1 }}") {{- ', ' if not loop.last -}}

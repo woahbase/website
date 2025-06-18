@@ -1,0 +1,16 @@
+---
+services:
+  binfmt:
+    container_name: binfmt
+    command: --install ${BINFMT_ARCHS:-all}
+    deploy:
+      resources:
+        limits:
+          cpus: '1.00'
+          memory: 256M
+      restart_policy:
+        condition: none
+    hostname: binfmt
+    image: tonistiigi/binfmt:${BINFMT_TAG:-latest}
+    network_mode: bridge
+    privileged: true

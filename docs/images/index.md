@@ -13,6 +13,7 @@ navigation or search,
     | {{ anchify('compose') }}    | These images include an example `docker-compose.yml` file.
     | {{ anchify('deprecated') }} | Deprecated images, to be used with caution.
     | {{ anchify('dev') }}        | Images used to develop or as base for applications that require the compiler/runtime.
+    | {{ anchify('foreign') }}    | Images not built by us.
     | {{ anchify('github') }}     | Applications that use Github Release to track versions or fetch binaries.
     | {{ anchify('gui') }}        | Images that provide a GUI, requires X.Org or alternatives.
     | {{ anchify('legacy') }}     | Images that are still using the old-style builds, not yet updated.
@@ -37,4 +38,4 @@ navigation or search,
     | {{ anchify('python3') }}    | Applications that build from Python 3.
     | {{ anchify('s6') }}         | Images that build from s6.
 
-<!-- material/tags -->
+<!-- material/tags { scope: true } -->

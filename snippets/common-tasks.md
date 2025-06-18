@@ -27,11 +27,14 @@ Get a shell inside a already running container,
 docker exec -it docker_{{ svcname }} /bin/bash
 ```
 
+
+{% if not ('foreign' in tags) -%}
 Optionally, login as a non-root user, (default is `{{ s6_user | default('alpine') }}`)
 
 ``` sh
 docker exec -u {{ s6_user | default('alpine') }} -it docker_{{ svcname }} /bin/bash
 ```
+{%- endif %}
 
 Or set user/group id e.g 1000/1000,
 

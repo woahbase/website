@@ -19,7 +19,7 @@ show them in the WebUI as a nice status-page.
 
 {{ m.srcimage('alpine-nodejs') }} with the [uptimekuma][2] package
 (and binary distributables) installed in it.
-{{ m.ghreleasestr('louislam/uptime-kuma ') }}
+{{ m.ghreleasestr('louislam/uptime-kuma') }}
 
 {% include "pull-image.md" %}
 
