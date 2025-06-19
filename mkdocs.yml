@@ -70,14 +70,14 @@ extra:
   # extra vars for macros
   # alpine stable version for generating package urls
   alpine_branch: v3.21
-  # default supported architectures
+  # default supported architecture-tags
   arches: [aarch64, armhf, armv7l, x86_64]
-  platforms:
+  platforms: # maps architecture-tags to docker image platforms
     aarch64: --os linux --arch arm64
     armhf: --os linux --arch arm --variant v6
     armv7l: --os linux --arch arm --variant v7
     i386: --os linux --arch 386
-    loongarch64: --os linux --arch loong64
+    loong64: --os linux --arch loong64
     mips64: --os linux --arch mips64
     mips64le: --os linux --arch mips64le
     ppc64le: --os linux --arch ppc64le

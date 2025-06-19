@@ -1,6 +1,7 @@
 ---
-description: MultiArch Base Image for Alpine Linux, with QEMU binfmt support.
+description: MultiArch Base Image for Alpine Linux
 svcname: base
+arches: [aarch64, armhf, armv7l, i386, loong64, ppc64le, riscv64, s390x, x86_64]
 tags:
   - base
   - shell
