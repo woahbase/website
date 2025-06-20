@@ -1,6 +1,8 @@
 ---
 description: MultiArch Alpine Linux + S6 Init System.
 svcname: s6
+alpine_branch: v3.22
+arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
 tags:
   - shell
 ---
@@ -21,13 +23,14 @@ pass the proper signals when interacted with the containers.
 Run
 ---
 
-Run `bash` in the container to get a shell.
+Run `bash` in the container to get a shell, or switch the
+entrypoint to `/usershell` to get a [user-scoped][114] shell.
 
 === "shell"
     ``` sh
     docker run --rm --name docker_s6 woahbase/alpine-s6 /bin/bash
     ```
-=== "usershell"
+=== "user-scoped shell"
     ``` sh
     docker run --rm -it --name docker_s6 --entrypoint /usershell woahbase/alpine-s6 /bin/bash
     ```
