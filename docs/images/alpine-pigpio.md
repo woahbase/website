@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + PiGPIO Daemon
-svcname: pigpio
 skip_x86_64: 1
 has_services:
   - compose

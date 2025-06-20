@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + Python3 + Buildbot (Worker)
-svcname: buildworker
 ghrepo: alpine-buildbot
 has_services:
   - compose

@@ -1,6 +1,5 @@
 ---
 description: Container for Alpine Linux + S6 + GNU LibC + OpenJDK8 + WildFly (JBoss) server
-svcname: wildfly
 tags:
   - deprecated
   - service

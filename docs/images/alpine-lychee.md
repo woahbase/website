@@ -1,6 +1,5 @@
 ---
 description: Container for Alpine Linux + S6 + NGINX + PHP7 + Lychee
-svcname: lychee
 skip_aarch64: 1
 skip_armv7l: 1
 tags:

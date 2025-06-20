@@ -1,6 +1,5 @@
 ---
 description: Concurrent, Cache-efficient, and Dockerfile-agnostic Builder Toolkit
-svcname: buildkit
 orgname: moby
 has_perarch_tags: false
 tags:

@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + MySQL (actually MariaDB)
-svcname: mysql
 has_services:
   - compose
   - nomad

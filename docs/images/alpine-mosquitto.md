@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + Mosquitto server.
-svcname: mosquitto
 has_services:
   - compose
   - nomad

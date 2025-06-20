@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + PostgreSQL
-svcname: postgresql
 has_services:
   - compose
   - nomad

@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + Redis.
-svcname: redis
 has_services:
   - compose
   - nomad

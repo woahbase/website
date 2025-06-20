@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + Squid Proxy/Content Cache.
-svcname: squid
 has_services:
   - compose
   - nomad

@@ -1,6 +1,5 @@
 ---
 description: Container for Alpine Linux + S6 + NGINX + Laverna Note-taking webapp
-svcname: laverna
 skip_armv7l: true
 skip_aarch64: true
 tags:

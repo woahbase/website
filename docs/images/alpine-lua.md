@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + Lua + LuaRocks
-svcname: lua
 tags:
   - dev
   - usershell

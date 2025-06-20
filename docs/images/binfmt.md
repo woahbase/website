@@ -1,6 +1,5 @@
 ---
 description: Cross-platform emulator collection distributed with Docker images.
-svcname: binfmt
 orgname: tonistiigi
 has_perarch_tags: false
 has_services:

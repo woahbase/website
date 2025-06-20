@@ -1,6 +1,5 @@
 ---
 description: Container for Alpine Linux + S6 + GNU LibC + Netdata
-svcname: netdata
 has_services:
   - compose
 tags:

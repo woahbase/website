@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + mJPG_streamer
-svcname: mjpgstreamer
 has_services:
   - systemd
 tags:

@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + Docker Registry v2 + genuinetools/Reg for WebUI
-svcname: registry
 has_services:
   - compose
   - nomad

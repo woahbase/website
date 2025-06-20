@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + Navidrome
-svcname: navidrome
 has_services:
   - compose
   - nomad

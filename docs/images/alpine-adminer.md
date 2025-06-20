@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + NGINX + PHP-fpm + Adminer
-svcname: adminer
 has_services:
   - compose
   - nomad

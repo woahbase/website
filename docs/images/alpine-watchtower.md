@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + Watchtower
-svcname: watchtower
 has_services:
   - compose
 tags:

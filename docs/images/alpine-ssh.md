@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + SSH/SSL + RSync + TMux
-svcname: ssh
 tags:
   - service
 ---

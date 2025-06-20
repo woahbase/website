@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + RSync(-Daemonized)
-svcname: rsyncd
 has_services:
   - compose
 tags:

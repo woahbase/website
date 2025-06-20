@@ -1,6 +1,5 @@
 ---
 description: Container for Alpine Linux + S6 + GNU LibC + OpenJDK 14
-svcname: openjdk14
 ghrepo: alpine-openjdk
 dockerfile: Dockerfile.14
 skip_armhf: true

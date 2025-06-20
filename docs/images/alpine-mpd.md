@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + Music Player Daemon + yMPD WebUI
-svcname: mpd
 has_services:
   - compose
   - nomad

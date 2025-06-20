@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + GNU LibC + Gotify Server (and CLI)
-svcname: gotify
 has_services:
   - compose
   - nomad

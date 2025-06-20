@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + GNU LibC + OpenJDK8 + Maven
-svcname: maven
 tags:
   - dev
   - github

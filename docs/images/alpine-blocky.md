@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + Blocky DNS-Resolver (and Ad-Blocker)
-svcname: blocky
 has_services:
   - compose
   - systemd

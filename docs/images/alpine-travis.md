@@ -1,6 +1,5 @@
 ---
 description: Container for Alpine Linux + S6 + Ruby + Travis.CI CLI
-svcname: travis
 tags:
   - deprecated
   - dev

@@ -1,20 +1,21 @@
+{%- set cntname = 'docker_'~ svcname|default(page.title.split('-')[-1]) -%}
 Stop the container with a timeout, (defaults to 2 seconds)
 
 ``` sh
-docker stop -t 2 docker_{{ svcname }}
+docker stop -t 2 {{ cntname }}
 ```
 
 Restart the container with
 
 ``` sh
-docker restart docker_{{ svcname }}
+docker restart {{ cntname }}
 ```
 
 Removes the container, (always better to stop it first and `-f`
 only when needed most)
 
 ``` sh
-docker rm -f docker_{{ svcname }}
+docker rm -f {{ cntname }}
 ```
 
 ---
@@ -24,7 +25,7 @@ docker rm -f docker_{{ svcname }}
 Get a shell inside a already running container,
 
 ``` sh
-docker exec -it docker_{{ svcname }} /bin/bash
+docker exec -it {{ cntname }} /bin/bash
 ```
 
 
@@ -32,14 +33,14 @@ docker exec -it docker_{{ svcname }} /bin/bash
 Optionally, login as a non-root user, (default is `{{ s6_user | default('alpine') }}`)
 
 ``` sh
-docker exec -u {{ s6_user | default('alpine') }} -it docker_{{ svcname }} /bin/bash
+docker exec -u {{ s6_user | default('alpine') }} -it {{ cntname }} /bin/bash
 ```
 {%- endif %}
 
 Or set user/group id e.g 1000/1000,
 
 ``` sh
-docker exec -u 1000:1000 -it docker_{{ svcname }} /bin/bash
+docker exec -u 1000:1000 -it {{ cntname }} /bin/bash
 ```
 
 ---
@@ -49,6 +50,6 @@ docker exec -u 1000:1000 -it docker_{{ svcname }} /bin/bash
 To check logs of a running container in real time
 
 ``` sh
-docker logs -f docker_{{ svcname }}
+docker logs -f {{ cntname }}
 ```
 

@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + Jackett
-svcname: jackett
 has_services:
   - compose
   - nomad

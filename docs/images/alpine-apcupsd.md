@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + APC-UPS Daemon
-svcname: apcupsd
 has_services:
   - compose
   - nomad

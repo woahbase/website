@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + GNU LibC + OpenJDK 21
-svcname: openjdk21
 ghrepo: alpine-openjdk
 dockerfile: Dockerfile.21
 skip_armhf: true

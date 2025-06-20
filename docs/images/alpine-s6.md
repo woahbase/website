@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 Init System.
-svcname: s6
 alpine_branch: v3.22
 arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
 tags:

@@ -1,6 +1,5 @@
 ---
 description: Container for Alpine Linux + S6 + GNU LibC + OpenJDK8 + Blynk Server
-svcname: blynk
 skip_aarch64: 1
 skip_armv7l: 1
 tags:

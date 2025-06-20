@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + SANE Scanner Daemon.
-svcname: saned
 has_services:
   - compose
   - nomad

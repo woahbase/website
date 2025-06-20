@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + NFS Server
-svcname: nfs
 has_services:
   - compose
   - nomad

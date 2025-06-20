@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + Python3 + MkDocsMaterial
-svcname: mkdocsmaterial
 skip_armhf: 1
 tags:
   - dev

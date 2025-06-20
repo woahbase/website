@@ -1,6 +1,5 @@
 ---
 description: Container for Alpine Linux + S6 + Python3 + SearX
-svcname: searx
 has_services:
   - compose
   - nomad

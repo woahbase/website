@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + NGINX + PHP-fpm + DAViCal
-svcname: davical
 has_services:
   - compose
 #   - nomad

@@ -1,6 +1,5 @@
 ---
 description: Container for Alpine Linux + S6 + NodeJS + VueJS CLI
-svcname: vue
 skip_aarch64: 1
 skip_armhf: 1
 skip_armv7l: 1

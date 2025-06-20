@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + Ruby
-svcname: ruby
 tags:
   - dev
   - usershell

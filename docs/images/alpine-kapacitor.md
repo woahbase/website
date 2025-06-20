@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + GNU LibC + Kapacitor
-svcname: kapacitor
 has_services:
   - compose
   - nomad

@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + GNU LibC + OpenJDK8 + Libreoffice
-svcname: libreoffice
 skip_armhf: 1
 tags:
   - gui

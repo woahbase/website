@@ -1,6 +1,5 @@
 ---
 description: Container for Alpine Linux + S6 + Python2 + PIP
-svcname: python2
 tags:
   - deprecated
   - dev

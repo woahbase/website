@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + NodeJS + UptimeKuma
-svcname: uptimekuma
 has_services:
   - compose
   - nomad

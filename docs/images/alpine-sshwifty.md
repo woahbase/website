@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + SSHwifty Web SSH & Telnet Client
-svcname: sshwifty
 has_services:
   - compose
   - nomad

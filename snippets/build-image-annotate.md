@@ -2,11 +2,12 @@
 {%- set itags = [] -%}{%- set vtags = [] -%}{%- set btags = [] -%}
 {%- for ar in page.meta.arches|default(config.extra.arches) -%}
 {%-   if not page.meta["skip_"~ar]|default(false) -%}
-{{-     itags.append('{}'.format(ar))                         or '' -}}
-{{-     vtags.append('{}_({})'.format(ar, vstag))             or '' -}}
-{{-     btags.append('{}_({})_({})'.format(ar, vstag, bdtag)) or '' -}}
+{{-     itags.append(ar)                              or '' -}}
+{{-     vtags.append(ar~'_${'~vstag~'}')              or '' -}}
+{{-     btags.append(ar~'_${'~vstag~'}_${'~bdtag~'}') or '' -}}
 {%-   endif -%}
 {%- endfor -%}
+
 ---
 #### Annotate Manifest(s)
 ---
@@ -47,7 +48,7 @@ manifest_tag }}` by running
 ---
 
 {% set target_name = vstag -%}
-{% set manifest_tag = "({})".format(vstag) -%}
+{%- set manifest_tag = '${'~vstag~'}' -%}
 
 Next, to facilitate pulling images by version, we create/amend the
 image-version manifest and annotate it to map the tags `:{{- vtags
@@ -60,7 +61,7 @@ image-version manifest and annotate it to map the tags `:{{- vtags
 ---
 
 {% set target_name = "date" -%}
-{% set manifest_tag = "({})_({})".format(vstag, bdtag) -%}
+{%- set manifest_tag = '${'~vstag~'}_${'~bdtag~'}' -%}
 
 Then, (optionally) we create/amend the `{{ manifest_tag }}`
 manifest and annotate it to map the tags `:{{- btags | join("`, `:")

@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + NGINX Web Server/Reverse Proxy.
-svcname: nginx
 has_services:
   - compose
   - nomad

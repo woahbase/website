@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + GNU LibC + OpenJDK8 + Ubooquity
-svcname: ubooquity
 has_services:
   - compose
 has_proxies:

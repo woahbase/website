@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + GNU LibC
-svcname: glibc
 tags:
   - base
   - shell

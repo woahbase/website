@@ -48,6 +48,6 @@ make annotate_{{ mtarget }} {{ wb_extra_args_annotate | default(wb_extra_args | 
 
     And finally, push it to the repository using
 
-    ```
+    ``` sh
     docker manifest push -p {{ mimg }}:{{ mtag }}
     ```

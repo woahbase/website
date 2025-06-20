@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + Coturn STUN/TURN Gateway for VoIP.
-svcname: coturn
 has_services:
   - compose
 tags:

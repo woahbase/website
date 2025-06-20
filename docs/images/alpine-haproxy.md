@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + HAProxy + DataPlaneAPI
-svcname: haproxy
 has_services:
   - compose
   - nomad

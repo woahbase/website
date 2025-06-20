@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + cGit + SSHd for network-local repositories.
-svcname: cgit
 has_services:
   - compose
   - nomad

@@ -1,6 +1,5 @@
 ---
 description: Container for Alpine Linux + S6 + GNU LibC + OpenJDK8 + Jenkins
-svcname: jenkins
 skip_aarch64: true
 skip_armv7l: true
 tags:

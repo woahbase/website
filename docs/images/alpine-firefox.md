@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + GNU LibC + Firefox Browser
-svcname: firefox
 skip_armhf: 1
 has_services:
   - systemd

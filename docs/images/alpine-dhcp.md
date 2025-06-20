@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + ISC DHCP server.
-svcname: dhcp
 has_services:
   - compose
   - systemd

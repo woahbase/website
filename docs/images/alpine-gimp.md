@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + GNU LibC + GIMP
-svcname: gimp
 tags:
   - gui
   - usershell

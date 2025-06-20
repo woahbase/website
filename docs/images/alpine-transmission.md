@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + Transmission Daemon (and CLI)
-svcname: transmission
 has_services:
   - compose
   - nomad

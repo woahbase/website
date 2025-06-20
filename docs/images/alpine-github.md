@@ -1,6 +1,5 @@
 ---
 description: Container for Alpine Linux + S6 + GNU LibC + Git + Hub
-svcname: github
 skip_aarch64: 1
 skip_armv7l: 1
 tags:

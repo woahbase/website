@@ -19,7 +19,7 @@ If the built image targets another architecture then it is
 {%-  if not page.meta["skip_"~ar]|default(false) -%}
 === "{{ ar }}"
     ``` sh
-    make push ARCH={{ ar  }} {{ wb_extra_args_push | default(wb_extra_args | default("")) }}
+    make push ARCH={{ ar  }} {{ wb_extra_args_push|default(wb_extra_args|default("")) }}
     ```
 {%-   endif %}
 {% endfor %}
@@ -36,7 +36,7 @@ If the built image targets another architecture then it is
 
     :   The actual image that is built.
 
-    * `{{ iimag }}:{{ iarch }}_(version)`
+    * `{{ iimag }}:{{ iarch }}_${version}`
 
     :   It is expected that the application is versioned when
         built or packaged, it can be specified in the tag, this
@@ -47,7 +47,7 @@ If the built image targets another architecture then it is
         github releases. Can be skipped with the parameter
         `SKIP_VERSIONTAG` to a non-empty string value like `1`.
 
-    * `{{ iimag }}:{{ iarch }}_(version)_(builddate)`
+    * `{{ iimag }}:{{ iarch }}_${version}_${builddate}`
 
     :   When building multiple versions of the same image (e.g. for
         providing fixes or revisions), this ensures that a more recent

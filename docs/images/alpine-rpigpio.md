@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + Python3 + RPi.GPIO
-svcname: rpigpio
 skip_x86_64: 1
 tags:
   - dev

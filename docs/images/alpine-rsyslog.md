@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + RSysLog (and LogRotate)
-svcname: rsyslog
 has_services:
   - compose
 tags:

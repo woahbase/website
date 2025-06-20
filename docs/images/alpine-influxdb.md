@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + InfluxDB
-svcname: influxdb
 has_services:
   - compose
   - nomad

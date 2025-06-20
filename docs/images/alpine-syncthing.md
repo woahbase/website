@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + SyncThing
-svcname: syncthing
 has_services:
   - compose
   - nomad

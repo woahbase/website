@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + GNU LibC + Chronograf
-svcname: chronograf
 has_services:
   - compose
   - nomad

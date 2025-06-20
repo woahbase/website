@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + LibCEC + PyCEC
-svcname: cec
 has_services:
   - compose
   - nomad

@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + Grafana
-svcname: grafana
 has_services:
   - compose
   - nomad

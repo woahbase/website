@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + Python3 + Ansible
-svcname: ansible
 tags:
   - dev
   - usershell

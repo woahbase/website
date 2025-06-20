@@ -1,6 +1,5 @@
 ---
 description: Container for Alpine Linux + S6 + NGINX + PHP7 + Pydio
-svcname: pydio
 skip_aarch64: true
 skip_armhf: true
 skip_armv7l: true

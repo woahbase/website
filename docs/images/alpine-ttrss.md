@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + NGINX + PHP-fpm + Tiny Tiny RSS
-svcname: ttrss
 has_services:
   - compose
   - nomad

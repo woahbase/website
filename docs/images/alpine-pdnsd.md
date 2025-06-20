@@ -1,6 +1,5 @@
 ---
 description: Container for Alpine Linux + S6 + Proxy DNS Daemon
-svcname: pdnsd
 has_services:
   - compose
   - systemd

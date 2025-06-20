@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + Golang
-svcname: go
 tags:
   - dev
   - usershell

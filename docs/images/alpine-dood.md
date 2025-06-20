@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + Docker(-outside-of-docker) Toolkit
-svcname: dood
 tags:
   - github
   - usershell

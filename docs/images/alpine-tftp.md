@@ -1,6 +1,5 @@
 ---
 description: MultiArch Alpine Linux + S6 + Trivial FTP(-hpa) Daemon
-svcname: tftp
 has_services:
   - compose
   - nomad
