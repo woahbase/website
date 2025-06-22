@@ -1,5 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + Python 3.x.x Runtime + PIP
+alpine_branch: v3.22
+arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
 tags:
   - dev
   - usershell
@@ -46,6 +48,7 @@ following environment variables.
 {% include "envvars/alpine-python3.md" %}
 | PYTHONUSERBASE          | /home/alpine/.local | Default prefix for installing user-scoped packages with `pip`. {{ m.sincev('3.12.10_20250524') }} Previously named `USERINSTPREFIX`.
 | PYTHON_SKIP_MODIFY_PATH | unset               | By default, user-scoped binaries installed by `pip` (in `~/.local/bin`) are added automatically to path, setting this to e.g `1` skips that step. {{ m.sincev('3.12.10_20250524') }}
+| PYTHON_SKIP_MODIFY_PYTHONPATH | unset               | By default, user-scoped libararies installed by `pip` (in `~/.local/lib`) are added automatically to python-path if not already exists, setting this to e.g `1` skips that step. {{ m.sincev('3.12.11_20250622') }}
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"
