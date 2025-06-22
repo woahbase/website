@@ -2,6 +2,7 @@
 description: MultiArch Alpine Linux + S6 + NodeJS + NPM + Yarn + PNPM
 alpine_branch: v3.22
 arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
+skip_s390x: 1
 tags:
   - dev
   - usershell
