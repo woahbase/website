@@ -1,5 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + Lua + LuaRocks
+alpine_branch: v3.22
+arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
 tags:
   - dev
   - usershell
@@ -18,8 +20,8 @@ This [image][155] serves as the base image for applications
 dependencies.
 
 {{ m.srcimage('alpine-s6') }} with the {{
-m.alpinepkg('lua'~luamajmin, star=true) }} and {{
-m.alpinepkg('luarocks'~luamajmin) }} package(s) installed
+m.alpinepkg('lua?.?', title='lua') }} and {{
+m.alpinepkg('luarocks?.?', title='luarocks') }} package(s) installed
 in it.
 
 {% include "pull-image.md" %}
@@ -52,7 +54,12 @@ following environment variables.
 | ENV Vars                 | Default      | Description
 | :---                     | :---         | :---
 | S6_LUA_PACKAGES          | empty string | **Comma**-separated list of packages (with optional version) to install globally with `luarocks`. E.g. `luasocket,luajson 1.3.3`
-| S6_LUA_USER_PACKAGES     | empty string | **Comma**-separated list of packages (with optional version) to install with `luarocks` that are local for `S6_USER`. These are installed in `~/.luarocks/`.
+| S6_LUA_USER_PACKAGES     | empty string | **Comma**-separated list of packages (with optional version) to install with `luarocks` that are local for `S6_USER`. These are installed in `USERROCKSDIR`.
+| USERROCKSDIR             | ~/.luarocks  | Customizable path where user-specified rocks are installed in.
+| LUA_SKIP_MODIFY_PATH     | unset        | By default, user-scoped binaries installed by `luarocks` (in `USERROCKSDIR`) are added automatically to path, setting this to e.g `1` skips that step. {{ m.sincev('5.2.4_20250622') }}
+| LUA_SKIP_MODIFY_LUAPATH  | unset        | By default, user-scoped libararies installed by `luarocks` (in `USERROCKSDIR`) are added automatically to `LUA_PATH` if not already exists, setting this to e.g `1` skips that step. {{ m.sincev('5.2.4_20250622') }}
+| LUA_SKIP_MODIFY_LUACPATH | unset        | By default, user-scoped shared objects installed by `luarocks` (in `USERROCKSDIR`) are added automatically to `LUA_CPATH` if not already exists, setting this to e.g `1` skips that step. {{ m.sincev('5.2.4_20250622') }}
+| LUA_SKIP_MODIFY_SHELL    | unset        | By default, `/etc/bash/bashrc` is changed to evaluate updated paths for `lua` at session start, setting this to e.g `1` skips that step. {{ m.sincev('5.2.4_20250622') }}
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"
@@ -66,12 +73,12 @@ Also,
 
 * When installing user packages via the `S6_LUA_USER_PACKAGES`
   variable, it is required to run `eval "$(luarocks path --bin)"`
-  to make those packages require-able. The command is
+  to make those packages require-able. By default, the command is
   automatically appended in `/etc/bash/bashrc` so that it is
   executed when a `/usershell` session starts.
 
-* If the user packages have binaries inside `~/.luarocks/bin`,
-  those are automatically added to path.
+* By default, if the user packages have binaries inside
+  `${USERROCKSDIR}/bin`, those are automatically added to path.
 
 [1]: http://www.lua.org/
 [2]: https://luarocks.org/

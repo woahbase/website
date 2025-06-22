@@ -5,14 +5,14 @@
   if not tag in page.meta.tags -}}
 {%- endmacro -%}
 
-{%- macro alpinepkg(name, branch, repo, arch, star) -%}
+{%- macro alpinepkg(name, branch, repo, arch, star, title) -%}
 {{- addpagetag('package') -}}
-[{{ name }}](https://pkgs.alpinelinux.org/packages?name=
-{{- name -}}
-{{- '*' if star else '' -}}
-{{- '&branch=' + (branch if branch else alpine_branch) -}}
-{{- ('&repo=' + repo) if repo else '' -}}
-{{- ('&arch=' + arch) if arch else ''  }} "AlpineLinux Package")
+[{{ title|default(name) }}](https://pkgs.alpinelinux.org/packages?name=
+{{- name|replace('?','%3F')
+~ ('*' if star else '')
+~ ('&branch='~branch|default(alpine_branch))
+~ ('&repo='~repo if repo else '')
+~ ('&arch='~arch if arch else '') }} "AlpineLinux Package")
 {%- endmacro -%}
 
 {%- macro srcimage(name) -%}
