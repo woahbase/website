@@ -7,9 +7,9 @@ tags:
   - usershell
 
 # pin lua major.minor
-luamajmin: "5.2"
-wb_extra_args_build: LUAMAJMIN=5.2
-
+luamajmin: "5.4"
+wb_extra_args: LUAMAJMIN=5.4
+wb_extra_args_run: ""
 ---
 
 {% import "macros.md" as m with context %}
