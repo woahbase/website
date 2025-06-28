@@ -29,9 +29,10 @@ command line if not already exists.
 Has handy **backup** and **restore** commands scripted inside the
 image.
 
-{{ m.srcimage('alpine-s6') }} with the
-{{ m.alpinepkg('postgresql'~pgmajor, star=true) }} package(s)
-installed in it.
+{{ m.srcimage('alpine-s6') }} with the {{
+m.alpinepkg('postgresql??', title='postgresql') }} and a few of
+the available {{ m.alpinepkg('postgresql-', star=true,
+title='extensions') }} package(s) installed in it.
 
 {% include "pull-image.md" %}
 
