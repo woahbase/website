@@ -17,9 +17,10 @@ services:
       PGID: ${PGID:-1000}
       # TZ: ${TZ}
       TFTP_ROOT: /tftp
+      TFTP_ADDR: "0.0.0.0"
+      TFTP_PORT: ${TFTP_PORT:-69}
+      TFTP_PORTRANGE: "63050:63100"
       TFTPD_ARGS: >-
-        --address 0.0.0.0:${TFTP_PORT:-69}
-        --port-range 63050:63100
         --secure
         /tftp/
       # --map-file /etc/tftpd.map

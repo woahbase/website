@@ -96,8 +96,11 @@ job "tftp" {
         PGID = var.pgid
         # TZ   = local.var.tz
 
-        TFTP_ROOT = "/tftp"
-        TFTPD_ARGS  = "-L4 --address 0.0.0.0:69 --port-range 63050:63100 --secure --map-file /etc/tftpd.map -vvv /tftp/"
+        TFTP_ROOT      = "/tftp"
+        TFTP_ADDR      = "0.0.0.0"
+        TFTP_PORT      = "69"
+        TFTP_PORTRANGE = "63050:63100"
+        TFTPD_ARGS     = "-L4 --secure --map-file /etc/tftpd.map -vvv /tftp/"
       }
 
       resources {

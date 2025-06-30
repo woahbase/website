@@ -1,5 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + Trivial FTP(-hpa) Daemon
+alpine_branch: v3.22
+arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
 has_services:
   - compose
   - nomad
@@ -43,10 +45,14 @@ woahbase/alpine-tftp
 We can customize the runtime behaviour of the container with the
 following environment variables.
 
-| ENV Vars   | Default                                      | Description
-| :---       | :---                                         | :---
-| TFTP_ROOT  | /data                                        | Path to storage directory.
-| TFTPD_ARGS | --port-range 63050:63100 --secure $TFTP_ROOT | Customizable arguments passed to `in.tftp` service.
+| ENV Vars       | Default               | Description
+| :---           | :---                  | :---
+| TFTP_ROOT      | /data                 | Path to storage directory.
+| TFTP_ADDR      | 0.0.0.0               | Default address to listen to. {{ m.sincev('5.2_20250630') }}
+| TFTP_PORT      | 69                    | Default port to listen to. {{ m.sincev('5.2_20250630') }}
+| TFTP_PORTRANGE | 63050:63100           | Default port range for file transfers. {{ m.sincev('5.2_20250630') }}
+| TFTP_USER      | ${S6_USER}            | When `tftp` is started as root user, it drops privileges to this user for file transfers. The user must exist, defaults to `alpine`, can also be set to `nobody`. {{ m.sincev('5.2_20250630') }}
+| TFTPD_ARGS     | --secure ${TFTP_ROOT} | Customizable arguments passed to `in.tftp` service.
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"

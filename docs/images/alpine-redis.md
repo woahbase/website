@@ -1,5 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + Redis.
+alpine_branch: v3.22
+arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
 has_services:
   - compose
   - nomad
@@ -48,6 +50,7 @@ following environment variables.
 | REDIS__dir         | /var/lib/redis     | Path to datastore. {{ m.sincev('7.2.5') }} Previously `REDIS_HOME`.
 | REDIS__pidfile     | /var/run/redis.pid | Path to pidfile. {{ m.sincev('7.2.5') }}
 | REDIS__logfile     | unset              | Path to log destination (will create file if set e.g. `/var/log/redis.log`). {{ m.sincev('7.2.5') }} Previously `REDIS_LOGS`.
+| REDIS_SKIP_PERMFIX | unset              | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `redis` configuration files/directories. {{ m.sincev('8.0.2') }}
 | REDIS_ARGS         | /etc/redis.conf    | Customizable arguments passed to `redis` service.
 {% include "envvars/alpine-s6.md" %}
 
