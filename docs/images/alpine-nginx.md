@@ -1,5 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + NGINX Web Server/Reverse Proxy.
+alpine_branch: v3.22
+arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
 has_services:
   - compose
   - nomad
@@ -54,13 +56,17 @@ following environment variables.
 
 Also,
 
-* Default configs setup a static site at `/` by copying
-  `/defaults/index.html` at the `$WEBDIR` (default
-  `/config/www/`).  Mount the `/config/` locally to persist
+* Mount the `/config/` locally to persist
   modifications (or your webapps). NGINX configurations are at
   `/config/nginx`, and vhosts at `/config/nginx/http.d/`. For JSON
   indexable (requires custom configuration) storage mount the data
   partition at `/storage/`.
+
+* Default `nginx.conf` includes files in `${CONFSDIR}` that ends
+  with `.root.conf` in the root context, similarly `.http.conf` in
+  `http` context as well as all files in `${SITESDIR}` and
+  `.stream.conf` and files in `${STREAMSDIR}` for streams. {{
+  m.sincev('1.28.0')  }}
 
 * Includes two default site configuration (for {{
   m.ghfilelink('root/defaults/default_http', title='http:80') }}
@@ -70,13 +76,10 @@ Also,
   intended to be used in production, you are better off rolling
   your own.
 
-* Default configs set up a https and auth protected web location
-  at `/secure`.
-
-* If you're proxying multiple containers at the same host, or
-  reverse proxying multiple hosts through the same container, you
-  may need to add `--net=host` and/or add entries in your firewall
-  to allow traffic.
+* Default configs setup a static site at `/` by copying
+  `/defaults/index.html` at `${WEBDIR}` (default `/config/www/`),
+  along with a HTTPS and HtPassword protected web location at
+  `/secure`.
 
 * {{ m.customscript('p12-nginx-customize') }}
 
@@ -84,6 +87,17 @@ Also,
   title='nginx-reconf.sh') }} script to check and reload `nginx`
   configurations (only when valid) without restarting the
   container. {{ m.sincev('1.26.2_20250225') }}
+
+* If running the container as a non-root user (with
+  `--user=${UID}:${GID}`), consider passing the prefix flag, i.e.
+  `-p /config/nginx` in `${NGINX_ARGS}` so that `nginx` does not
+  try to read/write files it does not have permissions to, e.g any
+  file in `/etc/nginx` or `/var/lib/nginx` or `/var/log/nginx`.
+
+* If you're proxying multiple containers at the same host, or
+  reverse proxying multiple hosts through the same container, you
+  may need to add `--net=host` and/or add entries in your firewall
+  to allow traffic.
 
 ###### SSL Subject
 

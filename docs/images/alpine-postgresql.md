@@ -91,7 +91,7 @@ Also,
 * Data stored at `/var/lib/postgresql/data`.
 
 * Initialization and bootstrapping tasks are **only** run if the
-  default `PG_VERSION` file does not exist insidata datadir,
+  default `PG_VERSION` file does not exist inside datadir,
   i.e. on the **first run**.  Once the database is initialized,
   the relevant environment vars have no effect.
 
@@ -147,7 +147,6 @@ Also,
         * {{ m.alpinepkg('postgresql-mysql_fdw'        , branch="v3.22") }}
         * {{ m.alpinepkg('postgresql-orafce'           , branch="v3.22") }}
         * {{ m.alpinepkg('postgresql-pg_cron'          , branch="v3.22") }}
-        * {{ m.alpinepkg('postgresql-pg_graphql'       , branch="v3.22") }}
         * {{ m.alpinepkg('postgresql-pg_roaringbitmap' , branch="v3.22") }}
         * {{ m.alpinepkg('postgresql-pgvector'         , branch="v3.22") }}
         * {{ m.alpinepkg('postgresql-rum'              , branch="v3.22") }}

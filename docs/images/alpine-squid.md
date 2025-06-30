@@ -1,5 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + Squid Proxy/Content Cache.
+alpine_branch: v3.22
+arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
 has_services:
   - compose
   - nomad
@@ -50,10 +52,12 @@ following environment variables.
 | :---                   | :---                 | :---
 | SQUID_CONFDIR          | /etc/squid           | Path to configuration dir. Expects `squid.conf` to exist in this directory. {{ m.sincev('6.9') }} Previously `CONFDIR`.
 | SQUID_CACHEDIR         | /var/cache/squid     | Path to cached contents directory as set in `squid.conf`. If empty, the required directory hierarchy for `squid` is initialized. {{ m.sincev('6.9') }} Previously `CACHEDIR`.
+| SQUID_LOGSDIR          | /var/log/squid       | Path to logs dir. {{ m.sincev('6.12_20250630') }}
 | SQUID_HTPASSWDFILE     | /etc/squid/.htpasswd | Path to `squid` authentication file. {{ m.sincev('6.9') }} Previously `HTPASSWDFILE`.
 | WEBADMIN               | admin                | Default user.
 | PASSWORD               | insecurebydefault    | Default user password.
 | SQUID_NO_HTPASSWD      | unset                | Set to `true` to disable generating password file. Ensure it is disabled in your own configuration if not needed.
+| SQUID_SKIP_PERMFIX     | unset                | If set to `true`, skips fixing permissions for `squid` configuration files/directories. {{ m.sincev('6.12_20250630') }}
 | SQUID_PERMFIX_CACHEDIR | unset                | If set to `true`, ensures files inside `$SQUID_CACHEDIR` are owned/accessible by `S6_USER`. {{ m.sincev('6.12') }}
 | SQUID_ARGS             | -NYCd 5              | Customizable arguments passed to `squid` service.
 {% include "envvars/alpine-s6.md" %}
