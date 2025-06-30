@@ -54,7 +54,7 @@ following environment variables.
 | XDG_DATA_HOME        | /config                 | (Preset) Data directory for `jackett`.
 | JACKETT_LN_LOGTXT    | unset                   | If set to `true`, links the logfile `XDG_CONFIG_HOME/Jackett/log.txt` to a different device (or file) mostly to suppress the output, or optionally redirect it. When `false`, removes the link if it exists.
 | JACKETT_LN_LOGDST    | /dev/null               | Links the logfile to this device (or file) when `JACKETT_LN_LOGTXT` is `true`.
-| JACKETT_SKIP_PERMFIX | unset                   | If set, skips applying permission fixes to `XDG_CONFIG_HOME` and `/torrents`.
+| JACKETT_SKIP_PERMFIX | unset                   | If set to a **non-empty-string** value (e.g. `1`), skips applying permission fixes to `XDG_CONFIG_HOME` and `/torrents`.
 | JACKETT_EXEC         | jackett                 | Customizable executable passed to `jackett` service. Can also be `jackett_launcher.sh` if needed.
 | JACKETT_ARGS         | --NoRestart --NoUpdates | Customizable arguments passed to `jackett` service.
 {% include "envvars/alpine-s6.md" %}

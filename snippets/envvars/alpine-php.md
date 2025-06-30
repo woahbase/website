@@ -7,7 +7,7 @@
 | PHP_POST_MAX_SIZE           | 16M                                     | `php.ini` value for `post_max_size`. (Only set if file does not exist)
 | PHP_UPLOAD_MAX_FILESIZE     | 16M                                     | `php.ini` value for `upload_max_filesize`. (Only set if file does not exist)
 | PHP_OPCACHE_ENABLE_CLI      | 0                                       | `php.ini` value for `opcache.enable_cli`. (Only set if file does not exist.) {{ m.sincev('8.2.22', name='alpine-php') }}
-| PHP_SKIP_PERMFIX            | unset                                   | If set to `true`, skips fixing permissions for `php` configuration files/directories. {{ m.sincev('8.2.27', name='alpine-php') }}
+| PHP_SKIP_PERMFIX            | unset                                   | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `php` configuration files/directories. {{ m.sincev('8.2.27', name='alpine-php') }}
 | PHP_ADD_DEFAULT_PHPINFO     | unset                                   | If set to `true` and no php scripts exist inside `WEBDIR`, a default `phpinfo.php` is copied into it. Useful for testing. {{ m.sincev('8.2.22', name='alpine-php') }} Previously `PHP_SKIP_DEFAULT_PHPINFO`, enabled by default.
 | PHP_PERMFIX_WEBDIR          | unset                                   | If set to `true`, ensures files inside `$WEBDIR` are owned/accessible by `S6_USER`. {{ m.sincev('8.2.22', name='alpine-php') }}
 | PHPFPMCONF                  | /etc/php{{ phpmajmin }}/php-fpm.conf    | `php-fpm` main config file.

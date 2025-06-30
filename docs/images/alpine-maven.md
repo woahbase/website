@@ -57,7 +57,7 @@ following environment variables.
 | :---               | :---             | :---
 | MAVEN_HOME         | /usr/share/maven | (Preset) Path to `mvn` binaries.
 | MAVEN_CONFIG       | /home/alpine/.m2 | Path to user-scoped directory for configurations or cache.
-| MAVEN_SKIP_PERMFIX | unset            | If set to non-empty-string value (e.g. `1`), skips ensuring files under `${MAVEN_CONFIG}` directory are readable by `${S6_USER}`. {{ m.sincev('3.9.9') }}
+| MAVEN_SKIP_PERMFIX | unset            | If set to a **non-empty-string** value (e.g. `1`), skips ensuring files under `${MAVEN_CONFIG}` directory are readable by `${S6_USER}`. {{ m.sincev('3.9.9') }}
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"

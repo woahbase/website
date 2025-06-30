@@ -57,7 +57,7 @@ following environment variables.
 | WEBADMIN               | admin                | Default user.
 | PASSWORD               | insecurebydefault    | Default user password.
 | SQUID_NO_HTPASSWD      | unset                | Set to `true` to disable generating password file. Ensure it is disabled in your own configuration if not needed.
-| SQUID_SKIP_PERMFIX     | unset                | If set to `true`, skips fixing permissions for `squid` configuration files/directories. {{ m.sincev('6.12_20250630') }}
+| SQUID_SKIP_PERMFIX     | unset                | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `squid` configuration files/directories. {{ m.sincev('6.12_20250630') }}
 | SQUID_PERMFIX_CACHEDIR | unset                | If set to `true`, ensures files inside `$SQUID_CACHEDIR` are owned/accessible by `S6_USER`. {{ m.sincev('6.12') }}
 | SQUID_ARGS             | -NYCd 5              | Customizable arguments passed to `squid` service.
 {% include "envvars/alpine-s6.md" %}

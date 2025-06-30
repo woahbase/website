@@ -82,7 +82,7 @@ following environment variables.
 | BUILDBOT_WORKERNAME         | ${BUILDBOT_PROJECTNAME}-worker                      | Name of the default worker updated in `master.cfg`. (Only when using the sample configurations)
 | BUILDBOT_WORKERPASS         | insecurebydefault                                   | Password of the default worker updated in `master.cfg`. (Only when using the sample configurations)
 | BUILDBOT_SKIP_CUSTOMIZE     | unset                                               | Skip post-setup customization tasks.
-| BUILDBOT_SKIP_PERMFIX       | unset                                               | Skip ensuring files in `${BUILDBOT_HOME}` are owned by `${S6_USER}`, enabled by default.
+| BUILDBOT_SKIP_PERMFIX       | unset                                               | If set to a **non-empty-string** value (e.g. `1`), skip ensuring files in `${BUILDBOT_HOME}` are owned by `${S6_USER}`, enabled by default.
 | BUILDBOT_ARGS               | --nodaemon --no_save                                | Customizable arguments passed to master service. (Runs as a `twisted` application instead of calling `buildbot` executable)
 {% include "envvars/alpine-python3.md" %}
 {% include "envvars/alpine-s6.md" %}

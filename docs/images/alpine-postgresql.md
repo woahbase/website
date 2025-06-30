@@ -67,7 +67,7 @@ following environment variables.
 | PGPORT                    | 5432                    | Default database port.
 | PGSQL_BACKUPDIR           | {{s6_userhome}}/backups | Default database backup directory. Used by `/scripts/run.sh`.
 | PGSQL_INITDIR             | /initdb.d               | Default database initialization files expected in this directory. Executed by `/scripts/run.sh` as part of bootstrap.
-| PGSQL_SKIP_PERMFIX        | unset                   | If set to `true`, skips fixing permissions for `postgresql` files/directories. {{ m.sincev('16.9_20250628') }}
+| PGSQL_SKIP_PERMFIX        | unset                   | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `postgresql` files/directories. {{ m.sincev('16.9_20250628') }}
 | PGSQL_SKIP_BOOTSTRAP      | unset                   | Set to `true` to skip default database bootstrapping (but not initialization) tasks.
 | PGSQL_SKIP_INITIALIZE     | unset                   | Set to `true` to skip all database initialization/bootstrap tasks. Useful when you only want the service to run.
 | PGSQL_CUSTOM_CONF         | unset                   | Path to custom `postgresql.conf`, if set and the file exists then it is copied into `PGDATA`. (**Replaces** existing configuration)
