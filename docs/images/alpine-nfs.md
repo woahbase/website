@@ -1,5 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + NFS Server
+alpine_branch: v3.22
+arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
 has_services:
   - compose
   - nomad
@@ -13,7 +15,7 @@ tags:
 This [image][155] containerizes the [NFS][1] server to share
 files/directories over the network to devices in the same LAN.
 Checkout this [link][2] to get started. Not really useful over the
-internet because security concerns. It *can* be tunnelled by SSH but
+internet because of security concerns. It *can* be tunnelled by SSH but
 thats quite slow and there are better options.
 
 {{ m.srcimage('alpine-s6') }} with the {{ m.alpinepkg('nfs-utils')

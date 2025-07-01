@@ -123,5 +123,6 @@ default the value of `SSLSUBJECT` is
     ```
 
 [1]: https://nginx.org
+[2]: https://github.com/denji/nginx-tuning
 
 {% include "all-include.md" %}
