@@ -1,5 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + RSysLog (and LogRotate)
+alpine_branch: v3.22
+arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
 has_services:
   - compose
 tags:
@@ -72,6 +74,7 @@ following environment variables.
 | FWD_PROTOCOL                | relp                     | Protocol for sending logs to remote host. (Used when `RSYSLOG_PROFILE` is set to `forwarder`.)
 | FWD_TO_HOST                 | your.logserver.local     | Address of log-receiver host (Used when `RSYSLOG_PROFILE` is set to `forwarder`.)
 | FWD_TO_PORT                 | 2514                     | Port of log-receiver host. (Used when `RSYSLOG_PROFILE` is set to `forwarder`.)
+| RSYSLOG_SKIP_PERMFIX        | unset                    | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `rsyslog` files/directories. {{ m.sincev('8.2410.0') }}
 | RSYSLOG_ARGS                | -n                       | Customizable arguments passed to `rsyslog` service.
 | LOGROTATE_CONF              | /etc/logrotate.conf      | Path to `logrotate` configuration file.
 | LOGROTATE_CONFD             | /etc/logrotate.d         | Path to `logrotate` configuration snippets directory.

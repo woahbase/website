@@ -44,16 +44,17 @@ woahbase/alpine-coturn
 We can customize the runtime behaviour of the container with the
 following environment variables.
 
-| ENV Vars           | Default                         | Description
-| :---               | :---                            | :---
-| COTURN_DATADIR     | /var/lib/coturn                 | Directory for datadir (for `sqlite` db).
-| COTURN_CONF        | /var/lib/coturn/turnserver.conf | Path to configuration file.
-| COTURN_CLIPASSWORD | unset                           | Default CLI password. If set and and using the default configuration, i.e. no configuration file exists at `${COTURN_CONF}`, will set the parameter in the configuration file. {{ m.sincev('4.6.3') }}
-| COTURN_CERTFILE    | /etc/ssl/certs/cert.pem         | Path to certificate file. If set and and using the default configuration, i.e. no configuration file exists at `${COTURN_CONF}`, will set the parameter in the configuration file. {{ m.sincev('4.6.3') }}
-| COTURN_PKEYFILE    | /etc/ssl/private/privkey.pem    | Path to privatekey file. If set and and using the default configuration, i.e. no configuration file exists at `${COTURN_CONF}`, will set the parameter in the configuration file. {{ m.sincev('4.6.3') }}
-| COTURN_LISTENADDR  | 0.0.0.0                         | Default address to listen on. If set and and using the default configuration, i.e. no configuration file exists at `${COTURN_CONF}`, will set the parameter in the configuration file. {{ m.sincev('4.6.3') }}
-| COTURN_REALM       | localhost                       | Default realm. If set and and using the default configuration, i.e. no configuration file exists at `${COTURN_CONF}`, will set the parameter in the configuration file. {{ m.sincev('4.6.3') }}
-| COTURN_ARGS        | unset                           | Customizable arguments passed to `coturn` service.
+| ENV Vars            | Default                         | Description
+| :---                | :---                            | :---
+| COTURN_DATADIR      | /var/lib/coturn                 | Directory for datadir (for `sqlite` db).
+| COTURN_CONF         | /var/lib/coturn/turnserver.conf | Path to configuration file.
+| COTURN_CLIPASSWORD  | unset                           | Default CLI password. If set and and using the default configuration, i.e. no configuration file exists at `${COTURN_CONF}`, will set the parameter in the configuration file. {{ m.sincev('4.6.3') }}
+| COTURN_CERTFILE     | /etc/ssl/certs/cert.pem         | Path to certificate file. If set and and using the default configuration, i.e. no configuration file exists at `${COTURN_CONF}`, will set the parameter in the configuration file. {{ m.sincev('4.6.3') }}
+| COTURN_PKEYFILE     | /etc/ssl/private/privkey.pem    | Path to privatekey file. If set and and using the default configuration, i.e. no configuration file exists at `${COTURN_CONF}`, will set the parameter in the configuration file. {{ m.sincev('4.6.3') }}
+| COTURN_LISTENADDR   | 0.0.0.0                         | Default address to listen on. If set and and using the default configuration, i.e. no configuration file exists at `${COTURN_CONF}`, will set the parameter in the configuration file. {{ m.sincev('4.6.3') }}
+| COTURN_REALM        | localhost                       | Default realm. If set and and using the default configuration, i.e. no configuration file exists at `${COTURN_CONF}`, will set the parameter in the configuration file. {{ m.sincev('4.6.3') }}
+| COTURN_SKIP_PERMFIX | unset                           | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `coturn` files/directories. {{ m.sincev('4.6.3') }}
+| COTURN_ARGS         | unset                           | Customizable arguments passed to `coturn` service.
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"

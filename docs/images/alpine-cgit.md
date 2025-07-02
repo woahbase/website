@@ -1,5 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + cGit + SSHd for network-local repositories.
+alpine_branch: v3.22
+arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
 has_services:
   - compose
   - nomad
@@ -61,9 +63,10 @@ following environment variables.
 | ENV Vars              | Default                          | Description
 | :---                  | :---                             | :---
 | CGIT_HOSTNAME         | localhost                        | Hostname to set in the url for cloning via web or ssh.
-| CGIT_SUBPATH          | /git                             | Alternate virtual-root for CGit repositories, default is `/cgit`.
+| CGIT_SUBPATH          | unset                            | Alternate virtual-root for CGit repositories, can be `""` (unset or empty-string for serving at root path) or a path like `/git` or `/repos`, but **cannot** be `"/"` (single backslash) or `/cgit`. {{ m.sincev('1.2.3_20250702') }} Previously defaulted to `/git`.
 | CGIT_REPODIR          | /home/{{ s6_user }}/repositories | Default path to repositories. {{ m.sincev('1.2.3_20240907') }}
 | CGIT_ARCHIVEDIR       | $CGIT_REPODIR/.archived          | Default path to archived repos (used in `backup`/`restore` scripts). {{ m.sincev('1.2.3_20240907') }}
+| CGIT_SKIP_PERMFIX     | unset                            | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `cgit` configuration files/directories. {{ m.sincev('1.2.3_20250702') }}
 | CGIT_PERMFIX_REPOS    | unset                            | If set to `true`, will fix repositories permissions to `$S6_USER` (default `git:git`). {{ m.sincev('1.2.3_20240907') }}
 | CGIT_GIT_CONFIG       | /home/{{ s6_user }}/.gitconfig   | Customizable configurations for git. (used in scripts) {{ m.sincev('1.2.3_20250311') }}
 | CGIT_HOOKSDIR         | /defaults/hooks                  | Custom hooks to add into repositories created via the `bareinit` or `mirror` script. {{ m.sincev('1.2.3_20240907') }}
@@ -90,10 +93,6 @@ following environment variables.
 
 Also,
 
-* cGit is deployed at the path `/cgit/`, alternately proxied to
-  `/git/` for convenience, controlled via the `CGIT_SUBPATH`
-  environment variable.
-
 * Default configuration listens to ports `80` and `22`(ssh), these
   may be published at `64801` and `64822` by default, so they
   don't clash with other services.
@@ -101,6 +100,19 @@ Also,
 * {{ m.defcfgfile('/etc/cgitrc', fr='CGit') }}
 
 * {{ m.defcfgfile('/etc/lighttpd/lighttpd.conf', fr='Lighttpd') }} {{ m.sincev('1.2.3_20240907') }}
+
+* By default, cGit is deployed using the {{
+  m.ghfilelink('root/defaults/cgit.subpath.lighttpd.conf',
+  title='subpath example') }} at the path `/cgit/`, and aliased to
+  `/git/` for convenience, the latter can be changed via the
+  `${CGIT_SUBPATH}` environment variable. If you need your
+  repositories served at `/`, set `${CGIT_SUBPATH}` to an
+  empty-string e.g `""`, that will use the {{
+  m.ghfilelink('root/defaults/cgit.root.lighttpd.conf',
+  title='root path example') }} instead {{
+  m.sincev('1.2.3_20250702') }}. Of course this only applies
+  if the file `${LIGHTTPD_CONFDIR}/cgit.conf` does not already
+  exist.
 
 * {{ m.defcfgfile('/etc/ssh/sshd_config', fr='SSH server') }}
 
