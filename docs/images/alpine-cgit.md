@@ -102,17 +102,16 @@ Also,
 * {{ m.defcfgfile('/etc/lighttpd/lighttpd.conf', fr='Lighttpd') }} {{ m.sincev('1.2.3_20240907') }}
 
 * By default, cGit is deployed using the {{
-  m.ghfilelink('root/defaults/cgit.subpath.lighttpd.conf',
-  title='subpath example') }} at the path `/cgit/`, and aliased to
-  `/git/` for convenience, the latter can be changed via the
-  `${CGIT_SUBPATH}` environment variable. If you need your
-  repositories served at `/`, set `${CGIT_SUBPATH}` to an
-  empty-string e.g `""`, that will use the {{
   m.ghfilelink('root/defaults/cgit.root.lighttpd.conf',
-  title='root path example') }} instead {{
-  m.sincev('1.2.3_20250702') }}. Of course this only applies
-  if the file `${LIGHTTPD_CONFDIR}/cgit.conf` does not already
-  exist.
+  title='root path example') }} at the root path `/`, {{
+  m.sincev('1.2.3_20250702') }}. If you need your repositories
+  served at a subpath like `/git/`, set `${CGIT_SUBPATH}` to
+  a non-empty-string e.g `/git`, that will use the {{
+  m.ghfilelink('root/defaults/cgit.subpath.lighttpd.conf',
+  title='subpath example') }} instead to deploy the service at
+  `/cgit`, and aliased to `/git/` for convenience. Of course
+  this only applies if any custom file
+  `${LIGHTTPD_CONFDIR}/cgit.conf` does not already exist.
 
 * {{ m.defcfgfile('/etc/ssh/sshd_config', fr='SSH server') }}
 
