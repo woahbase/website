@@ -1,5 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + SyncThing
+alpine_branch: v3.22
+arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
 has_services:
   - compose
   - nomad
@@ -52,15 +54,16 @@ woahbase/alpine-syncthing
 We can customize the runtime behaviour of the container with the
 following environment variables.
 
-| ENV Vars          | Default                   | Description
-| :---              | :---                      | :---
-| SYNCTHING_HOME    | {{ s6_userhome }}         | Root directory for configuration and storage.
-| SYNCTHING_DATA    | {{ s6_userhome }}/data    | Data directory for `syncthing`, for directory/file storage.
-| STHOMEDIR         | {{ s6_userhome }}/config  | Configuration directory for `syncthing`, both for `config.xml` and database.
-| STGUIADDRESS      | 0.0.0.0:8384              | Default `host:port` to bind to.
-| STNODEFAULTFOLDER | 1                         | By default, do not create default folders on first run.
-| STNOUPGRADE       | 1                         | By default, do not check for upgrades.
-| SYNCTHING_ARGS    | --no-browser --no-restart | Customizable arguments passed to `syncthing` service.
+| ENV Vars               | Default                   | Description
+| :---                   | :---                      | :---
+| SYNCTHING_HOME         | {{ s6_userhome }}         | Root directory for configuration and storage.
+| SYNCTHING_DATA         | {{ s6_userhome }}/data    | Data directory for `syncthing`, for directory/file storage.
+| STHOMEDIR              | {{ s6_userhome }}/config  | Configuration directory for `syncthing`, both for `config.xml` and database.
+| STGUIADDRESS           | 0.0.0.0:8384              | Default `host:port` to bind to.
+| STNODEFAULTFOLDER      | 1                         | By default, do not create default folders on first run.
+| STNOUPGRADE            | 1                         | By default, do not check for upgrades.
+| SYNCTHING_SKIP_PERMFIX | unset                     | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `syncthing` configuration files/directories. {{ m.sincev('1.30.0') }}
+| SYNCTHING_ARGS         | --no-browser --no-restart | Customizable arguments passed to `syncthing` service.
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"

@@ -1,5 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + Navidrome
+alpine_branch: v3.22
+arches: [aarch64, armhf, armv7l, i386, x86_64]
 has_services:
   - compose
   - nomad
@@ -47,15 +49,16 @@ woahbase/alpine-navidrome
 We can customize the runtime behaviour of the container with the
 following environment variables.
 
-| ENV Vars       | Default              | Description
-| :---           | :---                 | :---
-| ND_DATAFOLDER  | /data                | Path to music database store.
-| ND_CONFIGFILE  | /data/navidrome.toml | Path to `navidrome` configuration file.
-| ND_CACHEFOLDER | /data/cache          | Cache for album-art etc.
-| ND_MUSICDIR    | /music               | Path to audio files store.
-| ND_BASEURL     | /navidrome           | Subpath for application.
-| ND_PORT        | 4533                 | Port to listen on.
-| NAVIDROME_ARGS | unset                | Customizable arguments passed to `navidrome` service.
+| ENV Vars               | Default              | Description
+| :---                   | :---                 | :---
+| ND_DATAFOLDER          | /data                | Path to music database store.
+| ND_CONFIGFILE          | /data/navidrome.toml | Path to `navidrome` configuration file.
+| ND_CACHEFOLDER         | /data/cache          | Cache for album-art etc.
+| ND_MUSICDIR            | /music               | Path to audio files store.
+| ND_BASEURL             | /navidrome           | Subpath for application.
+| ND_PORT                | 4533                 | Port to listen on.
+| NAVIDROME_SKIP_PERMFIX | unset                | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `navidrome` configuration files/directories. {{ m.sincev('0.57.0') }}
+| NAVIDROME_ARGS         | unset                | Customizable arguments passed to `navidrome` service.
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"
