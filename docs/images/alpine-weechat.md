@@ -1,5 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + Python3 + WeeChat(IRC++)
+alpine_branch: v3.22
+arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
 tags:
   - usershell
 ---
@@ -43,6 +45,8 @@ following environment variables.
 
 | ENV Vars                 | Default      | Description
 | :---                     | :---         | :---
+| WEECHAT_HOME             | unset        | If set to a directory, skips creating separate directories for `weechat` configurations/cache and puts everything under this directory instead. {{ m.sincev('4.6.3') }}
+| WEECHAT_SKIP_PERMFIX     | unset        | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `weechat` configuration files/directories. {{ m.sincev('4.6.3') }}
 {% include "envvars/alpine-python3.md" %}
 {% include "envvars/alpine-s6.md" %}
 
@@ -53,7 +57,10 @@ Also,
 * If you want to persist your weechat data, mount a directory at
   `/home/alpine/` or directly at `/home/alpine/.weechat`.
 
-* WeeChat runs under the user `alpine`.
+* By default, WeeChat runs under the user `alpine`. If the
+  container is running as an arbitrary user, you may need to use
+  `with-contenv` so the environment variables are accessible to
+  the user process.
 
 * Check the [docs][2] for customizing your own.
 
