@@ -1,5 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + SANE Scanner Daemon.
+alpine_branch: v3.22
+arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
 has_services:
   - compose
   - nomad
@@ -52,7 +54,7 @@ following environment variables.
 | GID_LP                | unset                        | Group-id of `lp` group on the host. If set, updates group-id of the group `lp` inside container.
 | GID_SCANNER           | unset                        | Group-id of `scanner` group on the host. If set, updates group-id of the group `scanner` inside container.
 | SANED_CONF_`filename` | unset                        | File to modify with contents as value. e.g for `pixma.conf` `SANED_CONF_pixma='bjnp-timeout=5000;mfnp://scanner.bad-network.org/timeout=1500'`. See [Modifying `conf` files](#modifying-conf-files)
-| SANED_SKIP_PERMFIX    | unset                        | If set to a **non-empty-string** value (e.g. `1`), skips applying permission fixes to `SANED_CONFDIR` and `SANED_DATADIR`.
+| SANED_SKIP_PERMFIX    | unset                        | If set to a **non-empty-string** value (e.g. `1`), skips applying permission fixes to `${SANED_CONFDIR}` and `${SANED_DATADIR}`.
 | SANED_PORT            | 6566                         | Control Port of `saned` service.
 | SANED_ARGS            | -l -b 0.0.0.0 -p $SANED_PORT | Customizable arguments passed to `saned` service.
 

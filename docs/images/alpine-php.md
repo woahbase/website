@@ -7,8 +7,8 @@ tags:
   - service
 
 # pin php version
-phpmajmin: "82"
-wb_extra_args_build: PHPMAJMIN=82
+phpmajmin: "84"
+wb_extra_args_build: PHPMAJMIN=84
 
 ---
 
@@ -19,8 +19,8 @@ This [image][155] serves as a standalone web host server, or as
 the base image for applications / services that use [NGINX][1]
 and [PHP][2].
 
-{{ m.srcimage('alpine-nginx') }} with the {{ m.alpinepkg('php'~phpmajmin,
-star=true) }} package(s) installed in it.
+{{ m.srcimage('alpine-nginx') }} with the {{ m.alpinepkg('php??',
+title='php') }} package(s) installed in it.
 
 {% include "pull-image.md" %}
 

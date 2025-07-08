@@ -1,5 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + Music Player Daemon + yMPD WebUI
+alpine_branch: v3.22
+arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
 has_services:
   - compose
   - nomad
@@ -87,14 +89,18 @@ or on a remote host, with
 We can customize the runtime behaviour of the container with the
 following environment variables.
 
-| ENV Vars         | Default                       | Description
-| :---             | :---                          | :---
-| MPD_CONF         | /etc/mpd.conf                 | Path to configuration file. {{ m.sincev('0.23.15') }}
-| MPD_HOME         | /var/lib/mpd                  | Directory for database, playlists, state etc. {{ m.sincev('0.23.15') }}
-| MPD_ARGS         | --stdout                      | Customizable arguments passed to `mpd` service.
-| YMPD_ARGS        | -h localhost -p 6600 -w 64801 | Customizable arguments passed to `ympd` service.
-| MPDSCRIBBLE_CONF | /etc/mpdscribble.conf         | Path to `mpdscribble` configuration file. Must exist for service to start. {{ m.sincev('0.23.15') }}
-| MPDSCRIBBLE_ARGS | --host localhost --port 6600  | Customizable arguments passed to `mpdscribble` service.
+| ENV Vars              | Default                       | Description
+| :---                  | :---                          | :---
+| MPD_CONF              | /etc/mpd.conf                 | Path to configuration file. {{ m.sincev('0.23.15') }}
+| MPD_HOME              | /var/lib/mpd                  | Directory for database, playlists, state etc. {{ m.sincev('0.23.15') }}
+| MPD_LOGS              | /var/log/mpd                  | Directory for logs, if not logging to `stdout`. {{ m.sincev('0.24.4') }}
+| MPD_GROUP             | mpd                           | Primary group for `mpd` user, updated in configuration file when using the default configurations (not used by default). {{ m.sincev('0.24.4') }}
+| MPD_SKIP_PERMFIX      | unset                         | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `mpd` configuration files/directories. {{ m.sincev('0.24.4') }}
+| MPD_PERMFIX_MUSIC_DIR | unset                         | If set to a **non-empty-string** value (e.g. `1`), ensures files inside `$MUSIC_DIR` are owned/accessible by `S6_USER`. {{ m.sincev('0.24.4') }}
+| MPD_ARGS              | --stdout                      | Customizable arguments passed to `mpd` service.
+| YMPD_ARGS             | -h localhost -p 6600 -w 64801 | Customizable arguments passed to `ympd` service.
+| MPDSCRIBBLE_CONF      | /etc/mpdscribble.conf         | Path to `mpdscribble` configuration file. Must exist for service to start. {{ m.sincev('0.23.15') }}
+| MPDSCRIBBLE_ARGS      | --host localhost --port 6600  | Customizable arguments passed to `mpdscribble` service.
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"
