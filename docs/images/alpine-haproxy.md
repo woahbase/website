@@ -60,6 +60,7 @@ following environment variables.
 | HAPROXY_PROMEX          | unset                                   | Set to `true` to enable prometheus exporter frontend at port `8405` in default configuration.
 | HAPROXY_STATSOCK        | /var/run/haproxy/haproxy.sock           | Path to `haproxy` stats/controller socket. {{ m.sincev('3.2.2') }} Previously named `HAPROXY_SOCK`.
 | HAPROXY_STATSOCKPARAMS  | level admin expose-fd listeners         | Default parameters for `haproxy` stats/controller socket. {{ m.sincev('3.2.2') }}
+| HAPROXY_SKIP_PERMFIX    | unset                                   | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `haproxy` configuration files/directories. {{ m.sincev('3.2.2') }}
 | HAPROXY_AS_ROOT         | unset                                   | By default, `haproxy` is started as a user-scoped service, set this to a **non-empty-string** (e.g. `1`) to run as root. (Only effective if the container is also running as root) {{ m.sincev('3.2.2') }}
 | HAPROXY_ARGS            | -W -S /var/run/haproxy/master.sock      | Customizable arguments passed to `haproxy` service.
 | HAPROXY_RELOAD_STRATEGY | socket                                  | Used in the {{ m.ghfilelink('root/usr/local/bin/haproxy-reconf.sh', title='haproxy-reconf.sh') }} script to check-and-reload `haproxy`, optionally set to `s6` to restart the process using `s6-svc`. {{ m.sincev('3.2.2') }}

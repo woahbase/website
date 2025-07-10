@@ -1,0 +1,70 @@
+---
+services:
+  rediscommander:
+    container_name: rediscommander
+    # depends_on:
+    #   redis:
+    #     condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: '1.00'
+          memory: 256M
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 120s
+    environment:
+      PUID: ${PUID:-1000}
+      PGID: ${PGID:-1000}
+      # REDISCMDR_LOCAL_JSON: >-
+      #   {
+      #     "connections": [
+      #       {
+      #         "label" : "redis",
+      #         "host" : "redis.service.local",
+      #         "port" : 6379,
+      #         "password" : "yourredispassword",
+      #         "dbIndex" : 0
+      #       }
+      #     ]
+      #   }
+      # REDISCMDR_ARGS: ~
+      # TZ: ${TZ}
+    # healthcheck:
+    #   interval: 2m
+    #   retries: 5
+    #   start_period: 5m
+    #   test:
+    #     - CMD-SHELL
+    #     - >
+    #       /redis-commander/node_modules/redis-commander/bin/healthcheck.js
+    #     # - >
+    #     #   curl -f http://localhost:8081/rediscommander/ || exit 1
+    #   timeout: 10s
+    hostname: rediscommander
+    image: woahbase/alpine-rediscommander:${REDISCMDR_TAG:-latest}
+    network_mode: bridge
+    ports:
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: ${REDISCMDR_PORT:-8081}
+        target: 8081
+    volumes:
+      # - type: bind
+      #   source: ${REDISCMDR_DIR:?err}/configs/config.json
+      #   target: /redis-commander/config/config.json
+      #   bind:
+      #     create_host_path: false
+      # - type: bind
+      #   source: ${REDISCMDR_DIR:?err}/configs/local.json
+      #   target: /redis-commander/config/local.json
+      #   bind:
+      #     create_host_path: false
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind:
+          create_host_path: false

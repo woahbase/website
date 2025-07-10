@@ -199,6 +199,7 @@ nav:
       - alpine-pigpio: images/alpine-pigpio.md
       - alpine-postgresql: images/alpine-postgresql.md
       - alpine-redis: images/alpine-redis.md
+      - alpine-rediscommander: images/alpine-rediscommander.md
       - alpine-registry: images/alpine-registry.md
       - alpine-rsyncd: images/alpine-rsyncd.md
       - alpine-rsyslog: images/alpine-rsyslog.md
