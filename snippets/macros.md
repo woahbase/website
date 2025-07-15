@@ -19,7 +19,9 @@
 Based on
 {% if 'alpine-' in name -%}
 {{- addpagetag(name|replace('alpine-', '')) -}}
-[Alpine Linux][113] from the
+[Alpine Linux][113]
+{{- ' (*'~page.meta.alpine_branch~'*)' if page and page.meta and page.meta.alpine_branch }}
+from the
 [{{ name | replace('alpine-', '') }}]({{ name }}.md "Go to {{ name }} docs")
 {%- endif %}
 image

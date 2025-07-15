@@ -1,5 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + MySQL (actually MariaDB)
+alpine_branch: v3.22
+arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
 has_services:
   - compose
   - nomad
@@ -59,10 +61,13 @@ following environment variables.
 
 | ENV Vars                      | Default                        | Description
 | :---                          | :---                           | :---
-| MYSQL_HOME                    | /var/lib/mysql                 | (Preset) Default database storage directory {{ m.sincev('11.4.5') }}.
-| MYSQL_INITDIR                 | /initdb.d                      | Default database initialization directory {{ m.sincev('11.4.5') }} (used by `/scripts/run.sh`). Previously named `MYSQL_INIT_DB` at `/etc/my.initdb.d` {{ m.sincev('10.11.8') }}
-| MYSQL_BACKUPDIR               | {{s6_userhome}}_backups        | Default database backup directory. {{ m.sincev('10.11.8') }}, previously `/var/lib/mysql/backups` (used by `/scripts/run.sh`).
+| MYSQL_HOME                    | {{s6_userhome}}                | (Preset) Default database storage directory {{ m.sincev('11.4.5') }}.
+| MYSQL_CONF                    | /etc/my.cnf                    | Default database configuration file {{ m.sincev('11.4.5_20250715') }}. Default configurations are read from the following files in the given order: `/etc/my.cnf`, `/etc/mysql/my.cnf`, `{{ s6_userhome }}/my.cnf`, `~/.my.cnf`.
+| MYSQL_CONFD                   | /etc/my.cnf.d                  | Default database configuration snippets directory {{ m.sincev('11.4.5_20250715') }}.
 | MYSQL_SKIP_MYCNFD             | unset                          | Set to `true` to skip copying default snippets to `/etc/my.cnf.d`.
+| MYSQL_BACKUPDIR               | {{s6_userhome}}_backups        | Default database backup directory. {{ m.sincev('10.11.8') }}, previously `/var/lib/mysql/backups` (used by `/scripts/run.sh`).
+| MYSQL_SKIP_PERMFIX            | unset                          | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `mysql` configuration files/directories. {{ m.sincev('11.4.5_20250715') }}
+| MYSQL_INITDIR                 | /initdb.d                      | Default database initialization directory {{ m.sincev('11.4.5') }} (used by `/scripts/run.sh`). Previously named `MYSQL_INIT_DB` at `/etc/my.initdb.d` {{ m.sincev('10.11.8') }}
 | MYSQL_SKIP_INITIALIZE         | unset                          | Set to `true` to skip all database initialization/bootstrap tasks. Useful when you only want the service to run.
 | MYSQL_HOST                    | 127.0.0.1                      | Default host needed to whitelist user access. (part of bootstrap tasks).
 | MYSQL_ROOT_PWD                | unset                          | Default root password **required** for database initialization. (part of bootstrap tasks).
@@ -101,7 +106,7 @@ Also,
 * {{ m.defcfgfile('/etc/my.cnf') }} By default all snippets
   existing in `/etc/my.cnf.d/` are included.
 
-* Data stored at `/var/lib/mysql`.
+* Data stored at `{{ s6_userhome }}`.
 
 * Initialization and bootstrapping tasks are **only** run if the
   default `mysql` table does not exist, i.e. on the **first run**.
