@@ -113,6 +113,10 @@ Also,
   Once the database is initialized, the environment vars have no
   effect.
 
+* RocksDB plugin {{ m.alpinepkg('mariadb-plugin-rocksdb',
+  title="package", arch='') }} is not available for the
+  following architectures, namely `linux/i386` and `linux/390x`.
+
 ---
 ##### Script - run.sh
 ---
