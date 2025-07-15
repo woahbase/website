@@ -115,7 +115,7 @@ Also,
 
 * RocksDB plugin {{ m.alpinepkg('mariadb-plugin-rocksdb',
   title="package", arch='') }} is not available for the
-  following architectures, namely `linux/i386` and `linux/390x`.
+  following architectures, namely `linux/386` and `linux/s390x`.
 
 ---
 ##### Script - run.sh
