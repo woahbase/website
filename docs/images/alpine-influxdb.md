@@ -1,5 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + InfluxDB
+alpine_branch: v3.22
+arches: [aarch64, armhf, armv7l, i386, ppc64le, s390x, x86_64]
 has_services:
   - compose
   - nomad
@@ -74,6 +76,7 @@ following environment variables.
 | INFLUXDB_`varname`               | unset                      | Override default configurations. Check [this link][3] for supported variables.
 | INFLUXDB_INITDIR                 | {{ s6_userhome }}/initdb.d | Directory for `.sh` or `.iql` scripts needed to initialize database. {{ m.sincev('1.8.10_20250522') }} (Used by `/scripts/run.sh`) Previously named `INFLUXDB_INIT_DB`.
 | INFLUXDB_BACKUPDIR               | {{ s6_userhome }}/backups  | Directory for backups. (Used by `/scripts/run.sh`)
+| INFLUXDB_SKIP_PERMFIX            | unset                      | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `influxdb` configuration files/directories. {{ m.sincev('1.8.10_20250722') }}
 | INFLUXDB_SKIP_INITIALIZE         | unset                      | Set to `true` to skip all database initialization/bootstrap tasks. Useful when you only want the service to run. {{ m.sincev('1.8.10_20250522') }}
 | INFLUXDB_HTTP_AUTH_ENABLED       | unset                      | Set to `true`/`false` in environment (or configuration) when authentication is required, default is unset.
 | INFLUXDB_ADMIN_USER              | influxadmin                | Default admin user, **required** for database initialization if authentication is enabled. (part of bootstrap tasks). {{ m.sincev('1.8.10_20250522') }}

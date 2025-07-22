@@ -12,7 +12,8 @@
 ~ ('*' if star else '')
 ~ ('&branch='~branch|default(alpine_branch))
 ~ ('&repo='~repo if repo else '')
-~ ('&arch='~arch if arch else '') }} "AlpineLinux Package")
+~ ('&arch='~arch if arch else '') }}
+"Alpine Linux{{ ' ('~branch~')' if branch|default(alpine_branch) != alpine_branch }} Package")
 {%- endmacro -%}
 
 {%- macro srcimage(name) -%}
