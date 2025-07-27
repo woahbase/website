@@ -71,15 +71,15 @@ following environment variables.
 | RSYSLOG_SPOOLDIR            | /var/spool/rsyslog       | Path to log spooldir.
 | RSYSLOG_PROFILE             | default                  | Use specified profile for configuration. Options are `default` for the configuration that comes with package, or `listener` for central log server, or `forwarder` to forward logs to remote host. Has no effect if file already exists.
 | SYS_HOSTNAME                | name-of-host-machine     | Use specified hostname to separate container and host machine logs.
-| FWD_PROTOCOL                | relp                     | Protocol for sending logs to remote host. (Used when `RSYSLOG_PROFILE` is set to `forwarder`.)
-| FWD_TO_HOST                 | your.logserver.local     | Address of log-receiver host (Used when `RSYSLOG_PROFILE` is set to `forwarder`.)
-| FWD_TO_PORT                 | 2514                     | Port of log-receiver host. (Used when `RSYSLOG_PROFILE` is set to `forwarder`.)
+| FWD_PROTOCOL                | relp                     | Protocol for sending logs to remote host. (Used when `${RSYSLOG_PROFILE}` is set to `forwarder`.)
+| FWD_TO_HOST                 | your.logserver.local     | Address of log-receiver host (Used when `${RSYSLOG_PROFILE}` is set to `forwarder`.)
+| FWD_TO_PORT                 | 2514                     | Port of log-receiver host. (Used when `${RSYSLOG_PROFILE}` is set to `forwarder`.)
 | RSYSLOG_SKIP_PERMFIX        | unset                    | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `rsyslog` files/directories. {{ m.sincev('8.2410.0') }}
 | RSYSLOG_ARGS                | -n                       | Customizable arguments passed to `rsyslog` service.
 | LOGROTATE_CONF              | /etc/logrotate.conf      | Path to `logrotate` configuration file.
 | LOGROTATE_CONFD             | /etc/logrotate.d         | Path to `logrotate` configuration snippets directory.
 | LOGROTATE_CONF_RSYSLOG      | /etc/logrotate.d/rsyslog | Path to `logrotate` configuration file for `rsyslog`. (Copied from `/defaults` if not exists.)
-| LOGROTATE_SKIP_CONF_RSYSLOG | unset                    | Set to `true` to skip copying `rsylog` default snippet, useful if using only `$LOGROTATE_CONF` for configurations. {{ m.sincev('8.2404.0') }}
+| LOGROTATE_SKIP_CONF_RSYSLOG | unset                    | Set to `true` to skip copying `rsylog` default snippet, useful if using only `${LOGROTATE_CONF}` for configurations. {{ m.sincev('8.2404.0') }}
 | LOGROTATE_STATE             | /tmp/logrotate.state     | Holds runtime state for `logrotate`.
 | LOGROTATE_PERIOD            | daily                    | When should `cron` run `logrotate`, options are `hourly`, `daily` , `weekly`, `monthly` etc.
 {% include "envvars/cron.md" %}
@@ -108,7 +108,7 @@ Also,
   cron job script to rotate logs periodically
   is provided at `/defaults/`. This gets copied inside
   `/etc/periodic/` and is picked up by `cron` to be executed.
-  The period is configurable by the `LOGROTATE_PERIOD`
+  The period is configurable by the `${LOGROTATE_PERIOD}`
   environment variable.
 
 * To forward logs from Journald to the syslog inside the
@@ -123,15 +123,15 @@ Also,
   ```
   and restart the service `systemd-journald`. Might want to set
   a name to the docker host instead of 'localhost', in that case set
-  the name in the environment variable `SYS_HOSTNAME`, and uncomment
+  the name in the environment variable `${SYS_HOSTNAME}`, and uncomment
   the hostname configuration inside the `imuxsock` module input.
 
 * To forward logs to a remote host, uncomment the transport type
   (TCP/UDP or RELP) in the configuration file at
   `data/config/rsyslog.conf`, the host and port to forward to can
-  be set by the environment variable `FWD_TO_HOST` and
-  `FWD_TO_PORT`, for TCP/UDP selection use the environment
-  variable `FWD_PROTOCOL`.
+  be set by the environment variable `${FWD_TO_HOST}` and
+  `${FWD_TO_PORT}`, for TCP/UDP selection use the environment
+  variable `${FWD_PROTOCOL}`.
 
 [1]: https://www.rsyslog.com/
 [2]: https://www.rsyslog.com/doc/

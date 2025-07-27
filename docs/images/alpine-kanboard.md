@@ -53,7 +53,7 @@ following environment variables.
 | KANBOARDDIR              | /config/www/kanboard        | (Preset) Path to Kanboard installation.
 | KANBOARD_URL             | http://localhost/kanboard/  | FQDN of your kanboard host including subpath, (kanboard is available at path `/kanboard/`). Required to set the first-run URL in database. (Relevant [issue][7])
 | KANBOARD_BACKUPDIR       | /config/www                 | Path to directory where current installation backup is generated during an update.
-| KANBOARD_UPDATE          | unset                       | If set to `true`, will reinstall kanboard at `$KANBOARDDIR` even if a previous installation exists. Useful if you're persisting your whole installation. Also generates a backup of the previous installation at `$KANBOARD_BACKUPDIR/kanboard-VERSION-YYYY-MM-DD.zip`
+| KANBOARD_UPDATE          | unset                       | If set to `true`, will reinstall kanboard at `${KANBOARDDIR}` even if a previous installation exists. Useful if you're persisting your whole installation. Also generates a backup of the previous installation at `${KANBOARD_BACKUPDIR}/kanboard-VERSION-YYYY-MM-DD.zip`
 | KANBOARD_PRESERVEFILES   | data,plugins,config.php     | **Comma**-separated list of files/dirs that are excluded from deletion during an update.
 | KANBOARD_CRONFILE        | /etc/crontabs/root          | Cron-registry file of a user (defaults to `root`). This file is modified to contain the periodic task script that will be executed.
 | KANBOARD_CRONJOB         | /defaults/cronjob.sh        | File to execute on `cron` invocation.
@@ -87,7 +87,7 @@ Also,
 * For first-time-right setups provide correct `KANBOARD_URL` to be set in
   the database. (Relevant [issue][7])
 
-* Kanboard source is located at `/opt/kanboard/kanboard-$VERSION.zip`.
+* Kanboard source is located at `/opt/kanboard/kanboard-${VERSION}.zip`.
 
 * Includes [Beanstalk][5] and the supporting [plugin][6].
 

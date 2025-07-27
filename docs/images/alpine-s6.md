@@ -46,8 +46,8 @@ following environment variables.
 | ENV Vars          | Default         | Description
 | :---              | :---            | :---
 {% include "envvars/alpine-s6.md" %}
-| S6_USERGROUPS     | empty string    | **Comma**-separated list of groups to add `S6_USER` to. E.g. `"audio,video,tty"`, groups **must** exist.
-| S6_USERPASS       | unset           | Password for `S6_USER`.
+| S6_USERGROUPS     | empty string    | **Comma**-separated list of groups to add `${S6_USER}` to. E.g. `"audio,video,tty"`, groups **must** exist.
+| S6_USERPASS       | unset           | Password for `${S6_USER}`.
 | FILEURL_`varname` | unset           | If set to `<url>|<optional /file/path>`, will download `url` to `/file/path`. See [URL to File](#url-to-file). {{ m.sincev('3.2.1.0') }}
 | HGID_`groupname`  | unset           | Update (or create) `groupname` with **non-zero positive integer** `gid` (to match with host). E.g `HGID_VIDEO=995` will change (or create if not exists) `gid` of `video` group to `995`. {{ m.sincev('3.2.0.0') }}
 | SECRET__`varname` | unset           | If set to a filepath, the contents of file are loaded in the environment variable `varname` (Note the **double** underscores). See [Secrets](#secrets).
@@ -96,7 +96,7 @@ database (requires {{ m.alpinepkg('nssdb-tools') }} for
     | S6_CERTUPDATE           | unset                            | Enabled when atleast one certificate is located, set to `1` to force-refresh the store.
     | NSS_DBDIR               | unset                            | Path to `nssdb` database dir. E.g. `/home/alpine/.pki/nssdb` or `/etc/pki/nssdb`. **Required** for nss-specific tasks to run.
     | NSS_DEFAULT_DB_TYPE     | sql                              | Format of `nssdb`, legacy ones used to be `dbm`.
-    | NSS_DBDIR_OWNER         | unset                            | To apply ownership to the database, set it to e.g. `root:root`, if unset, but the path in inside `S6_USER`-homedir, it defaults to `alpine:$PGID`.
+    | NSS_DBDIR_OWNER         | unset                            | To apply ownership to the database, set it to e.g. `root:root`, if unset, but the path in inside `${S6_USER}`-homedir, it defaults to `alpine:${PGID}`.
     | NSS_TRUST               | P,P,,                            | Default trust for server certificates when installing in `nssdb`.
     | NSS_CATRUST             | CT,C,C,                          | Default trust for CA certificates when installing in `nssdb`.
 
@@ -176,7 +176,7 @@ is added at `/usershell` that run the initialization stage tasks
 **as root**, and then execute the `CMD` **as a not-root
 user**. This way, images that set their entrypoint to
 `/usershell` have all the benefits of s6, but the CMD that is
-run, is run by `S6_USER` (by default `alpine`). Checkout any of
+run, is run by `${S6_USER}` (by default `alpine`). Checkout any of
 the images tagged [usershell][4] for an example.
 
 [1]: https://skarnet.org/software/s6/

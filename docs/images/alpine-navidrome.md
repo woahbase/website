@@ -58,7 +58,7 @@ following environment variables.
 | ND_BASEURL                    | /navidrome           | Subpath for application.
 | ND_PORT                       | 4533                 | Port to listen on.
 | NAVIDROME_SKIP_PERMFIX        | unset                | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `navidrome` configuration files/directories. {{ m.sincev('0.57.0') }}
-| NAVIDROME_PERMFIX_MUSICFOLDER | unset                | If set to a **non-empty-string** value (e.g. `1`), ensures files inside `$MUSIC_DIR` are owned/accessible by `S6_USER`. {{ m.sincev('0.57.0') }}
+| NAVIDROME_PERMFIX_MUSICFOLDER | unset                | If set to a **non-empty-string** value (e.g. `1`), ensures files inside `${MUSIC_DIR}` are owned/accessible by `${S6_USER}`. {{ m.sincev('0.57.0') }}
 | NAVIDROME_ARGS                | unset                | Customizable arguments passed to `navidrome` service.
 {% include "envvars/alpine-s6.md" %}
 

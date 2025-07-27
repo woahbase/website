@@ -36,7 +36,7 @@ docker run --rm \
   --name docker_jackett \
   -p 9117:9117 \
   -v $PWD/config:/config \
-  -v $PWD/torrents:/torrents \
+  -v $PWD/torrents:/config/torrents \
 woahbase/alpine-jackett
 ```
 
@@ -54,8 +54,8 @@ following environment variables.
 | XDG_CONFIG_HOME      | /config                 | (Preset) Configuration directory for `jackett`.
 | XDG_DATA_HOME        | /config                 | (Preset) Data directory for `jackett`.
 | TORRENTSDIR          | /config/torrents        | (Optional) `BlackholeDir` directory for `jackett`. {{ m.sincev('0.22.2111') }}, previously `/torrents`.
-| JACKETT_LN_LOGTXT    | unset                   | If set to `true`, links the logfile `XDG_CONFIG_HOME/Jackett/log.txt` to a different device (or file) mostly to suppress the output, or optionally redirect it. When `false`, removes the link if it exists.
-| JACKETT_LN_LOGDST    | /dev/null               | Links the logfile to this device (or file) when `JACKETT_LN_LOGTXT` is `true`.
+| JACKETT_LN_LOGTXT    | unset                   | If set to `true`, links the logfile `${XDG_CONFIG_HOME}/Jackett/log.txt` to a different device (or file) mostly to suppress the output, or optionally redirect it. When `false`, removes the link if it exists.
+| JACKETT_LN_LOGDST    | /dev/null               | Links the logfile to this device (or file) when `${JACKETT_LN_LOGTXT}` is `true`.
 | JACKETT_SKIP_PERMFIX | unset                   | If set to a **non-empty-string** value (e.g. `1`), skips applying permission fixes to `${XDG_CONFIG_HOME}` and `${TORRENTSDIR}`.
 | JACKETT_EXEC         | jackett                 | Customizable executable passed to `jackett` service. Can also be `jackett_launcher.sh` if needed.
 | JACKETT_ARGS         | --NoRestart --NoUpdates | Customizable arguments passed to `jackett` service.

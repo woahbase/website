@@ -52,12 +52,12 @@ following environment variables.
 | ENV Vars                   | Default                                     | Description
 | :---                       | :---                                        | :---
 | TRANSMISSION_ROOTDIR       | /var/lib/transmission                       | (Preset) Default application directory. {{ m.sincev('4.0.5_20240905') }}
-| TRANSMISSION_CONFDIR       | $TRANSMISSION_ROOTDIR/config                | Default configuration directory. {{ m.sincev('4.0.5_20240905') }}
-| TRANSMISSION_DOWNLOADDIR   | $TRANSMISSION_ROOTDIR/downloads             | Default download directory. Only set if custom `settings.json` does not exist. {{ m.sincev('4.0.5_20240905') }}
-| TRANSMISSION_INCOMPLETEDIR | $TRANSMISSION_ROOTDIR/incomplete            | Default directory for running downloads. Only set if custom `settings.json` does not exist. {{ m.sincev('4.0.5_20240905') }}
-| TRANSMISSION_WATCHDIR      | $TRANSMISSION_ROOTDIR/torrents              | Default directory for watching torrents to add. Only set if custom `settings.json` does not exist. (not to be confused with currently running torrents in `$TRANSMISSION_CONFDIR/torrents`) {{ m.sincev('4.0.5_20240905') }}
+| TRANSMISSION_CONFDIR       | ${TRANSMISSION_ROOTDIR}/config                | Default configuration directory. {{ m.sincev('4.0.5_20240905') }}
+| TRANSMISSION_DOWNLOADDIR   | ${TRANSMISSION_ROOTDIR}/downloads             | Default download directory. Only set if custom `settings.json` does not exist. {{ m.sincev('4.0.5_20240905') }}
+| TRANSMISSION_INCOMPLETEDIR | ${TRANSMISSION_ROOTDIR}/incomplete            | Default directory for running downloads. Only set if custom `settings.json` does not exist. {{ m.sincev('4.0.5_20240905') }}
+| TRANSMISSION_WATCHDIR      | ${TRANSMISSION_ROOTDIR}/torrents              | Default directory for watching torrents to add. Only set if custom `settings.json` does not exist. (not to be confused with currently running torrents in `${TRANSMISSION_CONFDIR}/torrents`) {{ m.sincev('4.0.5_20240905') }}
 | TRANSMISSION_SKIP_PERMFIX  | unset                                       | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `transmission` configuration files/directories. {{ m.sincev('4.0.6_20250702') }}
-| TRANSMISSION_PERMFIX_FILES | unset                                       | If set to a **non-empty-string** value (e.g. `1`), ensures files inside download/incomplete/watch directories are owned/accessible by `S6_USER`. {{ m.sincev('4.0.5_20240905') }}
+| TRANSMISSION_PERMFIX_FILES | unset                                       | If set to a **non-empty-string** value (e.g. `1`), ensures files inside download/incomplete/watch directories are owned/accessible by `${S6_USER}`. {{ m.sincev('4.0.5_20240905') }}
 | TRANSMISSION_ARGS          | --foreground --no-portmap --log-level=error | Customizable arguments passed to `transmission-daemon` service.
 {% include "envvars/alpine-s6.md" %}
 

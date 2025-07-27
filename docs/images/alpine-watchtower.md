@@ -61,7 +61,7 @@ following environment variables.
 
 | ENV Vars                 | Default      | Description
 | :---                     | :---         | :---
-| GID_DOCKER               | unset        | Group-id of `docker` group on the host. If set, updates group-id of the group `docker` inside container, and adds `S6_USER` to the group.
+| GID_DOCKER               | unset        | Group-id of `docker` group on the host. If set, updates group-id of the group `docker` inside container, and adds `${S6_USER}` to the group.
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"

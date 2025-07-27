@@ -56,7 +56,7 @@ following environment variables.
 | SANED_CONF_`filename` | unset                        | File to modify with contents as value. e.g for `pixma.conf` `SANED_CONF_pixma='bjnp-timeout=5000;mfnp://scanner.bad-network.org/timeout=1500'`. See [Modifying `conf` files](#modifying-conf-files)
 | SANED_SKIP_PERMFIX    | unset                        | If set to a **non-empty-string** value (e.g. `1`), skips applying permission fixes to `${SANED_CONFDIR}` and `${SANED_DATADIR}`.
 | SANED_PORT            | 6566                         | Control Port of `saned` service.
-| SANED_ARGS            | -l -b 0.0.0.0 -p $SANED_PORT | Customizable arguments passed to `saned` service.
+| SANED_ARGS            | -l -b 0.0.0.0 -p ${SANED_PORT} | Customizable arguments passed to `saned` service.
 
 Also,
 
@@ -72,7 +72,7 @@ Also,
   for USB scanners or `/dev/scanner0`) in the container so that
   `saned` can access the scanner device. (Or you could mount the
   whole `/dev/bus/usb`.) The service drops privileges to
-  `S6_USER` which should have the appropriate groups to allow
+  `${S6_USER}` which should have the appropriate groups to allow
   reading from the scanner device.
 
 ??? info "Did you know?"

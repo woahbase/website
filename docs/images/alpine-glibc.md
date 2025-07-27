@@ -62,5 +62,6 @@ following environment variables.
 [6]: https://github.com/sgerrand/docker-glibc-builder/issues/20
 [7]: https://github.com/Lauri-Nomme/alpine-glibc-xb/blob/master/Dockerfile
 [8]: https://github.com/jvasileff/alpine-pkg-glibc-armhf/blob/master/build-with-docker.sh
+[9]: https://github.com/jvasileff/alpine-pkg-glibc-armhf/blob/master/Dockerfile
 
 {% include "all-include.md" %}

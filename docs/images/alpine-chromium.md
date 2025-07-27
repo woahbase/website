@@ -64,7 +64,7 @@ following environment variables.
 Also,
 
 * Does **not** contain a X-server, so needs a host running its
-  own X, with `/tmp/.X11-unix/` mounted and `$DISPLAY` set inside
+  own X, with `/tmp/.X11-unix/` mounted and `${DISPLAY}` set inside
   the container.
 
 * By default, runs with sandboxing disabled using the
@@ -72,7 +72,7 @@ Also,
   `--net=host` if needed.
 
 * To preserve data mount the `/home/alpine` dir in your local. By
-  default mounts `$PWD/data`.
+  default mounts `${PWD}/data`.
 
 * {{ m.customscript('p11-chromium-customize') }}
 
@@ -96,6 +96,9 @@ Also,
   Need to pass the flag `--security-opt seccomp=/path/to/chrome.json`
   to use it.
 
+* See [this page][10] for an explanation of the differences
+  between Chromium and Google Chrome.
+
 * Check [here][3] for a reference of most of the
   command-line-switches that can be used to tune browser
   behaviour.
@@ -111,5 +114,6 @@ Also,
 [7]: https://github.com/GoogleChrome/chrome-launcher
 [8]: https://docs.docker.com/engine/security/apparmor/
 [9]: https://discourse.ubuntu.com/t/mantic-minotaur-release-notes/35534#security-improvements
+[10]: https://chromium.googlesource.com/chromium/src/+/master/docs/chromium_browser_vs_google_chrome.md
 
 {% include "all-include.md" %}

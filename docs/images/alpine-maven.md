@@ -66,7 +66,7 @@ Also,
 
 * Mount the project directory (where `pom.xml` is) at
   `/home/alpine/project` and (optionally set it as `workdir`).
-  Mounts `$PWD` by default.
+  Mounts `${PWD}` by default.
 
 * Maven runs under the user `alpine`.
 

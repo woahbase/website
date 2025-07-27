@@ -12,8 +12,8 @@
 ~ ('*' if star else '')
 ~ ('&branch='~branch|default(alpine_branch))
 ~ ('&repo='~repo if repo else '')
-~ ('&arch='~arch if arch else '') }}
-"Alpine Linux{{ ' ('~branch~')' if branch|default(alpine_branch) != alpine_branch }} Package")
+~ ('&arch='~arch if arch else '')
+}} "Alpine Linux{{ ' ('~branch~')' if branch|default(alpine_branch) != alpine_branch }} Package")
 {%- endmacro -%}
 
 {%- macro srcimage(name) -%}
@@ -105,7 +105,7 @@ Versioned accordingly with tags from {{ gltagslink(repo_name, title, search) }}.
 {%- endif -%}
 Configuration {{ 'files' if plural else 'file' }}
 {{ 'for '~fr if fr }} {{ 'are' if plural else 'is' }} at
-`{{ dst }}`{{ ' (the filepath preset in the env-var `'~vname~'`)' if vname }},
+`{{ dst }}`{{ ' (the filepath preset in the env-var `${'~vname~'}`)' if vname }},
 edit or remount {{ 'these' if plural else 'this' }} with your own.
 A {{ ghfilelink(src, title=title) }} is provided in
 `{{ '/'~ddir }}`, {{ 'these get' if plural else 'this gets' }}

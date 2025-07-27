@@ -96,7 +96,7 @@ following environment variables.
 | MPD_LOGS              | /var/log/mpd                  | Directory for logs, if not logging to `stdout`. {{ m.sincev('0.24.4') }}
 | MPD_GROUP             | mpd                           | Primary group for `mpd` user, updated in configuration file when using the default configurations (not used by default). {{ m.sincev('0.24.4') }}
 | MPD_SKIP_PERMFIX      | unset                         | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `mpd` configuration files/directories. {{ m.sincev('0.24.4') }}
-| MPD_PERMFIX_MUSIC_DIR | unset                         | If set to a **non-empty-string** value (e.g. `1`), ensures files inside `$MUSIC_DIR` are owned/accessible by `S6_USER`. {{ m.sincev('0.24.4') }}
+| MPD_PERMFIX_MUSIC_DIR | unset                         | If set to a **non-empty-string** value (e.g. `1`), ensures files inside `${MUSIC_DIR}` are owned/accessible by `${S6_USER}`. {{ m.sincev('0.24.4') }}
 | MPD_ARGS              | --stdout                      | Customizable arguments passed to `mpd` service.
 | YMPD_ARGS             | -h localhost -p 6600 -w 64801 | Customizable arguments passed to `ympd` service.
 | MPDSCRIBBLE_CONF      | /etc/mpdscribble.conf         | Path to `mpdscribble` configuration file. Must exist for service to start. {{ m.sincev('0.23.15') }}

@@ -91,15 +91,15 @@ following environment variables.
 | :---                          | :---                 | :---
 | TTRSSDIR                      | /config/www/ttrss    | (Preset) Path to `tt-rss` installation.
 | TTRSSCONFIG                   | /defaults/config.php | Path to default `config.php`, if set and the file exists, it is copied into installation directory.
-| TTRSSUPDATE                   | unset                | If set to `true`, will reinstall `tt-rss` at `$TTRSSDIR` even if a previous installation exists. Useful if you're persisting your whole installation. Generates a backup of the previous installation at `$WEBDIR/ttrss-backup-yyyy-MM-dd.tar.gz` before updating.
+| TTRSSUPDATE                   | unset                | If set to `true`, will reinstall `tt-rss` at `${TTRSSDIR}` even if a previous installation exists. Useful if you're persisting your whole installation. Generates a backup of the previous installation at `${WEBDIR}/ttrss-backup-yyyy-MM-dd.tar.gz` before updating.
 | TTRSS_*                       | unset                | If defined (with using the default `config.php` included in the image), these variables are set in the configuration. See [wiki/GlobalConfig][8].
 | TTRSS_WORKER_ARGS             | unset                | Customizable arguments passed to `tt-rss` worker service.
 | ADMIN_USER_PASS               | unset                | If set, updates the administrator user password. If unset on first-run, a random password is generated.
 | ADMIN_USER_ACCESS_LEVEL       | unset                | If set, updates the administrator access level.
-| AUTO_CREATE_USER              | unset                | If set, adds a user to the database.
-| AUTO_CREATE_USER_PASS         | unset                | Password for `AUTO_CREATE_USER`, **required** for creating the user.
-| AUTO_CREATE_USER_ACCESS_LEVEL | unset                | If set, updates the `AUTO_CREATE_USER` access level.
-| AUTO_CREATE_USER_ENABLE_API   | unset                | If set, enables API-access for `AUTO_CREATE_USER`.
+| AUTO_CREATE_USER              | unset                | If set to a username, adds the user to the database.
+| AUTO_CREATE_USER_PASS         | unset                | Password for `${AUTO_CREATE_USER}`, **required** for creating the user.
+| AUTO_CREATE_USER_ACCESS_LEVEL | unset                | If set, updates the `${AUTO_CREATE_USER}` access level.
+| AUTO_CREATE_USER_ENABLE_API   | unset                | If set, enables API-access for `${AUTO_CREATE_USER}`.
 | NO_STARTUP_PLUGIN_UPDATES     | unset                | Set to non-empty string e.g. `1` to skip updating plugins inside `plugins.local` directory. Only has effect when `git` is installed in the container, by default, **which is not**.
 | NO_STARTUP_SCHEMA_UPDATES     | unset                | Set to non-empty string e.g. `1` to skip updating database schema before starting services, **not recommened** unless you know what you're doing.
 | XDEBUG_ENABLED                | unset                | Toggles `xdebug`.
@@ -117,7 +117,7 @@ Also,
   unpacked at this path.
 
 * Tiny Tiny RSS release is located at
-  `/opt/ttrss/ttrss-$VERSION.tar.gz`. Also includes the
+  `/opt/ttrss/ttrss-${VERSION}.tar.gz`. Also includes the
   [nginx_xaccel][6] plugin.
 
 * **Database not included**. Checkout {{ m.myimage('alpine-mysql')
@@ -131,7 +131,7 @@ Also,
   the environment varibles are **NOT** exposed to `php`, but the
   default configuration included with the image supports reading
   `TTRSS_*` variables, as well as any snippet files found in
-  `$TTRSSDIR/config.d`, and for legacy plugins use `define()` like
+  `${TTRSSDIR}/config.d`, and for legacy plugins use `define()` like
   before. Check the [wiki][8], [docs][9], or the [source
   class][10] for all available configuration parameters.
 
@@ -141,7 +141,7 @@ Also,
   `/config` directory to have better (but manual) control over
   your installation.
 
-* SQL snippets inside `$TTRSSDIR/sql/post-init.d/` are executed
+* SQL snippets inside `${TTRSSDIR}/sql/post-init.d/` are executed
   automatically before services are started. Remember to not
   provide MySQL snippets when your database is PostgreSQL (or
   vice-versa).

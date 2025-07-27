@@ -46,7 +46,7 @@ following environment variables.
 | ENV Vars           | Default            | Description
 | :---               | :---               | :---
 | REDIS_CONF         | /etc/redis.conf    | Path to configuration.
-| REDIS__(parameter) | unset              | If set and no configuration file exists at `$REDIS_CONF`, will set the parameter (if exists) with the value. E.g. `REDIS__dir=/var/lib/redis`. (Note the **double** underscores). {{ m.sincev('7.2.5') }}
+| REDIS__(parameter) | unset              | If set and no configuration file exists at `${REDIS_CONF}`, will set the parameter (if exists) with the value. E.g. `REDIS__dir=/var/lib/redis`. (Note the **double** underscores). {{ m.sincev('7.2.5') }}
 | REDIS__dir         | /var/lib/redis     | Path to datastore. {{ m.sincev('7.2.5') }} Previously `REDIS_HOME`.
 | REDIS__pidfile     | /var/run/redis.pid | Path to pidfile. {{ m.sincev('7.2.5') }}
 | REDIS__logfile     | unset              | Path to log destination (will create file if set e.g. `/var/log/redis.log`). {{ m.sincev('7.2.5') }} Previously `REDIS_LOGS`.

@@ -52,7 +52,7 @@ following environment variables.
 | :---                   | :---                    | :---
 | NODE_CONFIG_DIR        | /redis-commander/config | Default configuration directory.
 | NODE_ENV               | config                  | Configuration JSON file to use.
-| REDISCMDR_LOCAL_CONFIG | unset                   | If set, creates the file `local.json` in `NODE_CONFIG_DIR` with the value as the content.
+| REDISCMDR_LOCAL_CONFIG | unset                   | If set, creates the file `local.json` in `${NODE_CONFIG_DIR}` with the value as the content.
 | REDISCMDR_SKIP_PERMFIX | unset                   | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `redis-commander` configuration files/directories.
 | REDISCMDR_ARGS         | unset                   | Customizable arguments passed to `redis-commander` service.
 {% include "envvars/alpine-s6.md" %}
@@ -66,7 +66,7 @@ Also,
   ddir='redis-commander') }}
 
 * Optionally add another file `local.json` inside
-  `/redis-commander/config/` or set `REDISCMDR_LOCAL_JSON` with
+  `/redis-commander/config/` or set `${REDISCMDR_LOCAL_JSON}` with
   the Redis Connections configurations. This helps to keep
   connections separate from configurations.
 

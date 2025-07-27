@@ -52,15 +52,15 @@ following environment variables.
 | :---                    | :---                                         | :---
 | UBOOQUITY_HOME          | /opt/ubooquity                               | Path to `ubooquity` jarfile.
 | UBOOQUITY_CONFIG        | /config                                      | Path to configuration directory.
-| UBOOQUITY_PATH_BOOKS    | /books                                       | Path to books directory, if set and `preferences.json` does not exist (i.e. on first run), updated in the default configuration. Required for permission-fixes on files. {{ m.sincev('2.1.5') }}
-| UBOOQUITY_PATH_COMICS   | /comics                                      | Path to comics directory, if set and `preferences.json` does not exist (i.e. on first run), updated in the default configuration. Required for permission-fixes on files. {{ m.sincev('2.1.5') }}
-| UBOOQUITY_PATH_FILES    | /files                                       | Path to files directory, if set and `preferences.json` does not exist (i.e. on first run), updated in the default configuration. Required for permission-fixes on files. {{ m.sincev('2.1.5') }}
-| UBOOQUITY_ADMIN_PORT    | 2203                                         | Default admin port, if set and `preferences.json` does not exist (i.e. on first run), updated in the default configuration. {{ m.sincev('2.1.5') }}
-| UBOOQUITY_ADMIN_ENABLED | true                                         | Whether admin is enabled, if set and `preferences.json` does not exist (i.e. on first run), updated in the default configuration. {{ m.sincev('2.1.5') }}
-| UBOOQUITY_LIBRARY_PORT  | 2202                                         | Default library port, if set and `preferences.json` does not exist (i.e. on first run), updated in the default configuration. {{ m.sincev('2.1.5') }}
-| UBOOQUITY_SUBPATH       | unset                                        | Default reverse proxy prefix, if set and `preferences.json` does not exist (i.e. on first run), updated in the default configuration. {{ m.sincev('2.1.5') }}
+| UBOOQUITY_PATH_BOOKS    | /books                                       | Path to books directory, if set and `${UBOOQUITY_CONFIG}/preferences.json` does not exist (i.e. on first run), updated in the default configuration. Required for permission-fixes on files. {{ m.sincev('2.1.5') }}
+| UBOOQUITY_PATH_COMICS   | /comics                                      | Path to comics directory, if set and `${UBOOQUITY_CONFIG}/preferences.json` does not exist (i.e. on first run), updated in the default configuration. Required for permission-fixes on files. {{ m.sincev('2.1.5') }}
+| UBOOQUITY_PATH_FILES    | /files                                       | Path to files directory, if set and `${UBOOQUITY_CONFIG}/preferences.json` does not exist (i.e. on first run), updated in the default configuration. Required for permission-fixes on files. {{ m.sincev('2.1.5') }}
+| UBOOQUITY_ADMIN_PORT    | 2203                                         | Default admin port, if set and `${UBOOQUITY_CONFIG}/preferences.json` does not exist (i.e. on first run), updated in the default configuration. {{ m.sincev('2.1.5') }}
+| UBOOQUITY_ADMIN_ENABLED | true                                         | Whether admin is enabled, if set and `${UBOOQUITY_CONFIG}/preferences.json` does not exist (i.e. on first run), updated in the default configuration. {{ m.sincev('2.1.5') }}
+| UBOOQUITY_LIBRARY_PORT  | 2202                                         | Default library port, if set and `${UBOOQUITY_CONFIG}/preferences.json` does not exist (i.e. on first run), updated in the default configuration. {{ m.sincev('2.1.5') }}
+| UBOOQUITY_SUBPATH       | unset                                        | Default reverse proxy prefix, if set and `${UBOOQUITY_CONFIG}/preferences.json` does not exist (i.e. on first run), updated in the default configuration. {{ m.sincev('2.1.5') }}
 | UBOOQUITY_ARGS          | --headless --host 0.0.0.0 --libraryport 2202 | Customizable arguments passed to `ubooquity` service.
-| UBOOQUITY_PERMFIX_FILES | unset                                        | If set to `true`, ensures files inside books/comics/files directories are owned/accessible by `S6_USER`. {{ m.sincev('2.1.5') }}
+| UBOOQUITY_PERMFIX_FILES | unset                                        | If set to `true`, ensures files inside books/comics/files directories are owned/accessible by `${S6_USER}`. {{ m.sincev('2.1.5') }}
 | MAXMEM                  | 1024                                         | Limits how much memory (MB) the JVM can use.
 {% include "envvars/alpine-s6.md" %}
 

@@ -52,8 +52,8 @@ following environment variables.
 | UPTIME_KUMA_HOST                     | 0.0.0.0                   | Interface to listen on.
 | UPTIME_KUMA_PORT                     | 3001                      | Port to listen on.
 | UPTIME_KUMA_DISABLE_FRAME_SAMEORIGIN | false                     | Whether to disable same-origin frames.
-| UPTIMEKUMA_SKIP_PERMFIX              | unset                     | Set to **non-empty-string** e.g. `1` to skip fixing permissions on `PROJECTDIR` and `DATADIR` everytime before starting service.
-| UPTIMEKUMA_ARGS                      | --data-dir=$DATADIR       | Customizable arguments passed to `uptime-kuma` service.
+| UPTIMEKUMA_SKIP_PERMFIX              | unset                     | Set to **non-empty-string** e.g. `1` to skip fixing permissions on `${PROJECTDIR}` and `${DATADIR}` everytime before starting service.
+| UPTIMEKUMA_ARGS                      | --data-dir=${DATADIR}       | Customizable arguments passed to `uptime-kuma` service.
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"

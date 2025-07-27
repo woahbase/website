@@ -59,7 +59,7 @@ following environment variables.
 | GF_UPDATE_PLUGINS     | unset                              | Set to `true` to run plugin-update (uses `grafana cli`).
 | GF_LOG_MODE           | console                            | Default log mode, can be `console` or `file`.
 | GRAFANA_ARGS          | see below                          | Customizable arguments passed to `grafana server` service. (Overrides default arguments)
-| GRAFANA_ARGS_EXTRA    | empty string                       | Customizable arguments passed to `grafana server` service.
+| GRAFANA_ARGS_EXTRA    | empty string                       | Customizable extra arguments passed to `grafana server` service.
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"
@@ -70,15 +70,15 @@ Also,
 
 * By default `grafana server` is run with the following arguments,
     ```
-    cfg:default.log.mode=$GF_LOG_MODE \
-    cfg:default.paths.data=$GF_PATHS_DATA \
-    cfg:default.paths.logs=$GF_PATHS_LOGS \
-    cfg:default.paths.plugins=$GF_PATHS_PLUGINS \
-    cfg:default.paths.provisioning=$GF_PATHS_PROVISIONING
+    cfg:default.log.mode=${GF_LOG_MODE} \
+    cfg:default.paths.data=${GF_PATHS_DATA} \
+    cfg:default.paths.logs=${GF_PATHS_LOGS} \
+    cfg:default.paths.plugins=${GF_PATHS_PLUGINS} \
+    cfg:default.paths.provisioning=${GF_PATHS_PROVISIONING}
     ```
   So that customized paths get used instead of the defaults in
-  configuration. Override the `GRAFANA_ARGS` environment variable
-  to customize these, or add extra args in `GRAFANA_ARGS_EXTRA` as
+  configuration. Override the `${GRAFANA_ARGS}` environment variable
+  to customize these, or add extra args in `${GRAFANA_ARGS_EXTRA}` as
   needed.
 
 [1]: https://grafana.com

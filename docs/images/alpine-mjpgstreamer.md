@@ -45,15 +45,15 @@ following environment variables.
 
 | ENV Vars             | Default                            | Description
 | :---                 | :---                               | :---
-| GID_VIDEO            | unset                              | Group-id of `video` group on the host. If set, updates group-id of the group `video` inside container, and adds `S6_USER` to the group.
+| GID_VIDEO            | unset                              | Group-id of `video` group on the host. If set, updates group-id of the group `video` inside container, and adds `${S6_USER}` to the group.
 | MJPGST_VIDEO_DEV     | /dev/video0                        | Default video device to use (**must exist**). Added to input arguments.
 | MJPGST_INPUT_MODULE  | input_uvc.so                       | Default input module.
 | MJPGST_INPUT_OPTS    | -n -r 640x480                      | Input module arguments.
 | MJPGST_HOST          | 0.0.0.0                            | Binds to all interfaces by default.
 | MJPGST_PORT          | 8080                               | Default port for service.
 | MJPGST_OUTPUT_MODULE | output_http.so                     | Default output module.
-| MJPGST_OUTPUT_OPTS   | -l $MJPGST_HOST -p $MJPGST_PORT    | Output module arguments.
-| MJPGST_CREDENTIALS   | unset                              | Access credentials in format `user:pass`. If set, added to the `MJPGST_OUTPUT_OPTS`.
+| MJPGST_OUTPUT_OPTS   | -l ${MJPGST_HOST} -p ${MJPGST_PORT}    | Output module arguments.
+| MJPGST_CREDENTIALS   | unset                              | Access credentials in format `user:pass`. If set, added to the `${MJPGST_OUTPUT_OPTS}`.
 | MJPGST_WWW_ROOT      | /usr/local/share/mjpg-streamer/www | Path where default UI/Control files are. If unset, will only serve snapshot/stream. Can be customized to point at your own html/css/js if needed.
 | MJPGST_ARGS          | unset                              | Customizable arguments passed to `mjpg_streamer` service.
 {% include "envvars/alpine-s6.md" %}
@@ -66,8 +66,8 @@ Also,
   port is accessible in the firewall configurations.
 
 * Make sure to mount the proper camera device (e.g.
-  `/dev/video0`) in the container, and ensure `MJPGST_VIDEO_DEV`
-  points to it, optionally also set `GID_VIDEO` so that
+  `/dev/video0`) in the container, and ensure `${MJPGST_VIDEO_DEV}`
+  points to it, optionally also set `${GID_VIDEO}` so that
   `mjpg_streamer` (running under user `alpine`) is allowed access
   to the camera.
 

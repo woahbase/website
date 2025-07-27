@@ -70,13 +70,13 @@ following environment variables.
 Also,
 
 * Does **not** contain a X-server, so needs a host running its
-  own X, with `/tmp/.X11-unix/` mounted and `$DISPLAY` set inside
+  own X, with `/tmp/.X11-unix/` mounted and `${DISPLAY}` set inside
   the container.
 
 * Optionally may require `--cap-add=SYS_ADMIN` and `--net=host`.
 
 * To preserve data mount the `/home/alpine` dir in your local. By
-  default mounts `$PWD/data`.
+  default mounts `${PWD}/data`.
 
 * {{ m.customscript('p11-firefox-customize') }}
 

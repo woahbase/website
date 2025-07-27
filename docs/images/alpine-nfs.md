@@ -70,12 +70,12 @@ following environment variables.
 | SKIP_SYSCTL         | unset                                                         | If set to `true`, will skip applying sysctl mods to kernel. Useful if those are already done at the provision level.
 | EXPORTFS_ARGS       | -afrv                                                         | Customizable arguments passed to `exportfs`.
 | MOUNTD_PORT         | 32767                                                         | Default port exposed for `rpc.mountd`, may require firewall whitelisting.
-| MOUNTD_ARGS         | -F -p $MOUNTD_PORT --debug all                                | Customizable arguments passed to `rpc.mountd` service.
+| MOUNTD_ARGS         | -F -p ${MOUNTD_PORT} --debug all                                | Customizable arguments passed to `rpc.mountd` service.
 | NFSD_ARGS           | --debug 8                                                     | Customizable arguments passed to `rpc.nfsd` service.
 | RPCBIND_ARGS        | -fw                                                           | Customizable arguments passed to `rpcbind` service.
 | STATD_PORT          | 32765                                                         | Default port exposed for `statd`, may require firewall whitelisting.
 | STATD_OUTGOING_PORT | 32766                                                         | Default port exposed for `statd` outbound connections, may require firewall whitelisting.
-| STATD_ARGS          | --port $STATD_PORT --outgoing-port $STATD_OUTGOING_PORT -F -d | Customizable arguments passed to `statd` service.
+| STATD_ARGS          | --port ${STATD_PORT} --outgoing-port ${STATD_OUTGOING_PORT} -F -d | Customizable arguments passed to `statd` service.
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"

@@ -51,17 +51,17 @@ following environment variables.
 | GOOS               | linux          | (Preset) Go OS type
 | GOPATH             | /go            | Default go project path (non-module-style projects)
 | GOBIN              | /go/bin        | Default go binary output path. {{ m.sincev('1.24.4') }}
-| GO_PROJECTDIR      | empty string   | Custom go project path for module-style projects. Should be outside of `GOPATH`. If set, dependecies from `go.mod` file in this directory are automatically set-up using `go get ./...`
+| GO_PROJECTDIR      | empty string   | Custom go project path for module-style projects. Should be outside of `${GOPATH}`. If set, dependecies from `go.mod` file in this directory are automatically set-up using `go get ./...`
 | S6_GO_PACKAGES     | empty string   | **Space**-separated list of packages to install at runtime (Preferebly main packages else `go` issues a warning).
-| S6_GO_SKIP_SETUP   | unset          | If set, skip setting up default directories under `GOPATH`.
-| S6_GO_SKIP_GET     | unset          | If set, skip fetching project dependecies from `go.mod` in `GO_PROJECTDIR`.
+| S6_GO_SKIP_SETUP   | unset          | If set, skip setting up default directories under `${GOPATH}`.
+| S6_GO_SKIP_GET     | unset          | If set, skip fetching project dependecies from `go.mod` in `${GO_PROJECTDIR}`.
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"
 
 Also,
 
-* Check [here][2] for supported `GOOS`/`GOARCH` combinations.
+* Check [here][2] for supported `${GOOS}`/`${GOARCH}` combinations.
 
 [1]: https://golang.org/
 [2]: https://go.dev/doc/install/source#environment

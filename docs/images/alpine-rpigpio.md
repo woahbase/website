@@ -60,8 +60,8 @@ following environment variables.
 
 | ENV Vars                 | Default      | Description
 | :---                     | :---         | :---
-| GID_DIALOUT              | unset        | Group-id of `dialout` group on the host. If set, updates group-id of the group `dialout` inside container, and adds `S6_USER` to the group.
-| GID_TTY                  | unset        | Group-id of `tty` group on the host. If set, updates group-id of the group `tty` inside container, and adds `S6_USER` to the group.
+| GID_DIALOUT              | unset        | Group-id of `dialout` group on the host. If set, updates group-id of the group `dialout` inside container, and adds `${S6_USER}` to the group.
+| GID_TTY                  | unset        | Group-id of `tty` group on the host. If set, updates group-id of the group `tty` inside container, and adds `${S6_USER}` to the group.
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"

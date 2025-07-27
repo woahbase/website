@@ -49,11 +49,11 @@ following environment variables.
 
 | ENV Vars            | Default                          | Description
 | :---                | :---                             | :---
-| BLOCKY_CONFIG_FILE  | /config/config.yml               | (Preset) Path to `blocky` configuration file. (Setting this path to a directory is **unsupported**, use `$BLOCKY_CONFDIR` instead.)
-| BLOCKY_CONFDIR      | unset                            | If set to a directory containing YML snippets, the files in this directory are merged (using `yq`) to generate `$BLOCKY_CONFIG_FILE`.
+| BLOCKY_CONFIG_FILE  | /config/config.yml               | (Preset) Path to `blocky` configuration file. (Setting this path to a directory is **unsupported**, use `${BLOCKY_CONFDIR}` instead.)
+| BLOCKY_CONFDIR      | unset                            | If set to a directory containing YML snippets, the files in this directory are merged (using `yq`) to generate `${BLOCKY_CONFIG_FILE}`.
 | BLOCKY_LISTSDIR     | /config/lists                    | Default directory for allow/deny lists (as plain `.txt` files containing one host per line). {{ m.sincev('0.26.2_20250722') }}
 | BLOCKY_LOGSDIR      | /config/logs                     | Default directory for logs. {{ m.sincev('0.26.2_20250722') }}
-| BLOCKY_CONFURL      | unset                            | If set, will fetch `config.yml` from this url. If the url points to a `.tar.gz` file, it is automatically unpacked inside `${BLOCKY_CONFDIR}` (`/config/snippets` by default) and subsequently merged to generate `$BLOCKY_CONFIG_FILE`.
+| BLOCKY_CONFURL      | unset                            | If set, will fetch `config.yml` from this url. If the url points to a `.tar.gz` file, it is automatically unpacked inside `${BLOCKY_CONFDIR}` (`/config/snippets` by default) and subsequently merged to generate `${BLOCKY_CONFIG_FILE}`.
 | BLOCKY_SKIP_PERMFIX | unset                            | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `blocky` configuration files/directories. {{ m.sincev('0.26.2_20250722') }}
 | BLOCKY_ARGS         | --apiHost 0.0.0.0 --apiPort 4000 | Customizable arguments passed to `blocky` service.
 {% include "envvars/alpine-s6.md" %}

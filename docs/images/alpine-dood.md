@@ -101,7 +101,7 @@ following environment variables.
 
 | ENV Vars                 | Default      | Description
 | :---                     | :---         | :---
-| GID_DOCKER               | unset        | Group-id of `docker` group on the host. If set, updates group-id of the group `docker` inside container, and adds `S6_USER` to the group. When unspecified, the socket permissions are used instead. {{ m.sincev('26.1.5') }}
+| GID_DOCKER               | unset        | Group-id of `docker` group on the host. If set, updates group-id of the group `docker` inside container, and adds `${S6_USER}` to the group. When unspecified, the socket permissions are used instead. {{ m.sincev('26.1.5') }}
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"
@@ -114,8 +114,8 @@ Also,
 * Optionally, for relative mounts (e.g. for providing project-specific
   configuration/defaults in `docker-compose` via directories that
   exist in the host, but not inside container) we can set an
-  environment variable (e.g. `$HOSTCWD`) to a directory in the
-  host machine, and use it similar to `$PWD`.
+  environment variable (e.g. `${HOSTCWD}`) to a directory in the
+  host machine, and use it similar to `${PWD}`.
 
 * Processes/services/tasks are generally recommended to be run as
   the non-root user `alpine`.

@@ -62,7 +62,7 @@ following environment variables.
 | S6_COMPOSER_PACKAGES     | empty string                | **Space**-separated list of packages to install globally with `composer`.
 | S6_COMPOSER_PROJECTDIR   | unset                       | If specified, runs `composer install` (or `update` if lockfile does not exist) in this directory at runtime.
 | COMPOSER_ARGS            | --no-cache --no-interaction | Arguments given to `composer install`.
-| S6_COMPOSER_SKIP_INSTALL | unset                       | Skips running install/update task inside `S6_COMPOSER_PROJECTDIR`.
+| S6_COMPOSER_SKIP_INSTALL | unset                       | Skips running install/update task inside `${S6_COMPOSER_PROJECTDIR}`.
 {% include "envvars/cron.md" %}
 {% include "envvars/alpine-s6.md" %}
 
@@ -71,7 +71,7 @@ following environment variables.
 Also,
 
 * PHP `(major)(minor)` version (e.g. `{{ phpmajmin }}`) is available in the
-  image as the environment variable `PHPMAJMIN`, for any image
+  image as the environment variable `${PHPMAJMIN}`, for any image
   built from this image, this can be used to install the correct
   packages for the specific PHP version installed.
 

@@ -89,23 +89,23 @@ following environment variables.
 
 Also,
 
-* The env variable `BUILDBOT_ROLE` determines if you are running
+* The env variable `${BUILDBOT_ROLE}` determines if you are running
   a master or worker. This also determines what image you'll be
   running when used with the `makefile`. This is baked into the
   image so does not need to be changed unless you know what you're
   doing.
 
 * Setup tasks are only run when the `buildbot.tac` file does not
-  exist or `BUILDBOT_SKIP_SETUP` is not set. Same goes for
+  exist or `${BUILDBOT_SKIP_SETUP}` is not set. Same goes for
   arguments / environment variables specific to setup, they are
   not needed anymore after setup is complete.
 
 * {{ m.customscript('p22-buildbot-customize', ghrepo=ghrepo) }}
 
 * The service **does not** run `buildbot-worker`, instead calls
-  `twistd` directly, pass `BUILDBOT_ARGS` accordingly.
+  `twistd` directly, pass `${BUILDBOT_ARGS}` accordingly.
 
-* Mount the configurations at the `BUILDBOT_HOME` directory inside
+* Mount the configurations at the `${BUILDBOT_HOME}` directory inside
   the container, by default it is `/home/alpine/buildbot`. This is
   optional for workers, however make sure you have enough cpu
   power and memory for the workers to do the heavy lifting if

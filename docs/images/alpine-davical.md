@@ -61,16 +61,16 @@ following environment variables.
 | PGHOST              | your.postgres.local        | Hostname of PostgreSQL database.
 | PGPORT              | 5432                       | Default port of PostgreSQL database.
 | POSTGRES_USER       | postgres                   | Postgres user with administator privileges for database and user(s) creation on first-run.
-| POSTGRES_PASSWORD   | unset                      | Password of `POSTGRES_USER`.
+| POSTGRES_PASSWORD   | unset                      | Password of `${POSTGRES_USER}`.
 | DAVI_DATABASE       | davical                    | Default name of database.
 | DAVI_ADMMAIL        | calendar-admin@localhost   | Application administator contact email. (To request user credentials)
-| DAVI_APPUSER        | davical_app                | Database user for application with limited privileges over `DAVI_DATABASE`.
-| DAVI_APPPASS        | unset                      | Password of `DAVI_APPUSER`.
+| DAVI_APPUSER        | davical_app                | Database user for application with limited privileges over `${DAVI_DATABASE}`.
+| DAVI_APPPASS        | unset                      | Password of `${DAVI_APPUSER}`.
 | DAVI_HOSTNAME       | localhost                  | Hostname of DAViCal server.
 | DAVI_LOCALE         | en_US                      | Default locale of application.
 | DAVI_SYSTNAME       | "DAViCal CalDAV Server"    | System name of application.
-| DAVI_DBAUSER        | davical_dba                | Database user with administator privileges over `DAVI_DATABASE`. Required to run migrations or changing application administator password.
-| DAVI_DBAPASS        | unset                      | Password of `DAVI_DBAUSER`.
+| DAVI_DBAUSER        | davical_dba                | Database user with administator privileges over `${DAVI_DATABASE}`. Required to run migrations or changing application administator password.
+| DAVI_DBAPASS        | unset                      | Password of `${DAVI_DBAUSER}`.
 | DAVI_SCHEMA         | davical_dba                | Schema name of database.
 | WEBADMIN            | admin                      | Application administator username for login.
 | PASSWORD            | unset                      | Application administator password, if set, is updated in database. (Defaults to `nimda` on first-run)
@@ -94,14 +94,14 @@ Also,
 
 * `POSTGRES_USER` credentials are only needed for the first-run to
   create the database and user(s) from scratch. These (can be
-  left unset for subsequent runs) fallback to `DAVI_APPUSER`
-  credentials for database readiness check, or to `DAVI_DBAUSER`
+  left unset for subsequent runs) fallback to `${DAVI_APPUSER}`
+  credentials for database readiness check, or to `${DAVI_DBAUSER}`
   for migrations.
 
 * After first-run, if migrations are not required to be run on
-  every startup (i.e. `DAVI_SKIP_MIGRATION` is set), the
+  every startup (i.e. `${DAVI_SKIP_MIGRATION}` is set), the
   `DAVI_DBAUSER` credentials can be omitted as well to reduce
-  exposed secrets. Optionally set `DAVI_SKIP_DBSETUP` to not
+  exposed secrets. Optionally set `${DAVI_SKIP_DBSETUP}` to not
   modify the database at all, but that also skips the readiness
   check.
 

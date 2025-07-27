@@ -59,18 +59,18 @@ following environment variables.
 | :---              | :---                                | :---
 | RSYNCD_CONFDIR    | /etc/rsyncd                         | Path to configuration dir. Expects `rsyncd.conf` to exist in this directory.
 | RSYNCD_SNIPDIR    | /etc/rsyncd.d                       | Path to configuration snippets dir. Expects `*.inc` or `*.conf` files to exist in this directory.
-| RSYNCD_EXCLUDES   | $RSYNCD_CONFDIR/rsyncd-excludes.txt | Path to default excludes file.
+| RSYNCD_EXCLUDES   | ${RSYNCD_CONFDIR}/rsyncd-excludes.txt | Path to default excludes file.
 | RSYNCD_ROOTDIR    | /storage                            | Path to datastores root directory.
-| RSYNCD_SECRETS    | $RSYNCD_CONFDIR/rsyncd.secrets      | Path to file containing `username:password` for `rsync` weak authentication.
+| RSYNCD_SECRETS    | ${RSYNCD_CONFDIR}/rsyncd.secrets      | Path to file containing `username:password` for `rsync` weak authentication.
 | RSYNCD_PORT       | 873                                 | Rsyncd default port.
 | RSYNCD_PIDFILE    | /var/run/rsyncd.pid                 | Path to PID file. (Set only if file does not exist.)
 | RSYNCD_LOCKFILE   | /var/run/rsync.lock                 | Path to lock file. (Set only if file does not exist.)
 | RSYNCD_LOGFILE    | /dev/stdout                         | Path to log file. (Set only if file does not exist.)
 | RSYNCD_USER       | root                                | Rsyncd **default** user. Must be a user already exising in the system.
 | RSYNCD_GROUP      | root                                | Rsyncd **default** group. Must be a group already exising in the system.
-| RSYNCD_USERPASS   | insecurebydefaultroot               | Rsyncd **default user** password. Only set if `$RSYNCD_SECRETS` file does not exist.
+| RSYNCD_USERPASS   | insecurebydefaultroot               | Rsyncd **default user** password. Only set if `${RSYNCD_SECRETS}` file does not exist.
 | RSYNC_USER        | user                                | Rsyncd **alternate** user, for local network access.
-| RSYNC_USERPASS    | insecurebydefault                   | Rsyncd **alternate** user password. Only set if `$RSYNCD_SECRETS` file does not exist.
+| RSYNC_USERPASS    | insecurebydefault                   | Rsyncd **alternate** user password. Only set if `${RSYNCD_SECRETS}` file does not exist.
 | RSYNCD_ARGS       | --daemon --no-detach                | Customizable arguments passed to `rsync` service.
 | RSYNCD_MAKEDIRS   | false                               | If set to `true`, ensure datastores (modules) referenced (as `path = ...`) in `rsyncd.conf` exist as directories.
 {% include "envvars/alpine-s6.md" %}

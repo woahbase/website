@@ -53,7 +53,7 @@ run `bash` in the container to get a user-scoped shell,
 ---
 
 * Default project dir for alpine is `/home/alpine/project`. Mount
-  your project here. By default mounts `$PWD`.
+  your project here. By default mounts `${PWD}`.
 
 * Runs under the user `alpine`, which is ideal to run in
   non-root mode.

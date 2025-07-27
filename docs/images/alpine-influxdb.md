@@ -109,13 +109,13 @@ Also,
 
 * To enable [authentication/authorization][4] during
   initialization, update the configuration file or set
-  `INFLUXDB_HTTP_AUTH_ENABLED` environment variable to `true`
+  `${INFLUXDB_HTTP_AUTH_ENABLED}` environment variable to `true`
   before starting the container.
 
     * Then, for images released after {{
       m.myimagetag('1.8.10_20250522') }}, set the required
       environment variables. At the minimum, setting
-      `INFLUXDB_ADMIN_PWD` is required. Now we can start the
+      `${INFLUXDB_ADMIN_PWD}` is required. Now we can start the
       container and these configurations are applied while the
       database is being initialized/bootstrapped.
       <br/>
@@ -186,13 +186,13 @@ to run a few common tasks is available into the image,
   ```
 
 * Optionally run a healthcheck query (if authentication is
-  enabled, make sure to set either `INFLUXDB_HEALTHCHECK_USER` and
-  `INFLUXDB_HEALTHCHECK_USER_PWD` or `INFLUXDB_USER` and
-  `INFLUXDB_USER_PWD`) with
+  enabled, make sure to set either `${INFLUXDB_HEALTHCHECK_USER}` and
+  `${INFLUXDB_HEALTHCHECK_USER_PWD}` or `${INFLUXDB_USER}` and
+  `${INFLUXDB_USER_PWD}`) with
   ```
   /scripts/run.sh healthcheck
   ```
-  The healthcheck query can be customized by `INFLUXDB_HEALTHCHECK_QUERY`
+  The healthcheck query can be customized by `${INFLUXDB_HEALTHCHECK_QUERY}`
   environment variable (defaults to `SHOW DATABASES`).
 
 [1]: https://www.influxdata.com

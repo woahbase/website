@@ -54,11 +54,11 @@ following environment variables.
 | ENV Vars                 | Default      | Description
 | :---                     | :---         | :---
 | S6_LUA_PACKAGES          | empty string | **Comma**-separated list of packages (with optional version) to install globally with `luarocks`. E.g. `luasocket,luajson 1.3.3`
-| S6_LUA_USER_PACKAGES     | empty string | **Comma**-separated list of packages (with optional version) to install with `luarocks` that are local for `S6_USER`. These are installed in `USERROCKSDIR`.
+| S6_LUA_USER_PACKAGES     | empty string | **Comma**-separated list of packages (with optional version) to install with `luarocks` that are local for `${S6_USER}`. These are installed in `${USERROCKSDIR}`.
 | USERROCKSDIR             | ~/.luarocks  | Customizable path where user-specified rocks are installed in.
-| LUA_SKIP_MODIFY_PATH     | unset        | By default, user-scoped binaries installed by `luarocks` (in `USERROCKSDIR`) are added automatically to path, setting this to e.g `1` skips that step. {{ m.sincev('5.2.4_20250622') }}
-| LUA_SKIP_MODIFY_LUAPATH  | unset        | By default, user-scoped libararies installed by `luarocks` (in `USERROCKSDIR`) are added automatically to `LUA_PATH` if not already exists, setting this to e.g `1` skips that step. {{ m.sincev('5.2.4_20250622') }}
-| LUA_SKIP_MODIFY_LUACPATH | unset        | By default, user-scoped shared objects installed by `luarocks` (in `USERROCKSDIR`) are added automatically to `LUA_CPATH` if not already exists, setting this to e.g `1` skips that step. {{ m.sincev('5.2.4_20250622') }}
+| LUA_SKIP_MODIFY_PATH     | unset        | By default, user-scoped binaries installed by `luarocks` (in `${USERROCKSDIR}`) are added automatically to path, setting this to e.g `1` skips that step. {{ m.sincev('5.2.4_20250622') }}
+| LUA_SKIP_MODIFY_LUAPATH  | unset        | By default, user-scoped libararies installed by `luarocks` (in `${USERROCKSDIR}`) are added automatically to `LUA_PATH` if not already exists, setting this to e.g `1` skips that step. {{ m.sincev('5.2.4_20250622') }}
+| LUA_SKIP_MODIFY_LUACPATH | unset        | By default, user-scoped shared objects installed by `luarocks` (in `${USERROCKSDIR}`) are added automatically to `LUA_CPATH` if not already exists, setting this to e.g `1` skips that step. {{ m.sincev('5.2.4_20250622') }}
 | LUA_SKIP_MODIFY_SHELL    | unset        | By default, `/etc/bash/bashrc` is changed to evaluate updated paths for `lua` at session start, setting this to e.g `1` skips that step. {{ m.sincev('5.2.4_20250622') }}
 {% include "envvars/alpine-s6.md" %}
 
@@ -67,11 +67,11 @@ following environment variables.
 Also,
 
 * Lua `(major).(minor)` version (e.g. `{{ luamajmin }}`) is available in the
-  image as the environment variable `LUAMAJMIN`, for any image
+  image as the environment variable `${LUAMAJMIN}`, for any image
   built from this image, this can be used to install the correct
   packages for the specific lua version installed.
 
-* When installing user packages via the `S6_LUA_USER_PACKAGES`
+* When installing user packages via the `${S6_LUA_USER_PACKAGES}`
   variable, it is required to run `eval "$(luarocks path --bin)"`
   to make those packages require-able. By default, the command is
   automatically appended in `/etc/bash/bashrc` so that it is

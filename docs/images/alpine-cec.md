@@ -61,11 +61,11 @@ following environment variables.
 
 | ENV Vars                 | Default      | Description
 | :---                     | :---         | :---
-| GID_DIALOUT              | unset        | Group-id of `dialout` group on the host. If set, updates group-id of the group `dialout` inside container, and adds `S6_USER` to the group.
-| GID_VIDEO                | unset        | Group-id of `video` group on the host. If set, updates group-id of the group `video` inside container, and adds `S6_USER` to the group.
+| GID_DIALOUT              | unset        | Group-id of `dialout` group on the host. If set, updates group-id of the group `dialout` inside container, and adds `${S6_USER}` to the group.
+| GID_VIDEO                | unset        | Group-id of `video` group on the host. If set, updates group-id of the group `video` inside container, and adds `${S6_USER}` to the group.
 | PYCEC_HOST               | 0.0.0.0      | Host address for `pycec` service to listen on.
 | PYCEC_PORT               | 9526         | Port for `pycec` service.
-| PYCEC_ARGS               | -i $PYCEC_HOST -p $PYCEC_PORT | Customizable arguments passed to `pycec` service.
+| PYCEC_ARGS               | -i ${PYCEC_HOST} -p ${PYCEC_PORT} | Customizable arguments passed to `pycec` service.
 | WAIT_FOR_HDMI_CONNECT    | unset        | If set to `true`, will wait for HDMI connection to become available, before starting `pycec` service.
 | WAIT_SEC                 | 10           | Poll interval for checking if HDMI is connected.
 {% include "envvars/alpine-s6.md" %}

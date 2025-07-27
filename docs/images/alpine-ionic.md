@@ -59,7 +59,7 @@ We can call `ionic` commands directly on the container, or run
 ---
 
 * Mount the project directory (where `package.json` is) at
-  `/home/alpine/project`. Mounts `$PWD/project` by default.
+  `/home/alpine/project`. Mounts `${PWD}/project` by default.
 
 * Ionic runs under the user `alpine`.
 

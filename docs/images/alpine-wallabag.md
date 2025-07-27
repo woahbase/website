@@ -82,7 +82,7 @@ Also,
 * On first-run the default login credentials are
   `wallabag`/`wallabag`.
 
-* Wallabag source is located at `/opt/wallabag/wallabag-$VERSION.tar.gz`.
+* Wallabag source is located at `/opt/wallabag/wallabag-${VERSION}.tar.gz`.
 
 * Includes everything from the {{ m.myimage('alpine-php') }} image.
 
