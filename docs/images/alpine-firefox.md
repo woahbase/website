@@ -64,8 +64,8 @@ following environment variables.
 | GID_AUDIO                    | unset   | Group-id of `audio` group on the host. If set, updates group-id of the group `audio` inside container, and adds `${S6_USER}` to the group.
 | GID_PULSE                    | unset   | Group-id of `pulse` group on the host. If set, updates group-id of the group `pulse` inside container, and adds `${S6_USER}` to the group.
 | GID_VIDEO                    | unset   | Group-id of `video` group on the host. If set, updates group-id of the group `video` inside container, and adds `${S6_USER}` to the group.
-| FIREFOX_SKIP_PERMFIX         | unset   | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `firefox` configuration/data files/directories. {{ m.sincev('139.0') }}
-| FIREFOX_PERMFIX_DOWNLOADSDIR | unset   | If set to a **non-empty-string** value (e.g. `1`), ensures files inside `~/Downloads/` are owned/accessible by `${S6_USER}`. {{ m.sincev('139.0') }}
+| FIREFOX_SKIP_PERMFIX         | unset   | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `firefox` configuration/data files/directories. {{ m.sincev('140.0.4') }}
+| FIREFOX_PERMFIX_DOWNLOADSDIR | unset   | If set to a **non-empty-string** value (e.g. `1`), ensures files inside `~/Downloads/` are owned/accessible by `${S6_USER}`. {{ m.sincev('140.0.4') }}
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"
