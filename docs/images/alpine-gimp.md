@@ -71,7 +71,7 @@ Also,
   `/home/alpine` dir somewhere in your host storage. By default
   mounts `${PWD}/data`.
 
-* By default, WeeChat runs under the user `alpine`. If the
+* By default, GIMP runs under the user `alpine`. If the
   container is running as an arbitrary user, you may need to use
   `with-contenv` so the environment variables are accessible to
   the user process.

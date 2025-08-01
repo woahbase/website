@@ -108,7 +108,7 @@ Also,
 
 * Checkout the [docs][6] to get started with [ChromeDriver][5].
 
-* By default, WeeChat runs under the user `alpine`. If the
+* By default, Chromium runs under the user `alpine`. If the
   container is running as an arbitrary user, you may need to use
   `with-contenv` so the environment variables are accessible to
   the user process.

@@ -15,10 +15,11 @@ tags:
 This [image][155] containerizes the [Firefox][1] browser.
 
 {{ m.srcimage('alpine-glibc') }} with the {{
-m.alpinepkg('firefox') }} package and [GeckoDriver][3] binaries
-(from preferably {{ m.ghreleaselink('mozilla/geckodriver') }} or
-{{ m.ghreleaselink('jamesmortensen/geckodriver-arm-binaries') }})
-installed in it.
+m.alpinepkg('firefox') }} package and [GeckoDriver][3] (from
+preferably {{ m.alpinepkg('geckodriver', title='APK Package') }}
+or binaries from {{ m.ghreleaselink('mozilla/geckodriver') }} or
+{{ m.ghreleaselink('jamesmortensen/geckodriver-arm-binaries')
+}}) installed in it.
 
 {% include "pull-image.md" %}
 
@@ -103,7 +104,7 @@ Also,
   (Check the [support][4] page for testing dependencies or
   capabilities configuration)
 
-* By default, WeeChat runs under the user `alpine`. If the
+* By default, Firefox runs under the user `alpine`. If the
   container is running as an arbitrary user, you may need to use
   `with-contenv` so the environment variables are accessible to
   the user process.
