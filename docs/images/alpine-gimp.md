@@ -1,5 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + GNU LibC + GIMP
+alpine_branch: v3.22
+arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, x86_64]
 tags:
   - gui
   - usershell
@@ -50,6 +52,7 @@ following environment variables.
 | ENV Vars                 | Default      | Description
 | :---                     | :---         | :---
 | GID_VIDEO                | unset        | Group-id of `video` group on the host. If set, updates group-id of the group `video` inside container, and adds `${S6_USER}` to the group.
+| GIMP_SKIP_PERMFIX        | unset        | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `gimp` configuration/data files/directories. {{ m.sincev('3.0.4_20250801') }}
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"
@@ -67,6 +70,11 @@ Also,
 * To preserve/load images from the host system,  mount the
   `/home/alpine` dir somewhere in your host storage. By default
   mounts `${PWD}/data`.
+
+* By default, WeeChat runs under the user `alpine`. If the
+  container is running as an arbitrary user, you may need to use
+  `with-contenv` so the environment variables are accessible to
+  the user process.
 
 [1]: https://www.gimp.org/
 

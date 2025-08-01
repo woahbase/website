@@ -1,6 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + GNU LibC + Firefox Browser
-skip_armhf: 1
+alpine_branch: v3.22
+arches: [aarch64, armv7l, i386, ppc64le, riscv64, x86_64]
 has_services:
   - systemd
 tags:
@@ -58,11 +59,13 @@ woahbase/alpine-firefox \
 We can customize the runtime behaviour of the container with the
 following environment variables.
 
-| ENV Vars                 | Default      | Description
-| :---                     | :---         | :---
-| GID_AUDIO                | unset        | Group-id of `audio` group on the host. If set, updates group-id of the group `audio` inside container, and adds `S6_USER` to the group.
-| GID_PULSE                | unset        | Group-id of `pulse` group on the host. If set, updates group-id of the group `pulse` inside container, and adds `S6_USER` to the group.
-| GID_VIDEO                | unset        | Group-id of `video` group on the host. If set, updates group-id of the group `video` inside container, and adds `S6_USER` to the group.
+| ENV Vars                     | Default | Description
+| :---                         | :---    | :---
+| GID_AUDIO                    | unset   | Group-id of `audio` group on the host. If set, updates group-id of the group `audio` inside container, and adds `${S6_USER}` to the group.
+| GID_PULSE                    | unset   | Group-id of `pulse` group on the host. If set, updates group-id of the group `pulse` inside container, and adds `${S6_USER}` to the group.
+| GID_VIDEO                    | unset   | Group-id of `video` group on the host. If set, updates group-id of the group `video` inside container, and adds `${S6_USER}` to the group.
+| FIREFOX_SKIP_PERMFIX         | unset   | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `firefox` configuration/data files/directories. {{ m.sincev('139.0') }}
+| FIREFOX_PERMFIX_DOWNLOADSDIR | unset   | If set to a **non-empty-string** value (e.g. `1`), ensures files inside `~/Downloads/` are owned/accessible by `${S6_USER}`. {{ m.sincev('139.0') }}
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"
@@ -99,6 +102,11 @@ Also,
 * Checkout the [docs][5] to get started with [GeckoDriver][3].
   (Check the [support][4] page for testing dependencies or
   capabilities configuration)
+
+* By default, WeeChat runs under the user `alpine`. If the
+  container is running as an arbitrary user, you may need to use
+  `with-contenv` so the environment variables are accessible to
+  the user process.
 
 [1]: https://www.mozilla.org/en-US/firefox/
 [2]: https://www.freedesktop.org/wiki/Software/PulseAudio/Documentation/User/Network/
