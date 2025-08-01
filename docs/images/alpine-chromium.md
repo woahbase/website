@@ -58,8 +58,8 @@ following environment variables.
 | GID_AUDIO                     | unset   | Group-id of `audio` group on the host. If set, updates group-id of the group `audio` inside container, and adds `${S6_USER}` to the group.
 | GID_PULSE                     | unset   | Group-id of `pulse` group on the host. If set, updates group-id of the group `pulse` inside container, and adds `${S6_USER}` to the group.
 | GID_VIDEO                     | unset   | Group-id of `video` group on the host. If set, updates group-id of the group `video` inside container, and adds `${S6_USER}` to the group.
-| CHROMIUM_SKIP_PERMFIX         | unset   | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `chromium` configuration/data files/directories. {{ m.sincev('138.0.7204.93') }}
-| CHROMIUM_PERMFIX_DOWNLOADSDIR | unset   | If set to a **non-empty-string** value (e.g. `1`), ensures files inside `~/Downloads/` are owned/accessible by `${S6_USER}`. {{ m.sincev('138.0.7204.93') }}
+| CHROMIUM_SKIP_PERMFIX         | unset   | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `chromium` configuration/data files/directories. {{ m.sincev('138.0.7204.157') }}
+| CHROMIUM_PERMFIX_DOWNLOADSDIR | unset   | If set to a **non-empty-string** value (e.g. `1`), ensures files inside `~/Downloads/` are owned/accessible by `${S6_USER}`. {{ m.sincev('138.0.7204.157') }}
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"
