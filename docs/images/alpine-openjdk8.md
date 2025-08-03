@@ -1,5 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + GNU LibC + OpenJDK 8
+alpine_branch: v3.22
+arches: [aarch64, armhf, armv7l, i386, ppc64le, s390x, x86_64]
 ghrepo: alpine-openjdk
 dockerfile: Dockerfile.8
 wb_extra_args: JVVMAJOR=8
