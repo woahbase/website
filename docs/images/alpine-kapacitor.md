@@ -1,10 +1,10 @@
 ---
 description: MultiArch Alpine Linux + S6 + GNU LibC + Kapacitor
+alpine_branch: v3.22
+arches: [aarch64, x86_64]
 has_services:
   - compose
   - nomad
-skip_armhf: 1
-skip_armv7l: 1
 tags:
   - service
 ---
@@ -50,12 +50,15 @@ woahbase/alpine-kapacitor
 We can customize the runtime behaviour of the container with the
 following environment variables.
 
-| ENV Vars          | Default                       | Description
-| :---              | :---                          | :---
-| KAPACITOR_URL     | http://localhost:9092         | Url for `kapacitor`.
-| KAPACITOR_CONFIG  | /etc/kapacitor/kapacitor.conf | Path to `kapacitor` configuration.
-| KAPACITOR_AS_ROOT | unset                         | If set, runs service as `root` user, default is non-root `alpine`.
-| KAPACITOR_ARGS    | unset                         | Customizable arguments passed to `kapacitord` service.
+| ENV Vars               | Default                       | Description
+| :---                   | :---                          | :---
+| KAPACITOR_URL          | http://localhost:9092         | Url for `kapacitor`.
+| KAPACITOR_CONFIG_PATH  | /etc/kapacitor/kapacitor.conf | Path to `kapacitor` configuration. {{ m.sincev('1.8.0') }} (Previously named `KAPACITOR_CONFIG`)
+| KAPACITOR_DATA_DIR     | /var/lib/kapacitor            | Path to `kapacitor` data directory. {{ m.sincev('1.8.0') }}
+| KAPACITOR_LOGGING_FILE | STDOUT                        | Default log destination, can be a filepath (like `/var/log/kapacitor/kapacitor.log`) or `STDOUT`/`STDERR`. {{ m.sincev('1.8.0') }}
+| KAPACITOR_SKIP_PERMFIX | unset                         | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `kapacitor` configuration/data files/directories. {{ m.sincev('1.8.0') }}
+| KAPACITOR_AS_ROOT      | unset                         | By default, `kapacitor` is started as a user-scoped service, set this to a **non-empty-string** (e.g. `1`) to run as root. (Only effective if the container is also running as root)
+| KAPACITOR_ARGS         | unset                         | Customizable arguments passed to `kapacitord` service.
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"

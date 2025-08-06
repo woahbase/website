@@ -1,5 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + GNU LibC + Chronograf
+alpine_branch: v3.22
+arches: [aarch64, armhf, armv7l, i386, x86_64]
 has_services:
   - compose
   - nomad
@@ -50,14 +52,15 @@ woahbase/alpine-chronograf
 We can customize the runtime behaviour of the container with the
 following environment variables.
 
-| ENV Vars           | Default                              | Description
-| :---               | :---                                 | :---
-| BASE_PATH          | /chronograf                          | The URL path prefix under which all chronograf routes will be mounted.
-| BOLT_PATH          | /var/lib/chronograf/chronograf-v1.db | The file path to the BoltDB file.
-| CANNED_PATH        | /usr/share/chronograf/canned         | The path to the directory of canned dashboards files.
-| REPORTING_DISABLED | true                                 | Disables reporting of usage statistics.
-| RESOURCES_PATH     | /usr/share/chronograf/resources      | Path to directory of sources (.src files), Kapacitor connections (.kap files), organizations (.org files), and dashboards (.dashboard files).
-| CHRONOGRAF_ARGS    | unset                                | Customizable arguments passed to `chronograf` service.
+| ENV Vars                | Default                              | Description
+| :---                    | :---                                 | :---
+| BASE_PATH               | /chronograf                          | The URL path prefix under which all chronograf routes will be mounted.
+| BOLT_PATH               | /var/lib/chronograf/chronograf-v1.db | The file path to the BoltDB file.
+| CANNED_PATH             | /usr/share/chronograf/canned         | The path to the directory of canned dashboards files.
+| REPORTING_DISABLED      | true                                 | Disables reporting of usage statistics.
+| RESOURCES_PATH          | /usr/share/chronograf/resources      | Path to directory of sources (.src files), Kapacitor connections (.kap files), organizations (.org files), and dashboards (.dashboard files).
+| CHRONOGRAF_SKIP_PERMFIX | unset                                | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `chronograf` configuration/data files/directories. {{ m.sincev('1.10.7_20250806') }}
+| CHRONOGRAF_ARGS         | unset                                | Customizable arguments passed to `chronograf` service.
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"
