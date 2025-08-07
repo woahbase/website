@@ -62,7 +62,7 @@ following environment variables.
 Also,
 
 * {{ m.defcfgfile('/redis-commander/config/config.json',
-  src='redis-commander/config/config.json',
+  src='root/redis-commander/config/config.json',
   ddir='redis-commander') }}
 
 * Optionally add another file `local.json` inside

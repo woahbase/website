@@ -1,5 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + SSHwifty Web SSH & Telnet Client
+alpine_branch: v3.22
+arches: [aarch64, armhf, armv7l, i386, ppc64le, x86_64]
 has_services:
   - compose
   - nomad
@@ -53,6 +55,7 @@ following environment variables.
 | SSHWIFTY_LISTENINTERFACE | 0.0.0.0                    | Default listen interface. (Only set if using default configuration file)
 | SSHWIFTY_LISTENPORT      | 8182                       | Default listen port. (Only set if using default configuration file)
 | SSHWIFTY_SERVERMESSAGE   | empty string               | Default server message. (Only set if using default configuration file)
+| SSHWIFTY_SKIP_PERMFIX    | unset                      | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `sshwifty` configuration/data files/directories. {{ m.sincev('0.3.25-beta-release-prebuild') }}
 | SSHWIFTY_ARGS            | unset                      | Customizable arguments passed to `sshwifty` service.
 {% include "envvars/alpine-s6.md" %}
 
