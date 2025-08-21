@@ -1,5 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + Grafana
+alpine_branch: v3.22
+arches: [aarch64, armhf, armv7l, x86_64]
 has_services:
   - compose
   - nomad
@@ -50,14 +52,17 @@ following environment variables.
 
 | ENV Vars              | Default                            | Description
 | :---                  | :---                               | :---
+| GRAFANA_HOME          | /var/lib/grafana                   | (Preset) Path to `grafana` home directory.
 | GF_PATHS_CONFIG       | /var/lib/grafana/conf/defaults.ini | Path to configuration file.
 | GF_PATHS_DATA         | /var/lib/grafana/data              | Path to data directory.
+| GF_PATHS_HOME         | ${GRAFANA_HOME}                    | Path to `grafana` home directory. (Passed as arguments to the service process)
 | GF_PATHS_LOGS         | /var/lib/grafana/logs              | Path where logs are stored.
 | GF_PATHS_PLUGINS      | /var/lib/grafana/plugins           | Path to plugins directory.
 | GF_PATHS_PROVISIONING | /var/lib/grafana/provisioning      | Path where provisioning configuration should exist.
 | GF_INSTALL_PLUGINS    | empty string                       | **Comma**-separated list of plugins (or urls) to install before running server.
 | GF_UPDATE_PLUGINS     | unset                              | Set to `true` to run plugin-update (uses `grafana cli`).
 | GF_LOG_MODE           | console                            | Default log mode, can be `console` or `file`.
+| GRAFANA_SKIP_PERMFIX  | unset                              | If set to a **non-empty-string** value (e.g. `1`), skips fixing permissions for `grafana` configuration/data files/directories. {{ m.sincev('12.1.0') }}
 | GRAFANA_ARGS          | see below                          | Customizable arguments passed to `grafana server` service. (Overrides default arguments)
 | GRAFANA_ARGS_EXTRA    | empty string                       | Customizable extra arguments passed to `grafana server` service.
 {% include "envvars/alpine-s6.md" %}

@@ -117,8 +117,10 @@ job "grafana" {
         # GF_PATHS_LOGS         = "/var/lib/grafana/logs"
         # GF_LOG_MODE           = "console file"
 
+        # GRAFANA_HOME          = "/var/lib/grafana"
         # GF_PATHS_CONFIG       = "/var/lib/grafana/conf/defaults.ini"
         # GF_PATHS_DATA         = "/var/lib/grafana/data"
+        # GF_PATHS_HOME         = "/var/lib/grafana"
         # GF_PATHS_LOGS         = "/var/lib/grafana/logs"
         # GF_PATHS_PLUGINS      = "/var/lib/grafana/plugins"
         # GF_PATHS_PROVISIONING = "/var/lib/grafana/provisioning"

@@ -23,8 +23,10 @@ services:
 
       # GF_PATHS_CONFIG: /var/lib/grafana/conf/defaults.ini
       # GF_PATHS_DATA: /var/lib/grafana/data
+      # GF_PATHS_HOME: /var/lib/grafana
       # GF_PATHS_PLUGINS: /var/lib/grafana/plugins
       # GF_PATHS_PROVISIONING: /var/lib/grafana/provisioning
+      # GRAFANA_HOME: /var/lib/grafana
       # GF_INSTALL_PLUGINS:
       # GF_UPDATE_PLUGINS: 1
 
