@@ -1,5 +1,6 @@
 ---
 description: MultiArch Alpine Linux + S6 + mJPG_streamer
+alpine_branch: v3.22
 has_services:
   - systemd
 tags:
@@ -66,10 +67,14 @@ Also,
   port is accessible in the firewall configurations.
 
 * Make sure to mount the proper camera device (e.g.
-  `/dev/video0`) in the container, and ensure `${MJPGST_VIDEO_DEV}`
-  points to it, optionally also set `${GID_VIDEO}` so that
-  `mjpg_streamer` (running under user `alpine`) is allowed access
-  to the camera.
+  `/dev/video0`) in the container, and ensure
+  `${MJPGST_VIDEO_DEV}` points to it.
+
+* If running with root, set either `${PGID}` or `${GID_VIDEO}` so
+  that `mjpg_streamer` (running under user `alpine`) is allowed
+  access to the camera. Or when running as any arbitrary user with
+  the `--user` flag, set the group number to the group allowed to
+  read/write to the video device.
 
 * `mjpg_streamer` feature status printed during build.
   ```

@@ -1,5 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + Docker(-outside-of-docker) Toolkit
+alpine_branch: v3.22
+arches: [aarch64, armhf, armv7l, ppc64le, riscv64, s390x, x86_64]
 tags:
   - github
   - usershell

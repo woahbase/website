@@ -1,5 +1,6 @@
 ---
 description: MultiArch Alpine Linux + S6 + LibCEC + PyCEC
+alpine_branch: v3.22
 has_services:
   - compose
   - nomad
@@ -30,6 +31,7 @@ Running the container starts the service.
 ``` sh
 docker run --rm \
   --name docker_cec \
+  --device /dev/cec0 \
   -e GID_DIALOUT=994 `#(1)` \
   -e GID_VIDEO=995 `#(2)` \
   -p 9526:9526 \
