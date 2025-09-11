@@ -1,5 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + Watchtower
+alpine_branch: v3.22
+arches: [aarch64, armhf, armv7l, i386, x86_64]
 has_services:
   - compose
 tags:
