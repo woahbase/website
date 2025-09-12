@@ -1,0 +1,98 @@
+---
+services:
+  consul:
+    container_name: consul
+    deploy:
+      resources:
+        limits:
+          cpus: '2.00'
+          memory: 256M
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 120s
+    environment:
+      PUID: ${PUID:-1000}
+      PGID: ${PGID:-1000}
+      # TZ: ${TZ}
+      # CONSUL_OPTS: -node server-${HOSTNAME}
+    # healthcheck:
+    #   interval: 2m
+    #   retries: 5
+    #   start_period: 5m
+    #   test:
+    #     - CMD-SHELL
+    #     - >
+    #       curl -f http://localhost:${CONSUL_HTTP_PORT:-8500}/ || exit 1
+    #   timeout: 10s
+    hostname: consul
+    image: woahbase/alpine-consul:${CONSUL_TAG:-latest}
+    network_mode: host
+    # ports:
+      # - protocol: tcp
+      #   host_ip: 0.0.0.0
+      #   published: ${CONSUL_RPC_PORT:-8300}
+      #   target: ${CONSUL_RPC_PORT:-8300}
+      # - protocol: tcp
+      #   host_ip: 0.0.0.0
+      #   published: ${CONSUL_SERFLAN_PORT:-8301}
+      #   target: ${CONSUL_SERFLAN_PORT:-8301}
+      # - protocol: udp
+      #   host_ip: 0.0.0.0
+      #   published: ${CONSUL_SERFLAN_PORT:-8301}
+      #   target: ${CONSUL_SERFLAN_PORT:-8301}
+      # - protocol: tcp
+      #   host_ip: 0.0.0.0
+      #   published: ${CONSUL_SERFWAN_PORT:-8302}
+      #   target: ${CONSUL_SERFWAN_PORT:-8302}
+      # - protocol: udp
+      #   host_ip: 0.0.0.0
+      #   published: ${CONSUL_SERFWAN_PORT:-8302}
+      #   target: ${CONSUL_SERFWAN_PORT:-8302}
+      # - protocol: tcp
+      #   host_ip: 0.0.0.0
+      #   published: ${CONSUL_HTTP_PORT:-8500}
+      #   target: ${CONSUL_HTTP_PORT:-8500}
+      # - protocol: tcp
+      #   host_ip: 0.0.0.0
+      #   published: ${CONSUL_HTTPS_PORT:-8501}
+      #   target: ${CONSUL_HTTPS_PORT:-8501}
+      # - protocol: tcp
+      #   host_ip: 0.0.0.0
+      #   published: ${CONSUL_GRPC_PORT:-8502}
+      #   target: ${CONSUL_GRPC_PORT:-8502}
+      # - protocol: tcp
+      #   host_ip: 0.0.0.0
+      #   published: ${CONSUL_GRPCS_PORT:-8503}
+      #   target: ${CONSUL_GRPCS_PORT:-8503}
+      # - protocol: tcp
+      #   host_ip: 0.0.0.0
+      #   published: ${CONSUL_DNS_PORT:-8600}
+      #   target: ${CONSUL_DNS_PORT:-8600}
+      # - protocol: udp
+      #   host_ip: 0.0.0.0
+      #   published: ${CONSUL_DNS_PORT:-8600}
+      #   target: ${CONSUL_DNS_PORT:-8600}
+    volumes:
+      - type: bind
+        source: ${CONSUL_DIR:?err}
+        target: /consul
+        bind:
+          create_host_path: true
+      # - type: bind
+      #   source: ${CONSUL_DIR:?err}/config/agent.hcl
+      #   target: /consul/config/agent.hcl
+      #   bind:
+      #     create_host_path: false
+      # - type: bind
+      #   source: ${CERTIFICATE_DIR:?err}
+      #   target: /config/keys
+      #   bind:
+      #     create_host_path: true
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind:
+          create_host_path: false

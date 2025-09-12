@@ -1,0 +1,62 @@
+---
+services:
+  vault:
+    cap_add:
+      - IPC_LOCK
+    container_name: vault
+    deploy:
+      resources:
+        limits:
+          cpus: '2.00'
+          memory: 512M
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 120s
+    environment:
+      PUID: ${PUID:-1000}
+      PGID: ${PGID:-1000}
+      # TZ: ${TZ}
+      # CONSUL_HTTP_ADDR: ${VAULT_CONSUL_HTTP_ADDR:-http://localhost:8500}
+      # CONSUL_HTTP_TOKEN: ${VAULT_CONSUL_HTTP_TOKEN:-null}
+      VAULT_ADDR: ${VAULT_ADDR:-http://localhost:8200}
+      VAULT_API_ADDR: ${VAULT_API_ADDR:-http://localhost:8200}
+    # healthcheck:
+    #   interval: 2m
+    #   retries: 5
+    #   start_period: 5m
+    #   test:
+    #     - CMD-SHELL
+    #     - >
+    #       curl -f http://localhost:${VAULT_PORT}/ || exit 1
+    #   timeout: 10s
+    hostname: vault
+    image: woahbase/alpine-vault:${VAULT_TAG:-latest}
+    network_mode: bridge
+    ports:
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: ${VAULT_PORT:-8200}
+        target: ${VAULT_PORT:-8200}
+      - protocol: tcp
+        host_ip: 0.0.0.0
+        published: ${VAULT_CLUSTER_PORT:-8201}
+        target: ${VAULT_CLUSTER_PORT:-8201}
+    volumes:
+      - type: bind
+        source: ${VAULT_DIR:?err}
+        target: /vault
+        bind:
+          create_host_path: true
+      # - type: bind
+      #   source: ${VAULT_DIR:?err}/config/vault/server.hcl
+      #   target: /vault/config/server.hcl
+      #   bind:
+      #     create_host_path: false
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind:
+          create_host_path: false

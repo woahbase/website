@@ -179,6 +179,7 @@ nav:
       - alpine-cec: images/alpine-cec.md
       - alpine-cgit: images/alpine-cgit.md
       - alpine-chronograf: images/alpine-chronograf.md
+      - alpine-consul: images/alpine-consul.md
       - alpine-coturn: images/alpine-coturn.md
       - alpine-davical: images/alpine-davical.md
       - alpine-dhcp: images/alpine-dhcp.md
@@ -213,6 +214,7 @@ nav:
       - alpine-ttrss: images/alpine-ttrss.md
       - alpine-ubooquity: images/alpine-ubooquity.md
       - alpine-uptimekuma: images/alpine-uptimekuma.md
+      - alpine-vault: images/alpine-vault.md
       - alpine-wallabag: images/alpine-wallabag.md
       - alpine-webhook: images/alpine-webhook.md
 
