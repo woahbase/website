@@ -19,7 +19,7 @@ all: serve ## develop
 build: CMD = build
 build: run ## build static site
 
-serve: CMD = serve -a 0.0.0.0:$(PORT) --watch-theme --clean
+serve: CMD = serve -a 0.0.0.0:$(PORT) --watch-theme --clean --livereload
 serve: run ## run dev server
 
 deploy: deploy_netlify  ## deploy site
