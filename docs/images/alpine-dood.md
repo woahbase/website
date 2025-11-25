@@ -122,11 +122,14 @@ Also,
 * Processes/services/tasks are generally recommended to be run as
   the non-root user `alpine`.
 
+* Checkout [Awesome Docker][7] for best practices, books, or tools.
+
 [1]: https://docs.docker.com/compose/
 [2]: https://github.com/docker/machine/
 [3]: https://github.com/docker/compose/releases/
 [4]: https://github.com/docker/machine/releases/
 [5]: https://github.com/docker/buildx/releases/
 [6]: https://github.com/containers/skopeo
+[7]: https://github.com/veggiemonk/awesome-docker
 
 {% include "all-include.md" %}

@@ -1,5 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + Python3 + Buildbot (Worker)
+alpine_branch: v3.22
+arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
 ghrepo: alpine-buildbot
 has_services:
   - compose
@@ -57,7 +59,7 @@ following environment variables.
 
 | ENV Vars                      | Default                                             | Description
 | :---                          | :---                                                | :---
-| BUILDBOT_HOME                 | /home/alpine/buildbot                               | Default root directory for buildbot configurations.
+| BUILDBOT_HOME                 | /home/alpine/buildbot                               | (Preset) Default root directory for buildbot configurations.
 | BUILDBOT_PROJECTNAME          | buildbot                                            | Project name that is prepended to the worker name, e.g. default is `buildbot`-worker.
 | BUILDBOT_SETUP_ARGS           | --force --log-count=2 --log-size=5000 --relocatable | These arguments are passed to setup the worker.
 | BUILDBOT_SKIP_SETUP           | unset                                               | If `true`, skips worker setup tasks, useful when your already have your configurations setup, or would like to do it manually.
@@ -81,6 +83,8 @@ following environment variables.
 | BUILDBOT_WORKERINFO_ACCESSURI | ssh://${HOSTNAME}                                   | Sets worker `info/access_uri` file.
 | BUILDBOT_SKIP_CUSTOMIZE       | unset                                               | Skip post-setup customization tasks.
 | BUILDBOT_SKIP_PERMFIX         | unset                                               | If set to a **non-empty-string** value (e.g. `1`), skip ensuring files in `${BUILDBOT_HOME}` are owned by `${S6_USER}`, enabled by default.
+| BUILDBOT_PIDFILE              | twistd.pid                                          | If PID file exists from last run, it is removed before starting the service.
+| BUILDBOT_TACFILE              | buildbot.tac                                        | (Preset) The `tacfile` to use for starting `buildbot` service.
 | BUILDBOT_ARGS                 | --nodaemon --no_save                                | Customizable arguments passed to worker service. (Runs as a `twisted` application instead of calling `buildbot-worker` executable)
 {% include "envvars/alpine-python3.md" %}
 {% include "envvars/alpine-s6.md" %}

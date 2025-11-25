@@ -39,3 +39,8 @@ Built and tested at home using [Buildbot][111].
 <!-- Pull requests are welcome, forks even more so. :) -->
 
 Maintained (or sometimes a lack thereof?) by [{{ config.site_name }}][110].
+
+Helped you save a bit of your valuable time and effort that
+is best spent *doing stuff you actually enjoy*? If you have some
+pocket-change to spare, kindly consider [helping
+out](/about/donate.md#support-us).

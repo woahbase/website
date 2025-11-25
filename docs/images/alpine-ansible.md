@@ -75,11 +75,16 @@ in the container to get a [user-scoped][114] shell,
     * Ansible to be run as the user `alpine`.
     * Your ssh keys/configs at `/home/alpine/.ssh`
 
+* Checkout [Awesome Ansible][7] (previously [here][8]) for additional
+  resources, books, or tools.
+
 [1]: https://www.ansible.com/
 [2]: https://docs.ansible.com/ansible/latest/index.html
 [3]: https://docs.ansible.com/ansible/latest/reference_appendices/config.html
 [4]: https://docs.ansible.com/ansible/latest/collections/index_module.html
 [5]: https://docs.ansible.com/ansible/latest/reference_appendices/config.html#environment-variables
 [6]: https://mitogen.networkgenomics.com/ansible_detailed.html#
+[7]: https://github.com/ansible-community/awesome-ansible
+[8]: https://github.com/jdauphant/awesome-ansible
 
 {% include "all-include.md" %}

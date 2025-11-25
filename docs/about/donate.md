@@ -36,6 +36,11 @@ hardware) on it than otherwise. Every little bit helps.
       bc1qdnd93p93f4eqxwc6fjcqw5l96llmv2cccung22
       ```
 
+    - ##### :simple-dogecoin: &nbsp; Doge
+      ```
+      DQ28qwzwcsPWBt11H52VEgAXbmGkoyJXaw
+      ```
+
     - ##### :simple-ethereum: &nbsp; Ethereum
       ```
       0x825240aDb9d9F1B162c608A2c18F13bb86D237B1
@@ -45,10 +50,14 @@ hardware) on it than otherwise. Every little bit helps.
       ```
       ltc1q9yxfc698600000eldnuwk2lmx64d3ddfnxhcea
       ```
-
     - ##### :simple-solana: &nbsp; Solana
       ```
       5Qyjxq9KbjykUY7pE7YZstdNfyNsME7bSt5oJfrU4Kz9
+      ```
+
+    - ##### :simple-tether: &nbsp; USDT (Tron)
+      ```
+      TEE1WmsSrRuYLpyJvo4TeDjkBuxYBvizBc
       ```
 
     </div>
