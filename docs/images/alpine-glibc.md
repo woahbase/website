@@ -11,10 +11,11 @@ tags:
 {% include "shields.md" %}
 
 This [image][155] serves as a base image for applications/services
-that need the GNU C Library to run binaries linked against it.
-AlpineLinux by default uses `musl`, which is simply not compatible
-for quite a few applications. This image solves the dynamic
-linking problem for a few (definitely not all) of those cases.
+that need the [GNU C Library][11] to run binaries linked against
+it. [Alpine Linux][113] by default uses [musl libc][10], which is
+simply not compatible for quite a few applications. This image
+solves the dynamic linking problem for a few (definitely not all)
+of those cases.
 
 {{ m.srcimage('alpine-s6') }} with the compiled [glibc][1]
 binaries installed in it.
@@ -65,5 +66,7 @@ following environment variables.
 [7]: https://github.com/Lauri-Nomme/alpine-glibc-xb/blob/master/Dockerfile
 [8]: https://github.com/jvasileff/alpine-pkg-glibc-armhf/blob/master/build-with-docker.sh
 [9]: https://github.com/jvasileff/alpine-pkg-glibc-armhf/blob/master/Dockerfile
+[10]: https://musl.libc.org/
+[11]: https://www.gnu.org/software/libc/
 
 {% include "all-include.md" %}
