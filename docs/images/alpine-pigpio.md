@@ -1,6 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + PiGPIO Daemon
-skip_x86_64: 1
+alpine_branch: v3.22
+arches: [aarch64, armhf, armv7l]
 has_services:
   - compose
   - nomad

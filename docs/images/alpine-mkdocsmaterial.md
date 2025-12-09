@@ -1,6 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + Python3 + MkDocsMaterial
-skip_armhf: 1
+alpine_branch: v3.22
+arches: [aarch64, armv7l, x86_64]
 tags:
   - dev
   - usershell
