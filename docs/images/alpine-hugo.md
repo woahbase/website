@@ -1,6 +1,6 @@
 ---
 description: MultiArch Alpine Linux + S6 + Hugo + Pygments
-alpine_branch: v3.22
+alpine_branch: v3.23
 tags:
   - usershell
 ---
