@@ -1,8 +1,7 @@
 ---
 description: Container for Alpine Linux + S6 + NGINX + PHP7 + Pydio
-skip_aarch64: true
-skip_armhf: true
-skip_armv7l: true
+alpine_branch: v3.10
+arches: [x86_64]
 tags:
   - deprecated
   - service

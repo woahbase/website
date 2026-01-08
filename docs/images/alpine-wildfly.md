@@ -1,5 +1,7 @@
 ---
 description: Container for Alpine Linux + S6 + GNU LibC + OpenJDK8 + WildFly (JBoss) server
+alpine_branch: v3.10
+arches: [aarch64, armhf, armv7l, x86_64]
 tags:
   - deprecated
   - service

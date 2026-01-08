@@ -1,8 +1,7 @@
 ---
 description: Container for Alpine Linux + OpenJDK8 + Android + NodeJS + Cordova
-skip_armhf: true
-skip_armv7l: true
-skip_aarch64: true
+alpine_branch: v3.10
+arches: [x86_64]
 tags:
   - deprecated
   - usershell

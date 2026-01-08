@@ -1,7 +1,7 @@
 ---
 description: Container for Alpine Linux + S6 + GNU LibC + OpenJDK8 + Libresonic
-skip_aarch64: 1
-skip_armv7l: 1
+alpine_branch: v3.10
+arches: [armhf, x86_64]
 deprecator_link: /images/alpine-navidrome.md
 deprecator_linktitle: Navidrome
 tags:

@@ -1,7 +1,7 @@
 ---
 description: Container for Alpine Linux + S6 + GNU LibC + OpenJDK8 + Jenkins
-skip_aarch64: true
-skip_armv7l: true
+alpine_branch: v3.10
+arches: [armhf, x86_64]
 tags:
   - legacy
   - service

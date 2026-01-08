@@ -1,10 +1,10 @@
 ---
 description: Container for Alpine Linux + S6 + Proxy DNS Daemon
+alpine_branch: v3.10
+arches: [armhf, x86_64]
 has_services:
   - compose
   - systemd
-skip_aarch64: true
-skip_armv7l: true
 tags:
   - deprecated
   - service

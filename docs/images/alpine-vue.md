@@ -1,8 +1,7 @@
 ---
 description: Container for Alpine Linux + S6 + NodeJS + VueJS CLI
-skip_aarch64: 1
-skip_armhf: 1
-skip_armv7l: 1
+alpine_branch: v3.10
+arches: [x86_64]
 tags:
   - legacy
   - usershell

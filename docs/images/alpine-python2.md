@@ -1,5 +1,7 @@
 ---
 description: Container for Alpine Linux + S6 + Python2 + PIP
+alpine_branch: v3.10
+arches: [aarch64, armhf, armv7l, x86_64]
 tags:
   - deprecated
   - dev
@@ -14,7 +16,7 @@ This [image][155] serves as the base image for applications
 dependencies.
 
 {{ m.srcimage('alpine-s6') }} with the package {{
-m.alpinepkg('python2', branch='v3.15') }} installed in it.
+m.alpinepkg('python2') }} installed in it.
 
 {% include "pull-image.md" %}
 

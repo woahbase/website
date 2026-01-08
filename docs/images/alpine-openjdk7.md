@@ -1,12 +1,14 @@
 ---
 description: Container for Alpine Linux + S6 + GNU LibC + OpenJDK 7
-ghrepo: alpine-openjdk
+alpine_branch: v3.19
+arches: [aarch64, armhf, armv7l, x86_64]
 dockerfile: Dockerfile.7
-wb_extra_args: JVVMAJOR=7
+ghrepo: alpine-openjdk
 tags:
   - deprecated
   - dev
   - usershell
+wb_extra_args: JVVMAJOR=7
 ---
 
 {% import "macros.md" as m with context %}

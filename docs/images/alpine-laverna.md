@@ -1,7 +1,7 @@
 ---
 description: Container for Alpine Linux + S6 + NGINX + Laverna Note-taking webapp
-skip_armv7l: true
-skip_aarch64: true
+alpine_branch: v3.10
+arches: [armhf, x86_64]
 tags:
   - deprecated
   - service

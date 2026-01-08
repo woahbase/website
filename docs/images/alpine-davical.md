@@ -1,5 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + NGINX + PHP-fpm + DAViCal
+alpine_branch: v3.21
+arches: [aarch64, armhf, armv7l, x86_64]
 has_services:
   - compose
 #   - nomad
