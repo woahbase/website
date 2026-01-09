@@ -1,15 +1,13 @@
 ---
 description: MultiArch Alpine Linux + S6 + NGINX + PHP-fpm.
-alpine_branch: v3.22
+alpine_branch: v3.23
 arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
 tags:
   - dev
   - service
-
 # pin php version
-phpmajmin: "84"
-wb_extra_args_build: PHPMAJMIN=84
-
+phpmajmin: "85"
+wb_extra_args_build: PHPMAJMIN=85
 ---
 
 {% import "macros.md" as m with context %}
@@ -77,26 +75,117 @@ Also,
 
 * These packages below are installed by default into the image.
 
-    * {{ m.alpinepkg('php'~phpmajmin~'-pecl-apcu') }}
-    * {{ m.alpinepkg('php'~phpmajmin~'-common') }}
-    * {{ m.alpinepkg('php'~phpmajmin~'-ctype') }}
-    * {{ m.alpinepkg('php'~phpmajmin~'-curl') }}
-    * {{ m.alpinepkg('php'~phpmajmin~'-dom') }}
-    * {{ m.alpinepkg('php'~phpmajmin~'-fpm') }}
-    * {{ m.alpinepkg('php'~phpmajmin~'-gd') }}
-    * {{ m.alpinepkg('php'~phpmajmin~'-intl') }}
-    * {{ m.alpinepkg('php'~phpmajmin~'-json') }}
-    * {{ m.alpinepkg('php'~phpmajmin~'-mbstring') }}
-    * {{ m.alpinepkg('php'~phpmajmin~'-opcache') }}
-    * {{ m.alpinepkg('php'~phpmajmin~'-openssl') }}
-    * {{ m.alpinepkg('php'~phpmajmin~'-pcntl') }}
-    * {{ m.alpinepkg('php'~phpmajmin~'-pear') }}
-    * {{ m.alpinepkg('php'~phpmajmin~'-pecl-mcrypt') }}
-    * {{ m.alpinepkg('php'~phpmajmin~'-phar') }}
-    * {{ m.alpinepkg('php'~phpmajmin~'-posix') }}
-    * {{ m.alpinepkg('php'~phpmajmin~'-session') }}
-    * {{ m.alpinepkg('php'~phpmajmin~'-sodium') }}
-    * {{ m.alpinepkg('php'~phpmajmin~'-zip') }}
+    === "PHP 8.1"
+
+        * {{ m.alpinepkg('php81-common'      , branch='v3.19') }}
+        * {{ m.alpinepkg('php81-ctype'       , branch='v3.19') }}
+        * {{ m.alpinepkg('php81-curl'        , branch='v3.19') }}
+        * {{ m.alpinepkg('php81-dom'         , branch='v3.19') }}
+        * {{ m.alpinepkg('php81-fpm'         , branch='v3.19') }}
+        * {{ m.alpinepkg('php81-gd'          , branch='v3.19') }}
+        * {{ m.alpinepkg('php81-intl'        , branch='v3.19') }}
+        * {{ m.alpinepkg('php81-json'        , branch='v3.19') }}
+        * {{ m.alpinepkg('php81-mbstring'    , branch='v3.19') }}
+        * {{ m.alpinepkg('php81-opcache'     , branch='v3.19') }}
+        * {{ m.alpinepkg('php81-openssl'     , branch='v3.19') }}
+        * {{ m.alpinepkg('php81-pcntl'       , branch='v3.19') }}
+        * {{ m.alpinepkg('php81-pear'        , branch='v3.19') }}
+        * {{ m.alpinepkg('php81-pecl-apcu'   , branch='v3.19') }}
+        * {{ m.alpinepkg('php81-pecl-mcrypt' , branch='v3.19') }}
+        * {{ m.alpinepkg('php81-phar'        , branch='v3.19') }}
+        * {{ m.alpinepkg('php81-posix'       , branch='v3.19') }}
+        * {{ m.alpinepkg('php81-session'     , branch='v3.19') }}
+        * {{ m.alpinepkg('php81-sodium'      , branch='v3.19') }}
+        * {{ m.alpinepkg('php81-zip'         , branch='v3.19') }}
+
+    === "PHP 8.2"
+
+        * {{ m.alpinepkg('php82-common'      , branch='v3.22') }}
+        * {{ m.alpinepkg('php82-ctype'       , branch='v3.22') }}
+        * {{ m.alpinepkg('php82-curl'        , branch='v3.22') }}
+        * {{ m.alpinepkg('php82-dom'         , branch='v3.22') }}
+        * {{ m.alpinepkg('php82-fpm'         , branch='v3.22') }}
+        * {{ m.alpinepkg('php82-gd'          , branch='v3.22') }}
+        * {{ m.alpinepkg('php82-intl'        , branch='v3.22') }}
+        * {{ m.alpinepkg('php82-json'        , branch='v3.22') }}
+        * {{ m.alpinepkg('php82-mbstring'    , branch='v3.22') }}
+        * {{ m.alpinepkg('php82-opcache'     , branch='v3.22') }}
+        * {{ m.alpinepkg('php82-openssl'     , branch='v3.22') }}
+        * {{ m.alpinepkg('php82-pcntl'       , branch='v3.22') }}
+        * {{ m.alpinepkg('php82-pear'        , branch='v3.22') }}
+        * {{ m.alpinepkg('php82-pecl-apcu'   , branch='v3.22') }}
+        * {{ m.alpinepkg('php82-pecl-mcrypt' , branch='v3.22') }}
+        * {{ m.alpinepkg('php82-phar'        , branch='v3.22') }}
+        * {{ m.alpinepkg('php82-posix'       , branch='v3.22') }}
+        * {{ m.alpinepkg('php82-session'     , branch='v3.22') }}
+        * {{ m.alpinepkg('php82-sodium'      , branch='v3.22') }}
+        * {{ m.alpinepkg('php82-zip'         , branch='v3.22') }}
+
+    === "PHP 8.3"
+
+        * {{ m.alpinepkg('php83-common') }}
+        * {{ m.alpinepkg('php83-ctype') }}
+        * {{ m.alpinepkg('php83-curl') }}
+        * {{ m.alpinepkg('php83-dom') }}
+        * {{ m.alpinepkg('php83-fpm') }}
+        * {{ m.alpinepkg('php83-gd') }}
+        * {{ m.alpinepkg('php83-intl') }}
+        * {{ m.alpinepkg('php83-json') }}
+        * {{ m.alpinepkg('php83-mbstring') }}
+        * {{ m.alpinepkg('php83-opcache') }}
+        * {{ m.alpinepkg('php83-openssl') }}
+        * {{ m.alpinepkg('php83-pcntl') }}
+        * {{ m.alpinepkg('php83-pear') }}
+        * {{ m.alpinepkg('php83-pecl-apcu') }}
+        * {{ m.alpinepkg('php83-pecl-mcrypt') }}
+        * {{ m.alpinepkg('php83-phar') }}
+        * {{ m.alpinepkg('php83-posix') }}
+        * {{ m.alpinepkg('php83-session') }}
+        * {{ m.alpinepkg('php83-sodium') }}
+        * {{ m.alpinepkg('php83-zip') }}
+
+    === "PHP 8.4"
+
+        * {{ m.alpinepkg('php84-common') }}
+        * {{ m.alpinepkg('php84-ctype') }}
+        * {{ m.alpinepkg('php84-curl') }}
+        * {{ m.alpinepkg('php84-dom') }}
+        * {{ m.alpinepkg('php84-fpm') }}
+        * {{ m.alpinepkg('php84-gd') }}
+        * {{ m.alpinepkg('php84-intl') }}
+        * {{ m.alpinepkg('php84-json') }}
+        * {{ m.alpinepkg('php84-mbstring') }}
+        * {{ m.alpinepkg('php84-opcache') }}
+        * {{ m.alpinepkg('php84-openssl') }}
+        * {{ m.alpinepkg('php84-pcntl') }}
+        * {{ m.alpinepkg('php84-pear') }}
+        * {{ m.alpinepkg('php84-pecl-apcu') }}
+        * {{ m.alpinepkg('php84-phar') }}
+        * {{ m.alpinepkg('php84-posix') }}
+        * {{ m.alpinepkg('php84-session') }}
+        * {{ m.alpinepkg('php84-sodium') }}
+        * {{ m.alpinepkg('php84-zip') }}
+
+    === "PHP 8.5"
+
+        * {{ m.alpinepkg('php85-common') }}
+        * {{ m.alpinepkg('php85-ctype') }}
+        * {{ m.alpinepkg('php85-curl') }}
+        * {{ m.alpinepkg('php85-dom') }}
+        * {{ m.alpinepkg('php85-fpm') }}
+        * {{ m.alpinepkg('php85-gd') }}
+        * {{ m.alpinepkg('php85-intl') }}
+        * {{ m.alpinepkg('php85-json') }}
+        * {{ m.alpinepkg('php85-mbstring') }}
+        * {{ m.alpinepkg('php85-openssl') }}
+        * {{ m.alpinepkg('php85-pcntl') }}
+        * {{ m.alpinepkg('php85-pear') }}
+        * {{ m.alpinepkg('php85-pecl-apcu') }}
+        * {{ m.alpinepkg('php85-phar') }}
+        * {{ m.alpinepkg('php85-posix') }}
+        * {{ m.alpinepkg('php85-session') }}
+        * {{ m.alpinepkg('php85-sodium') }}
+        * {{ m.alpinepkg('php85-zip') }}
 
 * If no `php.ini` is found inside  `/etc/php{{ phpmajmin }}/`,
   a default (from `/defaults/`, with a few options modified to suit

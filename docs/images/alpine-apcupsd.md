@@ -33,6 +33,7 @@ docker run --rm \
   --device /dev/usb/hiddev0 \
   -p 3551:3551/udp \
   -p 3551:3551/tcp \
+  -p 80:80 \
 woahbase/alpine-apcupsd
 ```
 

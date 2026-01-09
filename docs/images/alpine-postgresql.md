@@ -1,18 +1,17 @@
 ---
 description: MultiArch Alpine Linux + S6 + PostgreSQL
-alpine_branch: v3.22
+alpine_branch: v3.23
 arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
 has_services:
   - compose
   - nomad
 tags:
   - service
-
-pgmajor: 16
+# pin posgres version
+pgmajor: 18
 s6_user: postgres
 s6_userhome: /var/lib/postgresql
-wb_extra_args_build: PGMAJOR=16
-
+wb_extra_args_build: PGMAJOR=18
 ---
 
 {% import "macros.md" as m with context %}
@@ -29,10 +28,9 @@ command line if not already exists.
 Has handy **backup** and **restore** commands scripted inside the
 image.
 
-{{ m.srcimage('alpine-s6') }} with the {{
-m.alpinepkg('postgresql??', title='postgresql') }} and a few of
-the available {{ m.alpinepkg('postgresql-', star=true,
-title='extensions') }} package(s) installed in it.
+{{ m.srcimage('alpine-s6') }} with {{ m.alpinepkg('postgresql??',
+title='postgresql') }} and a few of the commonly available
+[extension packages](#extensions) installed in it.
 
 {% include "pull-image.md" %}
 
@@ -99,64 +97,100 @@ Also,
   Here's another [link][6] for securing the service and general
   best-practices.
 
-  * The following extension packages are included in the image, {{
-    m.sincev('16.9_20250524') }}
+---
+##### Extensions
+---
 
-    === "PostgreSQL 15"
+The following {{ m.alpinepkg('postgresql-', star=true,
+title='extension packages') }} are included in the image, {{
+m.sincev('16.9_20250524') }}
 
-        * {{ m.alpinepkg('postgresql-bdr-extension'    , branch="v3.18") }}
-        * {{ m.alpinepkg('postgresql-citus'            , branch="v3.18") }}
-        * {{ m.alpinepkg('postgresql-hypopg'           , branch="v3.18") }}
-        * {{ m.alpinepkg('postgresql-mysql_fdw'        , branch="v3.18") }}
-        * {{ m.alpinepkg('postgresql-orafce'           , branch="v3.18") }}
-        * {{ m.alpinepkg('postgresql-pg_cron'          , branch="v3.18") }}
-        * {{ m.alpinepkg('postgresql-rum'              , branch="v3.18") }}
-        * {{ m.alpinepkg('postgresql-sequential-uuids' , branch="v3.18") }}
-        * {{ m.alpinepkg('postgresql-shared_ispell'    , branch="v3.18") }}
-        * {{ m.alpinepkg('postgresql-temporal_tables'  , branch="v3.18") }}
-        * {{ m.alpinepkg('postgresql-timescaledb'      , branch="v3.18") }}
-        * {{ m.alpinepkg('postgresql-uint'             , branch="v3.18") }}
-        * {{ m.alpinepkg('postgresql-url_encode'       , branch="v3.18") }}
+=== "PostgreSQL 15"
 
-    === "PostgreSQL {{pgmajor}}"
+    * {{ m.alpinepkg('pgbackrest'                  , branch='v3.18') }} {{ m.sincev('15.13_20260109') }}
+    * {{ m.alpinepkg('postgis'                     , branch='v3.18') }} {{ m.sincev('15.13_20260109') }}
+    * {{ m.alpinepkg('postgresql-bdr-extension'    , branch='v3.18') }}
+    * {{ m.alpinepkg('postgresql-citus'            , branch='v3.18') }}
+    * {{ m.alpinepkg('postgresql-hypopg'           , branch='v3.18') }}
+    * {{ m.alpinepkg('postgresql-mysql_fdw'        , branch='v3.18') }}
+    * {{ m.alpinepkg('postgresql-orafce'           , branch='v3.18') }}
+    * {{ m.alpinepkg('postgresql-pg_cron'          , branch='v3.18') }}
+    * {{ m.alpinepkg('postgresql-rum'              , branch='v3.18') }}
+    * {{ m.alpinepkg('postgresql-sequential-uuids' , branch='v3.18') }}
+    * {{ m.alpinepkg('postgresql-shared_ispell'    , branch='v3.18') }}
+    * {{ m.alpinepkg('postgresql-temporal_tables'  , branch='v3.18') }}
+    * {{ m.alpinepkg('postgresql-timescaledb'      , branch='v3.18') }}
+    * {{ m.alpinepkg('postgresql-uint'             , branch='v3.18') }}
+    * {{ m.alpinepkg('postgresql-url_encode'       , branch='v3.18') }}
+    * {{ m.alpinepkg('repmgr'                      , branch='v3.18') }} {{ m.sincev('15.13_20260109') }}
 
-        * {{ m.alpinepkg('postgresql-age'              , branch="v3.20") }}
-        * {{ m.alpinepkg('postgresql-bdr-extension'    , branch="v3.20") }}
-        * {{ m.alpinepkg('postgresql-citus'            , branch="v3.20") }}
-        * {{ m.alpinepkg('postgresql-hypopg'           , branch="v3.20") }}
-        * {{ m.alpinepkg('postgresql-mysql_fdw'        , branch="v3.20") }}
-        * {{ m.alpinepkg('postgresql-orafce'           , branch="v3.20") }}
-        * {{ m.alpinepkg('postgresql-pg_cron'          , branch="v3.20") }}
-        * {{ m.alpinepkg('postgresql-pg_roaringbitmap' , branch="v3.20") }}
-        * {{ m.alpinepkg('postgresql-pgvector'         , branch="v3.20") }}
-        * {{ m.alpinepkg('postgresql-rum'              , branch="v3.20") }}
-        * {{ m.alpinepkg('postgresql-sequential-uuids' , branch="v3.20") }}
-        * {{ m.alpinepkg('postgresql-shared_ispell'    , branch="v3.20") }}
-        * {{ m.alpinepkg('postgresql-temporal_tables'  , branch="v3.20") }}
-        * {{ m.alpinepkg('postgresql-timescaledb'      , branch="v3.20") }}
-        * {{ m.alpinepkg('postgresql-topn'             , branch="v3.20") }}
-        * {{ m.alpinepkg('postgresql-uint'             , branch="v3.20") }}
-        * {{ m.alpinepkg('postgresql-url_encode'       , branch="v3.20") }}
+=== "PostgreSQL 16"
 
-    === "PostgreSQL 17"
+    * {{ m.alpinepkg('pgbackrest'                  , branch='v3.20') }} {{ m.sincev('16.11_20260109') }}
+    * {{ m.alpinepkg('postgis'                     , branch='v3.20') }} {{ m.sincev('16.11_20260109') }}
+    * {{ m.alpinepkg('postgresql-age'              , branch='v3.20') }}
+    * {{ m.alpinepkg('postgresql-bdr-extension'    , branch='v3.20') }}
+    * {{ m.alpinepkg('postgresql-citus'            , branch='v3.20') }}
+    * {{ m.alpinepkg('postgresql-hypopg'           , branch='v3.20') }}
+    * {{ m.alpinepkg('postgresql-mysql_fdw'        , branch='v3.20') }}
+    * {{ m.alpinepkg('postgresql-orafce'           , branch='v3.20') }}
+    * {{ m.alpinepkg('postgresql-pg_cron'          , branch='v3.20') }}
+    * {{ m.alpinepkg('postgresql-pg_roaringbitmap' , branch='v3.20') }}
+    * {{ m.alpinepkg('postgresql-pgvector'         , branch='v3.20') }}
+    * {{ m.alpinepkg('postgresql-rum'              , branch='v3.20') }}
+    * {{ m.alpinepkg('postgresql-sequential-uuids' , branch='v3.20') }}
+    * {{ m.alpinepkg('postgresql-shared_ispell'    , branch='v3.20') }}
+    * {{ m.alpinepkg('postgresql-temporal_tables'  , branch='v3.20') }}
+    * {{ m.alpinepkg('postgresql-timescaledb'      , branch='v3.20') }}
+    * {{ m.alpinepkg('postgresql-topn'             , branch='v3.20') }}
+    * {{ m.alpinepkg('postgresql-uint'             , branch='v3.20') }}
+    * {{ m.alpinepkg('postgresql-url_encode'       , branch='v3.20') }}
+    * {{ m.alpinepkg('repmgr'                      , branch='v3.20') }} {{ m.sincev('16.11_20260109') }}
 
-        * {{ m.alpinepkg('postgresql-age'              , branch="v3.22") }}
-        * {{ m.alpinepkg('postgresql-bdr-extension'    , branch="v3.22") }}
-        * {{ m.alpinepkg('postgresql-citus'            , branch="v3.22") }}
-        * {{ m.alpinepkg('postgresql-hypopg'           , branch="v3.22") }}
-        * {{ m.alpinepkg('postgresql-mysql_fdw'        , branch="v3.22") }}
-        * {{ m.alpinepkg('postgresql-orafce'           , branch="v3.22") }}
-        * {{ m.alpinepkg('postgresql-pg_cron'          , branch="v3.22") }}
-        * {{ m.alpinepkg('postgresql-pg_roaringbitmap' , branch="v3.22") }}
-        * {{ m.alpinepkg('postgresql-pgvector'         , branch="v3.22") }}
-        * {{ m.alpinepkg('postgresql-rum'              , branch="v3.22") }}
-        * {{ m.alpinepkg('postgresql-sequential-uuids' , branch="v3.22") }}
-        * {{ m.alpinepkg('postgresql-shared_ispell'    , branch="v3.22") }}
-        * {{ m.alpinepkg('postgresql-temporal_tables'  , branch="v3.22") }}
-        * {{ m.alpinepkg('postgresql-timescaledb'      , branch="v3.22") }}
-        * {{ m.alpinepkg('postgresql-topn'             , branch="v3.22") }}
-        * {{ m.alpinepkg('postgresql-uint'             , branch="v3.22") }}
-        * {{ m.alpinepkg('postgresql-url_encode'       , branch="v3.22") }}
+=== "PostgreSQL 17"
+
+    * {{ m.alpinepkg('pgbackrest'                  , branch='v3.22') }} {{ m.sincev('17.7_20260109') }}
+    * {{ m.alpinepkg('postgis'                     , branch='v3.22') }} {{ m.sincev('17.7_20260109') }}
+    * {{ m.alpinepkg('postgresql-age'              , branch='v3.22') }}
+    * {{ m.alpinepkg('postgresql-bdr-extension'    , branch='v3.22') }}
+    * {{ m.alpinepkg('postgresql-citus'            , branch='v3.22') }}
+    * {{ m.alpinepkg('postgresql-hypopg'           , branch='v3.22') }}
+    * {{ m.alpinepkg('postgresql-mysql_fdw'        , branch='v3.22') }}
+    * {{ m.alpinepkg('postgresql-orafce'           , branch='v3.22') }}
+    * {{ m.alpinepkg('postgresql-pg_cron'          , branch='v3.22') }}
+    * {{ m.alpinepkg('postgresql-pg_roaringbitmap' , branch='v3.22') }}
+    * {{ m.alpinepkg('postgresql-pgvector'         , branch='v3.22') }}
+    * {{ m.alpinepkg('postgresql-rum'              , branch='v3.22') }}
+    * {{ m.alpinepkg('postgresql-sequential-uuids' , branch='v3.22') }}
+    * {{ m.alpinepkg('postgresql-shared_ispell'    , branch='v3.22') }}
+    * {{ m.alpinepkg('postgresql-temporal_tables'  , branch='v3.22') }}
+    * {{ m.alpinepkg('postgresql-timescaledb'      , branch='v3.22') }}
+    * {{ m.alpinepkg('postgresql-topn'             , branch='v3.22') }}
+    * {{ m.alpinepkg('postgresql-uint'             , branch='v3.22') }}
+    * {{ m.alpinepkg('postgresql-url_encode'       , branch='v3.22') }}
+    * {{ m.alpinepkg('repmgr'                      , branch='v3.22') }} {{ m.sincev('17.7_20260109') }}
+
+=== "PostgreSQL 18"
+
+    * {{ m.alpinepkg('pgbackrest'                  , branch='v3.23') }} {{ m.sincev('18.1_20260109') }}
+    * {{ m.alpinepkg('postgis'                     , branch='v3.23') }} {{ m.sincev('18.1_20260109') }}
+    * {{ m.alpinepkg('postgresql-bdr-extension'    , branch='v3.23') }}
+    * {{ m.alpinepkg('postgresql-citus'            , branch='v3.23') }}
+    * {{ m.alpinepkg('postgresql-hypopg'           , branch='v3.23') }}
+    * {{ m.alpinepkg('postgresql-mysql_fdw'        , branch='v3.23') }}
+    * {{ m.alpinepkg('postgresql-orafce'           , branch='v3.23') }}
+    * {{ m.alpinepkg('postgresql-pg_cron'          , branch='v3.23') }}
+    * {{ m.alpinepkg('postgresql-pg_roaringbitmap' , branch='v3.23') }}
+    * {{ m.alpinepkg('postgresql-pgvector'         , branch='v3.23') }}
+    * {{ m.alpinepkg('postgresql-rum'              , branch='v3.23') }}
+    * {{ m.alpinepkg('postgresql-sequential-uuids' , branch='v3.23') }}
+    * {{ m.alpinepkg('postgresql-shared_ispell'    , branch='v3.23') }}
+    * {{ m.alpinepkg('postgresql-temporal_tables'  , branch='v3.23') }}
+    * {{ m.alpinepkg('postgresql-timescaledb'      , branch='v3.23') }}
+    * {{ m.alpinepkg('postgresql-topn'             , branch='v3.23') }}
+    * {{ m.alpinepkg('postgresql-uint'             , branch='v3.23') }}
+    * {{ m.alpinepkg('postgresql-url_encode'       , branch='v3.23') }}
+    * {{ m.alpinepkg('repmgr'                      , branch='v3.23') }} {{ m.sincev('18.1_20260109') }}
 
 ---
 ##### Script - run.sh
