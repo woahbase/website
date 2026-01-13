@@ -1,6 +1,6 @@
 ---
 description: MultiArch Alpine Linux + S6 + GNU LibC
-alpine_branch: v3.22
+alpine_branch: v3.23
 arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
 tags:
   - base
@@ -14,8 +14,8 @@ This [image][155] serves as a base image for applications/services
 that need the [GNU C Library][11] to run binaries linked against
 it. [Alpine Linux][113] by default uses [musl libc][10], which is
 simply not compatible for quite a few applications. This image
-solves the dynamic linking problem for a few (definitely not all)
-of those cases.
+solves the dynamic linking problem for [a few (**definitely** not
+all)][12] of those cases.
 
 {{ m.srcimage('alpine-s6') }} with the compiled [glibc][1]
 binaries installed in it.
@@ -68,5 +68,6 @@ following environment variables.
 [9]: https://github.com/jvasileff/alpine-pkg-glibc-armhf/blob/master/Dockerfile
 [10]: https://musl.libc.org/
 [11]: https://www.gnu.org/software/libc/
+[12]: /images/index.md#tag:glibc
 
 {% include "all-include.md" %}
