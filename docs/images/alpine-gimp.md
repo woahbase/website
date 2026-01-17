@@ -1,6 +1,6 @@
 ---
 description: MultiArch Alpine Linux + S6 + GNU LibC + GIMP
-alpine_branch: v3.22
+alpine_branch: v3.23
 arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, x86_64]
 tags:
   - gui
