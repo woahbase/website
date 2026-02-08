@@ -69,111 +69,144 @@ Also,
 * Check the [docs][2] or [configuration][3] options for
   customizing your own.
 
-##### DHCP Failover
+##### Recipes
 
-For failover, consider configuring two servers (namely `primary` and
-`secondary`) like the following.
+=== "Event Hooks"
 
-=== "primary"
-
-    ``` conf
-    failover peer "dhcp-failover" {
-      primary;
-      address 172.17.0.39; # Primary DHCP Server IP
-      port 647; # Primary DHCP Server port
-      peer address 172.17.0.67; # Secondary DHCP Server IP
-      peer port 847; # Secondary DHCP Server port
-      mclt 120;
-      split 128;
-      load balance max seconds 5;
-      max-response-delay 15;
-      max-unacked-updates 10;
-    }
-
-    # optionally include shared configurations from another file
-    # include "/etc/dhcp/dhcpd.shared.conf";
-
-    subnet 172.17.0.0 netmask 255.255.255.0 {
-      # your subnet specific configurations
-      pool {
-        failover peer "dhcp-failover";
-        # your pool specific parameters
-      };
-    };
-    ```
-
-=== "secondary"
+    For running a hook-script when an event takes place, consider the
+    following (references [here][6] and [here][7])
 
     ``` conf
-    failover peer "dhcp-failover" {
-      secondary;
-      address 172.17.0.67; # Secondary DHCP Server IP
-      port 847; # Secondary DHCP Server port
-      peer address 172.17.0.39; # Primary DHCP Server IP
-      peer port 647; # Primary DHCP Server port
-      max-response-delay 15;
-      max-unacked-updates 10;
-      load balance max seconds 5;
-    }
-
-    # optionally include shared configurations from another file
-    # include "/etc/dhcp/dhcpd.shared.conf";
-
     subnet 172.17.0.0 netmask 255.255.255.0 {
       # your subnet specific configurations
-      pool {
-        failover peer "dhcp-failover";
-        # your pool specific parameters
-      };
-    };
+
+      # event can be one of commit | expiry | release e.g.
+      on commit {
+        set chw = binary-to-ascii(16, 8, ":", substring(hardware, 1, 6));
+        set cip = binary-to-ascii(10, 8, ".", leased-address);
+        set cnm = pick-first-value(host-decl-name, option fqdn.hostname, option host-name, "unknown");
+        execute("/bin/dhcp_on_event", "commit", chw, cip, cnm);
+      }
+      on expiry {
+        set chw = binary-to-ascii(16, 8, ":", substring(hardware, 1, 6));
+        set cip = binary-to-ascii(10, 8, ".", leased-address);
+        set cnm = pick-first-value(host-decl-name, option fqdn.hostname, option host-name, "unknown");
+        execute("/bin/dhcp_on_event", "expiry", chw, cip, cnm);
+      }
+      on release {
+        set chw = binary-to-ascii(16, 8, ":", substring(hardware, 1, 6));
+        set cip = binary-to-ascii(10, 8, ".", leased-address);
+        set cnm = pick-first-value(host-decl-name, option fqdn.hostname, option host-name, "unknown");
+        execute("/bin/dhcp_on_event", "release", chw, cip, cnm);
+      }
+    }
     ```
 
-##### DHCP Hooks
+    and the script can be like
 
-For running a hook-script when an event takes place, consider the
-following (references [here][6] and [here][7])
+    ``` sh
+    #!/bin/bash
 
-``` conf
-subnet 172.17.0.0 netmask 255.255.255.0 {
-  # your subnet specific configurations
+    EVT="${1:? \$1 event type is required}";
+    CHW="${2:? \$2 client-MAC is required}";
+    CIP="${3:? \$3 client-ip is required}";
+    CNM="${4:? \$4 client-hostname is required}";
 
-  # event can be one of commit | expiry | release e.g.
-  on commit {
-    set chw = binary-to-ascii(16, 8, ":", substring(hardware, 1, 6));
-    set cip = binary-to-ascii(10, 8, ".", leased-address);
-    set cnm = pick-first-value(host-decl-name, option fqdn.hostname, option host-name, "unknown");
-    execute("/bin/dhcp_on_event", "commit", chw, cip, cnm);
-  }
-  on expiry {
-    set chw = binary-to-ascii(16, 8, ":", substring(hardware, 1, 6));
-    set cip = binary-to-ascii(10, 8, ".", leased-address);
-    set cnm = pick-first-value(host-decl-name, option fqdn.hostname, option host-name, "unknown");
-    execute("/bin/dhcp_on_event", "expiry", chw, cip, cnm);
-  }
-  on release {
-    set chw = binary-to-ascii(16, 8, ":", substring(hardware, 1, 6));
-    set cip = binary-to-ascii(10, 8, ".", leased-address);
-    set cnm = pick-first-value(host-decl-name, option fqdn.hostname, option host-name, "unknown");
-    execute("/bin/dhcp_on_event", "release", chw, cip, cnm);
-  }
-}
-```
+    echo "Detected event ${EVT} for host ${CNM} with address ${CIP} (mac ${CHW})";
 
-and the script can be like
+    # now do whatever is needed,
+    # keep in mind the script should return as soon as possible
+    ```
 
-``` sh
-#!/bin/bash
+=== "Failover"
 
-EVNT="${1:? \$1 event type is required}";
-CHW="${2:? \$2 client-MAC is required}";
-CIP="${3:? \$3 client-ip is required}";
-CNM="${4:? \$4 client-hostname is required}";
+    To configure failover, consider setting up two servers (namely
+    `primary` and `secondary`) like the following.
 
-echo "Detected event ${EVNT} for host ${CNM} with address ${CIP} (mac ${CHW})";
+    === "primary"
 
-# now do whatever is needed,
-# keep in mind the script should return as soon as possible
-```
+        ``` conf
+        failover peer "dhcp-failover" {
+          primary;
+          address 172.17.0.39; # Primary DHCP Server IP
+          port 647; # Primary DHCP Server port
+          peer address 172.17.0.67; # Secondary DHCP Server IP
+          peer port 847; # Secondary DHCP Server port
+          mclt 120;
+          split 128;
+          load balance max seconds 5;
+          max-response-delay 15;
+          max-unacked-updates 10;
+        }
+
+        # optionally include shared configurations from another file
+        # include "/etc/dhcp/dhcpd.shared.conf";
+
+        subnet 172.17.0.0 netmask 255.255.255.0 {
+          # your subnet specific configurations
+          pool {
+            failover peer "dhcp-failover";
+            # your pool specific parameters
+          };
+        };
+        ```
+
+    === "secondary"
+
+        ``` conf
+        failover peer "dhcp-failover" {
+          secondary;
+          address 172.17.0.67; # Secondary DHCP Server IP
+          port 847; # Secondary DHCP Server port
+          peer address 172.17.0.39; # Primary DHCP Server IP
+          peer port 647; # Primary DHCP Server port
+          max-response-delay 15;
+          max-unacked-updates 10;
+          load balance max seconds 5;
+        }
+
+        # optionally include shared configurations from another file
+        # include "/etc/dhcp/dhcpd.shared.conf";
+
+        subnet 172.17.0.0 netmask 255.255.255.0 {
+          # your subnet specific configurations
+          pool {
+            failover peer "dhcp-failover";
+            # your pool specific parameters
+          };
+        };
+        ```
+
+=== "Multiple Subnets"
+
+    To use the **same** NIC for multiple subnets, define them inside
+    a shared network. E.g.
+
+    ``` conf
+    shared-network multi-subnet {
+      subnet 172.17.0.0 netmask 255.255.255.0 {
+        # your subnet specific parameters
+        ...
+      }
+      subnet 172.17.1.0 netmask 255.255.255.0 {
+        # your subnet specific parameters
+        ...
+      }
+      subnet 172.17.2.0 netmask 255.255.255.0 {
+        # your subnet specific parameters
+        ...
+      }
+      subnet 172.17.3.0 netmask 255.255.255.0 {
+        # your subnet specific parameters
+        ...
+      }
+    }
+    ```
+
+    Additionally, if clients are on a different subnet than the
+    DHCP server, then your router/switch must be configured to act
+    as a DHCP relay (IP Helper) to ensure DHCP packets are able to
+    reach the hosts.
 
 [1]: https://www.isc.org/dhcp/
 [2]: https://linux.die.net/man/8/dhcpd
