@@ -1,7 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + Navidrome
 alpine_branch: v3.23
-arches: [aarch64, armhf, armv7l, i386, x86_64]
+arches: [aarch64, armhf, armv7l, i386, riscv64, x86_64]
 has_services:
   - compose
   - nomad
