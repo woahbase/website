@@ -1,7 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + GNU LibC + Chronograf
 alpine_branch: v3.23
-arches: [aarch64, armhf, armv7l, i386, x86_64]
+arches: [aarch64, x86_64]
 has_services:
   - compose
   - nomad
@@ -75,6 +75,8 @@ Also,
 
 * Check the [chronoctl][7] docs for tasks like migration or
   superadmin generation.
+
+* Binaries for `armhf`, `armv7l`, `i386` unavailable since `1.11.0`.
 
 [1]: https://www.influxdata.com/time-series-platform/chronograf/
 [2]: https://www.influxdata.com/products/influxdb-overview/

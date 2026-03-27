@@ -1,5 +1,5 @@
 ---
-description: MultiArch Alpine Linux + S6 + Python 3.x.x Runtime + PIP
+description: MultiArch Alpine Linux + S6 + Python 3.x.x Runtime + PIP/UV
 alpine_branch: v3.23
 arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
 tags:
@@ -11,11 +11,12 @@ tags:
 {% include "shields.md" %}
 
 This [image][155] serves as the base image for applications
-/ services that require [Python3][1] and [Pip][2] to manage
+/services that require [Python3][1] and [Pip][2]/[uv][3] to manage
 dependencies.
 
-{{ m.srcimage('alpine-s6') }} with the package {{
-m.alpinepkg('python3') }} installed in it.
+{{ m.srcimage('alpine-s6') }} with the packages {{
+m.alpinepkg('python3') }}, {{ m.alpinepkg('py3-pip') }} and {{
+m.alpinepkg('uv') }} installed in it.
 
 {% include "pull-image.md" %}
 
@@ -58,7 +59,11 @@ Also,
 * If the user packages have binaries inside `~/.local/bin`,
   they're automatically added to path.
 
+* If `${UV_PROJECT}` is set, the project-local binaries inside
+  `${UV_PROJECT}/.venv/bin`, are automatically added to path.
+
 [1]: https://www.python.org/
 [2]: https://pypi.python.org/pypi/pip
+[3]: https://docs.astral.sh/uv/
 
 {% include "all-include.md" %}
