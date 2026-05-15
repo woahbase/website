@@ -24,6 +24,7 @@ navigation or search,
     | {{ anchify('shell') }}      | Images that provide a CLI interface. (Default as `root`)
     | {{ anchify('systemd') }}    | These images include a sample systemd service file.
     | {{ anchify('usershell') }}  | Images that provide a [user-scoped](alpine-s6.md#usershell) CLI interface. (Default user as `alpine`)
+    | vX.XX                       | Alpine Linux baseimage (or specific package version available only for that os-version). E.g. [v3.17](#tag:v317).
 
     Other than the above, the images are also tagged as per their
     source-image, e.g.

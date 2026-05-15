@@ -7,6 +7,7 @@
 
 {%- macro alpinepkg(name, branch, repo, arch, star, title) -%}
 {{- addpagetag('package') -}}
+{{- addpagetag(branch|default(alpine_branch)) -}}
 [{{ title|default(name) }}](https://pkgs.alpinelinux.org/packages?name=
 {{- name|replace('?','%3F')
 ~ ('*' if star else '')
@@ -20,6 +21,7 @@
 Based on
 {% if 'alpine-' in name -%}
 {{- addpagetag(name|replace('alpine-', '')) -}}
+{{- addpagetag(alpine_branch) -}}
 [Alpine Linux][113]
 {{- ' (*'~page.meta.alpine_branch~'*)' if page and page.meta and page.meta.alpine_branch }}
 from the
