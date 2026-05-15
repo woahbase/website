@@ -2,9 +2,7 @@
 description: MultiArch Alpine Linux + S6 + Python3 + RPi.GPIO
 alpine_branch: v3.22
 arches: [aarch64, armhf, armv7l]
-tags:
-  - dev
-  - shell
+tags: [dev, shell]
 ---
 
 {% import "macros.md" as m with context %}

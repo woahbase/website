@@ -2,9 +2,7 @@
 description: Container for Alpine Linux + S6 + NGINX + PHP7 + Pydio
 alpine_branch: v3.10
 arches: [x86_64]
-tags:
-  - deprecated
-  - service
+tags: [deprecated, service]
 ---
 
 {% import "macros.md" as m with context %}

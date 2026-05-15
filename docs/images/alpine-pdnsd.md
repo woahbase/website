@@ -2,12 +2,8 @@
 description: Container for Alpine Linux + S6 + Proxy DNS Daemon
 alpine_branch: v3.10
 arches: [armhf, x86_64]
-has_services:
-  - compose
-  - systemd
-tags:
-  - deprecated
-  - service
+has_services: [compose, systemd]
+tags: [deprecated, service]
 ---
 
 {% import "macros.md" as m with context %}

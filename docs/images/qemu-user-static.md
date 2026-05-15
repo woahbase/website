@@ -3,10 +3,7 @@ description: /usr/bin/qemu-\*-static
 svcname: qemu-user-static
 orgname: multiarch
 has_perarch_tags: false
-tags:
-  - foreign
-  - dev
-  - shell
+tags: [dev, foreign, shell]
 ---
 
 {% import "macros.md" as m with context %}

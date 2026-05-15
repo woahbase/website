@@ -2,8 +2,7 @@
 description: MultiArch Alpine Linux + Supervisor Init System.
 alpine_branch: v3.23
 arches: [aarch64, armhf, armv7l, i386, loong64, ppc64le, riscv64, s390x, x86_64]
-tags:
-  - service
+tags: [service]
 ---
 
 {% import "macros.md" as m with context %}

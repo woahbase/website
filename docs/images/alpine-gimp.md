@@ -2,9 +2,7 @@
 description: MultiArch Alpine Linux + S6 + GNU LibC + GIMP
 alpine_branch: v3.23
 arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, x86_64]
-tags:
-  - gui
-  - usershell
+tags: [gui, usershell]
 ---
 
 {% import "macros.md" as m with context %}

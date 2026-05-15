@@ -2,14 +2,9 @@
 description: MultiArch Alpine Linux + S6 + NGINX + PHP-fpm + Tiny Tiny RSS
 alpine_branch: v3.21
 arches: [aarch64, armhf, armv7l, x86_64]
-has_services:
-  - compose
-  - nomad
-has_proxies:
-  - nginx
-tags:
-  - package
-  - service
+has_services: [compose, nomad]
+has_proxies: [nginx]
+tags: [package, service]
 ---
 
 {% import "macros.md" as m with context %}

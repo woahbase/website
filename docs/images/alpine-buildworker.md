@@ -3,10 +3,8 @@ description: MultiArch Alpine Linux + S6 + Python3 + Buildbot (Worker)
 alpine_branch: v3.22
 arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
 ghrepo: alpine-buildbot
-has_services:
-  - compose
-tags:
-  - service
+has_services: [compose]
+tags: [service]
 wb_extra_args: ROLE=worker
 ---
 

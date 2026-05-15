@@ -2,12 +2,9 @@
 description: MultiArch Alpine Linux + S6 + GNU LibC + OpenJDK17 + Ubooquity
 alpine_branch: v3.22
 arches: [aarch64, ppc64le, s390x, x86_64]
-has_services:
-  - compose
-has_proxies:
-  - nginx
-tags:
-  - service
+has_services: [compose]
+has_proxies: [nginx]
+tags: [service]
 ---
 
 {% import "macros.md" as m with context %}

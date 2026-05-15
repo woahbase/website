@@ -2,10 +2,7 @@
 description: Concurrent, Cache-efficient, and Dockerfile-agnostic Builder Toolkit
 orgname: moby
 has_perarch_tags: false
-tags:
-  - foreign
-  - dev
-  - shell
+tags: [dev, foreign, shell]
 ---
 
 {% import "macros.md" as m with context %}

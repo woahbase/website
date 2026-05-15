@@ -2,10 +2,7 @@
 description: MultiArch Alpine Linux + S6 + GNU LibC + OpenJDK8 + Maven
 alpine_branch: v3.21
 arches: [aarch64, armhf, armv7l, x86_64]
-tags:
-  - dev
-  - github
-  - usershell
+tags: [dev, github, usershell]
 ---
 
 {% import "macros.md" as m with context %}

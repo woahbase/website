@@ -2,10 +2,7 @@
 description: Container for Alpine Linux + S6 + NodeJS + VueJS + Quasar Framework CLI
 alpine_branch: v3.10
 arches: [x86_64]
-tags:
-  - legacy
-  - dev
-  - usershell
+tags: [legacy, dev, usershell]
 ---
 
 {% import "macros.md" as m with context %}

@@ -2,11 +2,8 @@
 description: MultiArch Alpine Linux + S6 + mJPG_streamer
 alpine_branch: v3.22
 arches: [aarch64, armhf, armv7l, x86_64]
-has_services:
-  - systemd
-tags:
-  - github
-  - service
+has_services: [systemd]
+tags: [github, service]
 ---
 
 {% import "macros.md" as m with context %}

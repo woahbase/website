@@ -2,13 +2,9 @@
 description: MultiArch Alpine Linux + S6 + NodeJS + UptimeKuma
 alpine_branch: v3.23
 arches: [aarch64, armhf, armv7l, x86_64]
-has_services:
-  - compose
-  - nomad
-has_proxies:
-  - nginx
-tags:
-  - service
+has_services: [compose, nomad]
+has_proxies: [nginx]
+tags: [service]
 ---
 
 {% import "macros.md" as m with context %}

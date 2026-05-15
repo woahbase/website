@@ -2,14 +2,9 @@
 description: Container for Alpine Linux + S6 + Python3 + SearX
 alpine_branch: v3.10
 arches: [aarch64, armhf, armv7l, x86_64]
-has_services:
-  - compose
-  - nomad
-has_proxies:
-  - nginx
-tags:
-  - legacy
-  - service
+has_services: [compose, nomad]
+has_proxies: [nginx]
+tags: [legacy, service]
 ---
 
 {% import "macros.md" as m with context %}

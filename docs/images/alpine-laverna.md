@@ -2,9 +2,7 @@
 description: Container for Alpine Linux + S6 + NGINX + Laverna Note-taking webapp
 alpine_branch: v3.10
 arches: [armhf, x86_64]
-tags:
-  - deprecated
-  - service
+tags: [deprecated, service]
 ---
 
 {% import "macros.md" as m with context %}

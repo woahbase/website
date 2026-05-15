@@ -2,9 +2,7 @@
 description: MultiArch Alpine Linux + S6 + Lua + LuaRocks
 alpine_branch: v3.23
 arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
-tags:
-  - dev
-  - usershell
+tags: [dev, usershell]
 
 # pin lua major.minor
 luamajmin: "5.4"

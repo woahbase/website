@@ -2,14 +2,10 @@
 description: MultiArch Alpine Linux + S6 + RSysLog (and LogRotate)
 alpine_branch: v3.23
 arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
-has_services:
-  - compose
-tags:
-  - service
-
+has_services: [compose]
+tags: [service]
 s6_user: rsyslog
 s6_userhome: /var/lib/rsyslog
-
 ---
 
 {% import "macros.md" as m with context %}

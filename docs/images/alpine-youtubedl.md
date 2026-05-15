@@ -2,9 +2,7 @@
 description: Container for Alpine Linux + S6 + Python2 + Youtube-DL
 alpine_branch: v3.10
 arches: [aarch64, armhf, armv7l, x86_64]
-tags:
-  - deprecated
-  - usershell
+tags: [deprecated, usershell]
 ---
 
 {% import "macros.md" as m with context %}

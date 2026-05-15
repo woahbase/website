@@ -2,13 +2,9 @@
 description: MultiArch Alpine Linux + S6 + NGINX + PHP-fpm + Wallabag
 alpine_branch: v3.22
 arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
-has_services:
-  - compose
-  - nomad
-has_proxies:
-  - nginx
-tags:
-  - service
+has_services: [compose, nomad]
+has_proxies: [nginx]
+tags: [service]
 ---
 
 {% import "macros.md" as m with context %}

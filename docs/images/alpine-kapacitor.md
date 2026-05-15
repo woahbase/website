@@ -2,11 +2,8 @@
 description: MultiArch Alpine Linux + S6 + GNU LibC + Kapacitor
 alpine_branch: v3.23
 arches: [aarch64, x86_64]
-has_services:
-  - compose
-  - nomad
-tags:
-  - service
+has_services: [compose, nomad]
+tags: [service]
 ---
 
 {% import "macros.md" as m with context %}

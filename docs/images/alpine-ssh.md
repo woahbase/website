@@ -2,8 +2,7 @@
 description: MultiArch Alpine Linux + S6 + SSH/SSL + RSync + TMux
 alpine_branch: v3.23
 arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
-tags:
-  - service
+tags: [service]
 ---
 
 {% import "macros.md" as m with context %}

@@ -2,9 +2,7 @@
 description: Container for Alpine Linux + S6 + GNU LibC + OpenJDK8 + Jenkins
 alpine_branch: v3.10
 arches: [armhf, x86_64]
-tags:
-  - legacy
-  - service
+tags: [legacy, service]
 ---
 
 {% import "macros.md" as m with context %}

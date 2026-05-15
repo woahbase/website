@@ -2,9 +2,7 @@
 description: Container for Alpine Linux + S6 + PulseAudio + Bluez
 alpine_branch: v3.10
 arches: [aarch64, armhf, armv7l, x86_64]
-tags:
-  - legacy
-  - service
+tags: [legacy, service]
 ---
 
 {% import "macros.md" as m with context %}

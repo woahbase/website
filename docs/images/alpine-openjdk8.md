@@ -5,9 +5,7 @@ arches: [aarch64, armhf, armv7l, i386, ppc64le, s390x, x86_64]
 ghrepo: alpine-openjdk
 dockerfile: Dockerfile.8
 wb_extra_args: JVVMAJOR=8
-tags:
-  - dev
-  - usershell
+tags: [dev, usershell]
 ---
 
 {% import "macros.md" as m with context %}

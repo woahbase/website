@@ -2,11 +2,8 @@
 description: MultiArch Alpine Linux + S6 + GNU LibC + Firefox Browser
 alpine_branch: v3.23
 arches: [aarch64, armv7l, i386, ppc64le, riscv64, x86_64]
-has_services:
-  - systemd
-tags:
-  - gui
-  - usershell
+has_services: [systemd]
+tags: [gui, usershell]
 ---
 
 {% import "macros.md" as m with context %}

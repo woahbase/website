@@ -2,8 +2,7 @@
 description: MultiArch Alpine Linux + S6 + Hugo + Pygments
 alpine_branch: v3.23
 arches: [aarch64, armhf, armv7l, x86_64]
-tags:
-  - usershell
+tags: [usershell]
 ---
 
 {% import "macros.md" as m with context %}

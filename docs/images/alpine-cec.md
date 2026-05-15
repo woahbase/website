@@ -2,11 +2,8 @@
 description: MultiArch Alpine Linux + S6 + LibCEC + PyCEC
 alpine_branch: v3.22
 arches: [aarch64, armhf, armv7l, x86_64]
-has_services:
-  - compose
-  - nomad
-tags:
-  - service
+has_services: [compose, nomad]
+tags: [service]
 ---
 
 {% import "macros.md" as m with context %}

@@ -2,9 +2,7 @@
 description: Container for Alpine Linux + S6 + NodeJS + VueJS CLI
 alpine_branch: v3.10
 arches: [x86_64]
-tags:
-  - legacy
-  - usershell
+tags: [legacy, usershell]
 ---
 
 {% import "macros.md" as m with context %}

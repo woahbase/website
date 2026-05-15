@@ -2,12 +2,8 @@
 description: Cross-platform emulator collection distributed with Docker images.
 orgname: tonistiigi
 has_perarch_tags: false
-has_services:
-  - compose
-tags:
-  - foreign
-  - dev
-  - shell
+has_services: [compose]
+tags: [dev, foreign, shell]
 ---
 
 {% import "macros.md" as m with context %}

@@ -2,17 +2,11 @@
 description: MultiArch Alpine Linux + S6 + Music Player Daemon + yMPD WebUI
 alpine_branch: v3.23
 arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
-has_services:
-  - compose
-  - nomad
-has_proxies:
-  - nginx
-tags:
-  - service
-
+has_services: [compose, nomad]
+has_proxies: [nginx]
+tags: [service]
 s6_user: mpd
 s6_userhome: /var/lib/mpd
-
 ---
 
 {% import "macros.md" as m with context %}

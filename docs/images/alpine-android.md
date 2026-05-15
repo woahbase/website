@@ -2,9 +2,7 @@
 description: Container for Alpine Linux + OpenJDK8 + Android + NodeJS + Cordova
 alpine_branch: v3.10
 arches: [x86_64]
-tags:
-  - deprecated
-  - usershell
+tags: [deprecated, usershell]
 ---
 
 {% import "macros.md" as m with context %}

@@ -2,11 +2,8 @@
 description: MultiArch Alpine Linux + S6 + APC-UPS Daemon
 alpine_branch: v3.23
 arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
-has_services:
-  - compose
-  - nomad
-tags:
-  - service
+has_services: [compose, nomad]
+tags: [service]
 ---
 
 {% import "macros.md" as m with context %}

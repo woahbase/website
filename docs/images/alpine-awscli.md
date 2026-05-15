@@ -2,9 +2,7 @@
 description: MultiArch Alpine Linux + S6 + Python3 + AWS-CLI
 alpine_branch: v3.22
 arches: [aarch64, armhf, armv7l, x86_64]
-tags:
-  - dev
-  - usershell
+tags: [dev, usershell]
 ---
 
 {% import "macros.md" as m with context %}

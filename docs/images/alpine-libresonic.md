@@ -4,9 +4,7 @@ alpine_branch: v3.10
 arches: [armhf, x86_64]
 deprecator_link: /images/alpine-navidrome.md
 deprecator_linktitle: Navidrome
-tags:
-  - deprecated
-  - service
+tags: [deprecated, service]
 ---
 
 {% import "macros.md" as m with context %}

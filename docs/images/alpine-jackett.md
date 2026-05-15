@@ -2,14 +2,9 @@
 description: MultiArch Alpine Linux + S6 + Jackett
 alpine_branch: v3.23
 arches: [aarch64, armv7l, x86_64]
-has_services:
-  - compose
-  - nomad
-  - systemd
-has_proxies:
-  - nginx
-tags:
-  - service
+has_services: [compose, nomad, systemd]
+has_proxies: [nginx]
+tags: [service]
 ---
 
 {% import "macros.md" as m with context %}

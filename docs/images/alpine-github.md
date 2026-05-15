@@ -2,10 +2,7 @@
 description: Container for Alpine Linux + S6 + GNU LibC + Git + Hub
 alpine_branch: v3.10
 arches: [armhf, x86_64]
-tags:
-  - deprecated
-  - dev
-  - usershell
+tags: [deprecated, dev, usershell]
 ---
 
 {% import "macros.md" as m with context %}

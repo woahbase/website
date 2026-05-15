@@ -2,11 +2,8 @@
 description: MultiArch Alpine Linux + S6 + Blocky DNS-Resolver (and Ad-Blocker)
 alpine_branch: v3.23
 arches: [aarch64, armhf, armv7l, x86_64]
-has_services:
-  - compose
-  - systemd
-tags:
-  - service
+has_services: [compose, systemd]
+tags: [service]
 ---
 
 {% import "macros.md" as m with context %}
