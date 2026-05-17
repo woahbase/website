@@ -1,7 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + NGINX + PHP-fpm + DAViCal
-alpine_branch: v3.21
-arches: [aarch64, armhf, armv7l, x86_64]
+alpine_branch: v3.23
+arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
 has_services: [compose]
 # has_proxies: [nginx]
 tags: [service]
@@ -79,7 +79,7 @@ following environment variables.
 Also,
 
 * Check our {{ m.myimage('alpine-postgresql') }} image to run your
-  own [PostgreSQL][10]-as-a-service.
+  own [PostgreSQL][9]-as-a-service.
 
 * DAViCal is located at base endpoint e.g.
   `http://localhost/index.php`, The scripts are located (or
@@ -88,7 +88,8 @@ Also,
   any customizations.
 
 * {{ m.defcfgfile('/etc/davical/config.php') }} Uses values from
-  environment to substitute `DAVI_*` variable names.
+  environment to substitute `DAVI_*` variable names. Check the
+  [configuration][10] wiki to customize your own.
 
 * `POSTGRES_USER` credentials are only needed for the first-run to
   create the database and user(s) from scratch. These (can be
@@ -116,9 +117,8 @@ Also,
 [5]: https://gitlab.com/davical-project/awl
 [6]: https://wiki.davical.org/index.php?title=Nginx_Config
 [7]: https://gitlab.com/fintechstudios/davical-docker
-[8]: https://github.com/fintechstudios/davical-docker
-[9]: https://github.com/Elrondo46/davical-docker-standalone
-[10]: https://www.postgresql.org/
-
+[8]: https://github.com/Elrondo46/davical-docker-standalone
+[9]: https://www.postgresql.org/
+[10]: https://wiki.davical.org/index.php?title=Configuration_settings
 
 {% include "all-include.md" %}
