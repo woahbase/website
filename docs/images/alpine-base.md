@@ -1,10 +1,11 @@
 ---
 description: MultiArch Base Image for Alpine Linux
-alpine_branch: v3.22
+alpine_branch: v3.24
 arches: [aarch64, armhf, armv7l, i386, loong64, ppc64le, riscv64, s390x, x86_64]
 tags: [base, shell]
 ---
 
+{% import "macros.md" as m with context %}
 {% include "shields.md" %}
 
 This [image][155] serves as a base rootfs container for [Alpine Linux][113],
