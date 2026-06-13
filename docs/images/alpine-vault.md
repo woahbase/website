@@ -1,7 +1,7 @@
 ---
 description: MultiArch Alpine Linux + S6 + HashiCorp Vault
 alpine_branch: v3.23
-arches: [aarch64, x86_64]
+arches: [aarch64, i386, x86_64]
 has_services: [compose]
 has_proxies: [nginx]
 tags: [service]
@@ -78,7 +78,7 @@ Also,
 
 * `armv6`/`armv7` binaries unavailable after [1.20.4][7].
 
-* `i386` binaries unavailable after [2.0.0][8].
+* `i386` binaries unavailable after [2.0.0][8]. Back again on [2.0.2][9].
 
 [1]: https://www.vault.io/
 [2]: https://releases.hashicorp.com/vault/
@@ -88,5 +88,6 @@ Also,
 [6]: https://developer.hashicorp.com/vault/docs/updates/important-changes
 [7]: https://releases.hashicorp.com/vault/1.20.4/
 [8]: https://releases.hashicorp.com/vault/2.0.0/
+[9]: https://releases.hashicorp.com/vault/2.0.2/
 
 {% include "all-include.md" %}
