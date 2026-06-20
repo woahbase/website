@@ -10,7 +10,7 @@ s6_userhome: /config
 {% import "macros.md" as m with context %}
 {% include "shields.md" %}
 
-This [image][155] containerizes the [MCPJungle][1] to consolidate and
+This [image][155] containerizes [MCPJungle][1] to consolidate and
 manage multiple MCP servers (can be either `stdio`, or
 `streamable_http`) through a single (or multiple?), authenticated,
 access-controlled service endpoint.
@@ -39,8 +39,9 @@ woahbase/alpine-mcpjungle
 ```
 
 1. Only **required** for Docker-based MCP servers. Optionally, also set
-   `PGID` to the numeric `docker`-group-id to allow the server process
-   to use docker running outside of the container.
+   the environment variable `PGID` to the numeric `docker`-group-id
+   (e.g. `-e PGID=995`) to allow the server process access to docker
+   running outside of the container via the socket.
 
 --8<-- "multiarch.md"
 
