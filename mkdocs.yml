@@ -190,6 +190,7 @@ nav:
       - alpine-jackett: images/alpine-jackett.md
       - alpine-kanboard: images/alpine-kanboard.md
       - alpine-kapacitor: images/alpine-kapacitor.md
+      - alpine-mcpjungle: images/alpine-mcpjungle.md
       - alpine-mjpgstreamer: images/alpine-mjpgstreamer.md
       - alpine-mosquitto: images/alpine-mosquitto.md
       - alpine-mpd: images/alpine-mpd.md

@@ -1,0 +1,43 @@
+[Unit]
+Description=SystemD Service (User Scoped) for MCPJungle (dockerized)
+After=network-online.target docker.service
+
+ConditionPathIsDirectory=/services/mcpjungle
+# ConditionPathExists=/services/mcpjungle/.env
+# ConditionPathExists=/services/mcpjungle/mcpjungle.db
+
+[Service]
+# Type=simple
+ExecStart=/usr/bin/docker run \
+    --rm \
+    --hostname mcpjungle \
+    --name docker_mcpjungle \
+    --pull=never \
+    -c 512 \
+    -m 1024m \
+    -e HOME=/config \
+    -e PUID=1000 \
+    -e PGID=995 \
+    -e SERVER_MODE=development \
+    -e PORT=8080 \
+    -i \
+    -p 8080:8080 \
+    -v /services/mcpjungle:/config \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    woahbase/alpine-mcpjungle
+
+# ExecStop=/usr/bin/docker stop -t 2 docker_mcpjungle
+# ExecStopPost=/usr/bin/docker rm -f docker_mcpjungle
+
+Restart=always
+RestartSec=60
+SyslogIdentifier=mcpjungle
+WorkingDirectory=/services/mcpjungle
+
+# User=user
+# Group=users
+# Running in user-scope requires the user to have systemd user session running
+# (typically via login session or `loginctl enable-linger`)
+
+[Install]
+WantedBy=multi-user.target
