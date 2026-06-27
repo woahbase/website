@@ -18,6 +18,13 @@ and [sceptre][11] for cloudformation.
 {{ m.srcimage('alpine-python3') }} with the {{ m.pypipkg('awscli')
 }} and {{ m.pypipkg('awsebcli') }} packages installed in it.
 
+???+ warning "CLI(v1) Entering Maintenance-mode Soon"
+
+    AWS has [announced][13] that CLI(v1) is entering Maintenance-mode
+    since July 15, 2026 and will reach End-of-Support on July 15, 2027.
+    You should upgrade your automations / scripts / workflows
+    accordingly.
+
 ???+ warning "ElasticBeanstalk-CLI in VirtualENV"
 
     Since April'24, `awsebcli` has been pulling in
@@ -87,5 +94,6 @@ Also, by default, the image expects
 [10]: https://github.com/awslabs/aws-cfn-template-flip
 [11]: https://github.com/Sceptre/sceptre
 [12]: https://github.com/donnemartin/awesome-aws
+[13]: https://aws.amazon.com/blogs/developer/cli-v1-maintenance-mode-announcement/
 
 {% include "all-include.md" %}

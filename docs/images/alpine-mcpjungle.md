@@ -89,8 +89,11 @@ Also,
 
 * {{ m.customscript('p11-mcpjungle-customize') }}
 
-* Checkout the official [examples][9] and [servers-list][10] to discover
-  and use awesome MCP-servers.
+* To discover and use more MCP-servers, checkout
+
+    * The Official [examples][9] and [servers-list][10]
+    * [Github MCP][11] servers
+    * [Awesome-MCP Servers][12] ([Website][13])
 
 [1]: https://docs.mcpjungle.com/
 [2]: https://github.com/mcpjungle/MCPJungle/releases
@@ -102,5 +105,8 @@ Also,
 [8]: https://www.npmjs.com/
 [9]: https://modelcontextprotocol.io/examples
 [10]: https://github.com/modelcontextprotocol/servers?tab=readme-ov-file#-resources
+[11]: https://github.com/mcp
+[12]: https://github.com/punkpeye/awesome-mcp-servers
+[13]: https://glama.ai/mcp/servers
 
 {% include "all-include.md" %}

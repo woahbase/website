@@ -1,6 +1,6 @@
 ---
 description: MultiArch Alpine Linux + S6 + Python3 + Ansible
-alpine_branch: v3.22
+alpine_branch: v3.23
 arches: [aarch64, armhf, armv7l, x86_64]
 tags: [dev, usershell]
 ---
@@ -78,6 +78,12 @@ in the container to get a [user-scoped][114] shell,
 * Checkout [Awesome Ansible][7] (previously [here][8]) for additional
   resources, books, or tools.
 
+* Replaced {{ m.pypipkg('python-consul') }} with newer {{
+  m.pypipkg('py-consul') }}, {{ m.sincev('2.21.1_20260627') }}
+
+* Started using prebuilt wheels from [PiWheels][9] for ARM images where
+  available, {{ m.sincev('2.21.1_20260627') }}.
+
 [1]: https://www.ansible.com/
 [2]: https://docs.ansible.com/ansible/latest/index.html
 [3]: https://docs.ansible.com/ansible/latest/reference_appendices/config.html
@@ -86,5 +92,6 @@ in the container to get a [user-scoped][114] shell,
 [6]: https://mitogen.networkgenomics.com/ansible_detailed.html#
 [7]: https://github.com/ansible-community/awesome-ansible
 [8]: https://github.com/jdauphant/awesome-ansible
+[9]: https://www.piwheels.org/
 
 {% include "all-include.md" %}
