@@ -57,7 +57,7 @@ deploy_netlify:  ## deploy site to netlify (as draft unless $(PROD) is set)
 		-e S6_NPM_LOCAL_PACKAGES=netlify-cli \
 		-e S6_NPM_PROJECTDIR=/home/alpine/project \
 		-v $(CURDIR):/home/alpine/project \
-		$(REGISTRY)/woahbase/alpine-nodejs \
+		$(REGISTRY)/woahbase/alpine-nodejs:24.14.1 \
 		netlify \
 		--telemetry-disable \
 		deploy \
