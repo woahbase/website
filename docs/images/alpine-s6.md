@@ -15,6 +15,15 @@ pass the proper signals when interacted with the containers.
 {{ m.srcimage('alpine-base') }} with the [s6][1] init system
 [overlayed][2] on it. {{ m.ghreleasestr('just-containers/s6-overlay') }}
 
+???+ info "Change default User-Bundle Path (v3.2.3.2)"
+
+    The default `user` (and `user2`) bundle path has changed ([relevant
+    changelog][8]) from `/etc/s6-overlay/s6-rc.d/user` to
+    `/etc/s6-overlay/user-bundles.d/user` {{ m.sincev('3.2.3.2_20260717') }}.
+
+    For building newer images based upon this image, you will need to
+    update the same in your rootfs overlays.
+
 {% include "pull-image.md" %}
 
 ---
@@ -185,5 +194,6 @@ the images tagged [usershell][4] for an example.
 [5]: https://github.com/just-containers/s6-overlay/blob/master/MOVING-TO-V3.md
 [6]: https://skarnet.org/software/s6-rc/s6-rc-compile.html
 [7]: https://skarnet.org/software/s6/servicedir.html
+[8]: https://github.com/just-containers/s6-overlay/blob/master/CHANGELOG.md#version-3232
 
 {% include "all-include.md" %}
