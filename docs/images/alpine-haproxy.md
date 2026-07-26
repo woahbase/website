@@ -1,6 +1,6 @@
 ---
 description: MultiArch Alpine Linux + S6 + HAProxy + DataPlaneAPI
-alpine_branch: v3.23
+alpine_branch: v3.24
 arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
 has_services: [compose, nomad]
 tags: [github, service]
@@ -60,9 +60,9 @@ following environment variables.
 | HAPROXY_AS_ROOT         | unset                                   | By default, `haproxy` is started as a user-scoped service, set this to a **non-empty-string** (e.g. `1`) to run as root. (Only effective if the container is also running as root) {{ m.sincev('3.2.2') }}
 | HAPROXY_ARGS            | -W -S /var/run/haproxy/master.sock      | Customizable arguments passed to `haproxy` service.
 | HAPROXY_RELOAD_STRATEGY | socket                                  | Used in the {{ m.ghfilelink('root/usr/local/bin/haproxy-reconf.sh', title='haproxy-reconf.sh') }} script to check-and-reload `haproxy`, optionally set to `s6` to restart the process using `s6-svc`. {{ m.sincev('3.2.2') }}
-| DPA_ARGS                | unset                                   | Customizable arguments passed to `dataplaneapi`, unset by default, **required** to be set to start `dataplaneapi` supervised by `haproxy` in the default configuration. You can either pass all configuration options here or put those in the `${DPA_CONF}` file (or both).
+| DPA_ARGS                | unset                                   | Customizable arguments passed to `dataplaneapi`, unset by default, **required** to be set to start `dataplaneapi`. You can either pass all configuration options here or put those in the `${DPA_CONF}` file (or both).
 | DPA_CONF                | unset                                   | Path to `dataplaneapi` configuration file, unset by default, set to enable it in default configuration e.g `/etc/haproxy/dataplaneapi.yaml`. Copies default configuration when set but file not found.
-| DPA_AS_S6SVC            | unset                                   | Set to a **non-empty-string** (e.g. `1`) to run `dataplaneapi` as a s6-service, by default runs as a program supervised by `haproxy`. {{ m.sincev('3.2.2') }}
+| ~~DPA_AS_S6SVC~~        | unset                                   | (**Deprecated** along with removal of the keyword `program`, {{ m.sincev('3.4.2_20260726') }}, now `dataplaneapi` is started as an s6-service) ~~Set to a **non-empty-string** (e.g. `1`) to run `dataplaneapi` as a s6-service, by default runs as a program supervised by `haproxy`. {{ m.sincev('3.2.2') }}~~
 | SSLSUBJECT              | see [here](alpine-nginx.md#ssl-subject) | Default SSL Subject for self-signed certificate generation on first run.
 {% include "envvars/alpine-s6.md" %}
 
@@ -77,15 +77,21 @@ Also,
   [Data-Plane API docs][4] or [configuration file][10], and its
   [API Endpoints][8] for customizing Data-Plane API.
 
-* For `riscv64` images, DataPlaneAPI prebuilt binary is
-  unavailable so the {{ m.alpinepkg('haproxy-dataplaneapi') }}
-  package is installed instead. May be a version or two behind the
-  latest released version.
+* For `riscv64` images, DataPlaneAPI prebuilt binary is unavailable so
+  the {{ m.alpinepkg('haproxy-dataplaneapi3') }}, (previously named {{
+  m.alpinepkg('haproxy-dataplaneapi', branch="v3.22") }}) package is
+  installed instead. May be a version or two behind the latest
+  released version.
 
 * Check the [LUA API Docs][9] to extend HAProxy using the embedded
   Lua interpreter.
 
 * {{ m.customscript('p12-haproxy-customize') }}
+
+* Running `program`s supervised by `haproxy` is being deprecated in
+  `3.x.x`, default configurations for running `dataplaneapi` as
+  a program is removed, now when `DPA_ARGS` is specified, `dataplaneapi`
+  is always run as a s6-service {{ m.sincev('3.4.2_20260726') }}.
 
 <!--* Other Links:
   > * [HAProxy Git Repository][6]

@@ -1,6 +1,6 @@
 ---
 description: MultiArch Alpine Linux + S6 + MCPJungle (+uvx|npx|docker-cli)
-alpine_branch: v3.23
+alpine_branch: v3.24
 arches: [aarch64, x86_64]
 has_services: [compose, nomad, systemd]
 tags: [service]
@@ -85,7 +85,10 @@ Also,
   m.myimage('alpine-postgresql') }} image.
 
 * For any MCP server that provides its own binary, mount those inside
-  `/usr/local/bin` to make them available to MCPJungle.
+  `/usr/local/bin` to make them available to MCPJungle. (Only
+  statically-linked binaries or those which work with Musl-LibC are
+  supported, not ones that require some other dynamically-linked
+  libraries or shared-objects e.g. GNU LibC.)
 
 * {{ m.customscript('p11-mcpjungle-customize') }}
 
@@ -94,6 +97,7 @@ Also,
     * The Official [examples][9] and [servers-list][10]
     * [Github MCP][11] servers
     * [Awesome-MCP Servers][12] ([Website][13])
+    * [MCPServer.org][14]
 
 [1]: https://docs.mcpjungle.com/
 [2]: https://github.com/mcpjungle/MCPJungle/releases
@@ -108,5 +112,6 @@ Also,
 [11]: https://github.com/mcp
 [12]: https://github.com/punkpeye/awesome-mcp-servers
 [13]: https://glama.ai/mcp/servers
+[14]: https://mcpservers.org/
 
 {% include "all-include.md" %}
