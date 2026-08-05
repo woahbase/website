@@ -1,6 +1,6 @@
 ---
 description: MultiArch Alpine Linux + S6 + GNU LibC + Gotify Server (and CLI)
-alpine_branch: v3.23
+alpine_branch: v3.24
 arches: [aarch64, armhf, armv7l, i386, x86_64]
 has_services: [compose, nomad]
 has_proxies: [nginx]
@@ -42,9 +42,10 @@ following environment variables.
 
 | ENV Vars                 | Default                | Description
 | :---                     | :---                   | :---
-| GOTIFY_CONFIG            | /etc/gotify/config.yml | Configuration file path.
-| GOTIFY_HOME              | /gotify                | Removed {{ m.sincev('2.6.3_20250807') }}. Set `${GOTIFY_DATA}` instead. Previously used to set the root directory for server application data.
-| GOTIFY_DATA              | /gotify/data           | Datastore for server application.
+| GOTIFY_CONFIG_FILE       | /etc/gotify/server.env | Optional configuration file path. {{ m.sincev('3.0.0_20260905') }}, unset to configure only using environment variables.
+| ~~GOTIFY_CONFIG~~        | /etc/gotify/config.yml | Deprecated YAML configuration file path. {{ m.sincev('3.0.0_20260905') }}.
+| ~~GOTIFY_HOME~~          | /gotify                | Removed {{ m.sincev('2.6.3_20250807') }}. Set `${GOTIFY_DATADIR}` instead. ~~Used to set the root directory for server application data.~~
+| GOTIFY_DATADIR           | /gotify/data           | Datastore for server application. Previously named `GOTIFY_DATA`, renamed {{ m.sincev('3.0.0_20260905') }}
 | GOTIFY_PLUGINSDIR        | /gotify/data/plugins   | Plugins directory.
 | GOTIFY_UPLOADEDIMAGESDIR | /gotify/data/images    | Cache for uploaded images.
 | GOTIFY_SERVER_PORT       | 80                     | Port to listen on.
@@ -56,8 +57,11 @@ following environment variables.
 
 Also,
 
-* {{ m.defcfgfile('/etc/gotify/config.yml', vname='GOTIFY_CONFIG')
-  }} The example configuration may also be found [here][7].
+* {{ m.defcfgfile('/etc/gotify/server.env', vname='GOTIFY_CONFIG_FILE')
+  }} The example configuration may also be found [here][8]. Optionally
+  you may unset this variable if all your configurations are from
+  environment variables. Previously preset as `GOTIFY_CONFIG`, example
+  [here][7], deprecated {{ m.sincev('3.0.0_20260905') }}.
 
 * Data stored at `/gotify/data`.
 
@@ -71,6 +75,7 @@ Also,
 [4]: https://github.com/gotify/android
 [5]: https://gotify.net/docs/index
 [6]: https://gotify.net/docs/config
-[7]: https://github.com/gotify/server/blob/master/config.example.yml
+[7]: https://github.com/gotify/server/blob/v2.9.1/config.example.yml
+[8]: https://github.com/gotify/server/raw/refs/heads/master/gotify-server.env.example
 
 {% include "all-include.md" %}

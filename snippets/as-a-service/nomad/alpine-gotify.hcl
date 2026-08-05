@@ -2,7 +2,7 @@ variables {
   dc   = "dc1" # to load the dc-local config file
   pgid = 1000  # gid for docker
   puid = 1000  # uid for docker
-  version = "2.1.5"
+  version = "3.0.0"
 }
 # locals { var = yamldecode(file("${var.dc}.vars.yml")) } # load dc-local config file
 
@@ -80,8 +80,8 @@ job "gotify" {
         }
 
         # mount {
-        #   source   = "local/config.yml"
-        #   target   = "/gotify/config.yml"
+        #   source   = "local/server.env"
+        #   target   = "/etc/gotify/server.env"
         #   type     = "bind"
         #   readonly = true
         # }
@@ -104,6 +104,10 @@ job "gotify" {
         PGID = var.pgid
         PUID = var.puid
         # TZ   = local.var.tz
+
+        # from v3.x.x YAML configurations deprecated in favour of environment file
+        # GOTIFY_CONFIG = "/etc/gotify/config.yml"
+        # GOTIFY_CONFIG_FILE = "/etc/gotify/server.env"
       }
 
       resources {
@@ -128,9 +132,9 @@ job "gotify" {
       # }
 
       # template {
-      #   destination = "local/config.yml"
+      #   destination = "local/server.env"
       #   data        = <<-EOC
-      #     {{ key "nomad/${var.dc}/gotify/config.yml" }}
+      #     {{ key "nomad/${var.dc}/gotify/server.env" }}
       #   EOC
       #   change_mode = "restart"
       #   perms       = "644"

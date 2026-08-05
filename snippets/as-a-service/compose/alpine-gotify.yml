@@ -17,6 +17,10 @@ services:
       PGID: ${PGID:-1000}
       # TZ: ${TZ}
 
+      # from v3.x.x YAML configurations deprecated in favour of environment file
+      # GOTIFY_CONFIG: /etc/gotify/config.yml
+      # GOTIFY_CONFIG_FILE: /etc/gotify/server.env
+
       # only needed to initialize sqlite database
       # enable on firstrun, not needed after
       # GOTIFY_DEFAULTUSER_NAME: admin
@@ -45,8 +49,9 @@ services:
         bind:
           create_host_path: true
       # - type: bind
-      #   source: ${GOTIFY_DIR:?err}/configs/config.yml
-      #   target: /etc/gotify/config.yml
+      #   # from v3.x.x YAML configurations deprecated in favour of environment file
+      #   source: ${GOTIFY_DIR:?err}/configs/server.env
+      #   target: /etc/gotify/server.env
       #   bind:
       #     create_host_path: false
       - type: bind
