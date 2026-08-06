@@ -165,6 +165,7 @@ nav:
       - alpine-openjdk11: images/alpine-openjdk11.md
       - alpine-openjdk17: images/alpine-openjdk17.md
       - alpine-openjdk21: images/alpine-openjdk21.md
+      - alpine-openjdk25: images/alpine-openjdk25.md
       - alpine-php: images/alpine-php.md
       - alpine-python3: images/alpine-python3.md
       - alpine-ruby: images/alpine-ruby.md

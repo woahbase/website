@@ -1,6 +1,6 @@
 ---
 description: MultiArch Alpine Linux + S6 + GNU LibC + OpenJDK 8
-alpine_branch: v3.23
+alpine_branch: v3.24
 arches: [aarch64, armhf, armv7l, i386, ppc64le, s390x, x86_64]
 ghrepo: alpine-openjdk
 dockerfile: Dockerfile.8
@@ -51,6 +51,16 @@ following environment variables.
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"
+
+Also,
+
+* Installed packages are separately grouped into two virtual packages
+  (for easy uninstallation in child-images as they require), they are
+  named respectively,
+
+    * `.deps-runtime` for the runtime environment dependencies (e.g. `java`),
+
+    * `.deps-devel` for the language/compiler specific dependencies (e.g. `javac`),
 
 [1]: https://openjdk.org/projects/jdk8/
 [2]: https://github.com/openjdk/jdk/

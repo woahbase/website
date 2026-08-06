@@ -1,6 +1,6 @@
 ---
 description: MultiArch Alpine Linux + S6 + GNU LibC + OpenJDK 21
-alpine_branch: v3.23
+alpine_branch: v3.24
 arches: [aarch64, ppc64le, riscv64, s390x, x86_64]
 ghrepo: alpine-openjdk
 dockerfile: Dockerfile.21
@@ -52,7 +52,19 @@ following environment variables.
 
 --8<-- "check-id.md"
 
+Also,
+
+* Installed packages are separately grouped into two virtual packages
+  (for easy uninstallation in child-images as they require), they are
+  named respectively,
+
+    * `.deps-runtime` for the runtime environment dependencies (e.g. `java`),
+
+    * `.deps-devel` for the language/compiler specific dependencies (e.g. `javac`),
+
+* Includes {{ m.alpinepkg('openjdk21-static-libs') }} {{ m.sincev('21.0.12_20260906') }}
+
 [1]: https://openjdk.org/projects/jdk/21/
-[2]: https://github.com/openjdk/jdk/
+[2]: https://github.com/openjdk/jdk21u/
 
 {% include "all-include.md" %}

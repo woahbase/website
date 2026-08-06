@@ -1,10 +1,10 @@
 ---
-description: MultiArch Alpine Linux + S6 + GNU LibC + OpenJDK 11
+description: MultiArch Alpine Linux + S6 + GNU LibC + OpenJDK 25
 alpine_branch: v3.24
-arches: [aarch64, ppc64le, s390x, x86_64]
+arches: [aarch64, ppc64le, riscv64, s390x, x86_64]
 ghrepo: alpine-openjdk
-dockerfile: Dockerfile.11
-wb_extra_args: JVVMAJOR=11
+dockerfile: Dockerfile.25
+wb_extra_args: JVVMAJOR=25
 tags: [dev, usershell]
 ---
 
@@ -13,10 +13,10 @@ tags: [dev, usershell]
 
 
 This [image][155] serves as the base image for applications
-/ services that require an [OpenJDK11][1] compiler/runtime.
+/ services that require an [OpenJDK25][1] compiler/runtime.
 
 {{ m.srcimage('alpine-glibc') }} with the {{
-m.alpinepkg('openjdk11', star=true) }} packages installed in it.
+m.alpinepkg('openjdk25', star=true) }} packages installed in it.
 
 {% include "pull-image.md" %}
 
@@ -24,16 +24,16 @@ m.alpinepkg('openjdk11', star=true) }} packages installed in it.
 Run
 ---
 
-We can call `java` or `bash` directly on the container, or run
-`bash` in the container to get a [user-scoped][114] shell,
+We can call `java` commands directly on the container, or run
+`bash` in the container to get a shell,
 
 === "command"
     ``` sh
-    docker run --rm -it --name docker_openjdk11 woahbase/alpine-openjdk11 java -version
+    docker run --rm -it --name docker_openjdk25 woahbase/alpine-openjdk25 java -version
     ```
 === "shell"
     ``` sh
-    docker run --rm -it --name docker_openjdk11 woahbase/alpine-openjdk11 /bin/bash
+    docker run --rm -it --name docker_openjdk25 woahbase/alpine-openjdk25 /bin/bash
     ```
 
 --8<-- "multiarch.md"
@@ -47,7 +47,7 @@ following environment variables.
 
 | ENV Vars  | Default                      | Description
 | :---      | :---                         | :---
-| JAVA_HOME | /usr/lib/jvm/java-11-openjdk | (Preset) Specifies which Java runtime environment (JRE) to use.
+| JAVA_HOME | /usr/lib/jvm/java-25-openjdk | (Preset) Specifies which Java runtime environment (JRE) to use.
 {% include "envvars/alpine-s6.md" %}
 
 --8<-- "check-id.md"
@@ -62,7 +62,9 @@ Also,
 
     * `.deps-devel` for the language/compiler specific dependencies (e.g. `javac`),
 
-[1]: https://openjdk.org/projects/jdk/11/
-[2]: https://github.com/openjdk/jdk11u/
+* Includes {{ m.alpinepkg('openjdk25-static-libs') }} {{ m.sincev('25.0.4_20260906') }}
+
+[1]: https://openjdk.org/projects/jdk/25/
+[2]: https://github.com/openjdk/jdk25u/
 
 {% include "all-include.md" %}

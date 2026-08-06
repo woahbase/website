@@ -58,6 +58,16 @@ following environment variables.
 
 --8<-- "check-id.md"
 
+Also,
+
+* Installed packages are separately grouped into two virtual packages
+  (for easy uninstallation in child-images as they require), they are
+  named respectively,
+
+    * `.deps-runtime` for the runtime environment dependencies (e.g. `java`),
+
+    * `.deps-devel` for the language/compiler specific dependencies (e.g. `javac`),
+
 [1]: https://openjdk.org/projects/jdk/14/
 [2]: https://github.com/openjdk/jdk/
 
