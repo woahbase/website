@@ -1,6 +1,6 @@
 ---
 description: MultiArch Alpine Linux + S6 + Lua + LuaRocks
-alpine_branch: v3.23
+alpine_branch: v3.24
 arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
 tags: [dev, usershell]
 
@@ -78,7 +78,12 @@ Also,
 * By default, if the user packages have binaries inside
   `${USERROCKSDIR}/bin`, those are automatically added to path.
 
+* For `lua5.5`, there is no `luarocks5.5` package available in
+  AlpineLinux repositories (as of August'26), instead it is
+  compiled-then-installed from [Github-Releases][3].
+
 [1]: http://www.lua.org/
 [2]: https://luarocks.org/
+[3]: https://github.com/luarocks/luarocks/releases
 
 {% include "all-include.md" %}
