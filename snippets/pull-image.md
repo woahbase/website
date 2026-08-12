@@ -53,6 +53,18 @@ Get the Image
 
     {%- endif %}
 
+    {% if page.meta.multi_versions|default(false) -%}
+    You can also filter images as per their **version**-families:
+
+    <div class="grid cards pull-image-arches" markdown>
+
+    {% for vf in page.meta.multi_versions|default([]) -%}
+    {{   '- ' ~ m.myimagetag(vf, icon='material-tag-multiple-outline') }}
+    {% endfor %}
+
+    </div>
+    {% endif %}
+
     {% if (not (skip_aarch64 and skip_armhf and skip_armv7l)) -%}{#- only 86_64 build available -#}
 
     **non-x86_64** images used to contain the embedded

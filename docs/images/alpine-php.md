@@ -1,8 +1,9 @@
 ---
 description: MultiArch Alpine Linux + S6 + NGINX + PHP-fpm.
-alpine_branch: v3.23
+alpine_branch: v3.24
 arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
 tags: [dev, service]
+multi_versions: ['8.1', '8.2', '8.3', '8.4', '8.5']
 # pin php version
 phpmajmin: "85"
 wb_extra_args_build: PHPMAJMIN=85

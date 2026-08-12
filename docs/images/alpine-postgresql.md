@@ -4,6 +4,7 @@ alpine_branch: v3.23
 arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
 has_services: [compose, nomad]
 tags: [service]
+multi_versions: ['15', '16', '17', '18']
 # pin posgres version
 pgmajor: 18
 s6_user: postgres
