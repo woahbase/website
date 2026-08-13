@@ -1,6 +1,6 @@
 ---
 description: MultiArch Alpine Linux + S6 + GNU LibC + OpenJDK8 + Libreoffice
-alpine_branch: v3.23
+alpine_branch: v3.24
 arches: [aarch64, armv7l, i386, x86_64]
 tags: [gui, usershell]
 ---
