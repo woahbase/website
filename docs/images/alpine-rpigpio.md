@@ -1,6 +1,6 @@
 ---
 description: MultiArch Alpine Linux + S6 + Python3 + RPi.GPIO
-alpine_branch: v3.22
+alpine_branch: v3.24
 arches: [aarch64, armhf, armv7l]
 tags: [dev, shell]
 ---
