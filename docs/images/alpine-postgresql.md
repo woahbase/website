@@ -1,6 +1,6 @@
 ---
 description: MultiArch Alpine Linux + S6 + PostgreSQL
-alpine_branch: v3.23
+alpine_branch: v3.24
 arches: [aarch64, armhf, armv7l, i386, ppc64le, riscv64, s390x, x86_64]
 has_services: [compose, nomad]
 tags: [service]
@@ -170,25 +170,25 @@ m.sincev('16.9_20250524') }}
 
 === "PostgreSQL 18"
 
-    * {{ m.alpinepkg('pgbackrest'                  , branch='v3.23') }} {{ m.sincev('18.1_20260109') }}
-    * {{ m.alpinepkg('postgis'                     , branch='v3.23') }} {{ m.sincev('18.1_20260109') }}
-    * {{ m.alpinepkg('postgresql-bdr-extension'    , branch='v3.23') }}
-    * {{ m.alpinepkg('postgresql-citus'            , branch='v3.23') }}
-    * {{ m.alpinepkg('postgresql-hypopg'           , branch='v3.23') }}
-    * {{ m.alpinepkg('postgresql-mysql_fdw'        , branch='v3.23') }}
-    * {{ m.alpinepkg('postgresql-orafce'           , branch='v3.23') }}
-    * {{ m.alpinepkg('postgresql-pg_cron'          , branch='v3.23') }}
-    * {{ m.alpinepkg('postgresql-pg_roaringbitmap' , branch='v3.23') }}
-    * {{ m.alpinepkg('postgresql-pgvector'         , branch='v3.23') }}
-    * {{ m.alpinepkg('postgresql-rum'              , branch='v3.23') }}
-    * {{ m.alpinepkg('postgresql-sequential-uuids' , branch='v3.23') }}
-    * {{ m.alpinepkg('postgresql-shared_ispell'    , branch='v3.23') }}
-    * {{ m.alpinepkg('postgresql-temporal_tables'  , branch='v3.23') }}
-    * {{ m.alpinepkg('postgresql-timescaledb'      , branch='v3.23') }}
-    * {{ m.alpinepkg('postgresql-topn'             , branch='v3.23') }}
-    * {{ m.alpinepkg('postgresql-uint'             , branch='v3.23') }}
-    * {{ m.alpinepkg('postgresql-url_encode'       , branch='v3.23') }}
-    * {{ m.alpinepkg('repmgr'                      , branch='v3.23') }} {{ m.sincev('18.1_20260109') }}
+    * {{ m.alpinepkg('pgbackrest'                  , branch='v3.24') }} {{ m.sincev('18.1_20260109') }}
+    * {{ m.alpinepkg('postgis'                     , branch='v3.24') }} {{ m.sincev('18.1_20260109') }}
+    * {{ m.alpinepkg('postgresql-bdr-extension'    , branch='v3.24') }}
+    * ~~{{ m.alpinepkg('postgresql-citus'            , branch='v3.24') }}~~ **skipped** in current build due to still targeting 17.x {{ m.sincev('18.6_20260918') }}.
+    * {{ m.alpinepkg('postgresql-hypopg'           , branch='v3.24') }}
+    * {{ m.alpinepkg('postgresql-mysql_fdw'        , branch='v3.24') }}
+    * {{ m.alpinepkg('postgresql-orafce'           , branch='v3.24') }}
+    * {{ m.alpinepkg('postgresql-pg_cron'          , branch='v3.24') }}
+    * {{ m.alpinepkg('postgresql-pg_roaringbitmap' , branch='v3.24') }}
+    * {{ m.alpinepkg('postgresql-pgvector'         , branch='v3.24') }}
+    * {{ m.alpinepkg('postgresql-rum'              , branch='v3.24') }}
+    * {{ m.alpinepkg('postgresql-sequential-uuids' , branch='v3.24') }}
+    * {{ m.alpinepkg('postgresql-shared_ispell'    , branch='v3.24') }}
+    * {{ m.alpinepkg('postgresql-temporal_tables'  , branch='v3.24') }}
+    * {{ m.alpinepkg('postgresql-timescaledb'      , branch='v3.24') }}
+    * {{ m.alpinepkg('postgresql-topn'             , branch='v3.24') }}
+    * {{ m.alpinepkg('postgresql-uint'             , branch='v3.24') }}
+    * {{ m.alpinepkg('postgresql-url_encode'       , branch='v3.24') }}
+    * {{ m.alpinepkg('repmgr'                      , branch='v3.24') }} {{ m.sincev('18.1_20260109') }}
 
 ---
 ##### Script - run.sh
