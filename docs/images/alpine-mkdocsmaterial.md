@@ -16,6 +16,13 @@ started.
 {{ m.srcimage('alpine-python3') }} with the {{
 m.pypipkg('mkdocs-material') }} package installed in it.
 
+???+ warning "EOL on November 5, 2026"
+
+    [MkDocsMaterial][1] has entered final maintenance period after
+    announcing its End-Of-Life ([relevant issue][5]), although
+    containerized site-builders are *expected to* work same as before,
+    users are encouraged to checkout [Zensical][6] for newer projects.
+
 {% include "pull-image.md" %}
 
 ---
@@ -96,8 +103,13 @@ Also,
     * {{ m.pypipkg('mkdocs-redirects',
         repo='https://github.com/datarobot/mkdocs-redirects') }}
 
+* Checkout the [mkdocs-plugins-catalog][4] to discover more plugins.
+
 [1]: https://squidfunk.github.io/mkdocs-material/
 [2]: https://squidfunk.github.io/mkdocs-material/getting-started/
 [3]: https://squidfunk.github.io/mkdocs-material/plugins/
+[4]: https://github.com/mkdocs/catalog
+[5]: https://github.com/squidfunk/mkdocs-material/issues/8523
+[6]: https://zensical.org/
 
 {% include "all-include.md" %}
